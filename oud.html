@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Oud au gramme — Where smoke becomes memory · ODYS PARFUM</title>
+<meta name="description" content="Bâtonnets d'oud sold by the gram — 5, 10, 15, 30, 100 g or a special order. Every 69 MAD of oud earns an ODYS point.">
+<!-- link previews: WhatsApp is the order channel, so a shared link has to show the product -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ODYS PARFUM">
+<meta property="og:title" content="Oud au gramme — Là où la fumée devient souvenir · ODYS PARFUM">
+<meta property="og:description" content="Bâtonnets d'oud sold by the gram — 5, 10, 15, 30, 100 g or a special order. Every 69 MAD of oud earns an ODYS point.">
+<meta property="og:url" content="https://odysparfum.ma/oud.html">
+<meta property="og:image" content="https://odysparfum.ma/assets/img/odys-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_MA">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<!-- outside Arabic the page needs Amiri for one decorative line, so only those letters are fetched (35 KB, not 125 KB). i18n.js pulls the full face when the reader switches to Arabic. -->
+<link href="https://fonts.googleapis.com/css2?family=Amiri&text=%D8%A1%D8%A3%D8%A6%D8%A7%D8%A8%D8%A9%D8%AA%D8%AC%D8%AD%D8%AE%D8%AF%D8%B0%D8%B1%D8%B2%D8%B3%D8%B4%D8%B5%D8%B6%D8%B7%D8%B8%D8%B9%D9%81%D9%82%D9%83%D9%84%D9%85%D9%86%D9%87%D9%88%D9%89%D9%8A%D9%91%C2%B7&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/odys.css?v=20260922c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230B0B0B'/%3E%3Ctext x='16' y='22' font-family='serif' font-size='16' fill='%23B08D4F' text-anchor='middle'%3EO%3C/text%3E%3C/svg%3E">
+</head>
+<body class="dark night">
+<div id="odys-chrome"></div>
+
+<main id="main">
+  <section class="oud-hero">
+    <div data-embers aria-hidden="true" style="position:absolute;inset:0"></div>
+    <div class="smoke" data-smoke aria-hidden="true"></div>
+    <div class="wrap" style="position:relative">
+      <p class="ar" style="font-family:var(--arabic)">العود</p>
+      <h1>OUD</h1>
+      <p class="lede" style="margin:18px auto 10px;color:rgba(243,235,221,.7)">Where smoke becomes memory.</p>
+      <p class="mono" style="color:var(--brass)">Bâtonnets vendus au gramme · à partir de 5 g</p>
+      <a class="btn" href="#collection" style="margin-top:26px">Enter the collection</a>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="wrap-wide">
+      <div class="grid grid-4 grid-1-sm" id="how"></div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0" id="collection">
+    <div class="wrap-wide">
+      <div class="sec-head">
+        <div><p class="eyebrow" style="margin:0">The oud rooms</p><h2 class="d3">Six batches, one price ladder.</h2></div>
+        <a class="link-u" href="rewards.html">69 MAD = 1 point</a>
+      </div>
+      <div class="scroll-x" id="cats" style="margin-bottom:30px"></div>
+      <div class="grid grid-3" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--bg-alt)">
+    <div class="wrap">
+      <div class="split" style="align-items:start">
+        <div>
+          <p class="eyebrow">The price ladder</p>
+          <h2 class="d2">The more you take,<br>the less each gram costs.</h2>
+          <p class="lede" style="margin-top:18px">Five grams is a week of evenings. A hundred is a season, at the best rate we do. Beyond that it becomes a special order — you tell us the weight, we quote a special price and confirm before shipping.</p>
+          <p class="mono" style="color:var(--accent);margin-top:20px">Every 69 MAD of oud = 1 ODYS point, whatever the batch</p>
+          <a class="btn" href="#collection" style="margin-top:18px">Choose a batch</a>
+        </div>
+        <div class="box">
+          <label class="field" style="margin-bottom:20px"><span>Batch</span><select id="calcp"></select></label>
+          <div class="weights" id="calcw"></div>
+          <label class="field" style="margin:20px 0 0"><span>Or a special weight (grams)</span><input id="calcg" type="number" min="5" step="5" value="250" inputmode="numeric"></label>
+          <div class="pts-hero" style="margin-top:18px;padding:20px">
+            <p class="mono muted" style="margin:0 0 6px">Your quote</p>
+            <p class="d3" id="calcout" style="margin:0"></p>
+            <p class="mono" id="calcpts" style="color:var(--accent);margin-top:8px"></p>
+            <button class="btn btn-block" id="calcadd" style="margin-top:16px">Add this weight</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <p class="eyebrow">Discover the oud</p>
+          <h2 class="d2">Tell us how you want it to smell.</h2>
+          <p class="lede" style="margin-top:18px">Oud is not one scent. Move the sliders and we will find the batch that matches — sweet Cambodi, animalic Hindi, quiet musk.</p>
+        </div>
+        <div class="box">
+          <div class="sensory" id="sliders"></div>
+          <div id="oudmatch" style="margin-top:26px"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--bg-alt)">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <p class="eyebrow">The ritual</p>
+          <h2 class="d2">How to burn a stick properly.</h2>
+          <p class="lede" style="margin-top:18px">A bâtonnet is not a candle. Most of the scent is lost in the first thirty seconds if you leave the flame on it.</p>
+        </div>
+        <ol style="list-style:none;padding:0;margin:0">
+          <li class="note-tier" style="grid-template-columns:40px 1fr"><b>01</b><div><h4 style="font-size:20px">Light the tip</h4><p class="muted" style="font-size:14px;margin:6px 0 0">Let the flame catch for three or four seconds, no longer.</p></div></li>
+          <li class="note-tier" style="grid-template-columns:40px 1fr"><b>02</b><div><h4 style="font-size:20px">Blow it out</h4><p class="muted" style="font-size:14px;margin:6px 0 0">You want an ember, not a fire. The smoke should be thin and steady.</p></div></li>
+          <li class="note-tier" style="grid-template-columns:40px 1fr"><b>03</b><div><h4 style="font-size:20px">Stand it upright</h4><p class="muted" style="font-size:14px;margin:6px 0 0">In sand, a holder or a mabkhara — away from curtains and draughts.</p></div></li>
+          <li class="note-tier" style="grid-template-columns:40px 1fr"><b>04</b><div><h4 style="font-size:20px">Dress the fabric</h4><p class="muted" style="font-size:14px;margin:6px 0 0">Hold a jacket or scarf over the smoke. Wool keeps oud for days.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section center">
+    <div class="wrap" style="max-width:660px">
+      <p class="eyebrow">Coffret oud</p>
+      <h2 class="d2">A bottle and a weight,<br>in one box.</h2>
+      <p class="lede" style="margin:16px auto 26px">Put a 50 ML parfum and 15 g of bâtonnets in a personalised coffret — for yourself or sent as a gift with your words on the card.</p>
+      <a class="btn" href="coffrets.html#cof-oud">Build the coffret oud</a>
+    </div>
+  </section>
+</main>
+
+<div id="odys-footer"></div>
+
+<script src="assets/js/i18n.js?v=20260922c"></script>
+<script src="assets/js/i18n-content.js?v=20260922c"></script>
+<script src="assets/js/i18n-labels.js?v=20260922c"></script>
+<script src="assets/js/data.js?v=20260922c"></script>
+<script>
+window.PAGE = function (OD) {
+  const { D, C, $, $$, card, money, find, T } = OD;
+
+  $('#how').innerHTML = [
+    ['Sold by the gram', T('From') + ' ' + C.oud.minGrams + ' g — 5, 10, 15, 30, 100 g'],
+    ['Sliding scale', T('The price per gram falls at every tier')],
+    ['Special order', T('Above') + ' ' + C.oud.specialFrom + ' g — ' + T('special rate on request')],
+    ['1 point / ' + C.points.madPerPoint + ' MAD', C.rewards[0].pts + ' ' + T('points = your first reward')]
+  ].map(x => `<div class="box"><p class="eyebrow" style="margin-bottom:8px">${T(x[0])}</p><p class="muted" style="font-size:14px;margin:0">${x[1]}</p></div>`).join('');
+
+  const CATS = [['ALL', () => true], ['SWEET', p => p.sensory.sweet >= 4], ['SMOKY', p => p.sensory.smoky >= 4],
+    ['ANIMALIC', p => p.sensory.animalic >= 3], ['SOFT', p => p.sensory.smoky <= 3 && p.sensory.animalic <= 1],
+    ['GIFTING', p => (p.tags || []).includes('gifts')]];
+  $('#cats').innerHTML = CATS.map((c, i) => `<button class="pill${i ? '' : ' on'}" data-c="${i}">${c[0]}</button>`).join('');
+  function draw(i) {
+    const list = D.ouds.filter(CATS[i][1]);
+    $('#grid').innerHTML = (list.length ? list : D.ouds).map(p => card(p)).join('');
+    OD.paint();
+  }
+  $('#cats').addEventListener('click', e => {
+    const b = e.target.closest('[data-c]'); if (!b) return;
+    $$('#cats .pill').forEach(x => x.classList.toggle('on', x === b));
+    draw(Number(b.dataset.c));
+  });
+  draw(0);
+
+  /* price ladder calculator */
+  let cp = D.ouds[0], cg = C.oud.steps[0], custom = false;
+  $('#calcp').innerHTML = D.ouds.map(p => `<option value="${p.id}">${p.code} — ${p.name} · ${p.pricePerGram} MAD/g</option>`).join('');
+  function calc() {
+    $('#calcw').innerHTML = C.oud.steps.map(g =>
+      `<button class="weight${!custom && g === cg ? ' on' : ''}" data-g="${g}"><b>${g} g</b><span>${money(OD.gramPrice(cp, g))}</span><em class="muted" style="display:block;font-style:normal;font-size:10.5px;margin-top:2px">${OD.sticksLabel(g)}</em><small>+${OD.ptsLabel(OD.unitPoints(cp, g))} ${T('pts')}</small></button>`).join('');
+    const g = custom ? Math.max(C.oud.minGrams, Math.round(Number($('#calcg').value || 0) / C.oud.minGrams) * C.oud.minGrams) : cg;
+    const price = OD.gramPrice(cp, g);
+    $('#calcout').innerHTML = `${g} g · ${money(price)} <span class="muted" style="font-size:14px">· ${(price / g).toFixed(1).replace('.0', '')} MAD/g</span>`;
+    $('#calcpts').textContent = '+' + OD.ptsLabel(OD.unitPoints(cp, g)) + ' ' + T('ODYS points') + (g >= C.oud.specialFrom ? ' · ' + T('special rate, confirmed before shipping') : '');
+    return g;
+  }
+  $('#calcp').addEventListener('change', e => { cp = find(e.target.value); calc(); });
+  $('#calcw').addEventListener('click', e => {
+    const b = e.target.closest('[data-g]'); if (!b) return;
+    cg = Number(b.dataset.g); custom = false; calc();
+  });
+  $('#calcg').addEventListener('input', () => { custom = true; calc(); });
+  $('#calcadd').addEventListener('click', () => OD.add(cp.id, { grams: calc() }));
+  calc();
+
+  /* sensory finder */
+  const AXES = ['sweet', 'woody', 'smoky', 'animalic', 'resinous', 'earthy'];
+  const want = { sweet: 3, woody: 3, smoky: 3, animalic: 1, resinous: 3, earthy: 2 };
+  $('#sliders').innerHTML = AXES.map(a => `<div class="sens-row">
+      <span>${a}</span>
+      <div class="sens-track" data-axis="${a}" role="group" aria-label="${a}">
+        ${Array.from({ length: 5 }, (_, i) => `<i class="${i < want[a] ? 'on' : ''}" data-v="${i + 1}" style="cursor:pointer"></i>`).join('')}
+      </div></div>`).join('');
+  function match() {
+    const p = D.ouds.map(p => ({ p, d: AXES.reduce((n, a) => n + Math.abs((p.sensory[a] || 0) - want[a]), 0) }))
+      .sort((a, b) => a.d - b.d)[0].p;
+    $('#oudmatch').innerHTML = `<p class="eyebrow" style="margin-bottom:8px">Your oud is</p>
+      <h3 class="d3">${p.code} — ${p.name}</h3>
+      <p class="muted" style="font-size:14px;margin:8px 0 16px">${T(p.oud.character)}. ${T(p.oud.origin)}, ${T(p.oud.grade)} · ${money(OD.gramPrice(p, C.oud.minGrams))} / ${C.oud.minGrams} g.</p>
+      <a class="btn btn-sm" href="product.html?id=${p.id}">Choose a weight</a>`;
+  }
+  $('#sliders').addEventListener('click', e => {
+    const i = e.target.closest('[data-v]'); if (!i) return;
+    const track = i.closest('[data-axis]');
+    want[track.dataset.axis] = Number(i.dataset.v);
+    $$('i', track).forEach((x, n) => x.classList.toggle('on', n < want[track.dataset.axis]));
+    match();
+  });
+  match();
+};
+</script>
+<script src="assets/js/app.js?v=20260922c"></script>
+</body>
+</html>

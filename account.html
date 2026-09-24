@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Your ODYS journey — Account</title>
+<meta name="description" content="Your ODYS points, rewards, orders, coffrets, wishlist, referrals and fragrance profile.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<!-- outside Arabic the page needs Amiri for one decorative line, so only those letters are fetched (35 KB, not 125 KB). i18n.js pulls the full face when the reader switches to Arabic. -->
+<link href="https://fonts.googleapis.com/css2?family=Amiri&text=%D8%A1%D8%A3%D8%A6%D8%A7%D8%A8%D8%A9%D8%AA%D8%AC%D8%AD%D8%AE%D8%AF%D8%B0%D8%B1%D8%B2%D8%B3%D8%B4%D8%B5%D8%B6%D8%B7%D8%B8%D8%B9%D9%81%D9%82%D9%83%D9%84%D9%85%D9%86%D9%87%D9%88%D9%89%D9%8A%D9%91%C2%B7&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/odys.css?v=20260922c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%233D1216'/%3E%3Ctext x='16' y='22' font-family='serif' font-size='16' fill='%23B08D4F' text-anchor='middle'%3EO%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div id="odys-chrome"></div>
+<main id="main"><div id="view"></div></main>
+<div id="odys-footer"></div>
+
+<script src="assets/js/i18n.js?v=20260922c"></script>
+<script src="assets/js/i18n-content.js?v=20260922c"></script>
+<script src="assets/js/i18n-labels.js?v=20260922c"></script>
+<script src="assets/js/data.js?v=20260922c"></script>
+<script>
+window.PAGE = function (OD) {
+  const { D, C, $, $$, card, money, num, esc, S, save, find } = OD;
+
+  const refCode = name => (name || 'ODYS').replace(/\W/g, '').slice(0, 4).toUpperCase() + Math.random().toString(36).slice(2, 6).toUpperCase();
+
+  function signIn() {
+    $('#view').innerHTML = `
+      <section class="section">
+        <div class="wrap" style="max-width:520px">
+          <p class="eyebrow center">Begin</p>
+          <h1 class="d2 center" style="margin-bottom:10px">Start your journey.</h1>
+          <p class="lede center" style="margin:0 auto 30px">Create your account and every 69 MAD you spend starts counting — the first reward is three points away.</p>
+          <form class="box" id="signin">
+            <label class="field"><span>Name</span><input name="name" required placeholder="Abdel"></label>
+            <label class="field"><span>Email</span><input name="email" type="email" required placeholder="you@example.com"></label>
+            <label class="field"><span>Phone</span><input name="tel" placeholder="06 00 00 00 00"></label>
+            <button class="btn btn-block" type="submit">Create account</button>
+            <p class="muted" style="font-size:12px;margin:14px 0 0">Demo build — your account lives in this browser only, nothing is sent anywhere.</p>
+          </form>
+        </div>
+      </section>`;
+    $('#signin').addEventListener('submit', e => {
+      e.preventDefault();
+      const f = new FormData(e.target), s = S();
+      s.user = { name: f.get('name'), email: f.get('email'), tel: f.get('tel') };
+      s.referrals.code = s.referrals.code || refCode(f.get('name'));
+      save();
+      dash();
+    });
+  }
+
+  const TABS = ['Overview', 'My Orders', 'My Rewards', 'My Fragrances', 'Wishlist', 'Points History', 'Referrals', 'Fragrance Profile'];
+
+  function dash(tab) {
+    const s = S(), u = s.user, tier = OD.tierOf(s.points), nxt = OD.nextReward(s.points);
+    const goal = nxt ? nxt.pts : C.rewards[C.rewards.length - 1].pts;
+    tab = tab || (location.hash ? TABS.find(t => '#' + t.toLowerCase().replace(/\s/g, '') === location.hash.toLowerCase()) : null) || 'Overview';
+
+    $('#view').innerHTML = `
+      <section class="section-sm">
+        <div class="wrap-wide">
+          <p class="eyebrow">Welcome back</p>
+          <h1 class="d2">${esc(u.name)}.</h1>
+          <div class="split" style="margin-top:30px;align-items:start">
+            <div class="pts-hero">
+              <div class="pts-big">${num(s.points)}</div>
+              <p class="mono muted">ODYS points · ${tier.name}</p>
+              <div class="bar"><i style="width:${Math.min(100, s.points / goal * 100)}%"></i></div>
+              <div class="bar-labels"><span>${nxt ? num(nxt.pts - s.points) + ' → ' + OD.T(nxt.name) : OD.T('Everything unlocked')}</span><span>${num(goal)}</span></div>
+              <div class="tierbar">${C.rewards.map(r => `<span class="${s.points >= r.pts ? 'on' : ''}">${r.pts} pts</span>`).join('')}</div>
+              <p class="muted" style="font-size:13px">${tier.perk}</p>
+              ${(s.vouchers || []).length ? `<p class="mono" style="color:var(--accent)">${s.vouchers.length} reward${s.vouchers.length > 1 ? 's' : ''} ready to use</p>` : ''}
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <a class="btn" href="rewards.html#ladder">Redeem rewards</a>
+                <a class="btn btn-ghost" href="shop.html">Earn a point</a>
+              </div>
+            </div>
+            <div>
+              <nav class="tabs" id="atabs" style="flex-wrap:wrap;border:0">
+                ${TABS.map(t => `<button class="tab${t === tab ? ' on' : ''}" data-t="${t}">${t}</button>`).join('')}
+              </nav>
+              <div id="panel" style="margin-top:26px"></div>
+            </div>
+          </div>
+        </div>
+      </section>`;
+
+    $('#atabs').addEventListener('click', e => {
+      const b = e.target.closest('[data-t]'); if (!b) return;
+      $$('#atabs .tab').forEach(x => x.classList.toggle('on', x === b));
+      panel(b.dataset.t);
+    });
+    panel(tab);
+  }
+
+  function panel(tab) {
+    const s = S(), el = $('#panel');
+    const empty = (t, sub, href, cta) => `<div class="box center" style="padding:50px 20px">
+      <h3 style="font-size:24px;margin-bottom:8px">${t}</h3><p class="muted" style="font-size:14px">${sub}</p>
+      <a class="btn btn-sm" href="${href}" style="margin-top:18px">${cta}</a></div>`;
+
+    if (tab === 'Overview') {
+      const grams = s.orders.flatMap(o => o.items).filter(i => i.grams).reduce((n, i) => n + i.grams * i.qty, 0);
+      const bottles = s.orders.flatMap(o => o.items).filter(i => i.kind === 'parfum').reduce((n, i) => n + i.qty, 0);
+      el.innerHTML = `
+        <div class="grid grid-2" style="gap:14px">
+          <div class="box"><p class="eyebrow" style="margin:0 0 6px">Parfums acquis</p><p class="d3">${bottles}</p></div>
+          <div class="box"><p class="eyebrow" style="margin:0 0 6px">Oud cumulé</p><p class="d3">${num(grams)} g</p></div>
+          <div class="box"><p class="eyebrow" style="margin:0 0 6px">Coffrets</p><p class="d3">${s.orders.flatMap(o => o.items).filter(i => i.kind === 'coffret').length}</p></div>
+          <div class="box"><p class="eyebrow" style="margin:0 0 6px">Rewards redeemed</p><p class="d3">${s.ledger.filter(l => l.pts < 0).length}</p></div>
+        </div>
+        <div class="box" style="margin-top:14px">
+          <p class="eyebrow">Next steps</p>
+          <ul style="list-style:none;padding:0;margin:0;font-size:14px">
+            ${[[!s.quiz, 'Complete your fragrance profile', 'better recommendations', 'discover.html'],
+        [true, 'Try the trio', '+2.9 pts', 'coffrets.html#cof-trio'],
+        [true, 'Build a coffret', 'for you or as a gift', 'coffrets.html'],
+        [true, 'Invite a friend', '+' + C.referral.join + ' pts', '#referrals']]
+          .filter(x => x[0]).map(x => `<li style="display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)">
+              <a href="${x[3]}">${x[1]}</a><span class="mono" style="color:var(--accent)">${x[2]}</span></li>`).join('')}
+          </ul>
+        </div>`;
+    }
+
+    if (tab === 'My Orders') {
+      el.innerHTML = s.orders.length ? s.orders.map(o => `<div class="box" style="margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px">
+          <div><p class="card-code">${o.ref}</p><p class="muted" style="font-size:13px;margin:4px 0 0">${new Date(o.at).toLocaleDateString('fr-MA')} · ${o.status}</p></div>
+          <div style="text-align:right"><p class="price">${money(o.total)}</p><p class="mono" style="color:var(--accent)">+${num(o.points)} pts</p></div>
+        </div>
+        <p class="card-meta" style="margin-top:12px">${o.items.map(i => i.title + (i.grams ? ' ' + i.grams + 'g' : '') + ' ×' + i.qty).join(' · ')}</p>
+        ${(o.rewards || []).length ? `<p class="mono" style="color:var(--accent);margin:8px 0 0">${o.rewards.join(' · ')}</p>` : ''}
+      </div>`).join('') : empty('No orders yet', 'Your first parfum is ' + money(C.prices.perfume50) + ' — and your first point.', 'shop.html', 'Discover parfums');
+    }
+
+    if (tab === 'My Rewards') {
+      el.innerHTML = `
+        ${(s.vouchers || []).length ? `<div class="box" style="margin-bottom:14px;border-color:var(--accent)">
+          <p class="eyebrow">Ready to use</p>
+          ${s.vouchers.map(v => `<div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)">
+            <span>${esc(v.name)}</span>
+            <a class="link-u" href="${v.type === 'coffret' ? 'coffrets.html' : 'shop.html'}" style="border:0">${v.type === 'coffret' ? 'Build it' : 'Choose it'}</a></div>`).join('')}
+          <p class="muted" style="font-size:13px;margin:12px 0 0">Rewards come off automatically at checkout once an eligible item is in the bag.</p>
+        </div>` : ''}
+        <div class="grid grid-3">${C.rewards.map(r => {
+          const can = s.points >= r.pts;
+          return `<div class="reward-card${can ? '' : ' locked'}">
+            <p class="reward-pts">${num(r.pts)}</p><h3 style="font-size:20px">${r.name}</h3>
+            <p class="muted" style="font-size:13px;margin:0">${r.sub}</p>
+            <div class="tail"><a class="btn btn-sm btn-block${can ? '' : ' btn-ghost'}" href="rewards.html#ladder">${can ? 'Redeem' : num(r.pts - s.points) + ' to go'}</a></div>
+          </div>`;
+        }).join('')}</div>`;
+    }
+
+    if (tab === 'My Fragrances') {
+      const owned = [...new Set(s.orders.flatMap(o => o.items).map(i => i.id))].map(find).filter(Boolean);
+      el.innerHTML = owned.length ? `<div class="grid grid-2">${owned.map(p => card(p)).join('')}</div>`
+        : empty('Your collection is empty', 'Everything you order appears here, with its notes and profile.', 'shop.html', 'Start collecting');
+    }
+
+    if (tab === 'Wishlist') {
+      const w = s.wishlist.map(find).filter(Boolean);
+      el.innerHTML = w.length ? `<div class="grid grid-2">${w.map(p => card(p)).join('')}</div>`
+        : empty('Nothing saved yet', 'Tap the heart on any fragrance to keep it here.', 'shop.html', 'Browse parfums');
+    }
+
+    if (tab === 'Points History') {
+      el.innerHTML = s.ledger.length ? `<div class="box">${s.ledger.map(l => `
+        <div style="display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)">
+          <div><p style="margin:0">${esc(l.label)}</p><p class="muted" style="font-size:12px;margin:0">${new Date(l.at).toLocaleString('fr-MA')}</p></div>
+          <b style="color:${l.pts > 0 ? 'var(--accent)' : 'var(--ink-soft)'};white-space:nowrap">${l.pts > 0 ? '+' : ''}${num(l.pts)}</b>
+        </div>`).join('')}</div>` : empty('No movement yet', 'Points appear here the moment an order is placed.', 'shop.html', 'Earn your first point');
+    }
+
+    if (tab === 'Referrals') {
+      const r = s.referrals;
+      el.innerHTML = `
+        <div class="box">
+          <p class="eyebrow">Share the journey</p>
+          <h3 class="d3" style="margin-bottom:8px">They get ${C.referral.friendDiscountPct}% off.<br>You get ${C.referral.join + C.referral.firstOrder} points.</h3>
+          <p class="muted" style="font-size:14px">${C.referral.join} when they join, ${C.referral.firstOrder} when they order. No limit.</p>
+          <div style="display:flex;gap:10px;margin:18px 0;flex-wrap:wrap">
+            <input readonly id="reflink" value="odysparfum.ma/r/${r.code}" style="flex:1;min-width:220px;padding:14px;background:transparent;border:1px solid var(--line)">
+            <button class="btn" id="copyref">Copy</button>
+          </div>
+          <div class="grid grid-4" style="gap:10px">
+            ${[['Invited', r.invited], ['Joined', r.joined], ['Purchased', r.purchased],
+          ['Points earned', r.joined * C.referral.join + r.purchased * C.referral.firstOrder]]
+          .map(x => `<div class="stat" style="padding:14px"><b style="font-size:30px">${num(x[1])}</b><span>${x[0]}</span></div>`).join('')}
+          </div>
+          <button class="btn btn-ghost btn-block" id="invite" style="margin-top:16px">Simulate an invite (demo)</button>
+        </div>`;
+      $('#copyref').addEventListener('click', () => {
+        const i = $('#reflink'); i.select();
+        navigator.clipboard ? navigator.clipboard.writeText(i.value) : document.execCommand('copy');
+        OD.toast('Referral link copied');
+      });
+      $('#invite').addEventListener('click', () => {
+        const st = S(); st.referrals.invited++; st.referrals.joined++; save();
+        OD.award(C.referral.join, 'Referral joined'); panel('Referrals');
+      });
+    }
+
+    if (tab === 'Fragrance Profile') {
+      const q = s.quiz;
+      el.innerHTML = `<div class="box">
+        <p class="eyebrow">Fragrance profile</p>
+        ${q ? `<h3 class="d3" style="margin-bottom:14px">${q.mood[0].toUpperCase() + q.mood.slice(1)} · intensity ${q.intensity}/5 · ${q.when}</h3>
+          <p class="muted" style="font-size:14px">We use this to order the shop for you and to pre-fill your coffrets.</p>
+          <div class="grid grid-3" style="margin-top:22px">${OD.recommend(q).map(p => card(p)).join('')}</div>
+          <a class="btn btn-ghost btn-sm" href="discover.html" style="margin-top:18px">Retake the quiz</a>`
+          : `<h3 class="d3" style="margin-bottom:10px">Not built yet.</h3>
+          <p class="muted" style="font-size:14px">Three questions and the whole shop reorders itself around you.</p>
+          <a class="btn btn-sm" href="discover.html" style="margin-top:16px">Build my profile</a>`}
+      </div>`;
+    }
+
+    OD.paint();
+    OD.observe();
+  }
+
+  if (S().user) dash(); else signIn();
+};
+</script>
+<script src="assets/js/app.js?v=20260922c"></script>
+</body>
+</html>

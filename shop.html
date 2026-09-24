@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Parfums — ODYS PARFUM</title>
+<meta name="description" content="Every ODYS extrait de parfum, diffuseur and oud bâtonnet. Filter by fragrance family, mood, occasion, intensity and price.">
+<!-- link previews: WhatsApp is the order channel, so a shared link has to show the product -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ODYS PARFUM">
+<meta property="og:title" content="Parfums — ODYS PARFUM">
+<meta property="og:description" content="Every ODYS extrait de parfum, diffuseur and oud bâtonnet. Filter by fragrance family, mood, occasion, intensity and price.">
+<meta property="og:url" content="https://odysparfum.ma/shop.html">
+<meta property="og:image" content="https://odysparfum.ma/assets/img/odys-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_MA">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<!-- outside Arabic the page needs Amiri for one decorative line, so only those letters are fetched (35 KB, not 125 KB). i18n.js pulls the full face when the reader switches to Arabic. -->
+<link href="https://fonts.googleapis.com/css2?family=Amiri&text=%D8%A1%D8%A3%D8%A6%D8%A7%D8%A8%D8%A9%D8%AA%D8%AC%D8%AD%D8%AE%D8%AF%D8%B0%D8%B1%D8%B2%D8%B3%D8%B4%D8%B5%D8%B6%D8%B7%D8%B8%D8%B9%D9%81%D9%82%D9%83%D9%84%D9%85%D9%86%D9%87%D9%88%D9%89%D9%8A%D9%91%C2%B7&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/odys.css?v=20260922c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%233D1216'/%3E%3Ctext x='16' y='22' font-family='serif' font-size='16' fill='%23B08D4F' text-anchor='middle'%3EO%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div id="odys-chrome"></div>
+
+<main id="main">
+  <section class="section-sm" style="padding-top:clamp(40px,6vw,72px)">
+    <div class="wrap-wide">
+      <p class="eyebrow">Discover ODYS</p>
+      <h1 class="d2" id="ptitle">The parfums.</h1>
+      <p class="lede" style="margin-top:14px" id="psub">Twelve compositions at 69 MAD, six diffuseurs at 49 MAD, six batches of oud sold by the gram. Filter until one of them sounds like you — or let the house choose.</p>
+    </div>
+  </section>
+
+  <section class="section-sm" style="padding-top:0">
+    <div class="wrap-wide">
+      <div class="tabs" id="tabs" role="tablist"></div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:26px 0 8px">
+        <div class="scroll-x" id="moodpills" style="flex:1"></div>
+        <label class="field" style="margin:0;min-width:180px">
+          <span class="sr">Sort</span>
+          <select id="sort">
+            <option value="featured">Sort · Featured</option>
+            <option value="new">Newest</option>
+            <option value="price-asc">Price · low to high</option>
+            <option value="price-desc">Price · high to low</option>
+            <option value="rating">Most loved</option>
+          </select>
+        </label>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px">
+        <div class="scroll-x" id="exppills"></div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px">
+        <p class="mono muted" id="count" style="margin:0"></p>
+        <button class="link-u" id="clear" style="background:none">Clear filters</button>
+      </div>
+
+      <div class="grid grid-4" id="grid" style="margin-top:30px"></div>
+      <p id="empty" class="center muted hide" style="padding:60px 0">Nothing matches that combination yet. <a class="link-u" href="discover.html">Try the fragrance quiz</a></p>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <div class="wrap center" style="max-width:720px">
+      <p class="eyebrow">Not sure where to start?</p>
+      <h2 class="d3">Three questions. One fragrance.</h2>
+      <p class="lede" style="margin:14px auto 24px">The quiz reads intensity and occasion, not just family — which is why people keep what it picks.</p>
+      <a class="btn" href="discover.html">Find your ODYS</a>
+    </div>
+  </section>
+</main>
+
+<div id="odys-footer"></div>
+
+<script src="assets/js/i18n.js?v=20260922c"></script>
+<script src="assets/js/i18n-content.js?v=20260922c"></script>
+<script src="assets/js/i18n-labels.js?v=20260922c"></script>
+<script src="assets/js/data.js?v=20260922c"></script>
+<script>
+window.PAGE = function (OD) {
+  const { D, $, $$, card, qs } = OD;
+  const state = { tab: 0, mood: qs('mood') || '', exp: qs('exp') || '', sort: 'featured' };
+
+  const TABS = [
+    ['ALL', () => true],
+    ['PARFUMS', p => p.type === 'parfum'],
+    ['BESTSELLERS', p => (p.tags || []).includes('bestseller')],
+    ['NEW ARRIVALS', p => (p.tags || []).includes('new')],
+    ['MOST LOVED', p => (p.tags || []).includes('most-loved') || p.rating >= 4.9],
+    ['OUD AU GRAMME', p => p.type === 'oud'],
+    ['DIFFUSEURS', p => p.type === 'diffuseur'],
+    ['GIFTS', p => (p.tags || []).includes('gifts')],
+    ['LIMITED', p => (p.tags || []).includes('limited')]
+  ];
+  if (qs('tab')) {
+    const i = TABS.findIndex(t => t[0].toLowerCase().replace(/\s/g, '-') === qs('tab'));
+    if (i > -1) state.tab = i;
+  }
+
+  $('#tabs').innerHTML = TABS.map((t, i) => `<button class="tab${i === state.tab ? ' on' : ''}" data-tab="${i}" role="tab">${t[0]}</button>`).join('');
+  $('#moodpills').innerHTML = D.moods.map(m =>
+    `<button class="pill" data-mood="${m.toLowerCase()}" aria-pressed="${state.mood === m.toLowerCase()}">${m}</button>`).join('');
+  $('#exppills').innerHTML = D.experiences.map(m => {
+    const v = m.toLowerCase().replace(' ', '-');
+    return `<button class="pill" data-exp="${v}" aria-pressed="${state.exp === v}">${m}</button>`;
+  }).join('');
+
+  const pool = D.products;
+
+  function draw() {
+    let list = pool.filter(TABS[state.tab][1]);
+    if (state.mood) list = list.filter(p => (p.mood || []).includes(state.mood) || (p.family || '').toLowerCase().includes(state.mood));
+    if (state.exp) list = list.filter(p => (p.experience || []).some(e => state.exp.startsWith(e)) || (p.occasion || []).join(' ').toLowerCase().includes(state.exp.split('-')[0]));
+
+    const S = {
+      'price-asc': (a, b) => a.price - b.price,
+      'price-desc': (a, b) => b.price - a.price,
+      rating: (a, b) => (b.rating || 0) - (a.rating || 0),
+      new: (a, b) => ((b.tags || []).includes('new') ? 1 : 0) - ((a.tags || []).includes('new') ? 1 : 0)
+    }[state.sort];
+    if (S) list = list.slice().sort(S);
+
+    $('#grid').innerHTML = list.map(p => card(p)).join('');
+    $('#count').textContent = list.length + (list.length === 1 ? ' fragrance' : ' fragrances');
+    $('#empty').classList.toggle('hide', !!list.length);
+    $('#ptitle').textContent = state.mood ? state.mood[0].toUpperCase() + state.mood.slice(1) + '.' : (TABS[state.tab][0] === 'ALL' ? 'The parfums.' : TABS[state.tab][0][0] + TABS[state.tab][0].slice(1).toLowerCase() + '.');
+    OD.paint();
+  }
+
+  $$('#tabs .tab').forEach(b => b.addEventListener('click', () => {
+    state.tab = Number(b.dataset.tab);
+    $$('#tabs .tab').forEach(x => x.classList.toggle('on', x === b));
+    draw();
+  }));
+  $('#moodpills').addEventListener('click', e => {
+    const b = e.target.closest('[data-mood]'); if (!b) return;
+    state.mood = state.mood === b.dataset.mood ? '' : b.dataset.mood;
+    $$('[data-mood]').forEach(x => x.setAttribute('aria-pressed', x.dataset.mood === state.mood));
+    draw();
+  });
+  $('#exppills').addEventListener('click', e => {
+    const b = e.target.closest('[data-exp]'); if (!b) return;
+    state.exp = state.exp === b.dataset.exp ? '' : b.dataset.exp;
+    $$('[data-exp]').forEach(x => x.setAttribute('aria-pressed', x.dataset.exp === state.exp));
+    draw();
+  });
+  $('#sort').addEventListener('change', e => { state.sort = e.target.value; draw(); });
+  $('#clear').addEventListener('click', () => {
+    state.mood = ''; state.exp = ''; state.tab = 0; state.sort = 'featured';
+    $$('[data-mood],[data-exp]').forEach(x => x.setAttribute('aria-pressed', 'false'));
+    $$('#tabs .tab').forEach((x, i) => x.classList.toggle('on', !i));
+    $('#sort').value = 'featured';
+    draw();
+  });
+
+  draw();
+};
+</script>
+<script src="assets/js/app.js?v=20260922c"></script>
+</body>
+</html>

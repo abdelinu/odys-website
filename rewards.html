@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ODYS Rewards — 1 point per 69 MAD</title>
+<meta name="description" content="1 point per 69 MAD. 3 points is a discovery vial, 8 a diffuseur, 20 a free perfume, 50 three, 100 a custom coffret to gift.">
+<!-- link previews: WhatsApp is the order channel, so a shared link has to show the product -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ODYS PARFUM">
+<meta property="og:title" content="Fidélité ODYS — 1 point par 69 MAD">
+<meta property="og:description" content="1 point per 69 MAD. 3 points is a discovery vial, 8 a diffuseur, 20 a free perfume, 50 three, 100 a custom coffret to gift.">
+<meta property="og:url" content="https://odysparfum.ma/rewards.html">
+<meta property="og:image" content="https://odysparfum.ma/assets/img/odys-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_MA">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<!-- outside Arabic the page needs Amiri for one decorative line, so only those letters are fetched (35 KB, not 125 KB). i18n.js pulls the full face when the reader switches to Arabic. -->
+<link href="https://fonts.googleapis.com/css2?family=Amiri&text=%D8%A1%D8%A3%D8%A6%D8%A7%D8%A8%D8%A9%D8%AA%D8%AC%D8%AD%D8%AE%D8%AF%D8%B0%D8%B1%D8%B2%D8%B3%D8%B4%D8%B5%D8%B6%D8%B7%D8%B8%D8%B9%D9%81%D9%82%D9%83%D9%84%D9%85%D9%86%D9%87%D9%88%D9%89%D9%8A%D9%91%C2%B7&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/odys.css?v=20260922c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%233D1216'/%3E%3Ctext x='16' y='22' font-family='serif' font-size='16' fill='%23B08D4F' text-anchor='middle'%3EO%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div id="odys-chrome"></div>
+
+<main id="main">
+  <section class="section-sm">
+    <div class="wrap-wide">
+      <div class="split" style="align-items:center">
+        <div>
+          <p class="eyebrow">The ODYS journey</p>
+          <h1 class="d1" style="line-height:.95">Every bottle<br>takes you <em style="font-style:italic;color:var(--accent)">further</em>.</h1>
+          <p class="lede" style="margin-top:20px">No percentages, no tiers to decode. Every 69 MAD you pay is one point — a parfum is exactly one. Three points is a discovery vial, twenty is a perfume you don't pay for.</p>
+        </div>
+        <div class="pts-hero" id="ptsbox"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="wrap-wide">
+      <p class="eyebrow">How you earn</p>
+      <h2 class="d3" style="margin-bottom:26px">Three rules, that's all.</h2>
+      <div class="grid grid-3" id="earn"></div>
+    </div>
+  </section>
+
+  <section class="section dark" id="ladder">
+    <div class="wrap">
+      <div class="center" style="max-width:660px;margin-inline:auto">
+        <p class="eyebrow">The redemption ladder</p>
+        <h2 class="d2">3 · 8 · 20 · 50 · 100</h2>
+        <p class="lede" style="margin:14px auto 0">The first rung lands on a first order. Nothing expires while you are still buying.</p>
+      </div>
+      <div class="grid grid-3" id="rewards" style="margin-top:40px"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split" style="align-items:start">
+        <div>
+          <p class="eyebrow">How fast is it, really?</p>
+          <h2 class="d2">Count it yourself.</h2>
+          <p class="lede" style="margin-top:18px">Move the numbers. This is the same maths the till uses — diffuseurs are deliberately absent, because they earn nothing.</p>
+          <div class="tierbar" id="tiers" style="margin-top:26px"></div>
+          <p class="muted" style="font-size:13px" id="tiernote"></p>
+        </div>
+        <div class="box">
+          <label class="field"><span>Parfums 50 ML <b id="np">2</b></span><input id="perf" type="range" min="0" max="30" value="2"></label>
+          <label class="field"><span>Grams of oud <b id="ng">10</b> g</span><input id="oudg" type="range" min="0" max="300" step="5" value="10"></label>
+          <div class="pts-hero" style="padding:22px;margin-top:6px">
+            <div class="pts-big" id="simpts">0</div>
+            <p class="mono muted">points on this basket</p>
+            <p id="simline" style="font-size:14px;margin:10px 0 0"></p>
+            <p class="mono" id="simspend" style="color:var(--accent);margin-top:8px"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--bg-alt)">
+    <div class="wrap">
+      <div class="split" style="align-items:start">
+        <div>
+          <p class="eyebrow">The reward journey</p>
+          <h2 class="d2">Seven steps,<br>then it begins again.</h2>
+          <p class="lede" style="margin-top:18px">Nobody finishes — they start another journey with a perfume they did not pay for, or a coffret they send to someone else.</p>
+        </div>
+        <div class="journey" id="journey"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark" id="creator">
+    <div class="wrap-wide">
+      <div class="split" style="align-items:start">
+        <div>
+          <p class="eyebrow">ODYS Creator Journey</p>
+          <h2 class="d2">For the people<br>who explain scent<br>to everyone else.</h2>
+          <p class="lede" style="margin-top:18px">Reviewers, micro-influencers, oud obsessives. Every piece of content moves you up a tier — and the tiers are worth having.</p>
+          <div class="grid grid-2" style="margin-top:30px">
+            <div class="box"><p class="eyebrow" style="margin-bottom:6px">Tier I · 10K views</p><p class="muted" style="font-size:14px;margin:0">Coffret découverte offert · code perso à 10%</p></div>
+            <div class="box"><p class="eyebrow" style="margin-bottom:6px">Tier II · 50K views</p><p class="muted" style="font-size:14px;margin:0">3 parfums + 30 g d'oud · 12% de commission</p></div>
+            <div class="box"><p class="eyebrow" style="margin-bottom:6px">Tier III · 250K views</p><p class="muted" style="font-size:14px;margin:0">Batch Royal Noir · accès anticipé · événements</p></div>
+            <div class="box"><p class="eyebrow" style="margin-bottom:6px">Tier IV · 1M views</p><p class="muted" style="font-size:14px;margin:0">Éditions limitées · cachets campagne · déplacements</p></div>
+          </div>
+        </div>
+        <form class="box" id="creatorform">
+          <p class="eyebrow">Become an ODYS creator</p>
+          <label class="field"><span>Name</span><input name="name" required></label>
+          <label class="field"><span>Email</span><input name="email" type="email" required></label>
+          <label class="field"><span>Main platform</span>
+            <select name="platform"><option>Instagram</option><option>TikTok</option><option>YouTube</option><option>Blog / Newsletter</option><option>Other</option></select>
+          </label>
+          <label class="field"><span>Profile link</span><input name="link" required placeholder="@yourhandle"></label>
+          <label class="field"><span>Audience size</span>
+            <select name="size"><option>1K – 10K</option><option>10K – 50K</option><option>50K – 250K</option><option>250K+</option></select>
+          </label>
+          <label class="field"><span>Why ODYS?</span><textarea name="why" rows="3" placeholder="Tell us what you would make."></textarea></label>
+          <button class="btn btn-block" type="submit">Apply</button>
+          <p class="muted" style="font-size:12px;margin:12px 0 0">We answer every application within five working days.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-wide">
+      <div class="sec-head"><div><p class="eyebrow" style="margin:0">Share the journey</p><h2 class="d3">Bring someone with you.</h2></div><a class="link-u" href="account.html#referrals">Your referral link</a></div>
+      <div class="grid grid-3">
+        <div class="box"><p class="reward-pts">+3</p><p class="card-meta">Points when they join</p><p class="muted" style="font-size:14px;margin-top:10px">Credited the moment your friend creates an account with your link.</p></div>
+        <div class="box"><p class="reward-pts">+5</p><p class="card-meta">Points on their first order</p><p class="muted" style="font-size:14px;margin-top:10px">Five points is a quarter of a free perfume, for doing nothing.</p></div>
+        <div class="box"><p class="reward-pts">−10%</p><p class="card-meta">For them</p><p class="muted" style="font-size:14px;margin-top:10px">Your friend gets 10% off their first order. Nobody arrives empty-handed.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--bg-alt)">
+    <div class="wrap" style="max-width:760px">
+      <p class="eyebrow">The fine print, in plain words</p>
+      <div id="faq"></div>
+    </div>
+  </section>
+</main>
+
+<div id="odys-footer"></div>
+
+<script src="assets/js/i18n.js?v=20260922c"></script>
+<script src="assets/js/i18n-content.js?v=20260922c"></script>
+<script src="assets/js/i18n-labels.js?v=20260922c"></script>
+<script src="assets/js/data.js?v=20260922c"></script>
+<script>
+window.PAGE = function (OD) {
+  const { D, C, $, $$, money, num, S, save, T } = OD;
+
+  const EARN = [
+    ['1 point', T('Per') + ' ' + C.points.madPerPoint + ' MAD', T('On everything you pay for except diffuseurs — a parfum is exactly one point.')],
+    [C.rewards[0].pts + ' points', T('Your first reward'), T('A discovery vial, close enough to reach on a first order.')],
+    ['0 point', T('Diffuseurs'), T('Outside the programme by design:') + ' ' + money(C.prices.diffuseur50) + ' ' + T('is already the floor price.')]
+  ];
+  $('#earn').innerHTML = EARN.map(e => `<div class="box">
+      <p class="reward-pts">${e[0]}</p>
+      <p class="card-meta" style="margin-top:6px">${e[1]}</p>
+      <p class="muted" style="font-size:13px;margin:10px 0 0">${e[2]}</p>
+    </div>`).join('');
+
+  const JOURNEY = [
+    [T('Begin'), T('Create your account'), T('Your points start counting from the first order.')],
+    [T('Discover'), T('Take the fragrance quiz'), T('Three questions, and the shop reorders itself around you.')],
+    [T('Experience'), T('Buy your first parfum'), money(C.prices.perfume50) + ' · 1 point.'],
+    [T('Collect'), T('Add oud by the gram'), T('Every') + ' ' + C.points.madPerPoint + ' ' + T('MAD is another point.')],
+    [T('Earn'), T('Reach') + ' ' + C.rewards[2].pts + ' ' + T('points'), T('A free 50 ML perfume, any scent in the house.')],
+    [T('Redeem'), T('Or hold for') + ' ' + C.rewards[4].pts, T('A custom coffret, wrapped and sent to whoever you choose.')],
+    [T('Continue'), T('Begin another journey'), T('The points reset. The collection does not.')]
+  ];
+
+  const FAQ = [
+    ['Do diffuseurs earn points?', 'No. They are priced at ' + money(C.prices.diffuseur50) + ' and sit outside the programme — the discount is already in the price.'],
+    ['How is oud counted?', 'Like everything else — by what you pay. Every ' + C.points.madPerPoint + ' MAD of oud is one point, whichever batch or weight you choose.'],
+    ['Do points expire?', 'They rest after 18 months without an order. One purchase restarts the clock.'],
+    ['Can I use points as a discount instead?', 'No — points buy whole products at 3, 8, 20, 50 and 100. It is worth more that way, and it is simpler to explain.'],
+    ['What if I return something?', 'The points come back out of the balance. Nothing dramatic.'],
+    ['Can I gift my reward?', 'Yes. The 100-point coffret is built to be sent to someone else — you compose it, we wrap it, they open it.']
+  ];
+  $('#faq').innerHTML = FAQ.map(f => `<details class="note-tier" style="display:block;padding:20px 0">
+      <summary style="cursor:pointer;font-family:var(--display);font-size:22px">${f[0]}</summary>
+      <p class="muted" style="font-size:15px;margin:10px 0 0">${f[1]}</p>
+    </details>`).join('');
+
+  function render() {
+    const s = S(), tier = OD.tierOf(s.points), nxt = OD.nextReward(s.points);
+    const goal = nxt ? nxt.pts : C.rewards[C.rewards.length - 1].pts;
+    const pct = Math.min(100, s.points / goal * 100);
+
+    $('#ptsbox').innerHTML = `
+      <p class="eyebrow" style="margin-bottom:8px">Your balance</p>
+      <div class="pts-big">${num(s.points)}</div>
+      <p class="mono muted">ODYS points · ${tier.name}</p>
+      <div class="bar"><i style="width:${pct}%"></i></div>
+      <div class="bar-labels"><span>${nxt ? num(nxt.pts - s.points) + ' → ' + OD.T(nxt.name) : OD.T('Everything unlocked')}</span><span>${num(goal)}</span></div>
+      <p class="muted" style="font-size:13px;margin-top:16px">${tier.perk}</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+        <a class="btn" href="#ladder">${OD.unlocked(s.points).length ? 'Redeem now' : 'See the ladder'}</a>
+        <a class="btn btn-ghost" href="shop.html">Earn a point</a>
+      </div>
+      ${(s.vouchers || []).length ? `<p class="mono" style="color:var(--accent);margin-top:16px">${s.vouchers.length} reward waiting in your bag</p>` : ''}`;
+
+    $('#rewards').innerHTML = C.rewards.map(r => {
+      const can = s.points >= r.pts, held = (s.vouchers || []).filter(v => v.id === r.id).length;
+      return `<div class="reward-card${can ? '' : ' locked'}"${r.id === 'r-20' ? ' style="border-color:var(--accent)"' : ''}>
+        <p class="reward-pts">${num(r.pts)} <span class="mono" style="font-size:10px;color:var(--ink-soft)">pts</span></p>
+        <h3 style="font-size:23px">${r.name}</h3>
+        <p class="muted" style="font-size:14px;margin:0">${r.sub}</p>
+        ${held ? `<p class="mono" style="color:var(--accent);margin:0">${held} held</p>` : ''}
+        <div class="tail">
+          <button class="btn btn-sm btn-block" data-redeem="${r.id}"${can ? '' : ' disabled'}>${can ? 'Redeem' : num(r.pts - s.points) + ' points away'}</button>
+        </div>
+      </div>`;
+    }).join('');
+
+    $('#tiers').innerHTML = C.tiers.map(t => `<span class="${tier.name === t.name ? 'on' : ''}">${t.name}</span>`).join('');
+    $('#tiernote').textContent = T(tier.name) + ' · ' + T(tier.perk);
+
+    $('#journey').innerHTML = JOURNEY.map((j, i) => {
+      const done = [!!s.user, !!s.quiz, !!s.orders.length, s.points >= 2, s.points >= C.rewards[2].pts, s.points >= C.rewards[4].pts, false][i];
+      return `<div class="jstep${done ? ' done' : ''}"><b>${j[0]}</b><h4>${j[1]}</h4><p class="muted" style="font-size:14px;margin:0">${j[2]}</p></div>`;
+    }).join('');
+    OD.observe();
+  }
+  render();
+  document.addEventListener('odys:state', render);
+
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-redeem]'); if (!b) return;
+    const r = C.rewards.find(x => x.id === b.dataset.redeem), s = S();
+    if (s.points < r.pts) return;
+    s.points -= r.pts;
+    s.vouchers = (s.vouchers || []).concat([{ id: r.id, type: r.type, qty: r.qty, maxItems: r.maxItems, at: Date.now(), name: r.name }]);
+    s.ledger.unshift({ pts: -r.pts, label: 'Redeemed · ' + r.name, at: Date.now() });
+    save();
+    OD.toast(OD.T('Journey complete') + ' — ' + OD.T(r.name));
+    setTimeout(() => OD.toast(r.type === 'coffret' ? 'Build it in Coffrets — it comes off at checkout' : 'Add your perfume to the bag — it comes off at checkout'), 1200);
+  });
+
+  /* points simulator */
+  function sim() {
+    const p = Number($('#perf').value), g = Number($('#oudg').value);
+    const batch = D.ouds[0];                                   // the house standard, for the maths
+    const spend = p * C.prices.perfume50 + (g ? OD.gramPrice(batch, g) : 0);
+    const pts = Math.round(OD.pointsFor(spend));
+    $('#np').textContent = p; $('#ng').textContent = g;
+    $('#simpts').textContent = pts;
+    const nxt = C.rewards.find(r => r.pts > pts);
+    $('#simline').textContent = nxt
+      ? (nxt.pts - pts) + ' ' + T('points short of') + ' ' + T(nxt.name).toLowerCase() + '.'
+      : T('Everything on the ladder is unlocked.');
+    $('#simspend').textContent = T('Basket:') + ' ' + money(spend)
+      + (pts >= C.rewards[2].pts ? ' · ' + T('That basket already contains a free perfume.') : '');
+  }
+  $('#perf').addEventListener('input', sim);
+  $('#oudg').addEventListener('input', sim);
+  sim();
+
+  $('#creatorform').addEventListener('submit', e => {
+    e.preventDefault();
+    const f = new FormData(e.target), s = S();
+    s.creator = { name: f.get('name'), email: f.get('email'), platform: f.get('platform'), link: f.get('link'), size: f.get('size'), why: f.get('why'), status: 'submitted', at: Date.now() };
+    save();
+    e.target.innerHTML = `<p class="eyebrow">Application received</p>
+      <h3 class="d3" style="margin-bottom:10px">Welcome to the waiting room.</h3>
+      <p class="muted" style="font-size:15px">We read every application ourselves. Expect an answer within five working days — and a coffret découverte if it is a yes.</p>`;
+    OD.toast('Creator application submitted');
+  });
+};
+</script>
+<script src="assets/js/app.js?v=20260922c"></script>
+</body>
+</html>

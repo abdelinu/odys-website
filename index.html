@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ODYS PARFUM — More Than a Fragrance. It's a Journey.</title>
+<meta name="description" content="ODYS Parfum — parfums 50 ML à 69 MAD, diffuseurs 50 ML à 49 MAD, bâtonnets d'oud vendus au gramme et coffrets personnalisés. 20 points = un parfum offert.">
+<!-- link previews: WhatsApp is the order channel, so a shared link has to show the product -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ODYS PARFUM">
+<meta property="og:title" content="ODYS PARFUM — Plus qu'un parfum, un voyage.">
+<meta property="og:description" content="ODYS Parfum — parfums 50 ML à 69 MAD, diffuseurs 50 ML à 49 MAD, bâtonnets d'oud vendus au gramme et coffrets personnalisés. 20 points = un parfum offert.">
+<meta property="og:url" content="https://odysparfum.ma/">
+<meta property="og:image" content="https://odysparfum.ma/assets/img/odys-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_MA">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<!-- outside Arabic the page needs Amiri for one decorative line, so only those letters are fetched (35 KB, not 125 KB). i18n.js pulls the full face when the reader switches to Arabic. -->
+<link href="https://fonts.googleapis.com/css2?family=Amiri&text=%D8%A1%D8%A3%D8%A6%D8%A7%D8%A8%D8%A9%D8%AA%D8%AC%D8%AD%D8%AE%D8%AF%D8%B0%D8%B1%D8%B2%D8%B3%D8%B4%D8%B5%D8%B6%D8%B7%D8%B8%D8%B9%D9%81%D9%82%D9%83%D9%84%D9%85%D9%86%D9%87%D9%88%D9%89%D9%8A%D9%91%C2%B7&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/odys.css?v=20260922c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%233D1216'/%3E%3Ctext x='16' y='22' font-family='serif' font-size='16' fill='%23B08D4F' text-anchor='middle'%3EO%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div id="odys-chrome"></div>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="smoke" data-smoke aria-hidden="true"></div>
+    <div class="wrap-wide">
+      <div class="hero-grid">
+        <div>
+          <p class="hero-ar ar">أوديس</p>
+          <p class="eyebrow" style="color:var(--brass-lite)">More than a fragrance</p>
+          <h1>Your journey<br>starts <em>here</em>.</h1>
+          <p class="lede">Discover fragrances created for the stories you haven't lived yet — 50 ML parfums, diffuseurs for the house, and oud sold by the gram. Every bottle brings the next one closer.</p>
+          <div class="hero-cta">
+            <a class="btn" href="shop.html">Discover parfums</a>
+            <a class="btn btn-ghost" href="oud.html">Enter the world of oud</a>
+          </div>
+          <p class="mono" style="color:var(--brass-lite);margin-top:26px" id="heroprice"></p>
+        </div>
+        <div class="stage">
+          <span class="glow" aria-hidden="true"></span>
+          <div class="particles" data-particles aria-hidden="true" style="position:absolute;inset:0"></div>
+          <div class="bottle-3d" id="hero-bottle" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LE TRIO — the hero basket -->
+  <section class="section-sm" style="padding-bottom:0">
+    <div class="wrap-wide"><a class="box trio" href="coffrets.html#cof-trio" id="trioband"></a></div>
+  </section>
+
+  <!-- MOBILE REWARDS STRIP -->
+  <div class="mrewards wrap-wide" style="padding-top:18px" id="mrewards"></div>
+
+  <!-- THE THREE OFFERS -->
+  <section class="section-sm">
+    <div class="wrap-wide">
+      <div class="grid grid-3 grid-1-sm" id="offers"></div>
+    </div>
+  </section>
+
+  <!-- QUICK DISCOVERY -->
+  <section class="section-sm" style="padding-top:0">
+    <div class="wrap-wide">
+      <div class="sec-head" style="margin-bottom:20px">
+        <div><p class="eyebrow" style="margin:0">Explore by mood</p></div>
+        <a class="link-u" href="shop.html">All fragrances</a>
+      </div>
+      <div class="scroll-x" id="moods"></div>
+      <p class="eyebrow" style="margin:36px 0 16px">Explore by experience</p>
+      <div class="scroll-x" id="exps"></div>
+    </div>
+  </section>
+
+  <!-- FIND YOUR ODYS -->
+  <section class="section dark" id="find">
+    <div class="wrap">
+      <div class="center" style="margin-bottom:40px">
+        <p class="eyebrow">Find your ODYS</p>
+        <h2 class="d2">Find the fragrance<br>that feels like you.</h2>
+      </div>
+      <div class="quiz rv" data-quiz></div>
+    </div>
+  </section>
+
+  <!-- DISCOVER ODYS -->
+  <section class="section">
+    <div class="wrap-wide">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow" style="margin:0">Discover ODYS</p>
+          <h2 class="d3">The house, in twelve chapters.</h2>
+        </div>
+        <a class="link-u" href="shop.html">Shop all</a>
+      </div>
+      <div class="tabs" id="tabs" role="tablist"></div>
+      <div class="grid grid-4" id="tabgrid" style="margin-top:34px"></div>
+    </div>
+  </section>
+
+  <!-- THE FLACON -->
+  <section class="section" style="background:var(--bg-alt)">
+    <div class="wrap-wide">
+      <div class="sec-head">
+        <div>
+          <p class="eyebrow" style="margin:0">The flacon</p>
+          <h2 class="d3">One bottle, three finishes.</h2>
+        </div>
+        <a class="link-u" href="bottle3d.html">See it in 3D</a>
+      </div>
+      <figure style="margin:0">
+        <img src="assets/img/odys-range.webp"
+             srcset="assets/img/odys-range-820.webp 820w, assets/img/odys-range.webp 1536w"
+             sizes="(max-width:900px) 92vw, 1400px"
+             width="1536" height="1024" loading="lazy" decoding="async"
+             alt="Three ODYS flacons side by side, labelled Noir &amp; Or, Marine &amp; Or and Crème &amp; Or"
+             style="width:100%;height:auto;display:block;border:1px solid var(--line)">
+        <figcaption class="muted" style="font-size:13px;margin-top:14px">Noir &amp; Or, Marine &amp; Or, Crème &amp; Or — one thick-walled flacon, three labels.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- OUD TEASER -->
+  <section class="dark night" style="position:relative;overflow:hidden">
+    <div data-embers aria-hidden="true" style="position:absolute;inset:0"></div>
+    <div class="wrap section" style="position:relative">
+      <div class="split">
+        <div>
+          <p class="eyebrow">العود</p>
+          <h2 class="d2">Oud.<br>Sold by<br>the gram.</h2>
+          <p class="lede" style="margin-top:22px">Six batches of bâtonnets — Malaki, Cambodi, Hindi, Rose &amp; Oud, Musk, Royal Noir. Take 5 g or 100 g; the rate falls as the weight rises, and every 69 MAD of oud is one ODYS point.</p>
+          <div class="pills" style="margin-top:24px" id="gramchips"></div>
+          <a class="btn" href="oud.html" style="margin-top:26px">Enter the oud world</a>
+        </div>
+        <div class="grid grid-2" id="oudteaser"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COFFRETS -->
+  <section class="section">
+    <div class="wrap-wide">
+      <div class="sec-head">
+        <div><p class="eyebrow" style="margin:0">Coffrets personnalisés</p><h2 class="d3">Composez-le. Offrez-le.</h2></div>
+        <a class="link-u" href="coffrets.html">Build a coffret</a>
+      </div>
+      <div class="grid grid-3" id="coffrets"></div>
+    </div>
+  </section>
+
+  <!-- REWARDS -->
+  <section class="section" style="background:var(--bg-alt)">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <p class="eyebrow">The ODYS journey</p>
+          <h2 class="d2">Every bottle<br>takes you further.</h2>
+          <p class="lede" style="margin-top:20px">Every 69 MAD you spend is one point — a parfum is exactly one. Three points and we add a discovery vial to your next order; twenty and you choose any perfume in the house, free. Diffuseurs stay out of it, because 49 MAD is already the floor.</p>
+          <div class="grid grid-3" style="margin:30px 0" id="rstats"></div>
+          <a class="btn" href="rewards.html">See the rewards</a>
+        </div>
+        <div class="pts-hero rv" id="ptsbox"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFFUSEURS -->
+  <section class="section">
+    <div class="wrap-wide">
+      <div class="sec-head">
+        <div><p class="eyebrow" style="margin:0">La maison</p><h2 class="d3" id="difftitle">Diffuseurs.</h2></div>
+        <a class="link-u" href="diffuseurs.html">All diffuseurs</a>
+      </div>
+      <div class="grid grid-4" id="diffgrid"></div>
+    </div>
+  </section>
+
+  <!-- COLLECTIONS -->
+  <section class="section" style="background:var(--bg-alt)">
+    <div class="wrap-wide">
+      <div class="sec-head">
+        <div><p class="eyebrow" style="margin:0">The ODYS collections</p><h2 class="d3">Six ways in.</h2></div>
+        <a class="link-u" href="collections.html">All collections</a>
+      </div>
+      <div class="grid grid-3" id="cols"></div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <div>
+      <span>DISCOVER</span><span>·</span><span>EXPERIENCE</span><span>·</span><span>REMEMBER</span><span>·</span><span>COLLECT</span><span>·</span><span>EARN</span><span>·</span><span>REDEEM</span><span>·</span><span>CONTINUE</span><span>·</span>
+      <span>DISCOVER</span><span>·</span><span>EXPERIENCE</span><span>·</span><span>REMEMBER</span><span>·</span><span>COLLECT</span><span>·</span><span>EARN</span><span>·</span><span>REDEEM</span><span>·</span><span>CONTINUE</span><span>·</span>
+    </div>
+  </div>
+
+  <!-- COMMUNITY -->
+  <section class="section">
+    <div class="wrap-wide">
+      <div class="sec-head">
+        <div><p class="eyebrow" style="margin:0">The ODYS community</p><h2 class="d3">Most loved this month.</h2></div>
+        <a class="link-u" href="journal.html#community">Trending in Morocco</a>
+      </div>
+      <div class="grid grid-3" id="community"></div>
+    </div>
+  </section>
+
+  <!-- JOURNAL -->
+  <section class="section" style="background:var(--bg-alt)">
+    <div class="wrap-wide">
+      <div class="sec-head">
+        <div><p class="eyebrow" style="margin:0">The journal</p><h2 class="d3">Read before you wear.</h2></div>
+        <a class="link-u" href="journal.html">All stories</a>
+      </div>
+      <div class="grid grid-3" id="journal"></div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="section dark center">
+    <div class="wrap" style="max-width:640px">
+      <p class="eyebrow">Stay on the journey</p>
+      <h2 class="d3">New chapters, first.</h2>
+      <p class="lede" style="margin:14px auto 26px">Private launches, new oud batches and the occasional letter about how any of this is made. No noise.</p>
+      <form id="news" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <label class="sr" for="nemail">Email</label>
+        <input id="nemail" type="email" required placeholder="you@example.com" style="flex:1;min-width:240px;padding:16px;background:transparent;border:1px solid var(--line);color:inherit">
+        <button class="btn" type="submit">Join</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<div id="odys-footer"></div>
+
+<script src="assets/js/i18n.js?v=20260922c"></script>
+<script src="assets/js/i18n-content.js?v=20260922c"></script>
+<script src="assets/js/i18n-labels.js?v=20260922c"></script>
+<script src="assets/js/data.js?v=20260922c"></script>
+<script>
+window.PAGE = function (OD) {
+  const { D, C, $, $$, card, bottle, money, num, esc, S, T } = OD;
+
+  $('#hero-bottle').innerHTML = bottle(D.parfums[0]);
+  $('#heroprice').textContent = [
+    T('Parfum 50 ML') + ' · ' + money(C.prices.perfume50),
+    T('Diffuseur 50 ML') + ' · ' + money(C.prices.diffuseur50),
+    T('Oud from') + ' ' + C.oud.minGrams + ' g'
+  ].join('   —   ');
+
+  $('#offers').innerHTML = [
+    ['Parfums', money(C.prices.perfume50), '50 ML · extrait de parfum', '+1 point per bottle', 'shop.html'],
+    ['Diffuseurs', money(C.prices.diffuseur50), '50 ML · 3 rattan sticks', 'no points', 'diffuseurs.html'],
+    ['Oud', T('from') + ' ' + money(OD.gramPrice(D.ouds[4], C.oud.minGrams)), 'sticks sold by the gram', '+1 point per ' + C.points.madPerPoint + ' MAD', 'oud.html']
+  ].map(o => `<a class="box" href="${o[4]}" style="display:block">
+      <p class="eyebrow" style="margin-bottom:10px">${T(o[0])}</p>
+      <p class="d3" style="font-size:34px;margin-bottom:6px">${o[1]}</p>
+      <p class="card-meta">${T(o[2])}</p>
+      <p class="mono" style="color:var(--accent);margin-top:12px">${T(o[3])}</p>
+    </a>`).join('');
+
+  (function trio() {
+    const t = D.coffrets.find(c => c.id === 'cof-trio');
+    const three = [D.parfums[0], D.parfums[6], D.parfums[4]];
+    $('#trioband').innerHTML = `
+      <span style="display:flex;gap:2px">${three.map(p => `<span style="width:54px">${bottle(p, { k: 't' })}</span>`).join('')}</span>
+      <span style="flex:1">
+        <span class="eyebrow" style="display:block;margin-bottom:6px">${T('Start here')}</span>
+        <span class="d3" style="display:block;font-size:30px">${esc(t.name)}</span>
+        <span class="muted" style="display:block;font-size:14px;margin-top:6px">${T('Three 50 ML parfums you choose, one flat price, delivery included.')}</span>
+      </span>
+      <span style="text-align:end;white-space:nowrap">
+        <span class="d3" style="display:block;font-size:32px">${money(t.flatPrice)}</span>
+        <span class="muted" style="display:block;font-size:13px"><s>${money(3 * C.prices.perfume50 + 35)}</s> · ${T('you save')} ${money(3 * C.prices.perfume50 + 35 - t.flatPrice)}</span>
+        <span class="btn btn-sm" style="margin-top:12px">${T('Compose the trio')}</span>
+      </span>`;
+  })();
+
+  $('#gramchips').innerHTML = C.oud.steps.map(g => `<a class="pill" href="oud.html#collection">${g} g</a>`).join('')
+    + `<a class="pill" href="oud.html#collection">${T('special order')}</a>`;
+
+  $('#rstats').innerHTML = [
+    ['1 pt', 'per ' + C.points.madPerPoint + ' MAD'], [C.rewards[0].pts + ' pts', 'first reward'], ['20 pts', 'free perfume']
+  ].map(s => `<div class="stat"><b>${s[0]}</b><span>${T(s[1])}</span></div>`).join('');
+
+  $('#moods').innerHTML = D.moods.map(m => `<a class="pill" href="shop.html?mood=${m.toLowerCase()}">${m}</a>`).join('');
+  $('#exps').innerHTML = D.experiences.map(m => `<a class="pill" href="shop.html?exp=${m.toLowerCase().replace(' ', '-')}">${m}</a>`).join('');
+
+  const TABS = [
+    ['BESTSELLERS', p => (p.tags || []).includes('bestseller')],
+    ['NEW ARRIVALS', p => (p.tags || []).includes('new')],
+    ['MOST LOVED', p => (p.tags || []).includes('most-loved') || p.rating >= 4.9],
+    ['OUD AU GRAMME', p => p.type === 'oud'],
+    ['DIFFUSEURS', p => p.type === 'diffuseur'],
+    ['GIFTS', p => (p.tags || []).includes('gifts')],
+    ['LIMITED', p => (p.tags || []).includes('limited')]
+  ];
+  $('#tabs').innerHTML = TABS.map((t, i) => `<button class="tab${i ? '' : ' on'}" data-tab="${i}" role="tab">${T(t[0])}</button>`).join('');
+  function drawTab(i) {
+    $('#tabgrid').innerHTML = D.products.filter(TABS[i][1]).slice(0, 8).map((p, n) => card(p, { rank: n + 1 })).join('');
+    OD.paint();
+  }
+  $$('#tabs .tab').forEach(b => b.addEventListener('click', () => {
+    $$('#tabs .tab').forEach(x => x.classList.remove('on'));
+    b.classList.add('on'); drawTab(Number(b.dataset.tab));
+  }));
+  drawTab(0);
+
+  $('#oudteaser').innerHTML = D.ouds.slice(0, 2).map(p => card(p)).join('');
+  $('#diffgrid').innerHTML = D.diffuseurs.slice(0, 4).map(p => card(p)).join('');
+  $('#difftitle').textContent = T('Diffuseurs') + ' · ' + money(C.prices.diffuseur50) + '.';
+  $('#community').innerHTML = D.products.slice().sort((a, b) => b.reviews - a.reviews).slice(0, 3).map((p, i) => card(p, { rank: i + 1 })).join('');
+
+  $('#coffrets').innerHTML = D.coffrets.slice(0, 3).map(b =>
+    `<a class="tile" href="coffrets.html#${b.id}" style="--c1:${b.c[0]};--c2:${b.c[1]};min-height:300px">
+      <span class="mono">${b.sub}</span>
+      <h3>${b.name}</h3>
+      <p>${b.blurb}</p>
+      <p style="margin-top:14px;color:var(--sand);font-size:13px">Personnalisable · pour vous ou en cadeau</p>
+    </a>`).join('');
+
+  $('#cols').innerHTML = D.collections.map(c =>
+    `<a class="tile" href="collections.html#${c.id}" style="--c1:${c.c[0]};--c2:${c.c[1]}">
+      <span class="mono ar" style="font-family:var(--arabic);letter-spacing:0;font-size:15px;direction:rtl">${c.ar}</span>
+      <h3>${c.name}</h3><p>${c.blurb}</p>
+    </a>`).join('');
+
+  $('#journal').innerHTML = D.journal.slice(0, 3).map(j =>
+    `<a class="card" href="journal.html#${j.id}">
+      <span class="card-media" style="--c1:${j.c[0]};--c2:${j.c[1]};aspect-ratio:4/3;place-items:end start;padding:20px">
+        <span class="mono" style="color:var(--sand)">${j.cat}</span>
+      </span>
+      <div class="card-body"><h3 class="card-name" style="font-size:22px">${j.title}</h3>
+      <p class="muted" style="font-size:14px">${j.excerpt}</p>
+      <span class="card-meta">${j.read} min read</span></div>
+    </a>`).join('');
+
+  function ptsbox() {
+    const s = S(), nxt = OD.nextReward(s.points), goal = nxt ? nxt.pts : C.rewards[C.rewards.length - 1].pts;
+    const left = nxt ? nxt.pts - s.points : 0;
+    $('#ptsbox').innerHTML = `
+      <p class="eyebrow" style="margin-bottom:10px">Your next perfume is closer than you think</p>
+      <div class="pts-big">${num(s.points)}</div>
+      <p class="mono muted" style="margin-top:6px">ODYS points</p>
+      <div class="bar"><i data-w="${Math.min(100, s.points / goal * 100)}"></i></div>
+      <div class="bar-labels"><span>${nxt ? num(left) + ' points to go' : 'Everything unlocked'}</span><span>${nxt ? T(nxt.name) + ' · ' : ''}${num(goal)}</span></div>
+      <div class="tierbar">${C.rewards.map(r => `<span class="${s.points >= r.pts ? 'on' : ''}">${r.pts} pts</span>`).join('')}</div>
+      <p class="muted" style="font-size:13px;margin-top:14px">${OD.tierOf(s.points).perk}</p>
+      <a class="btn btn-block" href="rewards.html" style="margin-top:8px">${nxt ? 'Earn more points' : 'Redeem your reward'}</a>`;
+
+    $('#mrewards').innerHTML = `<a href="rewards.html">
+      <b>${num(s.points)}</b>
+      <span>${nxt ? num(left) + ' ' + T('pts to a free perfume') : T('Reward unlocked')}</span>
+      <em>${T(nxt ? 'Earn' : 'Redeem')} →</em></a>`;
+    OD.observe();
+  }
+  ptsbox();
+  document.addEventListener('odys:state', ptsbox);
+
+  $('#news').addEventListener('submit', e => {
+    e.preventDefault();
+    OD.toast('You are on the list');
+    e.target.reset();
+  });
+};
+</script>
+<script src="assets/js/app.js?v=20260922c"></script>
+</body>
+</html>

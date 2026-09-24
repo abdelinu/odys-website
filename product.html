@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ODYS PARFUM</title>
+<meta name="description" content="The story, the olfactory journey and the fragrance profile behind every ODYS composition.">
+<!-- link previews: WhatsApp is the order channel, so a shared link has to show the product -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ODYS PARFUM">
+<meta property="og:title" content="ODYS PARFUM">
+<meta property="og:description" content="The story, the olfactory journey and the fragrance profile behind every ODYS composition.">
+<meta property="og:url" content="https://odysparfum.ma/product.html">
+<meta property="og:image" content="https://odysparfum.ma/assets/img/odys-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_MA">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<!-- outside Arabic the page needs Amiri for one decorative line, so only those letters are fetched (35 KB, not 125 KB). i18n.js pulls the full face when the reader switches to Arabic. -->
+<link href="https://fonts.googleapis.com/css2?family=Amiri&text=%D8%A1%D8%A3%D8%A6%D8%A7%D8%A8%D8%A9%D8%AA%D8%AC%D8%AD%D8%AE%D8%AF%D8%B0%D8%B1%D8%B2%D8%B3%D8%B4%D8%B5%D8%B6%D8%B7%D8%B8%D8%B9%D9%81%D9%82%D9%83%D9%84%D9%85%D9%86%D9%87%D9%88%D9%89%D9%8A%D9%91%C2%B7&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/odys.css?v=20260922c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%233D1216'/%3E%3Ctext x='16' y='22' font-family='serif' font-size='16' fill='%23B08D4F' text-anchor='middle'%3EO%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div id="odys-chrome"></div>
+<main id="main"><div id="pdp"></div></main>
+<div id="odys-footer"></div>
+
+<script src="assets/js/i18n.js?v=20260922c"></script>
+<script src="assets/js/i18n-content.js?v=20260922c"></script>
+<script src="assets/js/i18n-labels.js?v=20260922c"></script>
+<script src="assets/js/data.js?v=20260922c"></script>
+<script>
+window.PAGE = function (OD) {
+  const { D, C, $, $$, card, bottle, money, num, esc, stars, qs, find, S, T } = OD;
+  const p = find(qs('id')) || D.parfums[0];
+  document.title = p.code + ' — ' + p.name + ' · ODYS PARFUM';
+  const isOud = p.type === 'oud', isDiff = p.type === 'diffuseur';
+  const dark = isOud ? ' dark' : '';
+  let grams = C.oud.minGrams;
+
+  const notes = p.notes || { top: [p.oud.oudType], heart: [p.oud.character.split(',')[0]], base: [p.oud.origin] };
+  const prof = p.profile || (p.sensory ? { intensity: 5, longevity: 5, projection: 4, sweetness: p.sensory.sweet, freshness: 1 } : null);
+
+  const reviews = [
+    { n: 'Yasmine B.', c: 'Casablanca', r: 5, t: 'Six hours on skin and my scarf still smells of it the next morning. At this price I bought three.' },
+    { n: 'Omar T.', c: 'Rabat', r: 5, t: 'Third order. The points add up faster than you think — my last bottle was free.' },
+    { n: 'Salma E.', c: 'Marrakech', r: 4, t: 'Beautiful, but stronger than I expected — one spray is plenty in summer.' }
+  ];
+
+  const buyBlock = isOud ? `
+      <p class="eyebrow" style="margin:26px 0 12px">Choose your weight</p>
+      <div class="weights" id="weights"></div>
+      <details style="margin-top:14px">
+        <summary class="link-u" style="cursor:pointer;display:inline-block;border:0">Special order — any weight</summary>
+        <div class="box" style="margin-top:12px">
+          <p class="muted" style="font-size:13px;margin-bottom:12px">${T('From')} ${C.oud.minGrams} g, ${T('in steps of')} ${C.oud.minGrams} g. ${T('Above')} ${C.oud.specialFrom} g ${T('the special rate applies and our team confirms the final price before shipping.')}</p>
+          <label class="field" style="margin:0"><span>Grams</span>
+            <input id="customg" type="number" min="${C.oud.minGrams}" step="${C.oud.minGrams}" value="200" inputmode="numeric">
+          </label>
+          <p id="customout" class="mono" style="color:var(--accent);margin:12px 0"></p>
+          <button class="btn btn-sm" id="addcustom">Request this weight</button>
+        </div>
+      </details>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px">
+        <button class="btn" id="addoud" style="flex:1;min-width:200px">Add to cart</button>
+        <button class="btn btn-ghost" data-wishbtn>Add to wishlist</button>
+      </div>`
+    : `
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:26px">
+        <button class="btn" data-add="${p.id}" style="flex:1;min-width:200px">Add to cart · ${money(p.price)}</button>
+        <button class="btn btn-ghost" data-wishbtn>Add to wishlist</button>
+      </div>`;
+
+  const ptsLine = isDiff
+    ? `<p class="mono muted" style="margin:18px 0 0">Diffuseurs sit outside the point programme — the price is already at its floor.</p>`
+    : isOud
+      ? `<p class="mono" style="color:var(--accent);margin:18px 0 0" id="oudpts">Earn 1 point per ${C.points.madPerPoint} MAD</p>`
+      : `<p class="mono" style="color:var(--accent);margin:18px 0 0">Earn 1 point — ${C.rewards[0].pts} points is a discovery vial</p>`;
+
+  $('#pdp').innerHTML = `
+  <section class="section-sm${dark}" style="padding-bottom:0">
+    <div class="wrap-wide">
+      <p class="mono muted"><a href="${isOud ? 'oud.html' : isDiff ? 'diffuseurs.html' : 'shop.html'}">${isOud ? 'Oud' : isDiff ? 'Diffuseurs' : 'Parfums'}</a> · ${esc(T(p.family))}</p>
+      <div class="split" style="margin-top:26px;align-items:start">
+        <div class="card-media" style="--c1:${p.c[0]};--c2:${p.c[1]};aspect-ratio:4/5;position:sticky;top:100px">${bottle(p, { eager: true })}</div>
+        <div>
+          <p class="eyebrow" style="margin-bottom:8px">${esc(p.code)}</p>
+          <h1 class="d2" style="margin-bottom:10px">${esc(p.name)}</h1>
+          <p class="card-meta">${isOud ? T('Bâtonnets d’oud · vendus au gramme') : esc(T(p.concentration || p.family)) + ' · ' + p.volume + ' ' + (p.unit || 'ML') + (isDiff ? ' · ' + p.sticks + ' ' + T('rattan sticks') : '')}</p>
+          ${C.showRatings ? `<p style="margin-top:14px"><span class="stars">${stars(p.rating)}</span> <span class="muted" style="font-size:13px">${p.reviews} ${T('reviews')}</span></p>` : ''}
+          <p class="d3" style="margin:22px 0 6px" id="price">${isOud ? money(OD.gramPrice(p, grams)) : money(p.price)}</p>
+          ${isOud ? `<p class="muted" style="font-size:13px" id="unitprice"></p>` : ''}
+          ${ptsLine}
+          ${buyBlock}
+          <p class="muted" style="font-size:13px;margin-top:16px">${T(p.stock > 40 ? 'In stock' : 'Low stock')} · ${T('Free shipping over')} ${money(C.freeShipFrom)} · ${T('Ships from Casablanca in 24h')}</p>
+          <p style="margin-top:10px"><a class="link-u" href="coffrets.html">Put it in a coffret instead</a></p>
+          <details style="margin-top:18px;border-top:1px solid var(--line);padding-top:12px">
+            <summary class="mono" style="cursor:pointer">${T('Precautions')}</summary>
+            <p class="muted" style="font-size:13px;margin:10px 0 0">${T(isOud
+              ? 'Burn on a heat-proof holder, never unattended, away from children, pets and fabrics. Air the room afterwards.'
+              : isDiff
+                ? 'Keep out of reach of children and pets. Avoid contact with skin, varnished wood and plastic. Do not ingest.'
+                : 'Flammable — keep away from heat and flames. Avoid contact with eyes. Keep out of reach of children. Test on a small patch of skin first.')}</p>
+          </details>
+
+          <div class="spec" style="margin-top:34px">
+            ${isOud ? `
+              <div><b>Origin</b><span>${esc(p.oud.origin)}</span></div>
+              <div><b>Grade</b><span>${esc(p.oud.grade)}</span></div>
+              <div><b>Type</b><span>${esc(p.oud.oudType)}</span></div>
+              <div><b>Aging</b><span>${esc(p.oud.aging)}</span></div>`
+      : isDiff ? `
+              <div><b>Format</b><span>${p.volume} ML + ${p.sticks} ${T('sticks')}</span></div>
+              <div><b>Durée</b><span>${esc(p.duration)}</span></div>
+              <div><b>Pièce</b><span>${esc(p.room)}</span></div>
+              <div><b>Famille</b><span>${esc(p.family)}</span></div>`
+        : `
+              <div><b>Family</b><span>${esc(p.family)}</span></div>
+              <div><b>Gender</b><span>${esc(p.gender)}</span></div>
+              <div><b>Season</b><span>${esc((p.season || []).join(' · '))}</span></div>
+              <div><b>Occasion</b><span>${esc((p.occasion || []).join(' · '))}</span></div>`}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section${dark}">
+    <div class="wrap" style="max-width:760px">
+      <p class="eyebrow center">The story</p>
+      <p class="d3" style="text-align:center;line-height:1.35;font-family:var(--display)">${esc(p.story)}</p>
+    </div>
+  </section>
+
+  <section class="section${dark}" style="padding-top:0">
+    <div class="wrap">
+      <div class="split" style="align-items:start">
+        <div>
+          <p class="eyebrow">${isDiff ? 'What fills the room' : 'The olfactory journey'}</p>
+          <h2 class="d3" style="margin-bottom:10px">How it moves.</h2>
+          <p class="muted" style="font-size:14px;max-width:38ch">${isDiff ? 'Turn the three sticks once a week — that is the whole maintenance.' : 'Scroll slowly. A fragrance is not a smell — it is three of them, arriving in order.'}</p>
+        </div>
+        <div>
+          ${[['Top', 'First 15 minutes', notes.top], ['Heart', 'Hours one to three', notes.heart || []], ['Base', 'What stays', notes.base || []]]
+      .filter(t => t[2].length).map(t => `<div class="note-tier">
+              <b>${t[0]}<br><span class="muted" style="letter-spacing:.1em;font-size:9px">${t[1]}</span></b>
+              <div class="names">${t[2].map(n => `<span class="note-chip">${esc(n)}</span>`).join('')}</div>
+            </div>`).join('')}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  ${isOud ? `
+  <section class="section dark night">
+    <div class="wrap">
+      <div class="split" style="align-items:start">
+        <div>
+          <p class="eyebrow">Discover the oud</p>
+          <h2 class="d3">Character, not stars.</h2>
+          <p class="muted" style="font-size:14px;max-width:40ch;margin-top:12px">Oud is not better or worse — it is sweeter or smokier, cleaner or wilder. This is where this batch sits.</p>
+          <div class="spec" style="margin-top:26px">
+            <div><b>Character</b><span style="font-size:15px">${esc(p.oud.character)}</span></div>
+            <div><b>Usage</b><span style="font-size:15px">${esc(p.oud.usage)}</span></div>
+            <div><b>How to burn</b><span style="font-size:15px">${esc(p.oud.burning)}</span></div>
+            <div><b>Occasions</b><span style="font-size:15px">${esc(p.oud.occasions.join(' · '))}</span></div>
+          </div>
+        </div>
+        <div class="sensory">
+          ${Object.keys(p.sensory).map(k => `<div class="sens-row">
+            <span>${k}</span>
+            <div class="sens-track">${Array.from({ length: 5 }, (_, i) => `<i class="${i < p.sensory[k] ? 'on' : ''}"></i>`).join('')}</div>
+          </div>`).join('')}
+        </div>
+      </div>
+    </div>
+  </section>` : ''}
+
+  ${prof ? `<section class="section${dark}" style="background:${isOud ? '' : 'var(--bg-alt)'}">
+    <div class="wrap">
+      <div class="split" style="align-items:start">
+        <div>
+          <p class="eyebrow">${isOud ? 'Burn profile' : 'Fragrance profile'}</p>
+          <h2 class="d3">Measured, not promised.</h2>
+          <p class="muted" style="font-size:14px;max-width:38ch;margin-top:12px">${C.showRatings ? T('Scored by our perfumer and cross-checked against') + ' ' + p.reviews + ' ' + T('customer reviews.') : T('Scored by our perfumer.')}</p>
+        </div>
+        <div>
+          ${[['Intensity', prof.intensity], ['Longevity', prof.longevity], ['Projection', prof.projection], ['Sweetness', prof.sweetness], ['Freshness', prof.freshness]]
+      .map(r => `<div class="profile-row">
+              <span>${r[0]}</span>
+              <span class="meter"><i data-w="${r[1] / 5 * 100}"></i></span>
+              <em>${stars(r[1])}</em>
+            </div>`).join('')}
+        </div>
+      </div>
+    </div>
+  </section>` : ''}
+
+  <section class="section${dark}">
+    <div class="wrap-wide">
+      <div class="sec-head">
+        <div><p class="eyebrow" style="margin:0">Community</p><h2 class="d3">What people say.</h2></div>
+        <button class="link-u" id="writerev" style="background:none">Write a review</button>
+      </div>
+      ${C.showRatings ? `<div class="grid grid-3">
+        ${reviews.map(r => `<blockquote class="box" style="margin:0">
+          <span class="stars">${stars(r.r)}</span>
+          <p style="margin:14px 0;font-family:var(--display);font-size:19px;line-height:1.4">${esc(T(r.t))}</p>
+          <span class="card-meta">${esc(r.n)} · ${esc(r.c)}</span>
+        </blockquote>`).join('')}
+      </div>` : `<div class="box center" style="padding:40px 20px">
+        <p class="d3" style="font-size:26px;margin-bottom:8px">${T('No reviews yet.')}</p>
+        <p class="muted" style="font-size:14px;margin:0">${T('Reviews open to customers once their order is delivered. Ask us anything in the meantime.')}</p>
+        <a class="btn btn-wa btn-sm" href="${OD.waHref(T('Hello ODYS, I have a question') + ' — ' + p.code + ' ' + p.name)}" target="_blank" rel="noopener" style="margin-top:16px">${T('Ask on WhatsApp')}</a>
+      </div>`}
+    </div>
+  </section>
+
+  <section class="section${dark}" style="padding-top:0">
+    <div class="wrap-wide">
+      <div class="sec-head"><div><p class="eyebrow" style="margin:0">Continue the journey</p><h2 class="d3">Wears well after this.</h2></div></div>
+      <div class="grid grid-4" id="similar"></div>
+    </div>
+  </section>`;
+
+  const sim = D.products.filter(x => x.id !== p.id)
+    .map(x => ({ x, s: (x.family === p.family ? 3 : 0) + ((x.mood || []).filter(m => (p.mood || []).includes(m)).length) + (x.type === p.type ? 2 : 0) }))
+    .sort((a, b) => b.s - a.s).slice(0, 4).map(o => o.x);
+  $('#similar').innerHTML = sim.map(x => card(x)).join('');
+
+  if (isOud) {
+    function drawWeights() {
+      $('#weights').innerHTML = C.oud.steps.map(g => {
+        const price = OD.gramPrice(p, g), pts = OD.unitPoints(p, g);
+        return `<button class="weight${g === grams ? ' on' : ''}" data-g="${g}">
+          <b>${g} g</b><span>${money(price)}</span><em class="muted" style="display:block;font-style:normal;font-size:10.5px;margin-top:2px">${OD.sticksLabel(g)}</em><small>+${OD.ptsLabel(pts)} ${T('pts')}</small></button>`;
+      }).join('');
+      const price = OD.gramPrice(p, grams);
+      $('#price').textContent = money(price);
+      $('#unitprice').textContent = (price / grams).toFixed(1).replace('.0', '') + ' MAD / g' + (grams > C.oud.minGrams ? ' — better rate at this weight' : '');
+      $('#oudpts').textContent = T('Earn') + ' ' + OD.ptsLabel(OD.unitPoints(p, grams)) + ' ' + T('pts') + ' · ' + grams + ' g';
+    }
+    drawWeights();
+    $('#weights').addEventListener('click', e => {
+      const b = e.target.closest('[data-g]'); if (!b) return;
+      grams = Number(b.dataset.g); drawWeights();
+    });
+    $('#addoud').addEventListener('click', () => OD.add(p.id, { grams }));
+
+    function quote() {
+      let g = Math.max(C.oud.minGrams, Math.round(Number($('#customg').value || 0) / C.oud.minGrams) * C.oud.minGrams);
+      const price = OD.gramPrice(p, g), pts = OD.unitPoints(p, g);
+      $('#customout').innerHTML = `${g} g · ${money(price)} · ${(price / g).toFixed(1).replace('.0', '')} MAD/g · +${OD.ptsLabel(pts)} ${T('pts')}`
+        + (g >= C.oud.specialFrom ? ' <span class="muted" style="letter-spacing:.1em;text-transform:none">— ' + T('special rate, confirmed by our team') + '</span>' : '');
+      return g;
+    }
+    $('#customg').addEventListener('input', quote);
+    quote();
+    $('#addcustom').addEventListener('click', () => {
+      const g = quote();
+      $('#customg').value = g;
+      OD.add(p.id, { grams: g });
+    });
+  }
+
+  $('[data-wishbtn]').addEventListener('click', e => {
+    OD.wish(p.id);
+    e.target.textContent = S().wishlist.includes(p.id) ? 'Saved to wishlist' : 'Add to wishlist';
+  });
+  $('#writerev').addEventListener('click', () => OD.toast('Reviews open once the order is delivered'));
+
+  OD.jsonLd(Object.assign({
+    '@type': 'Product',
+    name: p.code + ' — ' + p.name, sku: p.sku, description: p.story, category: p.family,
+    brand: { '@type': 'Brand', name: 'ODYS Parfum' },
+    offers: isOud
+      ? { '@type': 'AggregateOffer', priceCurrency: 'MAD', lowPrice: OD.gramPrice(p, C.oud.minGrams), highPrice: OD.gramPrice(p, C.oud.specialFrom), availability: 'https://schema.org/InStock' }
+      : { '@type': 'Offer', priceCurrency: 'MAD', price: p.price, availability: 'https://schema.org/' + (p.stock > 0 ? 'InStock' : 'OutOfStock'), url: location.href }
+  }, C.showRatings && p.rating ? { aggregateRating: { '@type': 'AggregateRating', ratingValue: p.rating, reviewCount: p.reviews } } : {}));
+
+  OD.observe();
+  OD.paint();
+};
+</script>
+<script src="assets/js/app.js?v=20260922c"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Find your ODYS — Fragrance discovery</title>
+<meta name="description" content="Three questions and the house picks your fragrance. Or browse by mood, occasion and season.">
+<!-- link previews: WhatsApp is the order channel, so a shared link has to show the product -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ODYS PARFUM">
+<meta property="og:title" content="Trouvez votre ODYS — Découverte olfactive">
+<meta property="og:description" content="Three questions and the house picks your fragrance. Or browse by mood, occasion and season.">
+<meta property="og:url" content="https://odysparfum.ma/discover.html">
+<meta property="og:image" content="https://odysparfum.ma/assets/img/odys-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_MA">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<!-- outside Arabic the page needs Amiri for one decorative line, so only those letters are fetched (35 KB, not 125 KB). i18n.js pulls the full face when the reader switches to Arabic. -->
+<link href="https://fonts.googleapis.com/css2?family=Amiri&text=%D8%A1%D8%A3%D8%A6%D8%A7%D8%A8%D8%A9%D8%AA%D8%AC%D8%AD%D8%AE%D8%AF%D8%B0%D8%B1%D8%B2%D8%B3%D8%B4%D8%B5%D8%B6%D8%B7%D8%B8%D8%B9%D9%81%D9%82%D9%83%D9%84%D9%85%D9%86%D9%87%D9%88%D9%89%D9%8A%D9%91%C2%B7&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/odys.css?v=20260922c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%233D1216'/%3E%3Ctext x='16' y='22' font-family='serif' font-size='16' fill='%23B08D4F' text-anchor='middle'%3EO%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div id="odys-chrome"></div>
+
+<main id="main">
+  <section class="section-sm center">
+    <div class="wrap" style="max-width:720px">
+      <p class="eyebrow">Find your ODYS</p>
+      <h1 class="d2">Find the fragrance<br>that feels like you.</h1>
+      <p class="lede" style="margin:16px auto 0">Not a personality test. Three practical questions — world, intensity, occasion — scored against every composition in the house.</p>
+    </div>
+  </section>
+
+  <section class="section-sm" style="padding-top:0">
+    <div class="wrap"><div class="quiz" data-quiz></div></div>
+  </section>
+
+  <section class="section dark">
+    <div class="wrap-wide">
+      <p class="eyebrow">Ask in plain language</p>
+      <h2 class="d3" style="margin-bottom:24px">Search the way you actually think.</h2>
+      <div class="scroll-x" id="prompts"></div>
+      <div class="grid grid-4" id="sres" style="margin-top:34px"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-wide">
+      <p class="eyebrow">Explore by mood</p>
+      <h2 class="d3" style="margin-bottom:26px">Nine worlds.</h2>
+      <div class="grid grid-3" id="moodtiles"></div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--bg-alt)">
+    <div class="wrap-wide">
+      <p class="eyebrow">Explore by experience</p>
+      <h2 class="d3" style="margin-bottom:26px">When will you wear it?</h2>
+      <div class="pills" id="exptiles"></div>
+    </div>
+  </section>
+
+  <section class="section center">
+    <div class="wrap" style="max-width:620px">
+      <p class="eyebrow">Still undecided?</p>
+      <h2 class="d3">Take two, not one.</h2>
+      <p class="lede" style="margin:14px auto 24px">At 69 MAD a bottle, a coffret duo costs less than most single bottles elsewhere — and it is two points instead of one.</p>
+      <a class="btn" href="coffrets.html#cof-duo">Build a coffret duo</a>
+    </div>
+  </section>
+</main>
+
+<div id="odys-footer"></div>
+
+<script src="assets/js/i18n.js?v=20260922c"></script>
+<script src="assets/js/i18n-content.js?v=20260922c"></script>
+<script src="assets/js/i18n-labels.js?v=20260922c"></script>
+<script src="assets/js/data.js?v=20260922c"></script>
+<script>
+window.PAGE = function (OD) {
+  const { D, $, $$, card, search } = OD;
+
+  // the prompts are real queries, so they are written in the reader's language, not translated after the fact
+  const PROMPTS = {
+    en: ['something sweet for winter', 'sweet oud sticks', 'fresh for summer', 'soft for the office',
+      'powerful for the evening', 'diffuseur for the salon', 'rose and oud', 'clean everyday musk'],
+    fr: ["quelque chose de sucré pour l'hiver", "bâtonnets d'oud sucrés", "frais pour l'été", 'léger pour le bureau',
+      'puissant pour le soir', 'diffuseur pour le salon', 'rose et oud', 'musc propre au quotidien'],
+    ar: ['شيء حلو للشتاء', 'أعواد عود حلوة', 'منعش للصيف', 'خفيف للمكتب',
+      'قوي للمساء', 'مبخرة للصالون', 'ورد وعود', 'مسك نظيف']
+  }[window.I18N ? I18N.lang : 'en'];
+  $('#prompts').innerHTML = PROMPTS.map((p, i) => `<button class="pill${i ? '' : ' on'}" data-q="${p}">${p}</button>`).join('');
+  function run(q) {
+    const r = search(q);
+    $('#sres').innerHTML = (r.length ? r : D.parfums.slice(0, 4)).slice(0, 4).map(p => card(p)).join('');
+    OD.paint();
+  }
+  $('#prompts').addEventListener('click', e => {
+    const b = e.target.closest('[data-q]'); if (!b) return;
+    $$('#prompts .pill').forEach(x => x.classList.toggle('on', x === b));
+    run(b.dataset.q);
+  });
+  run(PROMPTS[0]);
+
+  const EM = { Fresh: '🌿', Floral: '🌹', Woody: '🪵', Amber: '🔥', Oud: '🖤', Spicy: '🌶', Gourmand: '🍯', Oriental: '🌙', Musky: '🤍' };
+  $('#moodtiles').innerHTML = D.moods.map(m => {
+    const n = D.products.filter(p => (p.mood || []).includes(m.toLowerCase())).length;
+    return `<a class="opt" href="shop.html?mood=${m.toLowerCase()}" style="display:block;padding:34px 16px">
+      <span class="em">${EM[m] || '·'}</span><span class="lb">${m}</span>
+      <span class="sub">${n} fragrance${n === 1 ? '' : 's'}</span></a>`;
+  }).join('');
+
+  $('#exptiles').innerHTML = D.experiences.map(m =>
+    `<a class="pill" href="shop.html?exp=${m.toLowerCase().replace(' ', '-')}">${m}</a>`).join('');
+};
+</script>
+<script src="assets/js/app.js?v=20260922c"></script>
+</body>
+</html>

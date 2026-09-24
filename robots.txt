@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin.html
+Disallow: /cart.html
+Disallow: /account.html
+
+# ⚠ domain assumed from the referral links — change if the site lives elsewhere
+Sitemap: https://odysparfum.ma/sitemap.xml

@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Coffrets personnalisés — pour vous ou en cadeau · ODYS PARFUM</title>
+<meta name="description" content="Compose your own ODYS coffret — parfums, diffuseurs and oud by the gram. For yourself or as a gift, personalised with your message and sent straight to them.">
+<!-- link previews: WhatsApp is the order channel, so a shared link has to show the product -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ODYS PARFUM">
+<meta property="og:title" content="Coffrets personnalisés — pour vous ou en cadeau · ODYS PARFUM">
+<meta property="og:description" content="Compose your own ODYS coffret — parfums, diffuseurs and oud by the gram. For yourself or as a gift, personalised with your message and sent straight to them.">
+<meta property="og:url" content="https://odysparfum.ma/coffrets.html">
+<meta property="og:image" content="https://odysparfum.ma/assets/img/odys-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_MA">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<!-- outside Arabic the page needs Amiri for one decorative line, so only those letters are fetched (35 KB, not 125 KB). i18n.js pulls the full face when the reader switches to Arabic. -->
+<link href="https://fonts.googleapis.com/css2?family=Amiri&text=%D8%A1%D8%A3%D8%A6%D8%A7%D8%A8%D8%A9%D8%AA%D8%AC%D8%AD%D8%AE%D8%AF%D8%B0%D8%B1%D8%B2%D8%B3%D8%B4%D8%B5%D8%B6%D8%B7%D8%B8%D8%B9%D9%81%D9%82%D9%83%D9%84%D9%85%D9%86%D9%87%D9%88%D9%89%D9%8A%D9%91%C2%B7&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/odys.css?v=20260922c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%233D1216'/%3E%3Ctext x='16' y='22' font-family='serif' font-size='16' fill='%23B08D4F' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div id="odys-chrome"></div>
+
+<main id="main">
+  <section class="section-sm">
+    <div class="wrap-wide">
+      <p class="eyebrow">Coffrets ODYS</p>
+      <h1 class="d2">Composez-le.<br>Offrez-le.</h1>
+      <p class="lede" style="margin-top:16px">Choose who it is for first — then the box, the contents, the colour and the words on the card. We wrap it and send it wherever it needs to go.</p>
+      <div id="voucher"></div>
+    </div>
+  </section>
+
+  <section class="section-sm" style="padding-top:0">
+    <div class="wrap-wide">
+      <div class="steps" id="steps"></div>
+      <div class="split split-main" style="align-items:start">
+        <div id="builder"></div>
+        <aside class="box" id="summary" style="position:sticky;top:100px"></aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <div class="wrap-wide">
+      <p class="eyebrow">Ready-made starting points</p>
+      <h2 class="d3" style="margin-bottom:26px">Or start from one of these.</h2>
+      <div class="grid grid-3" id="presets"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-wide">
+      <p class="eyebrow">Gift by occasion</p>
+      <h2 class="d3" style="margin-bottom:26px">Eight reasons to send one.</h2>
+      <div class="grid grid-4" id="occasions"></div>
+    </div>
+  </section>
+</main>
+
+<div id="odys-footer"></div>
+
+<script src="assets/js/i18n.js?v=20260922c"></script>
+<script src="assets/js/i18n-content.js?v=20260922c"></script>
+<script src="assets/js/i18n-labels.js?v=20260922c"></script>
+<script src="assets/js/data.js?v=20260922c"></script>
+<script>
+window.PAGE = function (OD) {
+  const { D, C, $, $$, money, num, esc, find, bottle, S, save } = OD;
+
+  const BOXES = [['oud', 'Oud Burgundy', '#3D1216'], ['ivory', 'Warm Ivory', '#F3EBDD'], ['black', 'Deep Black', '#0B0B0B']];
+  const RIBBONS = [['brass', 'Brass', '#B08D4F'], ['sand', 'Smoked Sand', '#D8C6A5'], ['none', 'No ribbon', 'transparent']];
+
+  const B = {
+    mode: null,                 // 'self' | 'gift' — asked first, on purpose
+    coffret: null,
+    items: [],                  // [{id, grams}]
+    custom: { box: 'oud', ribbon: 'brass', engraving: '', message: '' },
+    gift: { name: '', phone: '', addr: '', date: '', hidePrices: true, direct: true }
+  };
+
+  const preset = () => D.coffrets.find(c => c.id === B.coffret) || null;
+  const isCustom = () => { const p = preset(); return !!(p && p.custom); };
+  function slotsLeft() {
+    const p = preset(); if (!p) return {};
+    if (p.custom) return { free: C.coffret.maxCustom - B.items.length };
+    const left = {};
+    Object.keys(p.slots).forEach(k => {
+      if (k === 'oud') left.oud = B.items.some(i => find(i.id).type === 'oud') ? 0 : 1;
+      else left[k] = p.slots[k] - B.items.filter(i => find(i.id).type === k).length;
+    });
+    return left;
+  }
+  const filled = () => {
+    const p = preset(); if (!p) return false;
+    if (p.custom) return B.items.length > 0;
+    const l = slotsLeft();
+    return Object.keys(l).every(k => l[k] <= 0);
+  };
+
+  function contentsTotal() {
+    return B.items.reduce((n, i) => n + OD.priceOf(find(i.id), i.grams), 0);
+  }
+  function totals() {
+    const p = preset();
+    const contents = contentsTotal();
+    // a flat-price coffret (the trio) ignores the discount/fee maths entirely
+    if (p && p.flatPrice && filled()) {
+      return { contents, disc: contents - p.flatPrice, fee: 0, flat: p.flatPrice, total: p.flatPrice, points: OD.pointsFor(p.flatPrice) };
+    }
+    const disc = B.items.length > 1 ? Math.round(contents * C.coffret.discountPct / 100) : 0;
+    const fee = C.coffret.fee;
+    const points = B.items.reduce((n, i) => n + OD.unitPoints(find(i.id), i.grams), 0);
+    return { contents, disc, fee, total: contents - disc + fee, points };
+  }
+
+  /* ── steps ─────────────────────────────────────────────── */
+  const STEPS = ['Pour qui', 'Le coffret', 'Le contenu', 'Personnalisation', 'Livraison'];
+  function stepState() {
+    return [!!B.mode, !!B.coffret, filled(), true, B.mode === 'gift' ? !!(B.gift.name && B.gift.addr) : true];
+  }
+  function drawSteps() {
+    const st = stepState();
+    const active = st.findIndex(x => !x);
+    $('#steps').innerHTML = STEPS.map((s, i) =>
+      `<i class="${st[i] ? 'done' : ''}${i === active ? ' on' : ''}">${i + 1}. ${OD.T(s)}</i>`).join('');
+  }
+
+  /* ── builder ───────────────────────────────────────────── */
+  function pickable() {
+    const p = preset(); if (!p) return [];
+    if (p.custom) return D.products;
+    const left = slotsLeft();
+    return D.products.filter(x => (left[x.type] || 0) > 0 || B.items.some(i => i.id === x.id));
+  }
+
+  function render() {
+    drawSteps();
+    const p = preset(), left = slotsLeft();
+
+    $('#builder').innerHTML = `
+      <div class="box" style="margin-bottom:16px">
+        <p class="eyebrow">1 · Pour qui ?</p>
+        <div class="grid grid-2" style="gap:12px;margin-top:6px">
+          <button class="opt${B.mode === 'self' ? ' on' : ''}" data-mode="self">
+            <span class="em">🕯</span><span class="lb">Pour moi</span><span class="sub">Delivered to my address</span></button>
+          <button class="opt${B.mode === 'gift' ? ' on' : ''}" data-mode="gift">
+            <span class="em">🎁</span><span class="lb">C'est un cadeau</span><span class="sub">Wrapped, no prices, sent to them</span></button>
+        </div>
+      </div>
+
+      ${B.mode ? `
+      <div class="box" style="margin-bottom:16px">
+        <p class="eyebrow">2 · Le coffret</p>
+        <div class="picker" style="grid-template-columns:repeat(auto-fill,minmax(190px,1fr))">
+          ${D.coffrets.map(c => `<button class="pick${B.coffret === c.id ? ' on' : ''}" data-coffret="${c.id}" style="display:block">
+            <span>${esc(c.name)}<small>${esc(c.sub)}</small></span></button>`).join('')}
+        </div>
+      </div>` : ''}
+
+      ${B.coffret ? `
+      <div class="box" style="margin-bottom:16px">
+        <p class="eyebrow">3 · Le contenu</p>
+        <p class="muted" style="font-size:14px">${p.custom
+        ? 'Jusqu’à ' + C.coffret.maxCustom + ' pièces, tout mélange autorisé — ' + (left.free || 0) + ' restante(s).'
+        : Object.keys(p.slots).map(k => {
+          const label = k === 'oud' ? p.slots.oud + ' g de bâtonnets' : p.slots[k] + ' × ' + (k === 'parfum' ? 'parfum' : 'diffuseur');
+          const done = k === 'oud' ? (left.oud <= 0) : (left[k] <= 0);
+          return label + (done ? ' ✓' : ' — ' + left[k] + ' à choisir');
+        }).join(' · ')}</p>
+
+        ${B.items.length ? `<div style="margin:18px 0">${B.items.map((i, n) => {
+          const x = find(i.id);
+          return `<div class="slot">
+              <b>${esc(x.code)} — ${esc(x.name)}<span class="card-meta" style="display:block">${x.type === 'oud' ? i.grams + ' g' : x.volume + ' ' + (x.unit || 'ML')} · ${money(OD.priceOf(x, i.grams))} · ${OD.unitPoints(x, i.grams) ? '+' + OD.unitPoints(x, i.grams) + ' pt' : 'hors points'}</span></b>
+              <span style="display:flex;gap:10px;align-items:center">
+                ${x.type === 'oud' && p.custom ? `<select data-grams="${n}" style="padding:8px;background:transparent;border:1px solid var(--line)">
+                  ${C.oud.steps.map(g => `<option value="${g}"${g === i.grams ? ' selected' : ''}>${g} g</option>`).join('')}</select>` : ''}
+                <button class="link-u" data-rm="${n}" style="border:0">Retirer</button>
+              </span>
+            </div>`;
+        }).join('')}</div>` : ''}
+
+        <div class="picker">
+          ${pickable().map(x => `<button class="pick${B.items.some(i => i.id === x.id) ? ' on' : ''}" data-pick="${x.id}">
+            ${bottle(x, { k: 'p' })}
+            <span>${esc(x.name)}<small>${x.type === 'oud' ? money(OD.gramPrice(x, p.custom ? C.oud.minGrams : (p.slots.oud || C.oud.minGrams))) + ' · ' + (p.custom ? C.oud.minGrams : p.slots.oud) + ' g' : money(x.price)}</small></span>
+          </button>`).join('')}
+        </div>
+      </div>` : ''}
+
+      ${B.coffret ? `
+      <div class="box" style="margin-bottom:16px">
+        <p class="eyebrow">4 · Personnalisation</p>
+        <p class="mono muted" style="margin-bottom:14px">Couleur du coffret</p>
+        <div class="pills" style="margin-bottom:20px">
+          ${BOXES.map(b => `<button class="pill${B.custom.box === b[0] ? ' on' : ''}" data-box="${b[0]}">
+            <span style="width:12px;height:12px;border-radius:50%;background:${b[2]};border:1px solid var(--line);display:inline-block"></span>${b[1]}</button>`).join('')}
+        </div>
+        <p class="mono muted" style="margin-bottom:14px">Ruban</p>
+        <div class="pills" style="margin-bottom:20px">
+          ${RIBBONS.map(b => `<button class="pill${B.custom.ribbon === b[0] ? ' on' : ''}" data-ribbon="${b[0]}">
+            <span style="width:12px;height:12px;border-radius:50%;background:${b[2]};border:1px solid var(--line);display:inline-block"></span>${b[1]}</button>`).join('')}
+        </div>
+        <label class="field"><span>Gravure sur la carte (max 20 caractères)</span>
+          <input id="engraving" maxlength="20" value="${esc(B.custom.engraving)}" placeholder="Salma"></label>
+        <label class="field" style="margin:0"><span>Message ${B.mode === 'gift' ? '(imprimé sur carte ivoire)' : '(pour vous, ou laissez vide)'}</span>
+          <textarea id="message" rows="3" placeholder="Pour le prochain chapitre. — O.">${esc(B.custom.message)}</textarea></label>
+      </div>` : ''}
+
+      ${B.coffret && B.mode === 'gift' ? `
+      <div class="box">
+        <p class="eyebrow">5 · Livraison du cadeau</p>
+        <div class="grid grid-2 grid-1-sm" style="gap:0 20px">
+          <label class="field"><span>Nom du destinataire</span><input id="gname" value="${esc(B.gift.name)}" placeholder="Salma"></label>
+          <label class="field"><span>Téléphone</span><input id="gphone" value="${esc(B.gift.phone)}" placeholder="06 00 00 00 00"></label>
+        </div>
+        <label class="field"><span>Adresse de livraison</span><input id="gaddr" value="${esc(B.gift.addr)}" placeholder="12 Rue Ibn Batouta, Casablanca"></label>
+        <label class="field"><span>Date de livraison souhaitée</span><input id="gdate" type="date" value="${esc(B.gift.date)}"></label>
+        <label style="display:flex;gap:10px;align-items:center;margin-bottom:10px"><input type="checkbox" id="ghide" ${B.gift.hidePrices ? 'checked' : ''} style="width:auto"><span style="font-size:13px">Masquer les prix sur le bon de livraison</span></label>
+        <label style="display:flex;gap:10px;align-items:center"><input type="checkbox" id="gdirect" ${B.gift.direct ? 'checked' : ''} style="width:auto"><span style="font-size:13px">Envoyer directement au destinataire</span></label>
+      </div>` : ''}`;
+
+    /* summary */
+    const t = totals(), ready = !!B.mode && !!B.coffret && filled() && (B.mode !== 'gift' || (B.gift.name && B.gift.addr));
+    const v = (S().vouchers || []).find(x => x.type === 'coffret');
+    $('#summary').innerHTML = `
+      <p class="eyebrow">Votre coffret</p>
+      <h3 class="d3" style="font-size:26px;margin-bottom:6px">${p ? esc(p.name) : 'À composer'}</h3>
+      <p class="card-meta">${B.mode === 'gift' ? 'Cadeau' : B.mode === 'self' ? 'Pour moi' : 'Choisissez d’abord pour qui'}</p>
+      <div style="margin:18px 0">
+        ${B.items.length ? B.items.map(i => {
+        const x = find(i.id);
+        return `<div style="display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:7px 0;border-bottom:1px solid var(--line)">
+            <span>${esc(x.name)}${x.type === 'oud' ? ' · ' + i.grams + ' g' : ''}</span><span>${money(OD.priceOf(x, i.grams))}</span></div>`;
+      }).join('') : '<p class="muted" style="font-size:13px;margin:0">Rien encore.</p>'}
+      </div>
+      ${B.items.length ? `
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:5px 0"><span class="muted">Contenu</span><b>${money(t.contents)}</b></div>
+        ${t.disc ? `<div style="display:flex;justify-content:space-between;font-size:13px;padding:5px 0"><span class="muted">${t.flat ? OD.T('Prix forfaitaire') : OD.T('Remise coffret') + ' ' + C.coffret.discountPct + '%'}</span><b>− ${money(t.disc)}</b></div>` : ''}
+        ${t.fee ? `<div style="display:flex;justify-content:space-between;font-size:13px;padding:5px 0"><span class="muted">Écrin + emballage</span><b>${money(t.fee)}</b></div>` : ''}
+        <hr class="rule" style="margin:10px 0">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><span class="mono">Total</span><b class="d3" style="font-size:26px">${money(t.total)}</b></div>
+        <p class="mono" style="color:var(--accent);margin:12px 0 0">+${OD.ptsLabel(t.points)} ${OD.T('pts')}</p>
+        ${v ? `<p class="mono" style="color:var(--accent);margin:8px 0 0">Reward available — this coffret is free up to ${v.maxItems} pieces</p>` : ''}
+      ` : ''}
+      <button class="btn btn-block" id="addcoffret" style="margin-top:18px"${ready ? '' : ' disabled'}>${ready ? 'Ajouter au panier' : 'Complétez le coffret'}</button>
+      <p class="muted" style="font-size:12px;margin:12px 0 0">Expédié sous 48h · emballage cadeau inclus</p>`;
+
+    OD.paint();
+  }
+
+  /* ── events ────────────────────────────────────────────── */
+  $('#builder').addEventListener('click', e => {
+    const mode = e.target.closest('[data-mode]');
+    if (mode) { B.mode = mode.dataset.mode; return render(); }
+
+    const cof = e.target.closest('[data-coffret]');
+    if (cof) { B.coffret = cof.dataset.coffret; B.items = []; return render(); }
+
+    const rm = e.target.closest('[data-rm]');
+    if (rm) { B.items.splice(Number(rm.dataset.rm), 1); return render(); }
+
+    const pick = e.target.closest('[data-pick]');
+    if (pick) {
+      const x = find(pick.dataset.pick), p = preset();
+      const at = B.items.findIndex(i => i.id === x.id);
+      if (at > -1) B.items.splice(at, 1);
+      else {
+        const left = slotsLeft();
+        const room = p.custom ? left.free > 0 : (x.type === 'oud' ? left.oud > 0 : left[x.type] > 0);
+        if (!room) return OD.toast('Ce coffret est complet — retirez une pièce d’abord');
+        B.items.push({ id: x.id, grams: x.type === 'oud' ? (p.custom ? C.oud.minGrams : p.slots.oud) : null });
+      }
+      return render();
+    }
+
+    const box = e.target.closest('[data-box]');
+    if (box) { B.custom.box = box.dataset.box; return render(); }
+    const rib = e.target.closest('[data-ribbon]');
+    if (rib) { B.custom.ribbon = rib.dataset.ribbon; return render(); }
+  });
+
+  $('#builder').addEventListener('change', e => {
+    const g = e.target.closest('[data-grams]');
+    if (g) { B.items[Number(g.dataset.grams)].grams = Number(g.value); return render(); }
+    if (e.target.id === 'ghide') B.gift.hidePrices = e.target.checked;
+    if (e.target.id === 'gdirect') B.gift.direct = e.target.checked;
+  });
+
+  $('#builder').addEventListener('input', e => {
+    const map = { engraving: 'engraving', message: 'message' };
+    if (map[e.target.id]) { B.custom[map[e.target.id]] = e.target.value; return; }
+    const gmap = { gname: 'name', gphone: 'phone', gaddr: 'addr', gdate: 'date' };
+    if (gmap[e.target.id]) {
+      B.gift[gmap[e.target.id]] = e.target.value;
+      drawSteps();
+      const btn = $('#addcoffret');
+      if (btn) btn.disabled = !(B.mode && B.coffret && filled() && (B.mode !== 'gift' || (B.gift.name && B.gift.addr)));
+    }
+  });
+
+  $('#summary').addEventListener('click', e => {
+    if (!e.target.closest('#addcoffret')) return;
+    const t = totals(), p = preset();
+    OD.addLine({
+      key: 'coffret:' + Date.now(),
+      id: p.id, kind: 'coffret', code: 'COFFRET', title: p.name,
+      sub: B.items.length + ' pièces · ' + (B.mode === 'gift' ? 'cadeau pour ' + B.gift.name : 'pour moi'),
+      unit: t.total, points: t.points, qty: 1, items: B.items.length,
+      meta: { mode: B.mode, items: B.items.slice(), custom: Object.assign({}, B.custom), gift: B.mode === 'gift' ? Object.assign({}, B.gift) : null },
+      c: p.c
+    });
+  });
+
+  /* presets + occasions */
+  $('#presets').innerHTML = D.coffrets.map(c =>
+    `<a class="tile" href="#${c.id}" data-jump="${c.id}" style="--c1:${c.c[0]};--c2:${c.c[1]};min-height:260px">
+      <span class="mono">${esc(c.sub)}</span><h3>${esc(c.name)}</h3><p>${esc(c.blurb)}</p></a>`).join('');
+  $('#presets').addEventListener('click', e => {
+    const a = e.target.closest('[data-jump]'); if (!a) return;
+    B.coffret = a.dataset.jump; B.items = []; B.mode = B.mode || 'self';
+    render();
+    $('#steps').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  $('#occasions').innerHTML = D.gifting.map(g =>
+    `<button class="tile" data-occ="${g.id}" style="min-height:180px;--c1:#3D1216;--c2:#0B0B0B;text-align:left">
+      <span class="mono ar" style="font-family:var(--arabic);letter-spacing:0;font-size:15px;direction:rtl">${g.ar}</span>
+      <h3 style="font-size:23px">${g.name}</h3></button>`).join('');
+  $('#occasions').addEventListener('click', e => {
+    const b = e.target.closest('[data-occ]'); if (!b) return;
+    B.mode = 'gift';
+    B.custom.message = B.custom.message || '';
+    render();
+    $('#steps').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  /* 100-point reward banner */
+  const v = (S().vouchers || []).find(x => x.type === 'coffret');
+  $('#voucher').innerHTML = v
+    ? `<div class="box" style="margin-top:22px;border-color:var(--accent)">
+        <p class="eyebrow" style="margin-bottom:6px">Reward unlocked</p>
+        <p style="margin:0">Your 100-point coffret is waiting — compose up to ${v.maxItems} pieces and it comes off the total at checkout.</p></div>`
+    : `<p class="mono muted" style="margin-top:22px">100 ODYS points = a custom coffret like this one, free, to keep or to gift.</p>`;
+
+  if (location.hash) {
+    const id = location.hash.slice(1);
+    if (D.coffrets.some(c => c.id === id)) { B.coffret = id; B.mode = 'self'; }
+  }
+  render();
+};
+</script>
+<script src="assets/js/app.js?v=20260922c"></script>
+</body>
+</html>
