@@ -96,6 +96,7 @@
   /* generated flacon art — no photography needed, and it scales to any tint.
      A product with a real photograph uses it instead, everywhere art is drawn:
      cards, the product page, search results, the cart. */
+  let artSeq = 0;
   function bottle(p, opts) {
     if (p && p.photo) {
       const eager = opts && opts.eager;
@@ -104,7 +105,9 @@
         ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
     }
     const c = (p && p.c) || ['#3D1216', '#0B0B0B'];
-    const id = 'g' + (p && p.id ? p.id.replace(/\W/g, '') : Math.random().toString(36).slice(2)) + (opts && opts.k || '');
+    // unique per drawing: the same product often appears twice on a page, and when the first copy
+    // sits in a hidden tab Chrome paints the second with its gradient missing
+    const id = 'g' + (p && p.id ? p.id.replace(/\W/g, '') : 'x') + (opts && opts.k || '') + '-' + (++artSeq);
     const label = (p && p.code) || 'ODYS';
 
     if (p && p.type === 'oud') {   // bundle of sticks
