@@ -45,7 +45,11 @@
   .notes{display:flex;gap:26px;justify-content:center}
   .note{width:128px;display:flex;flex-direction:column;align-items:center}
   .note .art{width:118px;height:118px;display:grid;place-items:center}
-  .note .art img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+  /* a generated photo never matches the card's ivory exactly, so its edges fade out
+     instead of ending in a square; the ingredient in the middle stays untouched */
+  .note .art img{width:136px;height:136px;max-width:none;object-fit:cover;
+    -webkit-mask-image:radial-gradient(circle at 50% 50%,#000 46%,transparent 70%);
+            mask-image:radial-gradient(circle at 50% 50%,#000 46%,transparent 70%)}
   .note .tier{font:400 11px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin:16px 0 7px}
   .note .nm{font:500 14px/1.25 var(--sans);letter-spacing:.12em;text-transform:uppercase}
   .words{font:400 15px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin:50px 0 0}

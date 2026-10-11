@@ -145,6 +145,7 @@ npm install                        # once: Playwright, used only by the robot
 npm run studio                     # all 12 parfums: shop shot + French card
 npm run studio -- odys-02 odys-07  # just these
 npm run studio -- --lang fr,ar,en  # cards in several languages
+npm run notes                      # ingredient photos from Gemini (needs GEMINI_API_KEY), then studio again
 ```
 
 It writes to `assets/img/products/`:
@@ -158,7 +159,7 @@ It writes to `assets/img/products/`:
 
 - **The flacon** is `assets/js/flacon3d.js`, the same model `bottle3d.html` shows: thick glass, fluted black cap, gold crimp, tinted juice and the white printed label read off the ODYS 01 photograph. A pale juice gets dark ink automatically (below 3:1 contrast, white is unreadable).
 - **⚠ Juice colours are guesses** for everything except ODYS 01 (read off the photograph). Set the real ones in `data.js` once the bottles exist — and if a pale juice really is printed in white, say so and the ink rule changes.
-- **Note pictures.** Until real ones exist, each note gets a drawn medallion picked by ingredient kind (citrus, flower, spice, wood, resin, leaf, fruit, musk, smoke — `studio/notes.js`). Drop a square photo with a plain light background at `assets/img/notes/<note>.webp` — e.g. `saffron.webp`, `rose-de-taif.webp`, the English note name in lower case with dashes — and every card using that note picks it up on the next run. That is also where AI-generated ingredient images go.
+- **Note pictures come from Gemini.** `npm run notes` asks Gemini (`gemini-2.5-flash-image`, or `GEMINI_IMAGE_MODEL`) for a studio photograph of each note the cards show — first top, heart and base note of every parfum, about 30 images — and saves them as `assets/img/notes/<note>.webp`. Then `npm run studio` rebuilds the cards with them. It needs `GEMINI_API_KEY` (from Google AI Studio) in the environment; `--all` does every note, `--force` redoes existing ones, and naming notes (`npm run notes -- saffron rose-de-taif`) does just those. A picture that is already there is never replaced, so to get another take of one, delete its file and run again. What each note is photographed as — agarwood chips for *Oud Accord*, sparkling droplets for *Aldehydes* — is the `SUBJECT` table at the top of `scripts/notes-gemini.js`. The card fades each photo's edges into the ivory, so a background a shade off does not show as a square. A note without a picture falls back to a drawn medallion picked by ingredient kind (`studio/notes.js`); a real photograph saved under the same name works just as well.
 - ODYS 01 keeps its real photograph in the shop; the robot still renders its card.
 - Diffuseurs and oud are not drawn yet — the 3D model is the parfum flacon only.
 
