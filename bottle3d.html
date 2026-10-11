@@ -30,6 +30,9 @@
   .load.gone{opacity:0;pointer-events:none}
   @media(max-width:600px){ .hud button{padding:10px 13px;letter-spacing:.14em} .hint{bottom:112px} }
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500&family=Bodoni+Moda:opsz,wght@6..96,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
 <script type="importmap">
 {
   "imports": {
@@ -63,48 +66,17 @@
 <script type="module">
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-
-/* Proportions read off the photograph, in units where the body is 1.0 wide:
-   body 415×485 px, cap 190×220 px, so height = 1.17 and the cap is 0.53 tall. */
-const W = 1.0, H = 1.17, D = 0.46;
-const CAP_R = 0.229, CAP_H = 0.53;
-const WALL = 0.085;                 // glass thickness, ~35 px in the photo
-const BG = 0xF3EBDD;
+import { buildFlacon } from './assets/js/flacon3d.js';
 
 const canvas = document.getElementById('c');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true, alpha: false });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-/* Khronos PBR Neutral, not ACES: ACES is graded for film and pulls the cream
-   background grey as it passes through the glass, so the flacon looks frosted.
-   Neutral is the one meant for product shots — colours come out as authored. */
-renderer.toneMapping = THREE.NeutralToneMapping;
-renderer.toneMappingExposure = 1.0;
 
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(BG);
-
-/* A real backdrop, not just scene.background: three.js renders the scene into a
-   separate buffer for transmission, and the clear colour does not reach it — with
-   only a background colour the inside of the bottle comes out grey. */
-/* toneMapped:false, or ACES darkens the cream to a dull grey and the backdrop
-   no longer matches the page behind the canvas */
-const cyc = new THREE.MeshBasicMaterial({ color: BG, toneMapped: false });
-const backdrop = new THREE.Mesh(new THREE.PlaneGeometry(40, 30), cyc);
-backdrop.position.set(0, 6, -8);
-scene.add(backdrop);
-const floor = new THREE.Mesh(new THREE.PlaneGeometry(40, 30), cyc);
-floor.rotation.x = -Math.PI / 2;
-floor.position.y = -0.004;        // clear of the base, which would z-fight at exactly 0
-scene.add(floor);
-
-/* a room gives the glass and the gold something to reflect —
-   without an environment both read as flat grey plastic */
-const pmrem = new THREE.PMREMGenerator(renderer);
-scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-scene.environmentIntensity = 0.55;
+/* the same model the product-photo robot (studio/) renders — see flacon3d.js */
+const { scene, bottle, glass, gold, capBlack, setLiquid, setLabel } = buildFlacon(renderer, { liquid: '#8A5A1C' });
+/* the label is drawn on a canvas, so it waits for the brand faces */
+Promise.all(['500 40px "Cormorant Garamond"', '400 40px "Bodoni Moda"', '400 40px Jost'].map(f => document.fonts.load(f)))
+  .catch(() => {}).then(() => setLabel({ num: '01', name: "L'ICÔNE" }));
 
 const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 100);
 /* Views are directions from the target, not fixed points: the distance depends on
@@ -124,163 +96,6 @@ controls.maxPolarAngle = Math.PI * 0.6;
 controls.target.set(0, 0.8, 0);
 controls.autoRotate = true;
 controls.autoRotateSpeed = 1.2;
-
-/* ── materials ───────────────────────────────────────────── */
-/* clear glass is mostly what is BEHIND it. A bright room plus clearcoat plus
-   three strong lights turns a big flat face into a white mirror, so the
-   reflections stay deliberately low and the background does the work. */
-const glass = new THREE.MeshPhysicalMaterial({
-  color: 0xffffff, metalness: 0, roughness: 0.015,
-  transmission: 1, thickness: 0.32, ior: 1.5,
-  clearcoat: 0.18, clearcoatRoughness: 0.08,
-  reflectivity: 0.5, envMapIntensity: 1.0, transparent: true,
-  /* BackSide, not DoubleSide: both faces of a transmissive mesh land in one draw
-     call with no sorting between them, and the two layers blend into a flat grey
-     panel. Drawing only the far faces is what reads as clear glass. */
-  side: THREE.BackSide
-});
-
-const gold = new THREE.MeshStandardMaterial({
-  color: 0xD9A441, metalness: 1, roughness: 0.16, envMapIntensity: 1.9
-});
-
-const goldDark = new THREE.MeshStandardMaterial({
-  color: 0xA87C2A, metalness: 1, roughness: 0.3, envMapIntensity: 1.6
-});
-
-const capBlack = new THREE.MeshPhysicalMaterial({
-  color: 0x121212, metalness: 0, roughness: 0.55,
-  clearcoat: 0.6, clearcoatRoughness: 0.35, envMapIntensity: 0.9
-});
-
-const tube = new THREE.MeshPhysicalMaterial({
-  color: 0xEDEAE4, metalness: 0, roughness: 0.3,
-  clearcoat: 0.5, clearcoatRoughness: 0.4, envMapIntensity: 0.8
-});
-
-/* ── the bottle ──────────────────────────────────────────── */
-const bottle = new THREE.Group();
-scene.add(bottle);
-
-/* A hollow shell, not a solid block: the cavity is what makes it read as a bottle
-   rather than a paperweight. It has to be ONE mesh — three.js keeps transmissive
-   meshes out of each other's refraction pass, so a separate inner mesh would just
-   paint a milky shell on top. Outer and inverted inner are merged instead. */
-const outer = new RoundedBoxGeometry(W, H, D, 6, 0.075);
-const inner = new RoundedBoxGeometry(W - WALL * 2, H - WALL * 2.4, D - WALL * 2, 5, 0.045);
-/* No mirroring: BackSide already flips normals in the shader, so an inner box
-   with ordinary outward normals renders its far wall exactly like the outer one.
-   Mirroring it first cancels that out and the near wall comes back as a grey slab. */
-inner.translate(0, WALL * 0.7, 0);     // thicker base than shoulders, like the real flacon
-const body = new THREE.Mesh(mergeGeometries([outer, inner]), glass);
-body.position.y = H / 2;
-bottle.add(body);
-
-
-/* neck: short glass collar the crimp sits on */
-const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.135, 0.15, 0.09, 48), glass);
-neck.position.y = H + 0.035;
-bottle.add(neck);
-
-/* gold crimp ring under the cap */
-const crimp = new THREE.Mesh(new THREE.CylinderGeometry(CAP_R * 0.93, CAP_R * 0.93, 0.055, 64), gold);
-crimp.position.y = H + 0.085;
-bottle.add(crimp);
-const crimpLip = new THREE.Mesh(new THREE.TorusGeometry(CAP_R * 0.92, 0.012, 12, 64), goldDark);
-crimpLip.rotation.x = Math.PI / 2;
-crimpLip.position.y = H + 0.058;
-bottle.add(crimpLip);
-
-/* ── ribbed cap ──────────────────────────────────────────── */
-/* fluting has to be in the silhouette, so it is geometry, not a normal map:
-   push each ring of vertices in and out with a cosine of the angle */
-function fluted(r, h, ribs, depth, segs = 1) {
-  const g = new THREE.CylinderGeometry(r, r, h, ribs * 6, segs, true);
-  const p = g.attributes.position;
-  for (let i = 0; i < p.count; i++) {
-    const x = p.getX(i), z = p.getZ(i), cur = Math.hypot(x, z);
-    if (cur < 1e-6) continue;
-    const a = Math.atan2(z, x);
-    const k = (r - depth * (0.5 + 0.5 * Math.cos(a * ribs))) / cur;
-    p.setX(i, x * k); p.setZ(i, z * k);
-  }
-  g.computeVertexNormals();
-  return g;
-}
-
-const cap = new THREE.Group();
-cap.position.y = H + 0.105;
-bottle.add(cap);
-
-const capSide = new THREE.Mesh(fluted(CAP_R, CAP_H, 40, 0.012), capBlack);
-capSide.position.y = CAP_H / 2;
-cap.add(capSide);
-
-/* gold band around the foot of the cap */
-const capFoot = new THREE.Mesh(new THREE.CylinderGeometry(CAP_R * 1.005, CAP_R * 1.005, 0.045, 64), gold);
-capFoot.position.y = 0.022;
-cap.add(capFoot);
-
-/* the top reads as a gold rim around a black disc */
-const capRim = new THREE.Mesh(new THREE.CylinderGeometry(CAP_R, CAP_R, 0.05, 64), gold);
-capRim.position.y = CAP_H - 0.02;
-cap.add(capRim);
-const capTop = new THREE.Mesh(new THREE.CylinderGeometry(CAP_R * 0.86, CAP_R * 0.86, 0.05, 64), capBlack);
-capTop.position.y = CAP_H - 0.028;
-cap.add(capTop);
-
-/* ── dip tube ────────────────────────────────────────────── */
-/* the cavity floor sits at WALL*2.4/2 above the base, so the tube has to stop
-   there — any lower and its tip vanishes inside the thick glass bottom */
-const FLOOR = H / 2 - (H - WALL * 2.4) / 2 + WALL * 0.7 + 0.03;
-const curve = new THREE.CatmullRomCurve3([
-  new THREE.Vector3(0, H - 0.09, 0),
-  new THREE.Vector3(0, H * 0.70, 0),
-  new THREE.Vector3(-0.04, H * 0.40, 0.02),
-  new THREE.Vector3(-0.18, FLOOR + 0.12, 0.03),
-  new THREE.Vector3(-0.30, FLOOR, 0.02)
-]);
-const dip = new THREE.Mesh(new THREE.TubeGeometry(curve, 64, 0.011, 12, false), tube);
-bottle.add(dip);
-
-/* the stem the sprayer sits on, visible through the shoulder */
-const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.024, 0.024, 0.16, 24), tube);
-stem.position.y = H - 0.03;
-bottle.add(stem);
-
-/* ── ground shadow ───────────────────────────────────────── */
-/* a painted blob, not a shadow map: transmissive materials do not cast
-   anything readable, and one texture is cheaper than a second render pass */
-function blobTexture() {
-  const s = 256, cv = document.createElement('canvas');
-  cv.width = cv.height = s;
-  const ctx = cv.getContext('2d');
-  const g = ctx.createRadialGradient(s / 2, s / 2, 0, s / 2, s / 2, s / 2);
-  /* a wide flat core, then a long fade: a steep gradient right under the base
-     gets refracted through the thick glass and reads as little tabs at the corners */
-  g.addColorStop(0, 'rgba(26,15,16,.30)');
-  g.addColorStop(0.34, 'rgba(26,15,16,.27)');
-  g.addColorStop(0.62, 'rgba(26,15,16,.09)');
-  g.addColorStop(1, 'rgba(26,15,16,0)');
-  ctx.fillStyle = g; ctx.fillRect(0, 0, s, s);
-  const t = new THREE.CanvasTexture(cv);
-  t.colorSpace = THREE.SRGBColorSpace;
-  return t;
-}
-const shadow = new THREE.Mesh(
-  new THREE.PlaneGeometry(3.0, 1.7),
-  new THREE.MeshBasicMaterial({ map: blobTexture(), transparent: true, depthWrite: false })
-);
-shadow.rotation.x = -Math.PI / 2;
-shadow.position.y = -0.002;   // under the base, not through it: a plane crossing the
-shadow.renderOrder = -1;      // thick glass shows up as little tabs at the bottom corners
-scene.add(shadow);
-
-/* ── lights ──────────────────────────────────────────────── */
-/* the environment does most of the work; these three carve the edges of the glass */
-const key = new THREE.DirectionalLight(0xffffff, 1.3); key.position.set(2.5, 4, 3); scene.add(key);
-const rim = new THREE.DirectionalLight(0xfff0d8, 1.1); rim.position.set(-3, 2.2, -2.5); scene.add(rim);
-const fill = new THREE.DirectionalLight(0xffffff, 0.35); fill.position.set(-1.5, 1, 3); scene.add(fill);
 
 /* ── camera framing ──────────────────────────────────────── */
 /* Watch the canvas, not the window, and never size to zero: a canvas that starts
@@ -345,7 +160,7 @@ document.getElementById('shot').addEventListener('click', () => {
 });
 
 /* one handle on the scene, for wiring this into a product page later */
-window.ODYS3D = { scene, camera, controls, bottle, glass, gold, capBlack, views };
+window.ODYS3D = { scene, camera, controls, bottle, glass, gold, capBlack, views, setLiquid, setLabel };
 
 /* ── loop ────────────────────────────────────────────────── */
 renderer.setAnimationLoop(() => {

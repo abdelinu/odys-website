@@ -1,0 +1,12 @@
+{
+  "name": "odys-website",
+  "private": true,
+  "description": "The site is static and needs none of this. Only the product-photo robot (scripts/studio.js) uses Playwright.",
+  "scripts": {
+    "studio": "node scripts/studio.js",
+    "sitemap": "node scripts/sitemap.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.1"
+  }
+}

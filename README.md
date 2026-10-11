@@ -128,13 +128,39 @@ Real product photographs live in `assets/img/`:
 | `odys-range.webp` / `-820.webp` | the three label finishes side by side | the *Un flacon, trois finitions* band on the home page |
 | `odys-og.jpg` | 1200×630 link preview | `og:image` on every customer-facing page |
 
-**How a photograph reaches the page.** Add `photo` (plus `photoW` / `photoH`) to a product in `data.js` and `OD.bottle()` returns an `<img>` instead of the generated SVG — cards, the product page, search results and the cart all pick it up at once. Products without a `photo` keep the drawn flacon, so the two can coexist while the rest of the range is shot. Today only ODYS 01 has one; the other 23 are still drawings, and the grid shows the difference.
+**How a photograph reaches the page.** Add `photo` (plus `photoW` / `photoH`) to a product in `data.js` and `OD.bottle()` returns an `<img>` instead of the generated SVG — cards, the product page, search results and the cart all pick it up at once. Products without a `photo` keep the drawn flacon, so the two can coexist while the rest of the range is shot. ODYS 01 has a real photograph; ODYS 02–12 use renders from the photo robot (below); diffuseurs and oud are still drawings.
 
 **Link previews.** A link shared on WhatsApp shows `odys-og.jpg` with the page's French title, because WhatsApp is where the orders come from and a bare link looks like spam. The absolute URLs assume `odysparfum.ma` — same assumption as `robots.txt` and the sitemap. WhatsApp does not run JavaScript, so those tags are static per page and always French, whatever language the reader would have seen.
 
 **Shoot list, in the order it pays off:** the other eleven parfums (the grid is visibly mixed today), the six diffuseurs with their rattan sticks, the oud bâtonnets at 5 g / 30 g / 100 g so the weights read as real quantities, and a coffret open with its ribbon. `odys-01-coffret.webp` is only 407×611 — it holds up in a card but it is soft on a large screen, so re-export it at 1200 px or wider when you have the original.
 
 **Read off the artwork, worth confirming:** the bottles say *extrait de parfum*, so all twelve parfums in `data.js` now say `Extrait de Parfum` instead of `Eau de Parfum` (translated in both `i18n-content.js` and the number-carrying rule in `i18n-labels.js`). The range image shows **30 ml** bottles while the box shows **50 ml** — the site is built entirely on 50 ml at 69 MAD, so if 30 ml is a real size it needs its own price and its own point value. That image also says **ODYS PARFUMS** while the box and the whole site say **ODYS PARFUM**, and it numbers bottles **07, 11 and 14** while the catalogue stops at 12.
+
+## The product-photo robot
+
+`scripts/studio.js` renders the 3D flacon for every parfum and writes the images the shop and social posts use. The look borrows the layout of tahara.ma's product cards — ivory ground, bottle on one side, name in large serif, three key notes, three words — with our own bottle and our own type.
+
+```bash
+npm install                        # once: Playwright, used only by the robot
+npm run studio                     # all 12 parfums: shop shot + French card
+npm run studio -- odys-02 odys-07  # just these
+npm run studio -- --lang fr,ar,en  # cards in several languages
+```
+
+It writes to `assets/img/products/`:
+
+| file | size | for |
+|---|---|---|
+| `odys-02.webp` | 800×1200 | the flacon alone — the shop grid, search, cart and product page (wired through `photo` in `data.js`) |
+| `odys-02-card-fr.webp` | 1080×1080 | the square card — Instagram, WhatsApp status, catalogue |
+
+**Every word and colour on the images comes from `data.js`**: name, number, family, gender, the first top / heart / base note, the moods and profile (for the three words), and `juice`, the liquid colour. Change one and run the robot again. Preview any image live at `studio/?id=odys-02&lang=fr` (add `&shot=bottle` for the shop shot).
+
+- **The flacon** is `assets/js/flacon3d.js`, the same model `bottle3d.html` shows: thick glass, fluted black cap, gold crimp, tinted juice and the white printed label read off the ODYS 01 photograph. A pale juice gets dark ink automatically (below 3:1 contrast, white is unreadable).
+- **⚠ Juice colours are guesses** for everything except ODYS 01 (read off the photograph). Set the real ones in `data.js` once the bottles exist — and if a pale juice really is printed in white, say so and the ink rule changes.
+- **Note pictures.** Until real ones exist, each note gets a drawn medallion picked by ingredient kind (citrus, flower, spice, wood, resin, leaf, fruit, musk, smoke — `studio/notes.js`). Drop a square photo with a plain light background at `assets/img/notes/<note>.webp` — e.g. `saffron.webp`, `rose-de-taif.webp`, the English note name in lower case with dashes — and every card using that note picks it up on the next run. That is also where AI-generated ingredient images go.
+- ODYS 01 keeps its real photograph in the shop; the robot still renders its card.
+- Diffuseurs and oud are not drawn yet — the 3D model is the parfum flacon only.
 
 ## The flacon in 3D
 
@@ -148,7 +174,7 @@ Three things there are deliberate and easy to undo by accident:
 - tone mapping is **Neutral**, not ACES — ACES is graded for film and pulls the cream background grey as it passes through the glass;
 - the backdrop and floor are **real meshes**, because `scene.background` does not reach the buffer the glass samples.
 
-It is not wired into the shop: product pages still use the drawn SVG bottles. Putting it on a product page means ~450 KB of Three.js on that page, so it is worth a lazy load and a still image as the fallback.
+The model itself lives in `assets/js/flacon3d.js`, shared with the photo robot above. The interactive page is not wired into the shop (the robot's still renders are): putting it on a product page means ~450 KB of Three.js on that page, so it is worth a lazy load and a still image as the fallback.
 
 ## Prices you must confirm before launch
 
