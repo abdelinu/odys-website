@@ -1,0 +1,14 @@
+# Identifiants : jamais versionnes. verify.sh et docker-compose les lisent ici.
+docker/.env
+*.key
+
+# Journaux de travail
+*.log
+
+# Brouillons
+tmpwork/
+
+# Systeme
+Thumbs.db
+desktop.ini
+.DS_Store

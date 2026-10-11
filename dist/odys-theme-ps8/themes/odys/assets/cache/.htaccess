@@ -1,0 +1,6 @@
+# Combined CSS/JS keeps its filename when its contents change, so the
+# browser must ask whether it is still current. The ETag answers in a
+# 304 when nothing moved.
+<IfModule mod_headers.c>
+  Header set Cache-Control "no-cache, must-revalidate"
+</IfModule>

@@ -1,0 +1,414 @@
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ODYS PARFUMS — JOUR (couche 6, chargee en dernier)
+   Ivoire au sol, vert profond pour les grands aplats, or doux en filet,
+   brun sombre pour le texte. Les cartes produit restent blanches.
+
+   Pourquoi le clair : les photos du catalogue sont detourees sur BLANC PUR
+   (#FFFFFF sur tous les bords, verifie sur les visuels en ligne). Sur un
+   fond noir, chaque vignette devenait un rectangle blanc qui flottait ;
+   sur l'ivoire, la photo se fond dans la page.
+
+   Cette couche garde la structure de la couche Nuit — quatre sections de
+   l'accueil (.nv-fam, .nv-sig, .nv-duo, .nv-assure) ne sont stylees qu'ici
+   et nulle part ailleurs — et n'en change que les couleurs.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Jetons ──────────────────────────────────────────────────────── */
+:root{
+  color-scheme:light;
+  --odys-vert:#182820;             /* vert profond : les grands aplats   */
+  --odys-vert-clair:#22362C;       /* sa nuance pour les degrades        */
+  --odys-on-dark:#F4EFE5;          /* texte pose sur un aplat vert       */
+  --odys-surface:#FFFFFF;          /* les cartes produit                 */
+  --odys-cream:#F4EFE5;            /* ivoire : le sol de la page         */
+  --odys-cream-warm:#EFE8DA;
+  --odys-champagne:#E9E0CE;
+  --odys-champagne-deep:#DED2BA;
+  --odys-text:#312B27;             /* brun sombre : le texte courant     */
+  /* Le plancher de contraste du site n'est pas l'ivoire du fond de page
+     (#F4EFE5) mais le plus sombre des trois ivoires, --odys-champagne
+     (#E9E0CE), sur lequel s'ecrivent les surtitres et les chapeaux. Sur
+     celui-la, #6E645C ne donnait que 4,40:1. */
+  --odys-muted:#6A6058;
+  /* --odys-mid n'etait defini NULLE PART. Dix-huit regles l'appelaient
+     avec un repli pale, #8A8577, qui ne donne que 3,21:1 sur l'ivoire —
+     sous le seuil de 4,5 du texte courant. Tout le texte secondaire du
+     site etait donc a la limite du lisible, sans que rien ne le signale.
+     C'est le meme gris que --odys-muted : un alias, pour qu'ils ne
+     puissent plus diverger. */
+  --odys-mid:var(--odys-muted);
+  --odys-border:#D8CDB8;
+  --odys-line:rgba(49,43,39,.14);
+  --odys-black:#182820;            /* « noir » = vert profond desormais  */
+  --odys-black-soft:#22362C;
+  --odys-sand:#C5A46A;             /* or doux sur photographie           */
+  --odys-gold:#C5A46A;             /* l'or doux, un seul or              */
+  --odys-soft-gold:#D4B882;
+  /* Deux jetons faisaient le meme travail — l'or qui porte du texte — avec
+     deux valeurs. Corriger l'un laissait l'autre derriere : les surtitres
+     de section tiraient sur --odys-gold-deep et sont restes a 4,25:1
+     quand --odys-gold-text etait deja assombri. Un alias, et ils ne
+     peuvent plus diverger. */
+  --odys-gold-deep:var(--odys-gold-text);
+  /* #86683A tenait 4,52:1 sur l'ivoire du fond de page (#F4EFE5) mais
+     moins sur les deux ivoires plus chauds ou s'ecrivent les surtitres de
+     section — « Collection ODYS », « Selection du moment » : 4,25:1 sur
+     #EFE8DA, 4,39:1 sur --odys-champagne. Assombri juste assez pour passer
+     sur le plus sombre des trois : 4,66:1 la, 5,33:1 sur le fond de page. */
+  /* Deux jetons, un seul or. --odys-gold-encre est la valeur, stable :
+     les sections sombres plus bas remplacent --odys-gold-text par l'or
+     doux, et ce qui doit revenir a l'or profond dans une telle section
+     — le hero empile sur telephone — pointe sur l'encre. */
+  --odys-gold-encre:#7A5D31;
+  --odys-gold-text:var(--odys-gold-encre); /* l'or quand il porte du texte */
+  --odys-marine:#182820;           /* le marine d'origine devient vert   */
+  --odys-marine-soft:#22362C;
+  --font-logo:'Bodoni Moda','Didot','Bodoni 72',Georgia,serif;
+  --ink:var(--odys-text);
+  --odys-success:#2D6A4F;
+  --odys-success-bg:#EFF5F1;
+  --odys-success-bdr:#BFD6C6;
+  --odys-alert:#8A2B20;
+}
+html,body{background:var(--odys-cream)!important;color:var(--odys-text)}
+::selection{background:var(--odys-gold);color:var(--odys-vert)}
+::placeholder{color:var(--odys-muted)}
+/* Un aplat d'or porte du texte vert profond : l'or doux sur blanc ne tient
+   pas 4.5:1, l'or doux sous du vert profond tient largement. */
+.btn-chk,.us-add,.co-step.active .cs-num,.np-note-name,.vc-badge,.isc-badge,.sc-badge,
+.sw-btn.on,.ih-l,.bc-b-rose,.bc-b-oud,.bc-sv,.cb,
+[style*="background:var(--odys-gold)"],[style*="background:#B4863D"],
+[style*="background:var(--rose);"],[style$="background:var(--rose)"],
+.btn-p[style*="background:var(--oud)"],.oc-grade[style*="background:rgba(180,134,61,.9)"]{color:var(--odys-vert)!important}
+.sw-btn:not(.on){color:var(--odys-text)!important}
+.btn-p.btn-chk{background:var(--odys-gold);border-color:var(--odys-gold-text)}
+.btn-p.btn-chk:hover{background:var(--odys-soft-gold);border-color:var(--odys-soft-gold)}
+.lp-free,.fbt-save,.pbadge.cod,.mob-b.cod,.mob-badge.cod{color:var(--odys-success)}
+
+/* L'or doux sur ivoire ne fait que 2.06:1 — illisible. C'est une propriete de
+   la palette, pas un reglage : l'or reste la couleur des aplats et des filets,
+   mais des qu'il porte du texte sur un fond clair il passe a l'or profond.
+   Sur les sections sombres (hero, signatures) l'or doux reste, il y est juste. */
+/* Les zones encore sombres redefinissent le jeton : tout ce qu'elles
+   contiennent retrouve l'or doux, sans une seule regle de plus. */
+.nv-hero,.nv-fam,.nv-sig,.nv-duo,.nv-assure,.site-footer,.oud-hero,.oud-sec,
+.btn-p,.pc-add,.oc-add,.fbt-btn,.btn-chk,.ff.on,.pg-btn.on,.mob-menu,
+.lp-bar,.loy-bar,.odys-notif,.toast,.pts-toast,.olf-hd,
+[style*="background:var(--odys-vert)"],[style*="background:var(--navy)"]{
+  --odys-gold-text:#C5A46A}
+
+/* Les quatre mentions de la fiche produit — Elabore au Maroc, Paiement a la
+   livraison, Livraison 24-48h, Retours sous 14 jours — etaient ecrites en
+   creme pour un panneau sombre. Leur fond est transparent : elles se posaient
+   sur l'ivoire et s'effacaient. Les pictogrammes, eux, etaient deja en or
+   profond. */
+.svc,.svc-lbl,.svc-txt{color:var(--odys-text)}
+.oc-lbl,.oc-num,.odys-contact,.odys-contact a{color:var(--odys-text)}
+/* nuit_prep remonte l'alpha de l'or en texte a .9 pour le fond noir ; sur du
+   blanc cet or reste a 2.3:1. Les styles en ligne ne passent pas par le jeton,
+   on les rattrape ici. */
+[style*="rgba(201,166,107,.9)"],[style*="rgba(201, 166, 107, 0.9)"]{
+  color:var(--odys-gold-text)!important}
+.pc-code,.pm-ref,
+.bsec .sec-hd-left p,.why-sec .sec-hd-left p,
+.eyebrow,.sec-eyebrow{color:var(--odys-gold-deep)}
+
+/* ── 2. Header ──────────────────────────────────────────────────────── */
+nav,.odys-nav,header .odys-nav{background:rgba(244,239,229,.82)!important;
+  border-bottom-color:rgba(49,43,39,.10)!important}
+@supports (backdrop-filter: blur(1px)){
+  header .odys-nav{background:rgba(244,239,229,.82)!important}
+}
+nav a,nav .ni,.odys-nav a,.odys-nav .ni{color:var(--odys-text)}
+nav.stuck,#header.stuck .odys-nav{background:rgba(244,239,229,.96)!important;
+  box-shadow:0 1px 0 rgba(49,43,39,.08),0 14px 34px rgba(49,43,39,.10)}
+.mob-menu{background:rgba(244,239,229,.99)!important}
+nav .ni:hover{background:rgba(197,164,106,.16)!important}
+.cb{color:var(--odys-vert)}
+/* Home: the bar floats over the hero photograph until the page scrolls */
+body.index #header:not(.stuck) .odys-nav{
+  background:linear-gradient(180deg,rgba(24,40,32,.55),rgba(24,40,32,0))!important;
+  border-bottom-color:transparent!important;
+  backdrop-filter:none;-webkit-backdrop-filter:none}
+
+/* ── 3. Buttons ─────────────────────────────────────────────────────── */
+.btn-p{background:var(--odys-vert);color:var(--odys-on-dark);border:1px solid var(--odys-vert)}
+.btn-p:hover{background:var(--odys-gold);border-color:var(--odys-gold-text);color:var(--odys-vert)}
+.btn-g{color:var(--odys-text);border-color:rgba(154,123,67,.5)}
+.btn-g:hover{background:var(--odys-soft-gold);border-color:var(--odys-soft-gold);color:var(--odys-vert)}
+.pc-add,.oc-add,.fbt-btn{background:var(--odys-vert);color:var(--odys-on-dark)}
+.pc-add:hover,.oc-add:hover,.fbt-btn:hover{background:var(--odys-gold);color:var(--odys-vert)}
+.ff.on,.pg-btn.on{background:var(--odys-vert);border-color:var(--odys-vert);color:var(--odys-on-dark)}
+.pbadge.cod,.mob-b.cod,.mob-badge.cod{color:var(--odys-success)}
+
+/* ── 4. Legacy light canvases ───────────────────────────────────────── */
+.hero-bg{background:
+  radial-gradient(90% 70% at 72% 20%,rgba(197,164,106,.22),rgba(244,239,229,0) 60%),
+  linear-gradient(158deg,#F4EFE5 0%,#EFE8DA 55%,#E9E0CE 100%)}
+.hero-bg::after,.hero::before{display:none}
+.site-footer{background:var(--odys-vert);color:var(--odys-on-dark);border-top:1px solid rgba(197,164,106,.28)}
+
+/* ── 5. Shared pieces for the Nuit home ─────────────────────────────── */
+.nv-eyebrow{font:500 10px/1.4 var(--font-body);letter-spacing:.42em;
+  text-transform:uppercase;color:var(--odys-soft-gold);margin:0 0 18px}
+.nv-h2{font-family:var(--font-display);font-weight:400;
+  font-size:clamp(28px,3.4vw,46px);line-height:1.06;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--odys-gold-text);margin:0 0 12px}
+.nv-h2-sm{font-size:clamp(24px,2.4vw,32px)}
+.nv-sub{font:300 15px/1.7 var(--font-body);color:rgba(245,235,221,.74);margin:0}
+.nv-lede{font:300 clamp(14px,1.15vw,16px)/1.85 var(--font-body);
+  color:rgba(245,235,221,.76);max-width:44ch;margin:0 0 32px}
+.nv-btn{display:inline-flex;align-items:center;justify-content:center;gap:18px;
+  min-height:50px;padding:0 28px;border:1px solid var(--odys-soft-gold);
+  border-radius:var(--radius);background:rgba(5,6,7,.28);color:var(--odys-on-dark);
+  font:500 10px/1 var(--font-body);letter-spacing:.26em;text-transform:uppercase;
+  text-decoration:none;cursor:pointer;
+  transition:background var(--transition-quick),color var(--transition-quick)}
+.nv-btn:hover{background:var(--odys-soft-gold);color:var(--odys-black)}
+.nv-btn .arw{transition:transform var(--transition-quick)}
+.nv-btn:hover .arw{transform:translateX(4px)}
+.nv-btn-pill{border-radius:999px}
+.nv-link{font:500 10px/1 var(--font-body);letter-spacing:.26em;text-transform:uppercase;
+  color:rgba(245,235,221,.78);border-bottom:1px solid rgba(201,166,107,.5);padding:8px 0;
+  transition:color var(--transition-quick),border-color var(--transition-quick)}
+.nv-link:hover{color:var(--odys-soft-gold);border-color:var(--odys-soft-gold)}
+.nv-bg{position:absolute;inset:0;z-index:-2;margin:0}
+.nv-bg img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* ── 6. Hero ────────────────────────────────────────────────────────── */
+.nv-hero{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;
+  min-height:clamp(600px,94vh,880px);background:#07080A;color:var(--odys-on-dark)}
+body.index .nv-hero{margin-top:calc(-1 * var(--nav-h))}
+.nv-hero .nv-bg img{object-position:center 78%}
+.nv-hero::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:
+  linear-gradient(90deg,rgba(5,6,7,.94) 0%,rgba(5,6,7,.72) 36%,rgba(5,6,7,.12) 68%,rgba(5,6,7,.32) 100%),
+  linear-gradient(0deg,rgba(5,6,7,.96) 0%,rgba(5,6,7,0) 36%),
+  linear-gradient(180deg,rgba(5,6,7,.55) 0%,rgba(5,6,7,0) 24%)}
+.nv-hero-in{width:100%;max-width:var(--maxw);margin:0 auto;
+  padding:calc(var(--nav-h) + clamp(40px,6vw,80px)) var(--page-gutter) clamp(64px,8vw,104px);
+  display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
+  align-items:center;gap:clamp(24px,4vw,64px)}
+.nv-hero h1{font-family:var(--font-display);font-weight:400;
+  font-size:clamp(40px,5.3vw,78px);line-height:1.02;letter-spacing:.02em;
+  text-transform:uppercase;color:var(--odys-gold-text);margin:0 0 26px}
+.nv-hero-cta{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+/* Bottle slot: stock stand-in until the ODYS render ships (same file) */
+.nv-stage{position:relative;justify-self:center;width:min(100%,420px);margin:0;aspect-ratio:4/5}
+.nv-stage::before{content:'';position:absolute;inset:-5% -16% 0;border-radius:50%;
+  border:1px solid rgba(233,211,174,.38);border-left-color:transparent;
+  border-bottom-color:transparent;transform:rotate(-16deg);pointer-events:none;
+  box-shadow:18px -10px 50px -34px rgba(233,190,120,.8)}
+.nv-stage::after{content:'';position:absolute;left:4%;right:4%;bottom:-4%;height:20%;
+  border-radius:50%;pointer-events:none;filter:blur(8px);
+  background:radial-gradient(50% 50% at 50% 50%,rgba(226,168,92,.42),rgba(226,168,92,0) 72%)}
+/* Packshot: ODYS 01 L'Icône and its crème coffret, drawn in SVG
+   (odys-bottle.tpl / odys-box.tpl) on a noir halo against the sky. */
+.nv-stage{background:radial-gradient(closest-side,rgba(5,6,7,.9) 50%,rgba(5,6,7,0) 100%)}
+.nv-pack{position:absolute;inset:0;z-index:1}
+.nv-pack-box{position:absolute;right:8%;bottom:14%;width:40%;
+  filter:drop-shadow(0 30px 40px rgba(0,0,0,.6))}
+.nv-pack-bottle{position:absolute;left:8%;bottom:9%;width:56%;
+  filter:drop-shadow(0 34px 38px rgba(0,0,0,.7))}
+.nv-pack svg{display:block;width:100%;height:auto}
+.nv-scroll{position:absolute;right:var(--page-gutter);bottom:clamp(28px,6vh,60px);
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  font:500 9px/1 var(--font-body);letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(245,235,221,.7)}
+.nv-scroll i{display:block;width:1px;height:46px;
+  background:linear-gradient(var(--odys-soft-gold),rgba(201,166,107,0))}
+
+/* ── 7. Trouvez votre ODYS — family circles ─────────────────────────── */
+.nv-fam{position:relative;isolation:isolate;overflow:hidden;background:#182820;
+  border-top:1px solid rgba(197,164,106,.22);border-bottom:1px solid rgba(197,164,106,.22)}
+.nv-fam .nv-bg{left:auto;width:min(54%,760px)}
+.nv-fam::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(90deg,#182820 46%,rgba(24,40,32,.72) 70%,rgba(24,40,32,.3) 100%)}
+.nv-fam-in{max-width:var(--maxw);margin:0 auto;padding:clamp(52px,6vw,84px) var(--page-gutter)}
+.nv-fam-row{display:flex;align-items:center;gap:clamp(24px,3vw,44px);flex-wrap:wrap;margin-top:36px}
+.nv-notes{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:clamp(16px,2.6vw,36px)}
+.nv-note a{display:flex;flex-direction:column;align-items:center;gap:14px;text-decoration:none}
+.nv-note-img{display:block;width:clamp(76px,7vw,96px);aspect-ratio:1;border-radius:50%;padding:3px;
+  background:linear-gradient(145deg,rgba(233,211,174,.85),rgba(180,134,61,.25) 50%,rgba(233,211,174,.6));
+  box-shadow:0 14px 30px -12px rgba(0,0,0,.85)}
+.nv-note-img img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;
+  transition:transform var(--transition-slow)}
+.nv-note a:hover .nv-note-img img{transform:scale(1.08)}
+.nv-note-lbl{font:500 10px/1 var(--font-body);letter-spacing:.24em;text-transform:uppercase;
+  color:var(--odys-on-dark);transition:color var(--transition-quick)}
+.nv-note a:hover .nv-note-lbl{color:var(--odys-soft-gold)}
+
+/* ── 8. Collection signature — bottles on stone plinths ─────────────── */
+.nv-sig{position:relative;isolation:isolate;overflow:hidden;background:#182820}
+.nv-sig .nv-bg img{filter:brightness(.42) saturate(.55) sepia(.18)}
+.nv-sig::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:
+  linear-gradient(90deg,rgba(24,40,32,.97) 0%,rgba(24,40,32,.82) 30%,rgba(24,40,32,.5) 62%,rgba(24,40,32,.8) 100%),
+  linear-gradient(0deg,rgba(24,40,32,.94) 0%,rgba(24,40,32,0) 42%)}
+.nv-sig-in{max-width:var(--maxw);margin:0 auto;padding:clamp(60px,7vw,104px) var(--page-gutter);
+  display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,2fr);gap:clamp(28px,4vw,64px);align-items:center}
+.nv-bottles{list-style:none;margin:0;padding:0;display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2vw,32px);align-items:end}
+.nv-bottle a{display:flex;flex-direction:column;align-items:center;text-align:center;text-decoration:none}
+.nv-bottle-fig{position:relative;width:100%;margin:0 0 18px;--glow:rgba(226,168,92,.5)}
+.nv-tone-marine .nv-bottle-fig{--glow:rgba(84,128,214,.5)}
+.nv-tone-creme .nv-bottle-fig{--glow:rgba(233,211,174,.42)}
+.nv-bottle-fig::before{content:'';position:absolute;left:0;right:0;top:12%;bottom:8%;
+  border-radius:50%;pointer-events:none;filter:blur(18px);
+  background:radial-gradient(50% 50% at 50% 55%,var(--glow),rgba(0,0,0,0) 70%)}
+.nv-bottle-fig .odys-bottle{position:relative;z-index:1;display:block;width:70%;height:auto;margin:0 auto;
+  filter:drop-shadow(0 26px 30px rgba(0,0,0,.65));transition:transform var(--transition-slow)}
+.nv-bottle:nth-child(2) .nv-bottle-fig .odys-bottle{width:82%}
+.nv-bottle-fig::after{content:'';position:relative;z-index:2;display:block;height:clamp(26px,3vw,42px);
+  margin-top:-10px;border-radius:3px 3px 0 0;
+  background:linear-gradient(180deg,#2B2723 0%,#15130F 60%,#0A0908 100%);
+  box-shadow:inset 0 1px 0 rgba(233,211,174,.2),0 20px 30px -14px rgba(0,0,0,.9)}
+.nv-bottle a:hover .nv-bottle-fig .odys-bottle{transform:translateY(-6px)}
+.nv-b-code{font:500 9px/1 var(--font-body);letter-spacing:.3em;text-transform:uppercase;
+  color:var(--odys-soft-gold);margin-bottom:8px}
+.nv-b-name{font-family:var(--font-display);font-size:clamp(17px,1.7vw,24px);font-weight:400;
+  letter-spacing:.04em;color:var(--odys-on-dark);margin-bottom:4px}
+.nv-b-mood{font:300 12px/1.5 var(--font-body);color:rgba(245,235,221,.62)}
+
+/* ── 9. Pyramide de senteurs + quiz panel ───────────────────────────── */
+.nv-duo{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);background:#08090B;
+  border-top:1px solid var(--odys-line)}
+.nv-pyr{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:center;
+  gap:clamp(28px,3.4vw,56px);
+  padding:clamp(52px,6vw,92px) clamp(20px,3.4vw,56px) clamp(52px,6vw,92px) var(--page-gutter);
+  background:radial-gradient(70% 70% at 30% 60%,rgba(180,134,61,.14),rgba(8,9,11,0) 70%)}
+.nv-pyr-fig{display:grid;gap:8px}
+.nv-layer{display:grid;grid-template-columns:minmax(96px,.62fr) minmax(0,1fr);align-items:center;gap:14px}
+.nv-layer-lbl{position:relative;margin:0;padding-left:22px}
+.nv-layer-lbl::before{content:'';position:absolute;left:0;top:3px;width:9px;height:9px;
+  border-radius:50%;border:1px solid var(--odys-soft-gold)}
+.nv-layer-lbl b{display:block;font:500 10px/1.4 var(--font-body);letter-spacing:.24em;
+  text-transform:uppercase;color:var(--odys-on-dark)}
+.nv-layer-lbl span{display:block;font:300 12px/1.5 var(--font-body);color:rgba(245,235,221,.62)}
+.nv-bands{filter:drop-shadow(0 0 1px rgba(233,211,174,.75)) drop-shadow(0 28px 36px rgba(0,0,0,.6))}
+.nv-band{position:relative;aspect-ratio:12/5;overflow:hidden}
+.nv-band img{display:block;width:100%;height:100%;object-fit:cover}
+.nv-band::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.2) 0%,rgba(255,255,255,0) 38%,rgba(255,255,255,0) 70%,rgba(255,255,255,.08) 100%)}
+.nv-band-1{clip-path:polygon(50% 0,66.67% 100%,33.33% 100%)}
+.nv-band-2{clip-path:polygon(33.33% 0,66.67% 0,83.33% 100%,16.67% 100%)}
+.nv-band-3{clip-path:polygon(16.67% 0,83.33% 0,100% 100%,0 100%)}
+.nv-quizp{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;min-height:440px;
+  padding:clamp(52px,6vw,84px) clamp(20px,3vw,48px);border-left:1px solid var(--odys-line)}
+.nv-quizp::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(8,9,11,.9) 0%,rgba(8,9,11,.62) 55%,rgba(8,9,11,.82) 100%)}
+.nv-quizp .nv-btn{margin:26px 0 34px}
+.nv-crit{list-style:none;margin:0;padding:0;display:flex;justify-content:center;flex-wrap:wrap;gap:8px 30px}
+.nv-crit li{display:flex;flex-direction:column;align-items:center;gap:8px;
+  font:400 11px/1.3 var(--font-body);letter-spacing:.04em;color:rgba(245,235,221,.8)}
+.nv-crit svg{width:26px;height:26px;stroke:var(--odys-soft-gold);fill:none;stroke-width:1.2;
+  stroke-linecap:round;stroke-linejoin:round}
+
+/* ── 10. Reassurance bar ────────────────────────────────────────────── */
+.nv-assure{background:#060708;border-top:1px solid var(--odys-line)}
+.nv-assure ul{max-width:var(--maxw);margin:0 auto;padding:30px var(--page-gutter);list-style:none;
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.nv-assure li{display:flex;align-items:center;justify-content:center;gap:14px}
+.nv-assure svg{flex:none;width:26px;height:26px;stroke:var(--odys-soft-gold);fill:none;
+  stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.nv-assure p{margin:0}
+.nv-assure b{display:block;font:500 11px/1.5 var(--font-body);letter-spacing:.04em;color:var(--odys-on-dark)}
+.nv-assure span{display:block;font:300 11px/1.5 var(--font-body);color:rgba(245,235,221,.62)}
+
+/* ── 11. Quiz dialog ────────────────────────────────────────────────── */
+.nv-quiz{width:min(640px,calc(100% - 32px));max-height:calc(100dvh - 32px);padding:0;
+  border:1px solid rgba(201,166,107,.35);border-radius:var(--radius-lg);
+  background:#0D0E11;color:var(--odys-text)}
+.nv-quiz::backdrop{background:rgba(4,5,6,.78);backdrop-filter:blur(4px)}
+.nv-quiz form{padding:clamp(24px,4vw,40px)}
+.nv-quiz-hd{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:22px}
+.nv-quiz-x{flex:none;width:44px;height:44px;border:1px solid var(--odys-line);border-radius:50%;
+  background:transparent;color:var(--odys-text);font-size:22px;line-height:1;cursor:pointer}
+.nv-quiz-x:hover{border-color:var(--odys-soft-gold);color:var(--odys-soft-gold)}
+.nv-quiz fieldset{border:0;margin:0 0 22px;padding:0;min-width:0}
+.nv-quiz legend{padding:0;margin-bottom:12px;font:500 10px/1.4 var(--font-body);
+  letter-spacing:.22em;text-transform:uppercase;color:var(--odys-soft-gold)}
+.nv-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:8px}
+.nv-opt{position:relative;display:block;cursor:pointer}
+.nv-opt input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.nv-opt span{display:block;min-height:48px;padding:13px 12px;border:1px solid var(--odys-border);
+  border-radius:var(--radius);font:400 13px/1.3 var(--font-body);color:var(--odys-text);
+  transition:border-color var(--transition-quick),background var(--transition-quick)}
+.nv-opt small{display:block;margin-top:3px;font-size:11px;color:var(--odys-muted)}
+.nv-opt:hover span{border-color:rgba(201,166,107,.6)}
+.nv-opt input:checked+span{border-color:var(--odys-gold-text);background:rgba(180,134,61,.14)}
+.nv-opt input:focus-visible+span{outline:2px solid var(--odys-gold);outline-offset:2px}
+.nv-quiz-ft{display:flex;justify-content:flex-end}
+
+/* ── 11b. Identity — European Maison logo, monogram, flacon ─────────── */
+.odys-logo{display:inline-flex;flex-direction:column;align-items:center;line-height:1;text-decoration:none}
+.odys-logo-w{font-family:var(--font-logo);font-weight:400;font-size:25px;letter-spacing:.2em;
+  margin-right:-.2em;color:var(--odys-vert);transition:color var(--transition-quick)}
+.odys-logo-p{margin-top:6px;margin-right:-.6em;font:400 7px/1 var(--font-body);letter-spacing:.6em;
+  text-transform:uppercase;color:var(--odys-muted)}
+a.odys-logo:hover .odys-logo-w,.footer-logo:hover .odys-logo-w{color:var(--odys-gold-text)}
+.footer-logo{display:inline-block;margin-bottom:18px;text-decoration:none}
+.odys-mono{display:block;margin-bottom:18px;font-family:var(--font-logo);font-size:52px;
+  line-height:.9;color:var(--odys-soft-gold);white-space:nowrap}
+.odys-mono span+span{margin-left:-.34em}
+.odys-lockup{display:flex;align-items:center;gap:18px}
+.odys-lockup .odys-logo-w{font-size:30px}
+.odys-lockup-rule{width:1px;align-self:stretch;background:rgba(201,166,107,.5)}
+.odys-lockup-sub{font:400 8px/1.9 var(--font-body);letter-spacing:.34em;text-transform:uppercase;
+  color:rgba(245,235,221,.72)}
+/* label type inside odys-bottle.tpl / odys-box.tpl (SVG user units) */
+.ob-w{font-family:var(--font-logo);font-size:27px;letter-spacing:5px}
+.ob-p{font-family:var(--font-body);font-size:6.4px;letter-spacing:3.2px}
+.ob-n{font-family:var(--font-logo);font-size:12px;letter-spacing:1px}
+.ob-name{font-family:var(--font-logo);font-size:8.6px;letter-spacing:2px;text-transform:uppercase}
+.ob-x{font-family:var(--font-body);font-size:5.8px;font-weight:500;letter-spacing:1.5px}
+
+/* ── 12. Responsive ─────────────────────────────────────────────────── */
+@media (max-width:1100px){
+  .nv-sig-in,.nv-duo{grid-template-columns:minmax(0,1fr)}
+  .nv-quizp{border-left:0;border-top:1px solid var(--odys-line)}
+  .nv-assure ul{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .nv-assure li{justify-content:flex-start}
+}
+@media (max-width:900px){
+  .nv-hero{min-height:0}
+  .nv-hero-in{grid-template-columns:minmax(0,1fr);padding-top:calc(var(--nav-h) + 36px)}
+  .nv-hero::before{background:linear-gradient(0deg,rgba(5,6,7,.96) 0%,rgba(5,6,7,.6) 55%,rgba(5,6,7,.72) 100%)}
+  .nv-stage{width:min(72%,320px)}
+  .nv-scroll{display:none}
+  .nv-fam .nv-bg{width:100%;opacity:.3}
+  .nv-pyr{grid-template-columns:minmax(0,1fr);padding-left:var(--page-gutter)}
+}
+@media (max-width:767px){
+  .nv-hero-in,.nv-fam-in,.nv-sig-in,.nv-pyr{padding-left:20px;padding-right:20px}
+  .nv-hero-cta .nv-btn{width:100%}
+  .nv-notes{width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+  .nv-note a{gap:10px}
+  .nv-note-img{width:min(100%,72px)}
+  .nv-note-lbl{font-size:9px;letter-spacing:.12em}
+  .nv-fam-row .nv-btn{width:100%}
+  .nv-bottles{gap:8px}
+  .nv-b-mood{display:none}
+  .nv-assure ul{grid-template-columns:minmax(0,1fr);padding:24px 20px}
+}
+
+/* Le lien d'evitement au clavier : trois blocs le definissent dans les
+   couches precedentes, dont un que la transformation de l'or avait pousse a
+   l'or profond. Et `body.authentication a` est plus specifique que
+   `.skip-link` : il gagnait malgre l'ordre. D'ou `body a.skip-link`. */
+body a.skip-link{background:var(--odys-vert);color:var(--odys-on-dark);
+  border-color:var(--odys-gold)}
+
+/* ── 13. Le logo selon le fond ──────────────────────────────────────── */
+/* Ecrit en creme pour la barre noire, il etait devenu ivoire sur ivoire :
+   invisible. En vert profond sur la barre claire, et creme la ou il flotte
+   encore sur une photographie — l'accueil avant defilement, et le pied de
+   page, qui est un aplat vert. */
+.cart-products-count,.cb,
+.odys-nav #_desktop_cart .cart-products-count{color:var(--odys-gold-text)}
+body.index #header:not(.stuck) .odys-logo-w,
+.site-footer .odys-logo-w,.footer-logo .odys-logo-w{color:var(--odys-on-dark)}
+body.index #header:not(.stuck) .odys-logo-p,
+.site-footer .odys-logo-p,.footer-logo .odys-logo-p{color:rgba(244,239,229,.74)}
+body.index #header:not(.stuck) nav a,
+body.index #header:not(.stuck) .odys-nav a{color:var(--odys-on-dark)}

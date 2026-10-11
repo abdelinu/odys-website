@@ -1,0 +1,204 @@
+{
+  "_lisez_moi": [
+    "Une entrée par référence. Trois champs à relire, rien d'autre :",
+    "  accords   — trois mots, la carte d'identité olfactive",
+    "  intensite — Légère | Moyenne | Soutenue | Forte, un repère, pas une mesure",
+    "  texte     — le déroulé du parfum, écrit depuis sa pyramide réelle",
+    "  occasion  — à qui et à quel moment",
+    "",
+    "Aucune promesse de tenue n'est écrite ici : la seule donnée chiffrée du",
+    "site (extrait 18-20 %, 7 à 9 heures) vit sur la page À propos, et c'est",
+    "le pied de chaque fiche qui la rappelle, une fois, au même endroit.",
+    "Deux formes d'entrée coexistent. Les parfums portent accords / intensite / texte / occasion. Les coffrets, diffuseurs et oud portent meta / court / long : la première va dans la balise description et dans og:description, la deuxième sous le nom du produit, la troisième dans l'accordéon de la fiche."
+  ],
+  "01": {
+    "accords": "Fruité · Floral · Musqué",
+    "intensite": "Légère",
+    "texte": "Elle s'ouvre sur un fruit vert et acidulé — kiwi, rhubarbe — qu'une pointe de poivre rose empêche d'être sage. Le cœur s'adoucit : pastèque et fleurs blanches, une fraîcheur presque sucrée. En fin de journée il reste le cédrat, le musc et un santal discret.",
+    "occasion": "Les journées de travail, les mois chauds, et celles qui préfèrent être remarquées de près plutôt que de loin."
+  },
+  "07": {
+    "accords": "Aromatique · Vanillé · Ambré",
+    "intensite": "Soutenue",
+    "texte": "Une lavande mentholée ouvre le parfum, nette, presque froide. La vanille et le benjoin la réchauffent ensuite, et le fond prend son temps : miel, fève tonka, et une note de tabac blond qui lui donne son caractère nocturne.",
+    "occasion": "Les soirées, l'automne et l'hiver, et ceux qui veulent un sillage qu'on reconnaît."
+  },
+  "11": {
+    "accords": "Épicé · Ambré · Cuiré",
+    "intensite": "Forte",
+    "texte": "Un départ d'agrumes vifs — mandarine sanguine, pamplemousse — rafraîchi par la menthe. La cannelle et les épices prennent vite le dessus, adoucies par une rose discrète. Le fond est franc : ambre, cuir et patchouli.",
+    "occasion": "Les sorties du soir, et les occasions où l'on veut être vu."
+  },
+  "14": {
+    "accords": "Boisé · Épicé · Chaleureux",
+    "intensite": "Forte",
+    "texte": "L'ouverture est épicée et sèche : cardamome et poivre de Sichuan posés sur un bois de rose. Puis vient l'oud, adouci par le santal et tenu par le vétiver. Le fond arrondit l'ensemble — fève tonka, ambre, une vanille à peine sucrée.",
+    "occasion": "Les soirées, les cérémonies, et celles et ceux qui aiment les boisés orientaux."
+  },
+  "22": {
+    "accords": "Gourmand · Floral · Café",
+    "intensite": "Soutenue",
+    "texte": "Poire et mandarine pour commencer, courtes et lumineuses. Le cœur est floral et vanillé, fleur d'oranger en tête. C'est le fond qui signe : un café noir amer, du cèdre et du patchouli, qui empêchent la gourmandise de tourner au sucré.",
+    "occasion": "Les soirées et les saisons froides."
+  },
+  "33": {
+    "accords": "Agrumé · Boisé · Encens",
+    "intensite": "Moyenne",
+    "texte": "Une ouverture d'agrumes nette — pamplemousse, citron, bergamote — relevée de menthe et de poivre rose. Le cœur se fait épicé, gingembre et muscade sur un floral léger. Puis l'encens arrive et le parfum devient boisé : cèdre, santal, patchouli.",
+    "occasion": "Le bureau comme le soir, et toute l'année."
+  },
+  "44": {
+    "accords": "Épicé · Floral · Boisé",
+    "intensite": "Soutenue",
+    "texte": "Une orange sanguine, et aussitôt un accord épicé rouge qui lui donne du mordant. Le cœur est très floral — fleur d'oranger, jasmin sambac — et le fond ramène le tout vers le bois : patchouli et santal.",
+    "occasion": "Les soirées et les fêtes."
+  },
+  "51": {
+    "accords": "Épicé · Vert · Vanillé",
+    "intensite": "Moyenne",
+    "texte": "Cardamome et poivre rose sur une feuille de violette : un départ épicé et vert. La sauge tient le cœur, herbacée et sobre. Le fond est gourmand sans excès — vanille et marron glacé.",
+    "occasion": "Tous les jours, et ceux qui préfèrent un gourmand discret."
+  },
+  "52": {
+    "accords": "Vanillé · Boisé · Liquoreux",
+    "intensite": "Forte",
+    "texte": "Plus sombre que Le Serment. Un rhum ambré, l'élémi résineux, une bergamote pour l'équilibre. La lavande et la davana donnent au cœur sa rondeur presque fruitée. Le fond est épais : vanille de Madagascar, châtaigne, cèdre et patchouli.",
+    "occasion": "Les soirées d'hiver, et ceux qui trouvent les vanillés trop sages."
+  },
+  "60": {
+    "accords": "Gourmand · Fruité · Lacté",
+    "intensite": "Soutenue",
+    "texte": "Un bouquet fruité pour commencer — nectarine, pomme, et un citron qui empêche l'ensemble de s'alourdir. La guimauve, la fraise et la noix de coco installent ensuite le dessert. Le fond est crémeux : crème fouettée, sucre, vanille, et un ambroxan qui le fait tenir.",
+    "occasion": "Les sorties entre amies, les anniversaires, et celles qui assument un parfum gourmand."
+  },
+  "61": {
+    "accords": "Vanillé · Caramel · Boisé",
+    "intensite": "Soutenue",
+    "texte": "Une poire confite et une goutte de rhum ouvrent le parfum ; l'ylang-ylang lui donne du corps. Le cœur est un caramel blanc adouci de guimauve, tenu par le jasmin et le labdanum. Le fond, lui, est boisé : fève tonka, santal, vétiver et patchouli sous le sucre candi.",
+    "occasion": "L'automne et l'hiver, et celles qui cherchent une vanille qui ne soit pas qu'un dessert."
+  },
+  "70": {
+    "accords": "Aquatique · Vert · Salé",
+    "intensite": "Légère",
+    "texte": "L'eau d'abord : des notes aquatiques, de la menthe, une herbe verte coupée. Le cœur est salin — eau de coco, sel, figue verte, comme une peau au sortir de la mer. Le santal et la fève tonka réchauffent la fin.",
+    "occasion": "L'été, les journées au soleil, et ceux qui fuient les parfums lourds."
+  },
+  "77": {
+    "accords": "Agrumé · Floral · Boisé",
+    "intensite": "Légère",
+    "texte": "Citron de Sicile et pomme verte : une ouverture franche, presque croquante. Le cœur est floral et vert — jasmin, rose blanche, bambou. Le fond reste léger, cèdre et musc sur un soupçon d'ambre.",
+    "occasion": "Les beaux jours, le quotidien, et celles qui veulent une fraîcheur qui dure."
+  },
+  "DUO": {
+    "meta": "Coffret Duo Classique : deux extraits de parfum ODYS de 50 ml, à offrir ou à partager. 129 DH, livré partout au Maroc, paiement à la livraison.",
+    "court": "Deux extraits de parfum de 50 ml réunis dans un coffret.",
+    "long": [
+      "Deux flacons de 50 ml dans un seul coffret : de quoi offrir sans hésiter entre deux fragrances, ou garder l'une et donner l'autre.",
+      "Même concentration que les flacons vendus seuls — extrait de parfum à 18–20 %, élaboré au Maroc."
+    ]
+  },
+  "TRIO": {
+    "meta": "Coffret Trio Découverte : trois extraits de parfum ODYS de 50 ml. 199 DH, livraison 24–48 h au Maroc, paiement à la livraison.",
+    "court": "Trois extraits de parfum de 50 ml réunis dans un coffret.",
+    "long": [
+      "Trois flacons de 50 ml pour parcourir la collection sans choisir : la manière la plus simple de découvrir une maison dont on ne connaît pas encore les accords.",
+      "Même concentration que les flacons vendus seuls — extrait de parfum à 18–20 %, élaboré au Maroc."
+    ]
+  },
+  "PACK-OUD": {
+    "meta": "Pack Oud Prestige : coffret de trois oud de 5 g, soit 15 g au total. 349 DH, livré partout au Maroc, paiement à la livraison.",
+    "court": "Coffret de trois oud de 5 g, soit 15 grammes.",
+    "long": [
+      "Trois oud de 5 g réunis dans un coffret, quinze grammes en tout. De quoi comparer des bois entre eux plutôt que d'en juger un seul.",
+      "L'oud se vend au gramme chez ODYS : le prix du coffret est celui de son contenu, affiché d'avance."
+    ]
+  },
+  "SAM-IND": {
+    "meta": "Sampler Hindi : trois oud indiens de 5 g, 15 g au total, pour comparer avant de choisir. 195 DH, livré au Maroc, paiement à la livraison.",
+    "court": "Trois oud indiens de 5 g, pour comparer avant de choisir.",
+    "long": [
+      "Trois oud d'origine indienne, 5 g chacun. Un sampler sert à cela : sentir côte à côte, à la même heure et dans la même pièce, ce qu'un flacon isolé ne permet jamais de juger.",
+      "Vendu au gramme comme le reste du rayon : quinze grammes, et le prix suit le poids."
+    ]
+  },
+  "SAM-THAI": {
+    "meta": "Sampler Thai : trois oud thaïlandais de 5 g, 15 g au total, pour comparer avant de choisir. 225 DH, livré au Maroc, paiement à la livraison.",
+    "court": "Trois oud thaïlandais de 5 g, pour comparer avant de choisir.",
+    "long": [
+      "Trois oud d'origine thaïlandaise, 5 g chacun. Un sampler sert à cela : sentir côte à côte, à la même heure et dans la même pièce, ce qu'un flacon isolé ne permet jamais de juger.",
+      "Vendu au gramme comme le reste du rayon : quinze grammes, et le prix suit le poids."
+    ]
+  },
+  "DIF-ROSEAUX-200": {
+    "meta": "Diffuseur à roseaux Nuit d'Ambre, 200 ml : cardamome et bergamote, rose et encens, musc, ambre et bois de oud. 249 DH, livré au Maroc.",
+    "court": "Diffuseur à roseaux 200 ml — cardamome, rose, encens, ambre et bois de oud.",
+    "long": [
+      "Un diffuseur à roseaux de 200 ml : la cardamome et la bergamote en premier, la rose et l'encens ensuite, puis le musc, l'ambre et le bois de oud qui tiennent la pièce.",
+      "Sans flamme et sans électricité : les roseaux font le travail seuls. On les retourne de temps en temps pour relancer la diffusion."
+    ]
+  },
+  "DIF-ROSEAUX-100": {
+    "meta": "Diffuseur à roseaux Jardin de Fès, 100 ml : citron et néroli, jasmin et fleur d'oranger, cèdre et musc blanc. 179 DH, livré au Maroc.",
+    "court": "Diffuseur à roseaux 100 ml — citron, néroli, jasmin, fleur d'oranger et cèdre.",
+    "long": [
+      "Un diffuseur à roseaux de 100 ml : le citron et le néroli d'abord, le jasmin et la fleur d'oranger au cœur, le cèdre et le musc blanc pour finir.",
+      "Sans flamme et sans électricité : les roseaux font le travail seuls. On les retourne de temps en temps pour relancer la diffusion."
+    ]
+  },
+  "DIF-RECHARGE-200": {
+    "meta": "Recharge 200 ml pour diffuseur Nuit d'Ambre : même composition, flacon seul, sans roseaux. 159 DH, livré partout au Maroc.",
+    "court": "Recharge 200 ml du diffuseur Nuit d'Ambre, flacon seul.",
+    "long": [
+      "La recharge du diffuseur Nuit d'Ambre : 200 ml de la même composition, en flacon seul.",
+      "Les roseaux du premier diffuseur se gardent si la fragrance est la même ; on les remplace pour en changer, sinon l'ancienne persiste dans la nouvelle."
+    ]
+  },
+  "OUD-BOUKHOUR-PRESTIGE": {
+    "meta": "Boukhour Prestige vendu au gramme, 15 DH le gramme. Vous payez le poids, pas l'emballage. Livré partout au Maroc, paiement à la livraison.",
+    "court": "Boukhour vendu au gramme, 15 DH le gramme.",
+    "long": [
+      "Du boukhour vendu au gramme : on prend la quantité qu'on veut, et le prix suit le poids.",
+      "Quinze dirhams le gramme, affichés d'avance. Le total se met à jour pendant que vous choisissez la quantité."
+    ]
+  },
+  "OUD-HINDI-ASSAM-A": {
+    "meta": "Hindi Assam A, oud d'origine indienne vendu au gramme, 35 DH le gramme. Livré partout au Maroc, paiement à la livraison.",
+    "court": "Oud d'origine indienne — Assam. Vendu au gramme, 35 DH le gramme.",
+    "long": [
+      "Un oud d'origine indienne, de la région d'Assam, vendu au gramme.",
+      "Trente-cinq dirhams le gramme, affichés d'avance : vous choisissez le poids, le total se calcule devant vous. Pas de lot imposé."
+    ]
+  },
+  "OUD-ROYAL-HINDI-B": {
+    "meta": "Royal Hindi B, oud d'origine indienne vendu au gramme, 45 DH le gramme. Livré partout au Maroc, paiement à la livraison.",
+    "court": "Oud d'origine indienne. Vendu au gramme, 45 DH le gramme.",
+    "long": [
+      "Un oud d'origine indienne, vendu au gramme.",
+      "Quarante-cinq dirhams le gramme, affichés d'avance : vous choisissez le poids, le total se calcule devant vous. Pas de lot imposé."
+    ]
+  },
+  "OUD-ROYAL-HINDI-C": {
+    "meta": "Royal Hindi C, oud d'origine indienne vendu au gramme, 65 DH le gramme. Livré partout au Maroc, paiement à la livraison.",
+    "court": "Oud d'origine indienne. Vendu au gramme, 65 DH le gramme.",
+    "long": [
+      "Un oud d'origine indienne, vendu au gramme.",
+      "Soixante-cinq dirhams le gramme, affichés d'avance : vous choisissez le poids, le total se calcule devant vous. Pas de lot imposé."
+    ]
+  },
+  "OUD-ROYAL-THAI-B": {
+    "meta": "Royal Thai B, oud d'origine thaïlandaise vendu au gramme, 45 DH le gramme. Livré partout au Maroc, paiement à la livraison.",
+    "court": "Oud d'origine thaïlandaise. Vendu au gramme, 45 DH le gramme.",
+    "long": [
+      "Un oud d'origine thaïlandaise, vendu au gramme.",
+      "Quarante-cinq dirhams le gramme, affichés d'avance : vous choisissez le poids, le total se calcule devant vous. Pas de lot imposé."
+    ]
+  },
+  "OUD-ROYAL-THAI-C": {
+    "meta": "Royal Thai C, oud d'origine thaïlandaise vendu au gramme, 55 DH le gramme. Livré partout au Maroc, paiement à la livraison.",
+    "court": "Oud d'origine thaïlandaise. Vendu au gramme, 55 DH le gramme.",
+    "long": [
+      "Un oud d'origine thaïlandaise, vendu au gramme.",
+      "Cinquante-cinq dirhams le gramme, affichés d'avance : vous choisissez le poids, le total se calcule devant vous. Pas de lot imposé."
+    ]
+  }
+}

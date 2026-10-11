@@ -1,0 +1,49 @@
+name: odys
+display_name: "ODYS Parfums Theme"
+version: "3.1.0"
+author:
+  name: "ODYS Parfums"
+  email: "contact@odys.ma"
+  url: "https://odys.ma"
+meta:
+  compatibility:
+    from: "8.0.0"
+    to: "9.1.99"
+  modules:
+    to_enable:
+      - ps_shoppingcart
+      - ps_searchbar
+      - ps_mainmenu
+      - ps_featuredproducts
+      - ps_emailsubscription
+      - ps_imageslider
+      - ps_socialfollow
+      - ps_cashondelivery
+      - ps_wirepayment
+      - blockwishlist
+      - odys_loyalty
+    to_disable:
+      - ps_themecusto
+assets:
+  use_parent_assets: false
+  css:
+    all:
+      - id: theme-style
+        path: assets/css/theme.css
+        media: all
+  js:
+    all:
+      - id: theme-app
+        path: assets/js/app.js
+        position: bottom
+        priority: 1
+global_settings:
+  image_types:
+    cart_default:     { width: 125, height: 125 }
+    small_default:    { width: 98,  height: 98  }
+    medium_default:   { width: 452, height: 452 }
+    large_default:    { width: 800, height: 800 }
+    home_default:     { width: 400, height: 400 }
+    category_default: { width: 960, height: 400 }
+    product_listing:  { width: 400, height: 400 }
+    product_detail:   { width: 800, height: 800 }

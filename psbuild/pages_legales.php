@@ -1,0 +1,495 @@
+<?php
+
+
+
+/**
+
+
+
+ * Les huit pages legales et d'information, depuis psbuild/legal/*.html.
+
+
+
+ *
+
+
+
+ * Sert a remonter une boutique de developpement apres une reinstallation :
+
+
+
+ * sans ces pages, le pied de page pointe dans le vide et la suite de
+
+
+
+ * verification crie des centaines de liens morts qui n'ont rien a voir avec
+
+
+
+ * le code qu'on teste.
+
+
+
+ *
+
+
+
+ * Cree ce qui manque, met a jour ce qui existe, par link_rewrite. Rejouable.
+
+
+
+ *
+
+
+
+ *   docker compose exec -u www-data shop php pages_legales.php
+
+
+
+ */
+
+
+
+if (!defined('_PS_VERSION_')) {
+
+
+
+    $root = '/var/www/html';
+
+
+
+    foreach (array_slice(isset($argv) ? $argv : [], 1) as $arg) {
+
+
+
+        if (strpos($arg, '--root=') === 0) {
+
+
+
+            $root = substr($arg, 7);
+
+
+
+        }
+
+
+
+    }
+
+
+
+    require_once rtrim($root, '/') . '/config/config.inc.php';
+
+
+
+}
+
+
+
+
+
+
+
+// --liens-seulement : ne reecrit QUE les liens internes des pages deja en
+
+// place, sans toucher a leur texte. C'est le mode a passer sur une boutique
+
+// en production, dont le contenu a pu etre modifie en Back Office.
+
+$liensSeulement = in_array('--liens-seulement', isset($argv) ? $argv : [], true)
+    || !empty($odysLiensSeulement);   // pose par maj-telephone.php, qui tourne en HTTP
+
+
+
+$dossier = isset($odysDossierLegal) ? $odysDossierLegal : __DIR__ . '/legal';
+
+
+
+$idLang = (int) Configuration::get('PS_LANG_DEFAULT');
+
+
+
+$idShop = (int) Context::getContext()->shop->id;
+
+
+
+
+
+
+
+/**
+
+
+
+ * La cle de configuration ou le theme va chercher l'identifiant de chaque
+
+
+
+ * page. Sans elle, les gabarits retombent sur une URL en dur (/a-propos)
+
+
+
+ * que PrestaShop ne sert pas — il sert /content/4-a-propos — et tout le
+
+
+
+ * pied de page pointe dans le vide.
+
+
+
+ */
+
+
+
+$cles = [
+
+
+
+    'a-propos' => 'ODYS_CMS_APROPOS',
+
+
+
+    'savoir-faire' => 'ODYS_CMS_SAVOIRFAIRE',
+
+
+
+    'livraison' => 'ODYS_CMS_LIVRAISON',
+
+
+
+    'retours' => 'ODYS_CMS_RETOURS',
+
+
+
+    'fidelite' => 'ODYS_CMS_FIDELITE',
+
+
+
+    'mentions-legales' => 'ODYS_CMS_MENTIONS',
+
+
+
+    'confidentialite' => 'ODYS_CMS_CONFIDENTIALITE',
+
+
+
+    'cgv' => 'ODYS_CMS_CGV',
+
+
+
+];
+
+
+
+
+
+
+
+/** Le titre tel qu'il doit apparaitre dans le pied de page. */
+
+
+
+$titres = [
+
+
+
+    'a-propos' => 'Notre histoire',
+
+
+
+    'savoir-faire' => 'Savoir-faire',
+
+
+
+    'livraison' => 'Livraison',
+
+
+
+    'retours' => 'Retours et remboursements',
+
+
+
+    'fidelite' => 'Programme fidélité',
+
+
+
+    'mentions-legales' => 'Mentions légales',
+
+
+
+    'confidentialite' => 'Confidentialité',
+
+
+
+    'cgv' => 'Conditions générales de vente',
+
+
+
+];
+
+
+
+
+
+
+
+/**
+
+ * Les pages se renvoient entre elles par des liens ecrits a la main
+
+ * (href="/retours"), que PrestaShop ne sert pas : il sert
+
+ * /content/7-retours, et l'identifiant change d'une boutique a l'autre.
+
+ * On les remplace par la vraie adresse, relue en base.
+
+ */
+
+function odys_liens(string $html, array $cles, int $idLang): string
+
+{
+
+    $lien = Context::getContext()->link;
+
+    foreach (array_keys($cles) as $slug) {
+
+        $id = (int) Db::getInstance()->getValue(
+
+            'SELECT c.`id_cms` FROM `' . _DB_PREFIX_ . 'cms` c
+
+             INNER JOIN `' . _DB_PREFIX_ . 'cms_lang` cl
+
+                     ON cl.`id_cms` = c.`id_cms` AND cl.`id_lang` = ' . $idLang . '
+
+             WHERE cl.`link_rewrite` = "' . pSQL($slug) . '"'
+
+        );
+
+        if (!$id) {
+
+            continue;
+
+        }
+
+        $html = str_replace(
+
+            ['href="/' . $slug . '"', "href='/" . $slug . "'"],
+
+            'href="' . $lien->getCMSLink($id) . '"',
+
+            $html
+
+        );
+
+    }
+
+
+
+    return $html;
+
+}
+
+
+
+// CMS::update() fait passer le contenu par HTMLPurifier, qui ecrit dans
+// var/cache/<env>/purifier. Si le cache vient d'etre vide — ce que le Back
+// Office propose juste avant une mise a jour — le dossier n'existe plus et
+// PHP crache trois avertissements par page au milieu du compte rendu.
+// On le recree : cela tait le bruit et rend son cache a la bibliotheque.
+foreach (['dev', 'prod'] as $env) {
+    $purifier = _PS_ROOT_DIR_ . '/var/cache/' . $env . '/purifier';
+    if (!is_dir($purifier)) {
+        @mkdir($purifier, 0775, true);
+    }
+}
+
+$crees = 0;
+
+
+
+$majs = 0;
+
+
+
+foreach ($titres as $slug => $titre) {
+
+
+
+
+
+
+
+
+
+
+    $idCms = (int) Db::getInstance()->getValue(
+
+
+
+        'SELECT c.`id_cms` FROM `' . _DB_PREFIX_ . 'cms` c
+
+
+
+         INNER JOIN `' . _DB_PREFIX_ . 'cms_lang` cl
+
+
+
+                 ON cl.`id_cms` = c.`id_cms` AND cl.`id_lang` = ' . $idLang . '
+
+
+
+         WHERE cl.`link_rewrite` = "' . pSQL($slug) . '"'
+
+
+
+    );
+
+
+
+
+
+
+
+    if ($liensSeulement) {
+        if (!$idCms) {
+            printf("  %-18s absente, rien a faire
+", $slug);
+            continue;
+        }
+        $cms = new CMS($idCms, $idLang, $idShop);
+        $avant = (string) $cms->content;
+        $apres = odys_liens($avant, $cles, $idLang);
+        if ($apres !== $avant) {
+            $cms->content = [$idLang => $apres];
+            $cms->update();
+            ++$majs;
+        }
+        Configuration::updateValue($cles[$slug], $idCms);
+        printf("  %-18s %s
+", $slug, $apres !== $avant ? 'liens corriges' : 'liens deja bons');
+        continue;
+    }
+
+    // La lecture du fichier source vient APRES le mode « liens
+    // seulement » : placee avant, elle faisait sauter chaque page faute
+    // de fichier HTML, et le mode destine a la boutique en ligne — celui
+    // qui repare les sept liens morts des pages legales — ne s'executait
+    // jamais. maj-telephone.php n'embarque pas les sources, par dessein :
+    // il ne doit pas reecrire un texte que vous avez modifie en Back
+    // Office.
+    $fichier = $dossier . '/' . $slug . '.html';
+
+
+
+    if (!is_file($fichier)) {
+
+
+
+        echo "  $slug : source absente\n";
+
+
+
+        continue;
+
+
+
+    }
+
+    $html = (string) file_get_contents($fichier);
+
+    $cms = new CMS($idCms ?: null, $idLang, $idShop);
+
+
+
+    $cms->meta_title = [$idLang => $titre];
+
+
+
+    $cms->link_rewrite = [$idLang => $slug];
+
+
+
+    $cms->content = [$idLang => odys_liens($html, $cles, $idLang)];
+    $cms->meta_description = [$idLang => Tools::substr(
+
+
+
+        trim(preg_replace('/\s+/', ' ', strip_tags($html))), 0, 160
+
+
+
+    )];
+
+
+
+    $cms->active = 1;
+
+
+
+    $cms->indexation = 1;
+
+
+
+    $cms->id_cms_category = 1;
+
+
+
+
+
+
+
+    if ($idCms) {
+
+
+
+        $cms->update();
+
+
+
+        ++$majs;
+
+
+
+    } else {
+
+
+
+        $cms->add();
+
+
+
+        ++$crees;
+
+
+
+    }
+
+
+
+    Configuration::updateValue($cles[$slug], (int) $cms->id);
+
+
+
+    printf("  %-18s %-12s id %-3d -> %s\n", $slug,
+
+
+        $idCms ? 'mise a jour' : 'creee', (int) $cms->id, $cles[$slug]);
+
+
+
+}
+
+
+
+
+
+
+
+echo "\n$crees creee(s), $majs mise(s) a jour.\n";
+
+
+
+echo "Videz le cache : les URL des pages sont memorisees.\n";
+
+
+

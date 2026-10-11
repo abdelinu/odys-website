@@ -1,0 +1,82 @@
+# Throwaway PrestaShop 8 + MySQL, only to verify the ODYS theme and the
+# odys_crm module against a real shop.
+#
+# No credential is written in this file: every one comes from the environment
+# (docker compose reads ./.env). Copy .env.example to .env first — the compose
+# file fails loudly on a missing variable rather than falling back to a default
+# someone might ship.
+services:
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?set it in docker/.env}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:?set it in docker/.env}
+      MYSQL_USER: ${MYSQL_USER:?set it in docker/.env}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?set it in docker/.env}
+    ports:
+      # so Windows tools (HeidiSQL, Workbench, DBeaver) can connect on
+      # 127.0.0.1:${DB_PORT} with the user and database from .env
+      - "${DB_PORT:-3306}:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    healthcheck:
+      # the password reaches mysqladmin through the container's own
+      # environment, so it never appears in this file or in `docker ps`
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p\"$$MYSQL_ROOT_PASSWORD\""]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  shop:
+    image: prestashop/prestashop:8
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${SHOP_PORT:-8080}:80"
+    environment:
+      DB_SERVER: db
+      DB_NAME: ${MYSQL_DATABASE:?set it in docker/.env}
+      DB_USER: ${MYSQL_USER:?set it in docker/.env}
+      DB_PASSWD: ${MYSQL_PASSWORD:?set it in docker/.env}
+      PS_INSTALL_AUTO: 1
+      # PIEGE : `docker compose down` supprime le conteneur, donc le `up`
+      # suivant relance ce point d'entree, qui REINSTALLE PrestaShop par
+      # dessus la base du volume : theme, modules et catalogue effaces.
+      # Pour arreter sans perdre la boutique : `docker compose stop`, puis
+      # `docker compose start`. Ca garde le conteneur et son installation.
+      # Apres un `down` malencontreux, tout se rejoue : theme:enable odys,
+      # module install odys_crm + odys_loyalty, volumes.php,
+      # La sequence complete, depuis la racine du projet :
+      #   docker compose exec -u www-data shop php bin/console prestashop:theme:enable odys
+      #   docker compose exec -u www-data shop php bin/console prestashop:module install odys_crm
+      #   docker compose exec -u www-data shop php bin/console prestashop:module install odys_loyalty
+      #   ... puis, copies dans le conteneur :
+      #   psbuild/volumes.php, import_catalogue.php, notes.php   (le catalogue)
+      #   psbuild/pages_legales.php                              (les 8 pages CMS)
+      #   psbuild/descriptions.php + descriptions.json           (les fiches)
+      #   psbuild/config_boutique.php                            (signatures, campagnes,
+      #                                                           wishlist, plan du site)
+      # Apres quoi docker/verify.sh doit afficher 0 echec.
+      # No PS_ERASE_DB: it drops the database, and the unprivileged user
+      # cannot recreate it, so the installer dies on the next connect.
+      # The volume starts empty anyway.
+      PS_DEV_MODE: ${PS_DEV_MODE:-1}
+      PS_DOMAIN: ${PS_DOMAIN:-localhost:8080}
+      PS_FOLDER_ADMIN: ${PS_FOLDER_ADMIN:-admin-odys}
+      PS_FOLDER_INSTALL: install
+      ADMIN_MAIL: ${ADMIN_MAIL:?set it in docker/.env}
+      ADMIN_PASSWD: ${ADMIN_PASSWD:?set it in docker/.env}
+      PS_LANGUAGE: fr
+      # not `ma`: that pulls the Arabic pack, whose RTL step needs an
+      # admin-dev folder that no longer exists once PS_FOLDER_ADMIN renames
+      # the admin directory, and the install dies. Country only seeds demo
+      # data — the theme and the module do not depend on it.
+      PS_COUNTRY: fr
+    volumes:
+      - ../dist/odys-theme-ps8/themes/odys:/var/www/html/themes/odys
+      - ../dist/odys-theme-ps8/modules/odys_crm:/var/www/html/modules/odys_crm
+
+volumes:
+  dbdata:

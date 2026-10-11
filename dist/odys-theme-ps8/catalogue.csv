@@ -1,0 +1,21 @@
+﻿reference;code;name;category;kind;family;price;compare_at;inspired_by;badge;origin;notes_tete;notes_coeur;notes_fond
+01;ODYS 01;L'Icône;Parfums;perfume;fresh;69.0;3200;Dior Sauvage EDP;Best-seller;;Bergamote, Poivre rose, Ambroxan;Lavande, Géranium, Vétiver;Cèdre, Ambre blanc, Musc
+07;ODYS 07;La Nuit;Parfums;perfume;sweet;69.0;1800;JP Gaultier Le Mâle Élixir;Nouveau;;Bergamote, Cardamome;Lavande, Vanille, Iris;Musc blanc, Tonka, Patchouli
+11;ODYS 11;L'Or;Parfums;perfume;oriental;79.0;1600;Paco Rabanne 1 Million;;;Pamplemousse, Mandarine, Menthe;Cannelle, Rose, Géranium;Patchouli, Ambre, Cuir
+14;ODYS 14;L'Oriental;Parfums;perfume;oud oriental;89.0;1500;Tom Ford Oud Wood;Oud;;Poivre rose, Épices orientales;Oud, Santal, Vétiver;Ambre boisé, Musc, Tonka
+22;ODYS 22;La Nuit Noire;Parfums;perfume;sweet oriental;69.0;3200;YSL Black Opium;;;Poire, Mandarine, Café;Jasmin, Fleur de cerisier, Vanille;Patchouli, Musc blanc, Cèdre
+33;ODYS 33;L'Azur;Parfums;perfume;fresh;69.0;1700;Bleu de Chanel;Populaire;;Citron, Bergamote, Pamplemousse;Gingembre, Jasmin, Noix de muscade;Cèdre, Santal, Vétiver
+DUO;DUO;Duo Classique;Coffrets;coffret;;129.0;;;;;;;
+OUD-BOUKHOUR-PRESTIGE;Boukhour Prestige;Boukhour Prestige;Oud & Boukhour;oud;oud;15.0;;;;;;;
+OUD-HINDI-ASSAM-A;Hindi Assam A;Hindi Assam A;Oud & Boukhour;oud;oud;35.0;;;;;;;
+OUD-ROYAL-HINDI-B;Royal Hindi B;Royal Hindi B;Oud & Boukhour;oud;oud;45.0;;;;;;;
+OUD-ROYAL-HINDI-C;Royal Hindi C;Royal Hindi C;Oud & Boukhour;oud;oud;65.0;;;;;;;
+OUD-ROYAL-THAI-B;Royal Thai B;Royal Thai B;Oud & Boukhour;oud;oud;45.0;;;;;;;
+OUD-ROYAL-THAI-C;Royal Thai C;Royal Thai C;Oud & Boukhour;oud;oud;55.0;;;;;;;
+PACK-OUD;PACK-OUD;Pack Oud Prestige;Oud & Boukhour;pack;oud;349.0;;;;;;;
+SAM-IND;SAM-IND;Sampler Hindi 3×5g;Oud & Boukhour;pack;oud;195.0;;;;;;;
+SAM-THAI;SAM-THAI;Sampler Thai 3×5g;Oud & Boukhour;pack;oud;225.0;;;;;;;
+TRIO;TRIO;Trio Découverte;Coffrets;coffret;;199.0;;;;;;;
+DIF-ROSEAUX-200;Diffuseur 200 ml;Diffuseur à roseaux — Nuit d'Ambre;Diffuseurs;diffuseur;oriental;249.0;;;Nouveau;;Bergamote, Cardamome;Rose, Encens;Ambre, Bois de oud, Musc
+DIF-ROSEAUX-100;Diffuseur 100 ml;Diffuseur à roseaux — Jardin de Fès;Diffuseurs;diffuseur;fresh;179.0;;;;;Néroli, Citron;Fleur d'oranger, Jasmin;Cèdre, Musc blanc
+DIF-RECHARGE-200;Recharge 200 ml;Recharge diffuseur — Nuit d'Ambre;Diffuseurs;diffuseur;oriental;159.0;;;;;Bergamote, Cardamome;Rose, Encens;Ambre, Bois de oud, Musc

@@ -1,0 +1,6 @@
+# Les .sh et .py de ce depot tournent sous Git Bash et sous Linux : LF partout.
+* text=auto eol=lf
+*.mp4 binary
+*.png binary
+*.jpg binary
+*.webp binary

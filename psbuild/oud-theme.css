@@ -1,0 +1,360 @@
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ODYS PARFUMS — OUD & BOUKHOUR (PrestaShop)
+   "Smoke & Amber": the house palette warmed toward resin and ember for
+   the one page that is about burning wood. Scoped entirely to body.oud —
+   nothing here can leak into the rest of the site.
+
+   The gram economy is untouched: .oud-card / .oc-* / .gram-sel / .gb /
+   .oc-total keep every id, data-attribute and rate the pricing JS reads.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+body.oud{
+  --smoke:#14100C;
+  --smoke-2:#1A1510;
+  --panel:#1E1812;
+  --panel-2:#241C15;
+  --amber:#C89355;
+  --amber-soft:#E0B584;
+  --amber-deep:#9A6B37;
+  --ember:rgba(200,147,85,.22);
+  --ember-soft:rgba(200,147,85,.11);
+  --parch:#EDE0CE;
+  --parch-mid:rgba(237,224,206,.62);
+  --parch-low:rgba(237,224,206,.4);
+}
+
+/* ── Ground ─────────────────────────────────────────────────────────── */
+body.oud{background:var(--smoke)!important}
+body.oud,body.oud .odys-nav{color:var(--parch)}
+body.oud .ann{background:#0D0A07}
+body.oud .ann-track{color:var(--parch-low)}
+body.oud .ann-track strong{color:var(--amber-soft)}
+body.oud .ai-dot{background:var(--amber)}
+
+body.oud .odys-nav{background:rgba(20,16,12,.9)!important;
+  border-bottom:1px solid var(--ember)!important;
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+body.oud .odys-nav .lw,body.oud .odys-nav .logo-w{color:var(--parch)!important}
+body.oud .odys-nav .lt,body.oud .odys-nav .logo-t{color:var(--parch-low)!important}
+body.oud .nav-links a{color:var(--parch-mid)!important}
+body.oud .nav-links a:hover,body.oud .nav-links .cur a{color:var(--amber-soft)!important}
+body.oud .nav-links a::after{background:var(--amber)}
+body.oud .odys-nav .ni{color:var(--parch-mid)!important}
+body.oud .odys-nav .ni:hover{background:rgba(200,147,85,.12)!important}
+body.oud .odys-nav .ham span{background:var(--parch-mid)!important}
+body.oud .cb{background:var(--amber);color:#14100C}
+
+/* ── 1. Cinematic hero ──────────────────────────────────────────────── */
+.oud-hero{position:relative;min-height:clamp(440px,58vw,620px);display:flex;
+  align-items:center;overflow:hidden;background:var(--smoke)}
+.oud-hero-media{position:absolute;inset:0;z-index:0}
+.oud-hero-media img{width:100%;height:100%;object-fit:cover;object-position:62% 50%;
+  filter:saturate(1.05) contrast(1.04)}
+.oud-hero-media::after{content:'';position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(16,12,9,.94) 0%,rgba(16,12,9,.82) 34%,
+    rgba(16,12,9,.34) 62%,rgba(16,12,9,.55) 100%),
+  radial-gradient(58% 62% at 72% 42%,rgba(224,181,132,.2),transparent 68%)}
+.oud-hero-in{position:relative;z-index:1;max-width:var(--maxw);width:100%;
+  margin:0 auto;padding:clamp(48px,7vw,88px) var(--page-gutter)}
+.oud-hero-txt{max-width:min(560px,92%)}
+
+.oud-eyebrow{display:flex;align-items:center;gap:14px;
+  font-family:var(--font-body);font-size:9px;font-weight:500;
+  letter-spacing:var(--tracking-widest);text-transform:uppercase;
+  color:var(--amber);margin-bottom:20px}
+.oud-eyebrow::after{content:'';flex:0 0 54px;height:1px;background:var(--amber);opacity:.55}
+
+.oud-hero h1{font-family:var(--font-editorial);font-weight:400;
+  font-size:clamp(34px,5.4vw,64px);line-height:1.06;letter-spacing:.03em;
+  text-transform:uppercase;color:var(--parch);margin:0 0 22px}
+.oud-hero h1 em{font-style:normal;display:block;color:var(--amber-soft)}
+.oud-hero p.lede{font-family:var(--font-display);font-weight:300;
+  font-size:clamp(14px,1.6vw,17px);line-height:1.85;color:var(--parch-mid);
+  max-width:46ch;margin:0 0 var(--spacing-lg)}
+
+.oud-btn{display:inline-flex;align-items:center;gap:12px;
+  font-family:var(--font-body);font-size:10px;font-weight:500;
+  letter-spacing:var(--tracking-wider);text-transform:uppercase;
+  color:var(--parch);padding:17px 30px;min-height:52px;
+  border:1px solid rgba(200,147,85,.5);border-radius:var(--radius);
+  background:transparent;cursor:pointer;
+  transition:background var(--transition-quick),color var(--transition-quick),
+             border-color var(--transition-quick)}
+.oud-btn:hover{background:var(--amber);border-color:var(--amber);color:#14100C}
+.oud-btn .arw{transition:transform var(--transition-quick)}
+.oud-btn:hover .arw{transform:translateX(4px)}
+
+/* Transparency chips under the hero copy */
+.oud-chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:var(--spacing-lg)}
+.oud-chip{padding:11px 16px;border:1px solid var(--ember);
+  background:rgba(200,147,85,.06);border-radius:var(--radius)}
+.oud-chip b{display:block;font-family:var(--font-body);font-size:8.5px;
+  font-weight:500;letter-spacing:var(--tracking-wider);text-transform:uppercase;
+  color:var(--amber);margin-bottom:5px}
+.oud-chip span{font-family:var(--font-display);font-size:12.5px;font-weight:300;
+  color:var(--parch-low)}
+
+/* ── 2. Centred collection header ───────────────────────────────────── */
+.oud-sec-hd{text-align:center;padding:var(--spacing-2xl) var(--page-gutter) 0;
+  max-width:var(--maxw);margin:0 auto}
+.oud-kicker{display:flex;align-items:center;justify-content:center;gap:18px;
+  font-family:var(--font-body);font-size:9px;font-weight:500;
+  letter-spacing:var(--tracking-widest);text-transform:uppercase;
+  color:var(--amber);margin-bottom:18px}
+.oud-kicker{white-space:nowrap}
+.oud-kicker::before,.oud-kicker::after{content:'';flex:0 0 auto;
+  width:clamp(40px,7vw,96px);height:1px;background:var(--ember)}
+.oud-sec-hd h2{font-family:var(--font-editorial);font-weight:400;
+  font-size:clamp(26px,4vw,48px);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--parch);margin:0 0 14px}
+.oud-sec-hd p{font-family:var(--font-display);font-weight:300;font-size:15px;
+  line-height:1.8;color:var(--parch-low);max-width:56ch;margin:0 auto}
+/* the kicker is also a <p> in here, so it needs to out-specify the rule above */
+.oud-sec-hd p.oud-kicker{font-family:var(--font-body);font-size:9px;font-weight:500;
+  color:var(--amber);max-width:none}
+
+/* ── 3. Value strip ─────────────────────────────────────────────────── */
+.oud-values{max-width:var(--maxw);margin:var(--spacing-2xl) auto 0;
+  padding:0 var(--page-gutter)}
+.oud-values-in{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  border-top:1px solid var(--ember);border-bottom:1px solid var(--ember)}
+.oud-value{display:flex;align-items:center;gap:16px;
+  padding:var(--spacing-md) var(--spacing-md);
+  border-left:1px solid var(--ember)}
+.oud-values-in>.oud-value:first-child{border-left:none;padding-left:0}
+.oud-value svg{width:32px;height:32px;flex-shrink:0;stroke:var(--amber);
+  fill:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round}
+.oud-value b{display:block;font-family:var(--font-body);font-size:9.5px;
+  font-weight:500;letter-spacing:var(--tracking-wider);text-transform:uppercase;
+  color:var(--parch);margin-bottom:5px}
+.oud-value span{font-family:var(--font-body);font-size:9px;font-weight:400;
+  letter-spacing:var(--tracking-wide);text-transform:uppercase;
+  color:var(--parch-low)}
+
+/* ── 4. Return-policy note ──────────────────────────────────────────── */
+.oud-note{display:flex;gap:16px;align-items:flex-start;
+  max-width:var(--maxw);margin:var(--spacing-xl) auto 0;
+  padding:20px 22px;border:1px solid var(--ember);border-left:2px solid var(--amber);
+  background:rgba(200,147,85,.05);border-radius:var(--radius)}
+.oud-note svg{width:20px;height:20px;flex-shrink:0;margin-top:2px;
+  stroke:var(--amber);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.oud-note b{display:block;font-family:var(--font-body);font-size:9.5px;
+  font-weight:500;letter-spacing:var(--tracking-wider);text-transform:uppercase;
+  color:var(--amber-soft);margin-bottom:8px}
+.oud-note p{font-family:var(--font-display);font-weight:300;font-size:13.5px;
+  line-height:1.85;color:var(--parch-low);margin:0}
+.oud-note strong{color:var(--amber-soft);font-weight:400}
+
+/* ── 5. Section dividers ────────────────────────────────────────────── */
+body.oud .oud-div{display:flex;align-items:center;gap:20px;
+  margin:var(--spacing-2xl) 0 var(--spacing-lg)}
+body.oud .oud-div::before,body.oud .oud-div::after{content:'';flex:1;height:1px;
+  background:var(--ember)}
+body.oud .oud-div span{font-family:var(--font-body);font-size:9px;font-weight:500;
+  letter-spacing:var(--tracking-widest);text-transform:uppercase;
+  color:var(--amber);white-space:nowrap}
+
+/* ── 6. Gram cards — the grammage logic is untouched ────────────────── */
+body.oud .oud-grid{grid-template-columns:repeat(auto-fill,minmax(264px,1fr));
+  gap:var(--spacing-md);margin-bottom:0}
+body.oud .oud-card{background:linear-gradient(180deg,var(--panel),var(--smoke-2));
+  border:1px solid var(--ember);border-radius:var(--radius);overflow:hidden;
+  transition:border-color var(--transition-luxury),
+             box-shadow var(--transition-luxury),transform var(--transition-luxury)}
+body.oud .oud-card:hover{transform:translateY(-3px);border-color:rgba(200,147,85,.55);
+  box-shadow:0 28px 60px -30px rgba(0,0,0,.9),0 0 46px -22px rgba(200,147,85,.45)}
+
+body.oud .oc-img{height:210px;background:#100C09}
+body.oud .oc-img::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:linear-gradient(180deg,rgba(16,12,9,.34) 0%,rgba(16,12,9,0) 42%,
+    rgba(30,24,18,.85) 100%)}
+body.oud .oc-img img{opacity:.92;filter:saturate(1.06) contrast(1.03);
+  transition:transform var(--transition-slow),opacity var(--transition-luxury)}
+body.oud .oud-card:hover .oc-img img{opacity:1;transform:scale(1.05)}
+
+body.oud .oc-origin{top:12px;left:12px;z-index:2;background:rgba(16,12,9,.72);
+  border:1px solid var(--ember);border-radius:var(--radius);
+  padding:6px 11px;font-family:var(--font-body);font-size:8px;font-weight:500;
+  letter-spacing:var(--tracking-wider);text-transform:uppercase;
+  color:var(--parch-mid);backdrop-filter:blur(8px)}
+/* The reference's amber token, sized for a grade rather than a percentage */
+body.oud .oc-grade{top:12px;right:12px;z-index:2;width:auto;height:auto;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--amber);border:none;border-radius:999px;padding:8px 14px;
+  font-family:var(--font-body);font-size:8.5px;font-weight:600;
+  letter-spacing:var(--tracking-wide);text-transform:uppercase;
+  color:#14100C;white-space:nowrap;
+  box-shadow:0 8px 22px -10px rgba(0,0,0,.85)}
+
+body.oud .oc-body{padding:20px}
+body.oud .oc-name{font-family:var(--font-editorial);font-weight:400;font-size:18px;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--parch);margin-bottom:8px}
+body.oud .oc-sub{font-family:var(--font-display);font-style:normal;font-weight:300;
+  font-size:13px;line-height:1.7;color:var(--parch-low);margin-bottom:16px}
+
+body.oud .oc-rate{align-items:baseline;gap:7px;margin-bottom:18px;
+  padding-bottom:16px;border-bottom:1px solid var(--ember)}
+body.oud .oc-rate-price{font-family:var(--font-editorial);font-size:26px;
+  font-weight:400;letter-spacing:.02em;color:var(--amber-soft)}
+body.oud .oc-rate-unit{font-family:var(--font-body);font-size:9.5px;font-weight:400;
+  letter-spacing:var(--tracking-wide);text-transform:uppercase;color:var(--parch-low)}
+
+body.oud .gram-sel{margin-bottom:16px}
+body.oud .gram-lbl{font-family:var(--font-body);font-size:8.5px;font-weight:500;
+  letter-spacing:var(--tracking-wider);text-transform:uppercase;
+  color:var(--parch-low);margin-bottom:10px}
+body.oud .gram-opts{gap:7px}
+body.oud .gb{padding:0 14px;min-height:40px;min-width:46px;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:transparent;border:1px solid var(--ember);border-radius:var(--radius);
+  font-family:var(--font-body);font-size:11px;font-weight:500;letter-spacing:.04em;
+  color:var(--parch-mid);
+  transition:color var(--transition-quick),border-color var(--transition-quick),
+             background var(--transition-quick)}
+body.oud .gb:hover{border-color:var(--amber);color:var(--amber-soft);
+  background:rgba(200,147,85,.1)}
+body.oud .gb.on{background:var(--amber);border-color:var(--amber);color:#14100C;
+  font-weight:600}
+
+body.oud .oc-total{background:rgba(200,147,85,.07);border:1px solid var(--ember);
+  border-radius:var(--radius);padding:14px 16px;margin-bottom:14px}
+body.oud .oct-lbl{font-family:var(--font-body);font-size:8.5px;font-weight:500;
+  letter-spacing:var(--tracking-wider);text-transform:uppercase;color:var(--parch-low)}
+body.oud .oct-grams{font-family:var(--font-display);font-size:13px;font-weight:300;
+  color:var(--parch-mid)}
+body.oud .oct-val{font-family:var(--font-editorial);font-size:24px;font-weight:400;
+  letter-spacing:.02em;color:var(--amber-soft)}
+body.oud .oct-val.bump{color:#F2D9B4}
+
+body.oud .oc-no-pts{font-family:var(--font-body);font-size:8.5px;font-weight:400;
+  letter-spacing:var(--tracking-wide);text-transform:uppercase;
+  color:var(--parch-low);background:transparent;border:none;
+  padding:0 0 14px;margin:0}
+
+body.oud .oc-add{width:100%;min-height:50px;padding:15px;
+  background:transparent;border:1px solid rgba(200,147,85,.5);
+  border-radius:var(--radius);font-family:var(--font-body);font-size:9.5px;
+  font-weight:500;letter-spacing:var(--tracking-wider);text-transform:uppercase;
+  color:var(--parch);
+  transition:background var(--transition-quick),color var(--transition-quick),
+             border-color var(--transition-quick)}
+body.oud .oc-add:hover{background:var(--amber);border-color:var(--amber);
+  color:#14100C;transform:none}
+body.oud .oc-add.done{background:var(--odys-success)!important;
+  border-color:var(--odys-success);color:var(--parch)}
+
+/* ── 7. Coffret band ────────────────────────────────────────────────── */
+body.oud .pack-card{display:flex;gap:0;align-items:stretch;overflow:hidden;
+  background:linear-gradient(180deg,var(--panel),var(--smoke-2));
+  border:1px solid var(--ember);border-radius:var(--radius);padding:0;
+  max-width:900px!important}
+body.oud .pack-img{width:38%;min-height:280px;height:auto;object-fit:cover;
+  flex-shrink:0;border-radius:0;filter:saturate(1.06)}
+body.oud .pack-body{padding:var(--spacing-lg)}
+body.oud .pack-eye{font-family:var(--font-body);font-size:9px;font-weight:500;
+  letter-spacing:var(--tracking-widest);text-transform:uppercase;
+  color:var(--amber);margin-bottom:12px}
+body.oud .pack-name{font-family:var(--font-editorial);font-weight:400;font-size:28px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--parch);margin-bottom:14px}
+body.oud .pack-desc{font-family:var(--font-display);font-style:normal;font-weight:300;
+  font-size:14px;line-height:1.8;color:var(--parch-low);margin-bottom:16px}
+body.oud .pack-contents{font-family:var(--font-body);font-size:10px;font-weight:400;
+  letter-spacing:var(--tracking-wide);text-transform:uppercase;
+  color:var(--parch-mid);padding:14px 0;margin-bottom:16px;
+  border-top:1px solid var(--ember);border-bottom:1px solid var(--ember)}
+body.oud .pack-price{font-family:var(--font-editorial);font-size:30px;font-weight:400;
+  color:var(--amber-soft);margin-bottom:10px}
+body.oud .pack-price small{font-family:var(--font-body);font-size:14px;
+  color:var(--parch-low);text-decoration:line-through;margin-left:12px}
+body.oud .pack-body .btn-p{background:transparent!important;
+  border:1px solid rgba(200,147,85,.5)!important;color:var(--parch)!important}
+body.oud .pack-body .btn-p:hover{background:var(--amber)!important;
+  border-color:var(--amber)!important;color:#14100C!important}
+
+/* ── 8. Footer on the smoke ground ──────────────────────────────────── */
+body.oud footer{background:#0D0A07;border-top:1px solid var(--ember)}
+body.oud footer h4{color:var(--amber)}
+body.oud .ft-logo{color:var(--parch)}
+body.oud .ft-logo:hover{color:var(--amber-soft)}
+body.oud footer li a:hover,body.oud .ft-legal:hover{color:var(--amber-soft)}
+body.oud .ft-tag{color:var(--amber);opacity:.6}
+
+/* ── 9. Responsive ──────────────────────────────────────────────────── */
+@media (max-width:1000px){
+  .oud-values-in{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .oud-values-in>.oud-value:nth-child(3){border-left:none;padding-left:0}
+  body.oud .pack-card{flex-direction:column}
+  body.oud .pack-img{width:100%;min-height:240px}
+}
+@media (max-width:767px){
+  .oud-hero{min-height:auto}
+  .oud-hero-media img{object-position:70% 50%}
+  .oud-hero-media::after{background:
+    linear-gradient(180deg,rgba(16,12,9,.9) 0%,rgba(16,12,9,.72) 46%,rgba(16,12,9,.94) 100%),
+    radial-gradient(70% 46% at 60% 34%,rgba(224,181,132,.22),transparent 70%)}
+  .oud-hero-in{padding:var(--spacing-xl) 20px}
+  .oud-hero-txt{max-width:100%}
+  .oud-btn{width:100%;justify-content:center}
+  .oud-sec-hd{padding:var(--spacing-2xl) 20px 0}
+  /* the flanking rules force a long kicker off-screen on a phone */
+  .oud-kicker{white-space:normal;gap:0}
+  .oud-kicker::before,.oud-kicker::after{display:none}
+  .oud-eyebrow{flex-wrap:wrap;gap:10px}
+  .oud-eyebrow::after{display:none}
+  .oud-values{padding:0 20px}
+  .oud-values-in{grid-template-columns:minmax(0,1fr)}
+  .oud-value{border-left:none;padding-left:0;
+    border-top:1px solid var(--ember)}
+  .oud-values-in>.oud-value:first-child{border-top:none}
+  .oud-note{margin-left:20px;margin-right:20px}
+  body.oud .oud-grid{grid-template-columns:minmax(0,1fr)!important}
+  body.oud .oc-img{height:230px}
+  .oud-chips{gap:8px}
+  .oud-chip{flex:1 1 calc(50% - 4px)}
+}
+
+/* ── La palette claire et la page qui ne l'a pas suivie ─────────────── */
+/* Le site est passe a l'ivoire ; cette page est restee a la fumee. Les
+   jetons partages de l'entete, du fil d'Ariane et du bloc lettre
+   d'information sont calcules pour un fond clair : poses ici sur #14100C
+   ils donnaient 1,23 a 3,66:1. Mesure avant correction :
+
+     .odys-logo-w        --odys-vert    #182820   1,23:1   le logo
+     « Connexion »       --odys-text    #312B27   1,36:1
+     « Panier »          --odys-text    #312B27   1,36:1
+     fil d'Ariane (b)    --odys-text    #312B27   1,36:1
+     « Recevez nos offres »             #312B27   1,36:1
+     .odys-logo-p        --odys-muted   #6E645C   3,28:1
+     « Vous pouvez vous desinscrire »   #6E645C   3,28:1
+     (0) au panier       --odys-gold-text         3,66:1
+
+   Les trois blocs concernes sont nommes un par un, et pas `body.oud`. La
+   page n'est pas sombre de bout en bout : la liste des produits repose sur
+   un panneau ivoire et le tiroir des notes est blanc. Redefinir les jetons
+   sur le body a bien repare l'entete — et rendu le titre de categorie, le
+   tri et deux paragraphes illisibles en creme sur ivoire, 1,05:1. Le fond
+   decide, pas la page.
+
+   Ce qui n'est PAS redefini : --odys-vert et --odys-black, qui servent de
+   FONDS ailleurs dans la page (le pied de page, notamment). Les toucher
+   repeindrait des panneaux au lieu de corriger du texte. */
+body.oud .odys-nav,
+body.oud .bc,
+body.oud .block_newsletter{
+  --odys-text:var(--parch);
+  --odys-muted:rgba(237,224,206,.75);
+  --odys-mid:rgba(237,224,206,.75);
+  --odys-gold-text:var(--amber-soft);
+}
+
+/* Le tiroir des notes est blanc sur toutes les pages. Ici il heritait la
+   creme de `body.oud` : creme sur blanc, 1,3:1. Il reprend l'encre du
+   theme clair, celle que son fond appelle. */
+body.oud .notes-panel{color:var(--odys-text)}
+
+/* Le logo prend --odys-vert comme couleur d'encre, et le vert profond sur
+   la fumee ne se voit pas. Les regles .lw / .logo-t plus haut visaient des
+   classes que le theme n'emploie plus : elles ne touchaient rien. */
+body.oud .odys-logo-w{color:var(--parch)}
+body.oud .odys-logo-p{color:rgba(237,224,206,.75)}

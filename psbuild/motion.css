@@ -1,0 +1,156 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   7. Motion — the bottles
+   Loaded after Nuit, so it can lean on the dark palette.
+
+   The vocabulary is the one 21st.dev popularised — reveal on entry, tilt
+   toward the pointer, a shimmer that crosses the surface, a spotlight that
+   follows the cursor — applied to glass rather than to buttons: a flacon
+   catching the light as you lean toward it.
+
+   Rules kept for a shop rather than a showcase:
+     · transform and opacity only, so it stays on the compositor;
+     · every effect degrades to nothing under prefers-reduced-motion;
+     · tilt and spotlight only where there is a real pointer;
+     · nothing moves more than a few pixels — this is a perfume, not a toy.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Reveal on entry ────────────────────────────────────────────────── */
+.odys-reveal{opacity:0;transform:translate3d(0,35px,0);
+  transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1);
+  transition-delay:var(--odys-reveal-delay,0ms);will-change:opacity,transform}
+.odys-reveal.is-in{opacity:1;transform:none}
+
+/* ── Fondu-dezoom des photos produit ──────────────────────────────────
+   La photo arrive en fondu depuis un leger sur-cadrage et se pose a sa
+   taille : c'est ce demi-pas de recul qui fait « poser » une fiche quand
+   elle s'ouvre, plutot que de la voir apparaitre d'un bloc.
+
+   La classe est posee par motion.js au chargement de chaque image, pas a
+   la peinture : une image en lazy-load arrive longtemps apres, et une
+   animation deja finie l'aurait fait surgir sans transition. */
+@keyframes odys-img-in{
+  from{opacity:0;transform:scale(1.06)}
+  to{opacity:1;transform:scale(1)}
+}
+.odys-img-in{animation:odys-img-in .55s cubic-bezier(.22,.61,.36,1) both}
+
+/* ── The flacon itself ──────────────────────────────────────────────── */
+/* The card keeps the perspective so the figure can turn inside it. */
+.odys-tilt{perspective:900px;transform-style:preserve-3d}
+.odys-tilt-inner{
+  transform:rotateX(var(--odys-rx,0deg)) rotateY(var(--odys-ry,0deg)) translateZ(0);
+  transition:transform .5s cubic-bezier(.22,.61,.36,1);will-change:transform}
+.odys-tilt.is-live .odys-tilt-inner{transition:transform .12s linear}
+
+/* the pointer's light: a soft warm halo behind the glass */
+.odys-tilt::before{content:'';position:absolute;inset:-6% -6% -10%;z-index:0;pointer-events:none;
+  border-radius:50%;opacity:0;transition:opacity .45s ease;
+  background:radial-gradient(38% 38% at var(--odys-px,50%) var(--odys-py,45%),
+    rgba(233,211,174,.22),rgba(233,211,174,.06) 55%,transparent 72%)}
+.odys-tilt:hover::before,.odys-tilt:focus-within::before{opacity:1}
+
+/* the shimmer: one band crossing the flacon, as glass would catch a lamp */
+.odys-sheen{position:relative;overflow:hidden}
+.odys-sheen::after{content:'';position:absolute;top:-30%;bottom:-30%;left:-60%;width:38%;
+  z-index:2;pointer-events:none;opacity:0;transform:translateX(0) skewX(-18deg);
+  background:linear-gradient(90deg,transparent,rgba(255,252,245,.42),transparent);
+  mix-blend-mode:screen}
+.odys-sheen:hover::after,.odys-sheen:focus-within::after{
+  animation:odysSheen 1.05s cubic-bezier(.36,.06,.2,1) forwards}
+@keyframes odysSheen{
+  0%{opacity:0;transform:translateX(0) skewX(-18deg)}
+  12%{opacity:1}
+  100%{opacity:0;transform:translateX(420%) skewX(-18deg)}
+}
+
+/* lift: the flacon rises a little and its shadow deepens */
+.nv-bottle .odys-tilt-inner{transition:transform .5s cubic-bezier(.22,.61,.36,1),
+  filter .5s ease}
+.nv-bottle a:hover .odys-tilt-inner,.nv-bottle a:focus-visible .odys-tilt-inner{
+  filter:drop-shadow(0 26px 38px rgba(0,0,0,.55))}
+
+/* ── The hero packshot ──────────────────────────────────────────────── */
+/* An idle drift, the box a touch behind the flacon, plus a scroll parallax
+   the script sets as --odys-parallax. */
+.nv-pack-bottle,.nv-pack-box{will-change:transform}
+.js-motion .nv-pack-bottle{animation:odysFloatA 9s ease-in-out infinite;
+  transform:translate3d(0,var(--odys-parallax,0px),0)}
+.js-motion .nv-pack-box{animation:odysFloatB 11s ease-in-out infinite;
+  transform:translate3d(0,calc(var(--odys-parallax,0px) * .55),0)}
+@keyframes odysFloatA{
+  0%,100%{transform:translate3d(0,calc(var(--odys-parallax,0px) - 0px),0)}
+  50%{transform:translate3d(0,calc(var(--odys-parallax,0px) - 9px),0)}
+}
+@keyframes odysFloatB{
+  0%,100%{transform:translate3d(0,calc(var(--odys-parallax,0px) * .55),0)}
+  50%{transform:translate3d(0,calc(var(--odys-parallax,0px) * .55 - 5px),0)}
+}
+
+/* the halo behind the hero breathes with it */
+.js-motion .nv-stage{animation:odysHalo 12s ease-in-out infinite}
+@keyframes odysHalo{0%,100%{opacity:.92;transform:scale(1)}50%{opacity:1;transform:scale(1.03)}}
+
+/* ── Product cards ──────────────────────────────────────────────────── */
+.pc-img{overflow:hidden}
+.pc-img img{transition:transform .8s cubic-bezier(.22,.61,.36,1)}
+.pc:hover .pc-img img,.pc:focus-within .pc-img img{transform:scale(1.045)}
+
+/* ── The product page gallery ───────────────────────────────────────── */
+.gal-main{overflow:hidden}
+.gal-main img{transition:transform .9s cubic-bezier(.22,.61,.36,1)}
+.gal-main:hover img{transform:scale(1.05)}
+
+/* ── Nobody has to watch any of this ────────────────────────────────── */
+@media (prefers-reduced-motion:reduce){
+  .odys-reveal{opacity:1;transform:none;transition:none}
+  .odys-tilt-inner{transform:none!important;transition:none}
+  .odys-tilt::before,.odys-sheen::after{display:none}
+  .js-motion .nv-pack-bottle,.js-motion .nv-pack-box,.js-motion .nv-stage{animation:none}
+  .pc-img img,.gal-main img{transition:none}
+  .pc:hover .pc-img img,.gal-main:hover img{transform:none}
+}
+/* a finger cannot hover: no tilt, no spotlight, no sheen on touch */
+@media (hover:none),(pointer:coarse){
+  .odys-tilt::before,.odys-sheen::after{display:none}
+  .odys-tilt-inner{transform:none!important}
+}
+
+/* ── Hero : plusieurs visuels en fondu ────────────────────────────────
+   .oh-film est deja `position:absolute;inset:0` et sert de bloc conteneur :
+   les visuels s'y superposent. Ne pas lui remettre `position:relative`, il
+   cesserait de couvrir la section et le hero se coupe en deux.
+
+   L'opacite est disputee avec `.oh-film.is-ready .oh-video{opacity:1}`, qui
+   rendrait les trois visibles d'un coup : les selecteurs ci-dessous sont
+   donc plus specifiques qu'elle.
+
+   Avec un seul visuel, aucun point n'est rendu et le script sort aussitot :
+   le hero redevient l'image fixe. */
+.oh-film[data-odys-carrousel] .oh-slide{position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s ease}
+.oh-film[data-odys-carrousel] .oh-slide.is-on{opacity:1}
+/* Le bouton mesurait 8 px de cote. C'est la seule facon de changer de
+   visuel au hero, et WCAG 2.5.8 demande 24 px au minimum : un pouce le
+   rate. Le repere visuel reste a 8 px — il doit rester discret, c'est un
+   reperage et pas une commande qu'on exhibe — et c'est le bouton qui
+   s'agrandit autour de lui, jusqu'a 28 px.
+
+   Le bas du rang descend de 22 a 12 px pour compenser : le point garde le
+   meme centre qu'avant, a 26 px du bord. L'ecart de 10 px entre les
+   boutons devient un pas de 38 px, donc aucune zone sensible n'en
+   recouvre une autre — un halo qui deborde sur le point voisin serait
+   pire que la petite cible qu'il remplace. */
+.oh-dots{position:absolute;left:0;right:0;bottom:12px;z-index:3;
+  display:flex;gap:10px;justify-content:center}
+.oh-dot{width:28px;height:28px;padding:0;border:0;background:transparent;
+  border-radius:50%;cursor:pointer;
+  display:flex;align-items:center;justify-content:center}
+.oh-dot::before{content:"";width:8px;height:8px;border-radius:50%;
+  border:1px solid rgba(244,239,229,.7);background:transparent;
+  transition:background-color .25s ease,transform .25s ease}
+.oh-dot.is-on::before{background:var(--odys-gold,#C5A46A);
+  border-color:var(--odys-gold,#C5A46A);transform:scale(1.25)}
+.oh-dot:focus-visible{outline:2px solid var(--odys-gold,#C5A46A);outline-offset:-4px}
+@media (prefers-reduced-motion: reduce){
+  .oh-film[data-odys-carrousel] .oh-slide{transition:none}
+}

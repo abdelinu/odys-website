@@ -1,0 +1,407 @@
+[
+  {
+    "reference": "01",
+    "code": "ODYS 01",
+    "name": "L'Icône",
+    "family": "fresh",
+    "price": 69.0,
+    "compare_at": "3200",
+    "inspired_by": "Dolce & Gabbana L'Impératrice",
+    "badge": "Best-seller",
+    "kind": "perfume",
+    "category": "Parfums",
+    "notes_tete": "Kiwi, Rhubarbe, Poivre rose",
+    "notes_coeur": "Pastèque, Cyclamen, Jasmin",
+    "notes_fond": "Cédrat, Musc, Santal",
+    "gender": "femme"
+  },
+  {
+    "reference": "07",
+    "code": "ODYS 07",
+    "name": "La Nuit",
+    "family": "sweet",
+    "price": 69.0,
+    "compare_at": "1800",
+    "inspired_by": "Jean Paul Gaultier Le Mâle Élixir",
+    "badge": "Nouveau",
+    "kind": "perfume",
+    "category": "Parfums",
+    "notes_tete": "Lavande, Menthe",
+    "notes_coeur": "Vanille, Benjoin",
+    "notes_fond": "Miel, Fève tonka, Tabac",
+    "gender": "homme"
+  },
+  {
+    "reference": "11",
+    "code": "ODYS 11",
+    "name": "L'Or",
+    "family": "oriental",
+    "price": 79.0,
+    "compare_at": "1600",
+    "inspired_by": "Rabanne 1 Million",
+    "badge": "",
+    "kind": "perfume",
+    "category": "Parfums",
+    "notes_tete": "Mandarine sanguine, Pamplemousse, Menthe",
+    "notes_coeur": "Cannelle, Épices, Rose",
+    "notes_fond": "Ambre, Cuir, Patchouli",
+    "gender": "homme"
+  },
+  {
+    "reference": "14",
+    "code": "ODYS 14",
+    "name": "L'Oriental",
+    "family": "oud oriental",
+    "price": 89.0,
+    "compare_at": "1500",
+    "inspired_by": "Tom Ford Oud Wood",
+    "badge": "Oud",
+    "kind": "perfume",
+    "category": "Parfums",
+    "notes_tete": "Bois de rose, Cardamome, Poivre de Sichuan",
+    "notes_coeur": "Oud, Santal, Vétiver",
+    "notes_fond": "Fève tonka, Ambre, Vanille",
+    "gender": "unisexe"
+  },
+  {
+    "reference": "22",
+    "code": "ODYS 22",
+    "name": "La Nuit Noire",
+    "family": "sweet oriental",
+    "price": 69.0,
+    "compare_at": "3200",
+    "inspired_by": "Yves Saint Laurent Black Opium",
+    "badge": "",
+    "kind": "perfume",
+    "category": "Parfums",
+    "notes_tete": "Poire, Mandarine",
+    "notes_coeur": "Vanille, Fleur d'oranger, Fleurs blanches",
+    "notes_fond": "Café noir, Cèdre, Musc blanc, Patchouli",
+    "gender": "femme"
+  },
+  {
+    "reference": "33",
+    "code": "ODYS 33",
+    "name": "L'Azur",
+    "family": "fresh",
+    "price": 69.0,
+    "compare_at": "1700",
+    "inspired_by": "Chanel Bleu de Chanel Eau de Parfum",
+    "badge": "Populaire",
+    "kind": "perfume",
+    "category": "Parfums",
+    "notes_tete": "Pamplemousse, Citron, Menthe, Bergamote, Poivre rose",
+    "notes_coeur": "Gingembre, Noix de muscade, Jasmin, Melon",
+    "notes_fond": "Encens, Ambre, Cèdre, Santal, Patchouli",
+    "gender": "homme"
+  },
+  {
+    "reference": "DUO",
+    "code": "DUO",
+    "name": "Duo Classique",
+    "family": "",
+    "price": 129.0,
+    "compare_at": "",
+    "inspired_by": "",
+    "badge": "",
+    "kind": "coffret",
+    "category": "Coffrets",
+    "format": "Coffret · 2 × 50 ml"
+  },
+  {
+    "reference": "OUD-BOUKHOUR-PRESTIGE",
+    "code": "Boukhour Prestige",
+    "name": "Boukhour Prestige",
+    "family": "oud",
+    "price": 15.0,
+    "compare_at": "",
+    "inspired_by": "",
+    "badge": "",
+    "kind": "oud",
+    "category": "Oud & Boukhour",
+    "origin": ""
+  },
+  {
+    "reference": "OUD-HINDI-ASSAM-A",
+    "code": "Hindi Assam A",
+    "name": "Hindi Assam A",
+    "family": "oud",
+    "price": 35.0,
+    "compare_at": "",
+    "inspired_by": "",
+    "badge": "",
+    "kind": "oud",
+    "category": "Oud & Boukhour",
+    "origin": ""
+  },
+  {
+    "reference": "OUD-ROYAL-HINDI-B",
+    "code": "Royal Hindi B",
+    "name": "Royal Hindi B",
+    "family": "oud",
+    "price": 45.0,
+    "compare_at": "",
+    "inspired_by": "",
+    "badge": "",
+    "kind": "oud",
+    "category": "Oud & Boukhour",
+    "origin": ""
+  },
+  {
+    "reference": "OUD-ROYAL-HINDI-C",
+    "code": "Royal Hindi C",
+    "name": "Royal Hindi C",
+    "family": "oud",
+    "price": 65.0,
+    "compare_at": "",
+    "inspired_by": "",
+    "badge": "",
+    "kind": "oud",
+    "category": "Oud & Boukhour",
+    "origin": ""
+  },
+  {
+    "reference": "OUD-ROYAL-THAI-B",
+    "code": "Royal Thai B",
+    "name": "Royal Thai B",
+    "family": "oud",
+    "price": 45.0,
+    "compare_at": "",
+    "inspired_by": "",
+    "badge": "",
+    "kind": "oud",
+    "category": "Oud & Boukhour",
+    "origin": ""
+  },
+  {
+    "reference": "OUD-ROYAL-THAI-C",
+    "code": "Royal Thai C",
+    "name": "Royal Thai C",
+    "family": "oud",
+    "price": 55.0,
+    "compare_at": "",
+    "inspired_by": "",
+    "badge": "",
+    "kind": "oud",
+    "category": "Oud & Boukhour",
+    "origin": ""
+  },
+  {
+    "reference": "PACK-OUD",
+    "code": "PACK-OUD",
+    "name": "Pack Oud Prestige",
+    "family": "oud",
+    "price": 349.0,
+    "compare_at": "",
+    "inspired_by": "",
+    "badge": "",
+    "kind": "pack",
+    "category": "Oud & Boukhour",
+    "format": "Coffret · 3 × 5 g"
+  },
+  {
+    "reference": "SAM-IND",
+    "code": "SAM-IND",
+    "name": "Sampler Hindi 3×5g",
+    "family": "oud",
+    "price": 195.0,
+    "compare_at": "",
+    "inspired_by": "",
+    "badge": "",
+    "kind": "pack",
+    "category": "Oud & Boukhour",
+    "format": "Sampler · 3 × 5 g"
+  },
+  {
+    "reference": "SAM-THAI",
+    "code": "SAM-THAI",
+    "name": "Sampler Thai 3×5g",
+    "family": "oud",
+    "price": 225.0,
+    "compare_at": "",
+    "inspired_by": "",
+    "badge": "",
+    "kind": "pack",
+    "category": "Oud & Boukhour",
+    "format": "Sampler · 3 × 5 g"
+  },
+  {
+    "reference": "TRIO",
+    "code": "TRIO",
+    "name": "Trio Découverte",
+    "family": "",
+    "price": 199.0,
+    "compare_at": "",
+    "inspired_by": "",
+    "badge": "",
+    "kind": "coffret",
+    "category": "Coffrets",
+    "format": "Coffret · 3 × 50 ml"
+  },
+  {
+    "reference": "DIF-ROSEAUX-200",
+    "code": "Diffuseur 200 ml",
+    "name": "Diffuseur à roseaux — Nuit d'Ambre",
+    "family": "oriental",
+    "price": 249.0,
+    "badge": "Nouveau",
+    "notes_tete": "Bergamote, Cardamome",
+    "notes_coeur": "Rose, Encens",
+    "notes_fond": "Ambre, Bois de oud, Musc",
+    "compare_at": "",
+    "inspired_by": "",
+    "origin": "",
+    "kind": "diffuseur",
+    "category": "Diffuseurs",
+    "format": "Diffuseur d'ambiance · 200 ml",
+    "ambiance": "ambre"
+  },
+  {
+    "reference": "DIF-ROSEAUX-100",
+    "code": "Diffuseur 100 ml",
+    "name": "Diffuseur à roseaux — Jardin de Fès",
+    "family": "fresh",
+    "price": 179.0,
+    "badge": "",
+    "notes_tete": "Néroli, Citron",
+    "notes_coeur": "Fleur d'oranger, Jasmin",
+    "notes_fond": "Cèdre, Musc blanc",
+    "compare_at": "",
+    "inspired_by": "",
+    "origin": "",
+    "kind": "diffuseur",
+    "category": "Diffuseurs",
+    "format": "Diffuseur d'ambiance · 100 ml",
+    "ambiance": "fleur-oranger"
+  },
+  {
+    "reference": "DIF-RECHARGE-200",
+    "code": "Recharge 200 ml",
+    "name": "Recharge diffuseur — Nuit d'Ambre",
+    "family": "oriental",
+    "price": 159.0,
+    "badge": "",
+    "notes_tete": "Bergamote, Cardamome",
+    "notes_coeur": "Rose, Encens",
+    "notes_fond": "Ambre, Bois de oud, Musc",
+    "compare_at": "",
+    "inspired_by": "",
+    "origin": "",
+    "kind": "diffuseur",
+    "category": "Diffuseurs",
+    "format": "Recharge diffuseur · 200 ml",
+    "ambiance": "ambre"
+  },
+  {
+    "reference": "44",
+    "code": "ODYS 44",
+    "name": "L'Écarlate",
+    "family": "oriental",
+    "price": 69.0,
+    "compare_at": "",
+    "inspired_by": "Givenchy L'Interdit Eau de Parfum Rouge",
+    "badge": "Nouveau",
+    "kind": "perfume",
+    "category": "Parfums",
+    "notes_tete": "Orange sanguine, Accord épicé rouge",
+    "notes_coeur": "Fleur d'oranger, Jasmin sambac",
+    "notes_fond": "Patchouli, Santal",
+    "gender": "femme"
+  },
+  {
+    "reference": "51",
+    "code": "ODYS 51",
+    "name": "Le Serment",
+    "family": "sweet",
+    "price": 69.0,
+    "compare_at": "",
+    "inspired_by": "Emporio Armani Stronger With You",
+    "badge": "Nouveau",
+    "kind": "perfume",
+    "category": "Parfums",
+    "notes_tete": "Cardamome, Poivre rose, Feuille de violette",
+    "notes_coeur": "Sauge",
+    "notes_fond": "Vanille, Marron glacé",
+    "gender": "homme"
+  },
+  {
+    "reference": "52",
+    "code": "ODYS 52",
+    "name": "Le Serment Absolu",
+    "family": "sweet oriental",
+    "price": 69.0,
+    "compare_at": "",
+    "inspired_by": "Emporio Armani Stronger With You Absolutely",
+    "badge": "Nouveau",
+    "kind": "perfume",
+    "category": "Parfums",
+    "notes_tete": "Rhum, Élémi, Bergamote",
+    "notes_coeur": "Lavande, Davana",
+    "notes_fond": "Vanille de Madagascar, Châtaigne, Cèdre, Patchouli",
+    "gender": "homme"
+  },
+  {
+    "reference": "60",
+    "code": "ODYS 60",
+    "name": "Le Nuage",
+    "family": "sweet",
+    "price": 69.0,
+    "compare_at": "",
+    "inspired_by": "Kayali Yum Boujee Marshmallow 81",
+    "badge": "Nouveau",
+    "kind": "perfume",
+    "category": "Parfums",
+    "notes_tete": "Freesia, Citron, Fleur de nectarine, Pomme",
+    "notes_coeur": "Guimauve, Fraise, Noix de coco, Fleur d'oranger",
+    "notes_fond": "Crème fouettée, Sucre, Vanille, Musc, Ambroxan",
+    "gender": "femme"
+  },
+  {
+    "reference": "61",
+    "code": "ODYS 61",
+    "name": "La Vanille",
+    "family": "sweet",
+    "price": 69.0,
+    "compare_at": "",
+    "inspired_by": "Kayali Vanilla Candy Rock Sugar 42",
+    "badge": "Nouveau",
+    "kind": "perfume",
+    "category": "Parfums",
+    "notes_tete": "Poire confite, Feuille de violette, Rhum, Ylang-ylang",
+    "notes_coeur": "Jasmin, Labdanum, Caramel blanc, Guimauve",
+    "notes_fond": "Fève tonka, Vétiver, Santal, Patchouli, Sucre candi",
+    "gender": "femme"
+  },
+  {
+    "reference": "70",
+    "code": "ODYS 70",
+    "name": "L'Oasis",
+    "family": "fresh",
+    "price": 69.0,
+    "compare_at": "",
+    "inspired_by": "Jean Paul Gaultier Le Beau Paradise Garden",
+    "badge": "Nouveau",
+    "kind": "perfume",
+    "category": "Parfums",
+    "notes_tete": "Notes aquatiques, Menthe, Gingembre, Herbe verte",
+    "notes_coeur": "Eau de coco, Sel, Figue verte",
+    "notes_fond": "Santal, Fève tonka",
+    "gender": "homme"
+  },
+  {
+    "reference": "77",
+    "code": "ODYS 77",
+    "name": "La Brise",
+    "family": "fresh",
+    "price": 69.0,
+    "compare_at": "",
+    "inspired_by": "Dolce & Gabbana Light Blue",
+    "badge": "Nouveau",
+    "kind": "perfume",
+    "category": "Parfums",
+    "notes_tete": "Citron de Sicile, Pomme verte, Cédrat, Campanule",
+    "notes_coeur": "Jasmin, Rose blanche, Bambou",
+    "notes_fond": "Cèdre, Ambre, Musc",
+    "gender": "femme"
+  }
+]
