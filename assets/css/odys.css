@@ -106,6 +106,12 @@ p{margin:0 0 1em}
 .btn:hover{background:var(--accent-ink);border-color:var(--accent-ink);color:var(--ivory)}
 .dark .btn:hover{color:var(--oud-deep);background:var(--sand);border-color:var(--sand)}
 .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn svg{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:1.3}
+.btn-gift{flex:1 1 100%}
+/* the product photo follows the reader down the page beside the details; once the
+   columns stack it would sit pinned under the text, so it only sticks when side by side */
+.pdp-media{position:sticky;top:100px}
+@media(max-width:860px){.pdp-media{position:static}}   /* its own row under add-to-cart: a different decision, not a third option */
 .btn-ghost:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .btn-sm{padding:11px 18px;font-size:10px;letter-spacing:.2em}
 .btn-block{width:100%}
@@ -266,6 +272,9 @@ p{margin:0 0 1em}
 }
 .card-media svg{width:56%;transition:transform .8s var(--ease)}
 /* a real photograph fills the tile; the generated SVG floats inside it */
+/* product photographs go everywhere the drawn flacon goes; the small spots size
+   the svg, so a photo there needs its own size or it comes in at 800 px */
+img.art-photo{display:block;max-width:100%;height:auto}
 .card-media img.art-photo{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
 .card:hover .card-media img.art-photo{transform:scale(1.04)}
 .card:hover .card-media svg{transform:rotate(3deg) scale(1.06) translateY(-6px)}
@@ -331,7 +340,7 @@ p{margin:0 0 1em}
 .pick{border:1px solid var(--line);padding:12px;text-align:left;transition:.3s var(--ease);display:flex;gap:10px;align-items:center;background:transparent}
 .pick:hover{border-color:var(--accent)}
 .pick.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}
-.pick svg{width:26px;flex:none}
+.pick svg,.pick img.art-photo{width:26px;flex:none}
 .pick span{font-size:12px;letter-spacing:.04em;line-height:1.3}
 .pick small{display:block;color:var(--ink-soft);font-size:10.5px;letter-spacing:.1em}
 .steps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
@@ -462,6 +471,7 @@ p{margin:0 0 1em}
 .li{display:grid;grid-template-columns:76px 1fr auto;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);align-items:center}
 .li .thumb{aspect-ratio:3/4;background:linear-gradient(160deg,var(--c1,#3D1216),var(--c2,#0B0B0B));display:grid;place-items:center}
 .li .thumb svg{width:60%}
+.li .thumb img.art-photo{width:100%;height:100%;object-fit:cover}
 .qty{display:inline-flex;align-items:center;border:1px solid var(--line)}
 .qty button{width:30px;height:30px;line-height:1}
 .qty span{min-width:28px;text-align:center;font-size:12px}

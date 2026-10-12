@@ -597,7 +597,9 @@ I18N.add('fr', {
     'Reload it, or order straight from us — we answer on WhatsApp.':
       'Rechargez-la, ou commandez directement auprès de nous — nous répondons sur WhatsApp.',
     'Back to the home page': "Retour à l'accueil",
-    'are quoted individually and confirmed before shipping.': 'font l\'objet d\'un devis et sont confirmées avant expédition.'
+    'are quoted individually and confirmed before shipping.': 'font l\'objet d\'un devis et sont confirmées avant expédition.',
+    'Give to someone': 'Offrir à quelqu\'un',
+    'Ready to gift — add a message, then their address': 'Prêt à offrir — ajoutez un mot, puis son adresse'
   }
 });
 
@@ -694,6 +696,8 @@ I18N.add('ar', {
     'Reload it, or order straight from us — we answer on WhatsApp.':
       'أعد تحميلها، أو اطلب منّا مباشرة — نردّ على واتساب.',
     'Back to the home page': 'العودة إلى الصفحة الرئيسية',
-    'are quoted individually and confirmed before shipping.': 'تُسعَّر كلٌّ على حدة وتُؤكَّد قبل الشحن.'
+    'are quoted individually and confirmed before shipping.': 'تُسعَّر كلٌّ على حدة وتُؤكَّد قبل الشحن.',
+    'Give to someone': 'أهدِه لشخص عزيز',
+    'Ready to gift — add a message, then their address': 'جاهز للإهداء — أضف رسالة، ثم عنوانه'
   }
 });

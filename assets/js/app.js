@@ -168,6 +168,7 @@
     box: '<svg viewBox="0 0 24 24"><path d="M4 8h16v12H4z"/><path d="M4 8 6 4h12l2 4M12 8v12M4 13h16"/></svg>',
     gem: '<svg viewBox="0 0 24 24"><path d="M7 4h10l4 5-9 11L3 9z"/><path d="M3 9h18M9.5 4 7 9l5 11 5-11-2.5-5"/></svg>',
     close: '<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+    gift: '<svg viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11"/><path d="M3 9h18M12 9v11M12 9c-1.5-3-5-4-5-1.5S10 9 12 9zm0 0c1.5-3 5-4 5-1.5S14 9 12 9z"/></svg>',
     wa: '<svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.9 7L4 20l1.1-4A8 8 0 1 1 20 12z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5.6 0 1-.5 1-1l-1.4-.7-.9.8a5 5 0 0 1-2.3-2.3l.8-.9L11 9.5c-.5 0-1 .4-1 1"/></svg>'
   };
 
