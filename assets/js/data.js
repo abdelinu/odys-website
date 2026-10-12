@@ -83,8 +83,9 @@ window.ODYS = (function () {
       profile: { intensity: 4, longevity: 5, projection: 4, sweetness: 2, freshness: 3 },
       story: "The first chapter. Bergamot opens like morning over the Atlas, then the scent turns inward — dry cedar, cold iris, a thread of pepper that never quite settles. Worn by people who do not explain themselves.",
       sku: 'ODY-01-50', stock: 142, c: P.icon, juice: '#8A5A1C',
-      // the real flacon with its box; ODYS 02–12 use the studio renders (scripts/studio.js)
-      photo: 'assets/img/odys-01-coffret.webp', photoW: 407, photoH: 611
+      // made by scripts/studio.js from the photograph in assets/img/bottles/; the others
+      // use the 3D render until their photograph is dropped in next to it
+      photo: 'assets/img/products/odys-01.webp', photoW: 800, photoH: 1200
     },
     {
       id: 'odys-02', code: 'ODYS 02', name: 'NUIT SAFRAN', type: 'parfum',

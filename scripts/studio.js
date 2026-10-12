@@ -10,7 +10,8 @@
 //   odys-02.webp          800×1200  the flacon alone, for the shop grid and the product page
 //   odys-02-card-fr.webp  1080×1080 the square card with name, notes and words (Instagram, WhatsApp)
 //
-// Everything on the images comes from assets/js/data.js — change a name, a note or a
+// A product with a photograph in assets/img/bottles/<id>.jpg (.png, .webp) is drawn
+// from it; the others from the 3D flacon. Everything else comes from assets/js/data.js — change a name, a note or a
 // juice colour there and run this again.
 const fs = require('fs');
 const http = require('http');
@@ -85,7 +86,7 @@ const server = http.createServer((req, res) => {
         return c.toDataURL('image/webp', 0.9).split(',')[1];
       }, png.toString('base64'));
       fs.writeFileSync(path.join(outDir, j.file), Buffer.from(webp, 'base64'));
-      console.log(`✓ ${j.file}`);
+      console.log(`✓ ${j.file}  (${await page.getAttribute('body', 'data-source') === 'photo' ? 'photo' : '3D render'})`);
     } catch (e) {
       failed++;
       console.error(`✗ ${j.file}: ${e.message}${errors.length ? ' — ' + errors.join('; ') : ''}`);

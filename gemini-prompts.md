@@ -43,6 +43,8 @@ No hands, no props, no flowers, no other objects.
 | ODYS 11 | TABAC & MIEL | 11 |
 | ODYS 12 | NUIT D'ATLAS | 12 |
 
+**Keep the set matching:** attach the finished ODYS 01 image (`assets/img/bottles/odys-01.jpg`) as the reference instead of the older bottle photo, and ask for "the same photograph, only the label text changes" — all 12 then share one bottle, light and background. Send the images in the chat (or save them as `assets/img/bottles/odys-02.jpg` …) and run `npm run studio`.
+
 Tip: if a letter comes out wrong, reply "Same image, but the label text must read exactly: …". Accents (Ô, È, É) are the most common errors.
 
 ---
