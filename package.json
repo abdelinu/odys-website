@@ -1,0 +1,13 @@
+{
+  "name": "odys-website",
+  "private": true,
+  "description": "The site is static and needs none of this. Only the photo robot (scripts/studio.js, scripts/notes-gemini.js) uses Playwright.",
+  "scripts": {
+    "studio": "node scripts/studio.js",
+    "notes": "node scripts/notes-gemini.js",
+    "sitemap": "node scripts/sitemap.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.1"
+  }
+}

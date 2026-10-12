@@ -106,6 +106,23 @@ p{margin:0 0 1em}
 .btn:hover{background:var(--accent-ink);border-color:var(--accent-ink);color:var(--ivory)}
 .dark .btn:hover{color:var(--oud-deep);background:var(--sand);border-color:var(--sand)}
 .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn svg{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:1.3}
+.btn-gift{flex:1 1 100%}
+/* the product photo follows the reader down the page beside the details; once the
+   columns stack it would sit pinned under the text, so it only sticks when side by side */
+.pdp-media{position:sticky;top:100px}
+
+/* the gift card: editor on one side, the card as it will be printed on the other */
+.giftnote{border-top:1px solid var(--line);margin-top:22px;padding-top:18px}
+.giftnote-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+.notecard{margin:0;background:#FBF7EF;color:#1A0F10;border:1px solid rgba(176,141,79,.45);outline:1px solid rgba(176,141,79,.25);outline-offset:-8px;
+  padding:30px 26px 22px;min-height:220px;display:flex;flex-direction:column;box-shadow:0 18px 40px -24px rgba(26,15,16,.35);transform:rotate(-1deg)}
+.nc-to{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#7E5F27;margin:0 0 14px}
+.nc-msg{font-family:var(--display);font-size:20px;line-height:1.4;margin:0;flex:1;overflow-wrap:anywhere}
+.nc-sign{font-family:var(--display);font-style:italic;font-size:18px;margin:14px 0 0;text-align:end}
+.nc-brand{font-size:9px;letter-spacing:.5em;text-align:center;color:#7E5F27;margin:18px 0 0}
+@media(max-width:860px){.giftnote-grid{grid-template-columns:1fr}.notecard{transform:none}}
+@media(max-width:860px){.pdp-media{position:static}}   /* its own row under add-to-cart: a different decision, not a third option */
 .btn-ghost:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .btn-sm{padding:11px 18px;font-size:10px;letter-spacing:.2em}
 .btn-block{width:100%}
@@ -266,6 +283,9 @@ p{margin:0 0 1em}
 }
 .card-media svg{width:56%;transition:transform .8s var(--ease)}
 /* a real photograph fills the tile; the generated SVG floats inside it */
+/* product photographs go everywhere the drawn flacon goes; the small spots size
+   the svg, so a photo there needs its own size or it comes in at 800 px */
+img.art-photo{display:block;max-width:100%;height:auto}
 .card-media img.art-photo{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
 .card:hover .card-media img.art-photo{transform:scale(1.04)}
 .card:hover .card-media svg{transform:rotate(3deg) scale(1.06) translateY(-6px)}
@@ -305,6 +325,13 @@ p{margin:0 0 1em}
 }
 .card-add:hover{background:var(--accent-ink);color:var(--ink-on-accent);border-color:var(--accent-ink)}
 .dark .card-add:hover{background:var(--sand);color:var(--oud-deep);border-color:var(--sand)}
+/* add-to-cart and, beside it, "give to someone" — an icon, since a phone card has no room for the words */
+.card-acts{display:flex;gap:6px;margin-top:12px}
+.card-acts .card-add{margin-top:0;flex:1;min-width:0}
+.card-gift{flex:none;width:44px;display:grid;place-items:center;border:1px solid var(--line);color:inherit;transition:.4s var(--ease)}
+.card-gift svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.3}
+.card-gift:hover{background:var(--accent-ink);color:var(--ink-on-accent);border-color:var(--accent-ink)}
+.dark .card-gift:hover{background:var(--sand);color:var(--oud-deep);border-color:var(--sand)}
 
 .trio{display:flex;gap:clamp(16px,3vw,34px);align-items:center;flex-wrap:wrap;
   background:linear-gradient(120deg,rgba(176,141,79,.14),transparent 65%);transition:.4s var(--ease)}
@@ -331,7 +358,7 @@ p{margin:0 0 1em}
 .pick{border:1px solid var(--line);padding:12px;text-align:left;transition:.3s var(--ease);display:flex;gap:10px;align-items:center;background:transparent}
 .pick:hover{border-color:var(--accent)}
 .pick.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}
-.pick svg{width:26px;flex:none}
+.pick svg,.pick img.art-photo{width:26px;flex:none}
 .pick span{font-size:12px;letter-spacing:.04em;line-height:1.3}
 .pick small{display:block;color:var(--ink-soft);font-size:10.5px;letter-spacing:.1em}
 .steps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
@@ -462,6 +489,7 @@ p{margin:0 0 1em}
 .li{display:grid;grid-template-columns:76px 1fr auto;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);align-items:center}
 .li .thumb{aspect-ratio:3/4;background:linear-gradient(160deg,var(--c1,#3D1216),var(--c2,#0B0B0B));display:grid;place-items:center}
 .li .thumb svg{width:60%}
+.li .thumb img.art-photo{width:100%;height:100%;object-fit:cover}
 .qty{display:inline-flex;align-items:center;border:1px solid var(--line)}
 .qty button{width:30px;height:30px;line-height:1}
 .qty span{min-width:28px;text-align:center;font-size:12px}
@@ -473,7 +501,23 @@ p{margin:0 0 1em}
 .searchbar.on{transform:none}
 .searchbar input{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);padding:14px 0;font-family:var(--display);font-size:clamp(22px,4vw,38px)}
 .searchbar input:focus{border-color:var(--accent)}
-.sresults{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:18px;margin-top:22px;max-height:52vh;overflow-y:auto}
+.searchbar input::-webkit-search-cancel-button{display:none}
+.sresults{margin-top:18px;max-height:min(62vh,560px);overflow-y:auto;overscroll-behavior:contain}
+.slabel{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft);margin:6px 0 10px}
+.schips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.slist{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:0 28px}
+.srow{display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:center;padding:10px 6px;border-bottom:1px solid var(--line);color:inherit;transition:background .2s}
+.srow:hover,.srow.on{background:var(--surface)}
+.srow-art{width:52px;height:64px;display:grid;place-items:center;overflow:hidden;background:linear-gradient(160deg,var(--c1),var(--c2))}
+.srow-art svg{width:62%}
+.srow-art img.art-photo{width:100%;height:100%;object-fit:cover}
+.srow-txt{min-width:0}
+.srow-name{display:block;font-family:var(--display);font-size:19px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srow-name mark{background:none;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.srow-meta{display:block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srow-price{font-size:12px;letter-spacing:.1em;white-space:nowrap}
+.sall{display:inline-block;margin:18px 0 4px}
+@media(max-width:520px){.slist{grid-template-columns:1fr}.srow-name{font-size:17px}}
 
 .toast-wrap{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:120;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}
 .toast{

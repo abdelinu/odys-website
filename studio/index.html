@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Studio — ODYS PARFUM</title>
+<!--
+  The product-photo studio. One URL = one image; scripts/studio.js drives it.
+
+    studio/?id=odys-02                 square 1080×1080 card, French
+    studio/?id=odys-02&lang=ar         same card in Arabic (en works too)
+    studio/?id=odys-02&shot=bottle     the flacon alone, 800×1200, for the shop grid
+
+  Open it in a browser to preview; the robot screenshots it once body[data-ready] is set.
+  Every word comes from assets/js/data.js and the i18n tables — nothing is typed here twice.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Bodoni+Moda:opsz,wght@6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F3EBDD;            /* = the 3D backdrop, so the render has no seam */
+    --ink:#1A0F10; --soft:#6B5A52; --accent:#7E5F27; --rule:rgba(126,95,39,.35);
+    --serif:"Cormorant Garamond",Didot,Georgia,serif; --sans:Jost,"Helvetica Neue",Arial,sans-serif;
+  }
+  .lang-ar{ --serif:"Amiri","Cormorant Garamond",serif; --sans:"Tajawal","Jost",Arial,sans-serif }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink)}
+  body{font:300 16px/1.5 var(--sans)}
+
+  .card{position:relative;width:1080px;height:1080px;overflow:hidden;background:var(--bg);display:flex}
+  /* the render fills the whole card, so its floor and shadow have no edge; the copy sits on top */
+  .card canvas{position:absolute;inset:0;width:100%;height:100%}
+  .card .stage{flex:0 0 500px}
+  .card .copy{flex:1;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:0 64px 0 20px}
+  [dir=rtl] .card .copy{padding:0 20px 0 64px}
+
+  .eyebrow{font:400 15px/1 var(--sans);letter-spacing:.42em;text-transform:uppercase;color:var(--accent);margin:0 0 30px}
+  .name{font:400 86px/.98 var(--serif);letter-spacing:.02em;margin:0;text-transform:uppercase;font-variant-numeric:lining-nums}
+  .kind{font:400 17px/1.4 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin:26px 0 0}
+  .rule{width:150px;height:1px;background:var(--rule);margin:30px 0}
+  .vol{font:400 30px/1 var(--serif);margin:0 0 46px}
+  .notes{display:flex;gap:26px;justify-content:center}
+  .note{width:128px;display:flex;flex-direction:column;align-items:center}
+  .note .art{width:118px;height:118px;display:grid;place-items:center}
+  /* a generated photo never matches the card's ivory exactly, so its edges fade out
+     instead of ending in a square; the ingredient in the middle stays untouched */
+  .note .art img{width:136px;height:136px;max-width:none;object-fit:cover;
+    -webkit-mask-image:radial-gradient(circle at 50% 50%,#000 46%,transparent 70%);
+            mask-image:radial-gradient(circle at 50% 50%,#000 46%,transparent 70%)}
+  .note .tier{font:400 11px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin:16px 0 7px}
+  .note .nm{font:500 14px/1.25 var(--sans);letter-spacing:.12em;text-transform:uppercase}
+  .words{font:400 15px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin:50px 0 0}
+  .lang-ar .eyebrow,.lang-ar .kind,.lang-ar .note .tier,.lang-ar .note .nm,.lang-ar .words{letter-spacing:0;font-size:20px}
+  .lang-ar .note .nm{font-size:17px}
+
+  .solo{width:800px;height:1200px;position:relative;overflow:hidden;background:var(--bg)}
+
+  /* a photograph of the bottle (assets/img/bottles/) instead of the 3D render; the
+     card takes the photo's own background colour, so the two meet without a seam,
+     and its edges still fade in case the photo's ivory is not quite flat */
+  .shot{position:absolute;display:block;
+    -webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 78%,transparent 100%);
+            mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 78%,transparent 100%)}
+  .card .shot{width:820px;height:820px;left:-160px;top:150px}
+  [dir=rtl] .card .shot{left:auto;right:-160px}
+  .solo .shot{width:1040px;height:1040px;left:-120px;top:100px}
+  .solo canvas{position:absolute;inset:0;width:100%;height:100%}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+  }
+}
+</script>
+<script>
+  /* the i18n engine reads the site language from storage; borrow it for this render
+     and put the visitor's own choice back as soon as the tables are loaded */
+  window.STUDIO = Object.fromEntries(new URLSearchParams(location.search));
+  window.STUDIO.lang = ['fr', 'en', 'ar'].includes(STUDIO.lang) ? STUDIO.lang : 'fr';
+  try { STUDIO.prevLang = localStorage.getItem('odys.lang'); localStorage.setItem('odys.lang', STUDIO.lang); } catch (e) { }
+</script>
+<script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/i18n-content.js"></script>
+<script src="../assets/js/i18n-labels.js"></script>
+<script src="../assets/js/data.js"></script>
+<script>
+  try { STUDIO.prevLang == null ? localStorage.removeItem('odys.lang') : localStorage.setItem('odys.lang', STUDIO.prevLang); } catch (e) { }
+</script>
+</head>
+<body>
+<div id="out"></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { buildFlacon } from '../assets/js/flacon3d.js';
+import { noteArt, slug } from './notes.js';
+
+const Q = window.STUDIO, L = Q.lang, D = window.ODYS;
+const tr = s => window.I18N ? I18N.tr(s) : s;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const fail = msg => { document.body.dataset.error = msg; document.getElementById('out').textContent = msg; throw new Error(msg); };
+
+const p = D.products.find(x => x.id === (Q.id || 'odys-01'));
+if (!p) fail('unknown product: ' + Q.id);
+if (p.type !== 'parfum') fail('the studio draws the parfum flacon only: ' + p.id);
+
+/* copy the card needs that the site never says — kept here, in three languages */
+const WORDS = {
+  fr: { Unisex: 'Parfum mixte', Feminine: 'Parfum femme', Masculine: 'Parfum homme', tiers: ['Tête', 'Cœur', 'Fond'],
+    woody: 'Boisé', spicy: 'Épicé', amber: 'Ambré', oriental: 'Oriental', floral: 'Floral', fresh: 'Frais', oud: 'Oud',
+    gourmand: 'Gourmand', musky: 'Musqué', intense: 'Intense', lasting: 'Tenace', bright: 'Lumineux', soft: 'Doux' },
+  en: { Unisex: 'Unisex perfume', Feminine: 'For her', Masculine: 'For him', tiers: ['Top', 'Heart', 'Base'],
+    woody: 'Woody', spicy: 'Spicy', amber: 'Amber', oriental: 'Oriental', floral: 'Floral', fresh: 'Fresh', oud: 'Oud',
+    gourmand: 'Gourmand', musky: 'Musky', intense: 'Intense', lasting: 'Long-lasting', bright: 'Luminous', soft: 'Soft' },
+  ar: { Unisex: 'عطر للجنسين', Feminine: 'عطر نسائي', Masculine: 'عطر رجالي', tiers: ['القمة', 'القلب', 'القاعدة'],
+    woody: 'خشبي', spicy: 'حار', amber: 'عنبري', oriental: 'شرقي', floral: 'زهري', fresh: 'منعش', oud: 'عود',
+    gourmand: 'حلو', musky: 'مسكي', intense: 'قوي', lasting: 'ثابت', bright: 'مشرق', soft: 'ناعم' }
+}[L];
+
+/* three words, like the line under each Tahara card: the moods first, then what the profile says */
+function adjectives() {
+  const f = p.profile || {}, out = [];
+  (p.mood || []).forEach(m => WORDS[m] && out.push(WORDS[m]));
+  if (f.intensity >= 5) out.push(WORDS.intense);
+  if (f.longevity >= 5) out.push(WORDS.lasting);
+  if (f.freshness >= 4) out.push(WORDS.bright);
+  if (f.intensity <= 2) out.push(WORDS.soft);
+  return [...new Set(out)].slice(0, 3);
+}
+
+/* the three notes: one from each tier, so the card reads top → heart → base */
+const keyNotes = ['top', 'heart', 'base'].map((t, i) => ({ en: p.notes[t][0], tier: WORDS.tiers[i] }));
+
+/* a note photograph wins over the drawn medallion when one exists */
+function noteImg(n) {
+  return new Promise(res => {
+    const img = new Image();
+    img.onload = () => res(`<img src="${img.src}" alt="">`);
+    img.onerror = () => res(noteArt(n.en));
+    img.src = `../assets/img/notes/${slug(n.en)}.webp`;
+  });
+}
+
+/* A photograph of the bottle wins over the 3D render when there is one: drop it in
+   assets/img/bottles/<id>.jpg (or .png / .webp), square, bottle centred. */
+function findPhoto() {
+  const tries = ['webp', 'jpg', 'jpeg', 'png'].map(x => `../assets/img/bottles/${p.id}.${x}`);
+  return tries.reduce((prev, src) => prev.then(hit => hit || new Promise(res => {
+    const img = new Image();
+    img.onload = () => res(img);
+    img.onerror = () => res(null);
+    img.src = src;
+  })), Promise.resolve(null));
+}
+/* the photo's background, read off its four corners */
+function cornerColour(img) {
+  const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
+  const g = c.getContext('2d'); g.drawImage(img, 0, 0);
+  const s = 12, w = c.width, h = c.height, sum = [0, 0, 0];
+  [[0, 0], [w - s, 0], [0, h - s], [w - s, h - s]].forEach(([x, y]) => {
+    const d = g.getImageData(x, y, s, s).data;
+    for (let i = 0; i < d.length; i += 4) { sum[0] += d[i]; sum[1] += d[i + 1]; sum[2] += d[i + 2]; }
+  });
+  const n = 4 * s * s;
+  return `rgb(${sum.map(v => Math.round(v / n)).join(',')})`;
+}
+const photo = await findPhoto();
+if (photo) document.documentElement.style.setProperty('--bg', cornerColour(photo));
+const stage = photo ? `<img class="shot" src="${photo.src}" alt="">` : '<canvas id="c"></canvas>';
+
+/* ── layout ─────────────────────────────────────────────── */
+const shot = Q.shot === 'bottle' ? 'bottle' : 'card';
+const out = document.getElementById('out');
+if (shot === 'card') {
+  const arts = await Promise.all(keyNotes.map(noteImg));
+  const num = p.code.replace(/\D/g, '');
+  out.innerHTML = `
+    <div class="card" id="frame">
+      ${stage}<div class="stage"></div>
+      <div class="copy">
+        <p class="eyebrow">ODYS · N° ${num}</p>
+        <h1 class="name" id="name">${esc(p.name).replace(' &amp; ', '\u00a0&amp; ')}</h1>
+        <p class="kind">${esc(WORDS[p.gender] || WORDS.Unisex)}</p>
+        <div class="rule"></div>
+        <p class="vol"><bdi>${p.volume} ml</bdi> · ${esc(tr(p.concentration))}</p>
+        <div class="notes">${keyNotes.map((n, i) => `
+          <div class="note"><div class="art">${arts[i]}</div>
+            <span class="tier">${esc(n.tier)}</span><span class="nm">${esc(tr(n.en))}</span></div>`).join('')}
+        </div>
+        <p class="words">${adjectives().map(esc).join(' · ')}</p>
+      </div>
+    </div>`;
+} else {
+  out.innerHTML = `<div class="solo" id="frame">${stage}</div>`;
+}
+
+/* ── fonts first: the label is painted on a canvas and cannot reflow later ── */
+await Promise.race([
+  Promise.all(['400 40px "Cormorant Garamond"', '500 40px "Cormorant Garamond"', '400 40px "Bodoni Moda"', '400 40px Jost']
+    .map(f => document.fonts.load(f))).then(() => document.fonts.ready),
+  new Promise(r => setTimeout(r, 8000))
+]);
+
+/* long names drop a size rather than break into three lines */
+const nameEl = document.getElementById('name');
+if (nameEl) for (let s = 86; s > 50 && nameEl.scrollHeight > 86 * 2.1; s -= 4) nameEl.style.fontSize = s + 'px';
+
+if (photo) {
+  document.title = `${p.code} — studio`;
+  document.body.dataset.ready = shot;
+  document.body.dataset.source = 'photo';
+} else {
+/* ── the flacon ─────────────────────────────────────────── */
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 3));
+renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+
+const juice = new THREE.Color(p.juice || '#8A5A1C');
+/* white ink below 3:1 against the juice is unreadable, so pale juices get dark ink
+   (Color is linear, which is what the WCAG luminance formula wants) */
+const pale = 1.05 / (juice.r * 0.2126 + juice.g * 0.7152 + juice.b * 0.0722 + 0.05) < 3;
+const F = buildFlacon(renderer, {
+  liquid: p.juice || '#8A5A1C',
+  label: { num: p.code.replace(/\D/g, ''), name: p.name, ink: pale ? 'rgba(42,28,20,.88)' : null }
+});
+
+const cw = canvas.clientWidth, ch = canvas.clientHeight;
+const camera = new THREE.PerspectiveCamera(24, cw / ch, 0.1, 100);
+/* A touch to the side so the glass shows its depth, little enough that the label
+   reads; low, so the surface of the juice stays a line instead of a lit lid. */
+const yaw = 0.13;
+const dist = shot === 'card' ? 7.6 : 6.9;
+const target = new THREE.Vector3(0, 0.98, 0);
+camera.position.set(Math.sin(yaw) * dist, target.y + 0.32, Math.cos(yaw) * dist);
+camera.lookAt(target);
+if (shot === 'card') {
+  /* Slide the frame, not the camera: the bottle is still seen head-on, just drawn
+     in the left column (the right one in Arabic) */
+  const dx = (cw / 2 - 250) * (L === 'ar' ? -1 : 1);
+  camera.aspect = 2 * cw / ch;
+  camera.setViewOffset(2 * cw, ch, cw / 2 + dx, 0, cw, ch);
+  camera.updateProjectionMatrix();
+}
+
+/* transmission needs a frame or two to settle */
+for (let i = 0; i < 3; i++) renderer.render(F.scene, camera);
+await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+renderer.render(F.scene, camera);
+
+document.title = `${p.code} — studio`;
+document.body.dataset.ready = shot;
+document.body.dataset.source = '3d';
+}
+</script>
+</body>
+</html>

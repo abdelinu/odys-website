@@ -96,6 +96,7 @@
   /* generated flacon art — no photography needed, and it scales to any tint.
      A product with a real photograph uses it instead, everywhere art is drawn:
      cards, the product page, search results, the cart. */
+  let artSeq = 0;
   function bottle(p, opts) {
     if (p && p.photo) {
       const eager = opts && opts.eager;
@@ -104,7 +105,9 @@
         ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
     }
     const c = (p && p.c) || ['#3D1216', '#0B0B0B'];
-    const id = 'g' + (p && p.id ? p.id.replace(/\W/g, '') : Math.random().toString(36).slice(2)) + (opts && opts.k || '');
+    // unique per drawing: the same product often appears twice on a page, and when the first copy
+    // sits in a hidden tab Chrome paints the second with its gradient missing
+    const id = 'g' + (p && p.id ? p.id.replace(/\W/g, '') : 'x') + (opts && opts.k || '') + '-' + (++artSeq);
     const label = (p && p.code) || 'ODYS';
 
     if (p && p.type === 'oud') {   // bundle of sticks
@@ -165,6 +168,7 @@
     box: '<svg viewBox="0 0 24 24"><path d="M4 8h16v12H4z"/><path d="M4 8 6 4h12l2 4M12 8v12M4 13h16"/></svg>',
     gem: '<svg viewBox="0 0 24 24"><path d="M7 4h10l4 5-9 11L3 9z"/><path d="M3 9h18M9.5 4 7 9l5 11 5-11-2.5-5"/></svg>',
     close: '<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+    gift: '<svg viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11"/><path d="M3 9h18M12 9v11M12 9c-1.5-3-5-4-5-1.5S10 9 12 9zm0 0c1.5-3 5-4 5-1.5S14 9 12 9z"/></svg>',
     wa: '<svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.9 7L4 20l1.1-4A8 8 0 1 1 20 12z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5.6 0 1-.5 1-1l-1.4-.7-.9.8a5 5 0 0 1-2.3-2.3l.8-.9L11 9.5c-.5 0-1 .4-1 1"/></svg>'
   };
 
@@ -222,7 +226,7 @@
             <div>
               <div class="brand" style="margin-bottom:16px"><b>ODYS</b><small class="ar">عطور وعود</small></div>
               <p class="muted" style="font-size:13px;max-width:34ch;color:rgba(243,235,221,.6)">More than a fragrance. It's a journey. Parfums 50 ML, diffuseurs and oud by the gram — composed in Morocco.</p>
-              <a class="link-u" href="${waHref(T('Hello ODYS, I have a question'))}" target="_blank" rel="noopener" style="display:inline-block;margin-top:14px;color:#D4B676;border-color:#B08D4F">WhatsApp +${C.whatsapp}</a>
+              <a class="link-u" href="${waHref(T('Hello ODYS, I have a question'))}" target="_blank" rel="noopener" style="display:inline-block;margin-top:14px;color:#D4B676;border-color:#B08D4F"><bdi>WhatsApp ${waShown()}</bdi></a>
               <p class="mono" style="margin-top:12px;color:rgba(243,235,221,.45)">Casablanca · cash on delivery</p>
             </div>
             <div><h5>Shop</h5>${[['Parfums', 'shop.html'], ['Diffuseurs', 'diffuseurs.html'], ['Oud au gramme', 'oud.html'], ['Coffrets', 'coffrets.html'], ['Discovery', 'discover.html']].map(l => `<a href="${l[1]}">${l[0]}</a><br>`).join('')}</div>
@@ -251,11 +255,12 @@
       <div class="searchbar" id="searchbar" role="dialog" aria-label="Search" inert>
         <div class="wrap-wide">
           <div style="display:flex;align-items:center;gap:16px">
-            <input id="sinput" placeholder="Try: something sweet for winter" aria-label="Search fragrances" autocomplete="off">
+            <input id="sinput" type="search" enterkeyhint="search" placeholder="Try: something sweet for winter" aria-label="Search fragrances"
+              autocomplete="off" role="combobox" aria-expanded="false" aria-controls="sresults" aria-autocomplete="list">
             <button class="icon-btn" data-close aria-label="Close search">${I.close}</button>
           </div>
           <p class="mono muted" style="margin:14px 0 0">Ask in plain language — mood, season, intensity or note</p>
-          <div class="sresults" id="sresults"></div>
+          <div class="sresults" id="sresults" role="listbox" aria-label="Suggestions"></div>
         </div>
       </div>
       <aside class="drawer" id="cartdrawer" role="dialog" aria-label="Your journey" inert>
@@ -284,6 +289,7 @@
     el.classList.add('on'); el.removeAttribute('inert'); el.setAttribute('aria-modal', 'true');
     inertBg(el);
     document.body.style.overflow = 'hidden';
+    if (what === 'search') drawSearch($('#sinput').value);
     setTimeout(() => { const f = what === 'search' ? $('#sinput') : el.querySelector('[data-close]'); if (f) f.focus(); }, 120);
   }
   function closeOverlay() {
@@ -390,11 +396,33 @@
      The launch channel: no backend, no payment gateway. The cart is serialised
      into a wa.me message; the shop replies, confirms and ships cash on delivery. */
   const waHref = text => 'https://wa.me/' + C.whatsapp + (text ? '?text=' + encodeURIComponent(text) : '');
+  /* the number as people read it: +212 6 84 51 94 44 */
+  const waShown = () => String(C.whatsapp).replace(/^212(\d)(\d{2})(\d{2})(\d{2})(\d{2})$/, '+212 $1 $2 $3 $4 $5').replace(/^(\d)/, '+$1');
+  /* A coffret line carries what the shop has to prepare: the pieces, the box, the card
+     and, for a gift, where it goes. Without these the order arrives as "COFFRET SIGNATURE". */
+  function coffretDetail(l) {
+    const m = l.kind === 'coffret' && l.meta; if (!m) return [];
+    const c = m.custom || {}, g = m.gift, out = [];
+    (m.items || []).forEach(i => { const x = find(i.id); out.push('   – ' + (x ? (x.code ? x.code + ' ' : '') + x.name : i.id) + (i.grams ? ' · ' + i.grams + ' g' : '')); });
+    if (c.boxLabel) out.push('   ' + T('Box') + ': ' + c.boxLabel + (c.ribbonLabel ? ' · ' + T('Ribbon') + ': ' + c.ribbonLabel : ''));
+    if (c.engraving) out.push('   ' + T('Engraving') + ': ' + c.engraving);
+    if (c.message) out.push('   ' + T('Card message') + ': « ' + c.message.replace(/\s*\n\s*/g, ' / ') + ' »' + (c.signed ? ' — ' + c.signed : ''));
+    else if (c.signed) out.push('   ' + T('Card signed') + ': ' + c.signed);
+    if (g) {
+      out.push('   ' + T('Gift for') + ': ' + g.name + (g.phone ? ' · ' + g.phone : ''));
+      out.push('   ' + T('Deliver to') + ': ' + g.addr + (g.date ? ' · ' + g.date : ''));
+      if (g.hidePrices) out.push('   ' + T('No prices on the delivery slip'));
+      if (g.direct) out.push('   ' + T('Send directly to the recipient'));
+    }
+    return out;
+  }
+
   function waLink(info) {
     const s = S(), sub = subtotal();
     const r = rewardDiscount(s.cart, s.vouchers || []);
     const ship = (sub - r.discount) >= C.freeShipFrom || r.discount ? 0 : 35;
-    const lines = s.cart.map(l => '• ' + l.qty + ' × ' + l.title + (l.sub ? ' (' + l.sub + ')' : '') + ' — ' + money(l.unit * l.qty));
+    const lines = s.cart.map(l => ['• ' + l.qty + ' × ' + l.title + (l.sub ? ' (' + l.sub + ')' : '') + ' — ' + money(l.unit * l.qty)]
+      .concat(coffretDetail(l)).join('\n'));
     const msg = [
       T('Hello ODYS, I would like to order:'), '',
       lines.join('\n'), '',
@@ -511,7 +539,10 @@
           ${C.showRatings && p.rating ? `<span class="stars">${stars(p.rating)}<small>${p.reviews}</small></span>` : ''}
         </div>
         <div class="card-pts ${pts ? '' : 'off'}">${pts ? '+' + ptsLabel(pts) + ' ' + ptsWord(pts) + (p.type === 'oud' ? ' / ' + C.oud.minGrams + ' g' : '') : T('Hors programme points')}</div>
-        <button class="card-add" data-add="${p.id}">${p.type === 'oud' ? 'Choose a weight' : 'Add to journey'}</button>
+        <div class="card-acts">
+          <button class="card-add" data-add="${p.id}">${p.type === 'oud' ? 'Choose a weight' : 'Add to journey'}</button>
+          <a class="card-gift" href="coffrets.html?offrir=${p.id}" aria-label="Give to someone" title="Give to someone">${I.gift}</a>
+        </div>
       </div>
     </article>`;
   }
@@ -588,23 +619,58 @@
       .map(w => QMAP[w] || w);
   }
 
-  function search(q) {
-    const words = queryWords(q);
+  /* Accents never decide a match: "icone" finds L'ICÔNE, "cedre" finds CÈDRE NOIR. */
+  const fold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[’']/g, "'");
+  const QFOLD = {};
+  Object.keys(QMAP).forEach(k => { QFOLD[fold(k)] = QMAP[k]; });
+
+  /* What a product is searched on, built once: its name, and everything else in English
+     AND in the reader's language — the catalogue is written in English, so without the
+     translated copy "bergamote" or "زعفران" would never meet "Bergamot" or "Saffron". */
+  let INDEX = null;
+  function index() {
+    if (INDEX) return INDEX;
+    INDEX = D.products.map(p => {
+      const notes = p.notes ? [].concat(p.notes.top, p.notes.heart || [], p.notes.base || []) : [];
+      const copy = [p.family, p.subtype, p.gender, p.room, p.concentration].concat(notes,
+        p.oud ? [p.oud.origin, p.oud.oudType, p.oud.grade, p.oud.character] : []).filter(Boolean);
+      return {
+        p,
+        name: fold(p.name),
+        code: fold(p.code),
+        hay: fold([p.story, (p.tags || []).join(' '), (p.mood || []).join(' '), (p.experience || []).join(' ')]
+          .concat(copy, copy.map(T)).join(' '))
+      };
+    });
+    return INDEX;
+  }
+  const startsWord = (text, w) => text.startsWith(w) || text.includes(' ' + w) || text.includes("'" + w);
+
+  /* Scored so the obvious answer comes first: a name beats a note, a note beats a word
+     in the story. Prefixes count, so results build up while the customer types. */
+  function search(q, limit) {
+    const raw = String(q || '').trim();
+    const words = queryWords(raw).concat(
+      raw.toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(w => w.length === 2 && !/^\p{Script=Arabic}/u.test(w)))
+      .map(w => QFOLD[fold(w)] || fold(w));
     if (!words.length) return [];
-    return D.products.map(p => {
-      const hay = [p.name, p.code, p.family, p.subtype, p.gender, p.story, p.room,
-      (p.tags || []).join(' '), (p.mood || []).join(' '), (p.experience || []).join(' '),
-      p.notes ? [].concat(p.notes.top, p.notes.heart || [], p.notes.base || []).join(' ') : '',
-      p.oud ? [p.oud.origin, p.oud.oudType, p.oud.grade, p.oud.character].join(' ') : ''
-      ].join(' ').toLowerCase();
-      let score = 0;
+    const whole = fold(raw);
+    return index().map(x => {
+      let score = 0, hits = 0;
+      if (whole.length > 1 && x.name.startsWith(whole)) score += 30;
+      if (whole.length > 1 && (x.code.includes(whole) || x.code.replace(/\D/g, '') === whole.replace(/\D/g, '') && /\d/.test(whole))) score += 25;
       words.forEach(w => {
-        // intent (sweet / winter / maison) outranks an incidental word match in the copy
-        if (hay.includes(w)) score += 2;
-        if (SYN[w] && SYN[w](p)) score += 3;
+        let s = 0;
+        if (startsWord(x.name, w)) s += 12; else if (x.name.includes(w)) s += 6;
+        if (startsWord(x.hay, w)) s += 3; else if (w.length > 3 && x.hay.includes(w)) s += 2;
+        if (SYN[w] && SYN[w](x.p)) s += 3;
+        if (s) hits++;
+        score += s;
       });
-      return { p, score };
-    }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).slice(0, 8).map(x => x.p);
+      score += (hits === words.length && words.length > 1) ? 6 : 0;   // every word found
+      return { p: x.p, score };
+    }).filter(x => x.score > 0).sort((a, b) => b.score - a.score)
+      .slice(0, limit || 8).map(x => x.p);
   }
 
   /* ── REVEAL ──────────────────────────────────────────────── */
@@ -704,12 +770,67 @@
     }
   });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(); });
-  document.addEventListener('input', e => {
+  /* ── SEARCH PANEL ───────────────────────────────────────────
+     Suggestions before the first letter, a short list of matches from the second, and
+     a way to everything: rows, not product cards, so a phone shows several at once and
+     a stray tap does not drop the customer on a product page. */
+  const SUGGEST = ['Oud', 'Rose', 'Fresh for summer', 'Sweet for winter', 'Diffuseur for the living room', 'Gift', 'Musk'];
+  function srow(p, q, i) {
+    /* fold() keeps the length of Latin text, so the match found in the folded name
+       can be cut out of the real one, accents and all */
+    const n = p.name, f = fold(n), at = q ? f.indexOf(fold(q)) : -1, len = fold(q).length;
+    const shown = at > -1 && f.length === n.length
+      ? esc(n.slice(0, at)) + '<mark>' + esc(n.slice(at, at + len)) + '</mark>' + esc(n.slice(at + len))
+      : esc(n);
+    const price = p.type === 'oud' ? money(gramPrice(p, C.oud.minGrams)) + ' / ' + C.oud.minGrams + ' g' : money(p.price);
+    const kind = p.type === 'oud' ? T('Bâtonnets · au gramme') : esc(T(p.family || p.concentration || ''));
+    return `<a class="srow" role="option" id="sopt${i}" href="product.html?id=${p.id}">
+      <span class="srow-art" style="--c1:${p.c[0]};--c2:${p.c[1]}">${bottle(p, { k: 's' + i, eager: true })}</span>
+      <span class="srow-txt"><span class="srow-name">${shown}</span><span class="srow-meta">${esc(p.code || '')} · ${kind}</span></span>
+      <span class="srow-price">${price}</span></a>`;
+  }
+  function drawSearch(q) {
+    const box = $('#sresults'), input = $('#sinput');
+    q = (q || '').trim();
+    const chips = `<div class="schips">${SUGGEST.map(t => `<button type="button" class="pill" data-sq="${esc(T(t))}">${T(t)}</button>`).join('')}</div>`;
+    if (q.length < 2) {
+      const best = D.products.filter(p => (p.tags || []).includes('bestseller')).slice(0, 4);
+      box.innerHTML = `<p class="slabel">${T('Popular searches')}</p>${chips}
+        <p class="slabel">${T('Bestsellers')}</p><div class="slist">${best.map((p, i) => srow(p, '', i)).join('')}</div>`;
+    } else {
+      const all = search(q, 50), top = all.slice(0, 6);
+      box.innerHTML = top.length
+        ? `<div class="slist">${top.map((p, i) => srow(p, q, i)).join('')}</div>
+           <a class="link-u sall" href="shop.html?q=${encodeURIComponent(q)}">${T('See all results')} (${all.length})</a>`
+        : `<p class="muted" style="margin:6px 0 18px">${T('No match yet — try one of these:')}</p>${chips}`;
+    }
+    active = -1;
+    input.setAttribute('aria-expanded', String(!!box.querySelector('.srow')));
+    input.removeAttribute('aria-activedescendant');
+  }
+  let active = -1;
+  function moveActive(d) {
+    const rows = $$('#sresults .srow'); if (!rows.length) return;
+    active = (active + d + rows.length) % rows.length;
+    rows.forEach((r, i) => r.classList.toggle('on', i === active));
+    $('#sinput').setAttribute('aria-activedescendant', rows[active].id);
+    rows[active].scrollIntoView({ block: 'nearest' });
+  }
+  document.addEventListener('input', e => { if (e.target.id === 'sinput') drawSearch(e.target.value); });
+  document.addEventListener('keydown', e => {
     if (e.target.id !== 'sinput') return;
-    const res = search(e.target.value);
-    $('#sresults').innerHTML = res.length ? res.map(p => card(p)).join('')
-      : (e.target.value.length > 2 ? '<p class="muted">No match yet — try “oud”, “fresh summer”, “diffuseur for the salon”.</p>' : '');
-    paint();
+    if (e.key === 'ArrowDown') { e.preventDefault(); moveActive(1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); moveActive(-1); }
+    else if (e.key === 'Enter') {
+      e.preventDefault();
+      const rows = $$('#sresults .srow'), q = e.target.value.trim();
+      if (active > -1 && rows[active]) location.href = rows[active].href;
+      else if (q.length >= 2) location.href = 'shop.html?q=' + encodeURIComponent(q);
+    }
+  });
+  document.addEventListener('click', e => {
+    const chip = e.target.closest('[data-sq]'); if (!chip) return;
+    const input = $('#sinput'); input.value = chip.dataset.sq; drawSearch(input.value); input.focus();
   });
 
   /* structured data for search engines — facts only, no ratings while those are demo data */
@@ -768,7 +889,7 @@
     award, awardOnce, tierOf, nextReward, unlocked, subtotal, cartCount, cartPoints, cartPointsAwarded,
     pointsFor, ptsLabel, ptsWord, rewardDiscount, waLink, waHref, sticksFor, sticksLabel, jsonLd,
     gramPrice, gramRate, isSpecial, oudPoints, unitPoints, priceOf,
-    search, paint, observe, recommend, mountQuiz, icons: I, setQty, closeOverlay, openOverlay, renderCart
+    waShown, search, paint, observe, recommend, mountQuiz, icons: I, setQty, closeOverlay, openOverlay, renderCart
   };
   window.OD = api;
 

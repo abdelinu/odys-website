@@ -40,9 +40,16 @@ Redeeming converts points into a *voucher* held on the account; the voucher come
 There is no payment gateway and no backend, by design for launch. `OD.waLink()` serialises the basket (items, weights, coffret composition, rewards applied, totals, name/address/city) into a `wa.me` message in the customer's language. Two entry points:
 
 - **Order on WhatsApp** — the primary button in the cart, and a WhatsApp icon in the header plus the number in the footer (the trust signal a COD shopper looks for).
+- A **coffret line spells out what the shop has to prepare**: each piece (with its weight), the box and ribbon, the engraving, the card message and its signature, and for a gift the recipient, their phone and address, the date, "no prices on the slip" and "send directly".
 - **Or leave your address here** — the same form as before; submitting opens WhatsApp pre-filled *and* records the order locally so points and rewards still work.
 
-⚠ `config.whatsapp` is a placeholder (`212600000000`). Put the real number there — or in `admin.html` — before showing anyone the site.
+`config.whatsapp` is the shop's number, `212684519444` (06 84 51 94 44): country code, no `+`, no spaces. Every order button is built from it.
+
+## Gifting
+
+**Offrir à quelqu'un** sits under add-to-cart on every product page and as a gift icon beside "Ajouter au voyage" on every product card. It opens `coffrets.html?offrir=<id>` (oud adds `&g=<grams>` from the product page): gift mode, the Coffret Signature (the free mix, the only coffret that takes any kind of piece), the product already inside, and the page scrolled to the personalisation step.
+
+In gift mode that step has **Votre mot**: six ready-made openings (anniversaire, merci, félicitations, Aïd, mariage, je pense à toi — translated in Arabic) that fill the message and stay editable, a 240-character message with a counter, a signature, and a live preview of the ivory card addressed to the recipient. The words travel with the cart line into the WhatsApp order.
 
 ## Coffrets
 
@@ -54,7 +61,7 @@ There is no payment gateway and no backend, by design for launch. `OD.waLink()` 
 4. **Personnalisation** — box colour, ribbon, engraving on the card, message
 5. **Livraison** — recipient, phone, address, date, hide prices, send directly (gift mode only)
 
-Price = contents − coffret discount + écrin fee; points = sum of the contents' points (diffuseurs contribute nothing). The whole composition travels with the cart line and into the order.
+Price = contents − coffret discount + écrin fee (none on a gift: the wrapping is included); points = sum of the contents' points (diffuseurs contribute nothing). The whole composition travels with the cart line and into the order.
 
 ## Pages
 
@@ -85,6 +92,7 @@ The site ships trilingual with a switcher in the header and footer, and full RTL
 - **French is the default.** An Arabic browser gets Arabic; English is opt-in through the switcher. Choosing a language stores it under `odys.lang` and reloads. Arabic sets `dir="rtl"`, swaps the UI face to Tajawal, and the stylesheet mirrors the drawer, journey rail, meters, badges and card overlays.
 - Composites that mix copy with numbers go through `OD.T()` in the page code, so atoms are translated *before* they are joined.
 - Deliberately left in English: brand and product names, prices in MAD and platform names.
+- **Search is instant.** The search panel shows popular searches and the bestsellers before the first letter, then a short list of matches from the second (rows, not cards, so a phone shows several); arrow keys move through them, Enter opens the highlighted one or `shop.html?q=…`, which lists every match with the usual tabs and filters on top. Accents never decide a match (*icone* finds L'ICÔNE), names outrank notes, notes outrank the story, and products are also indexed on their translated family and notes, so *bergamote* or *زعفران* find what *Bergamot* or *Saffron* would.
 - **Search understands French and Arabic.** `QMAP` in `app.js` maps FR/AR query words (sucré, hiver, bâtonnets, حلو, شتاء, مبخرة…) onto the English catalogue vocabulary, handles French elision and peels Arabic prefixes (للشتاء → شتاء). The Discovery prompts are written natively per language.
 
 To add a string: add the English source as a key in the last block of `i18n-labels.js` with its FR and AR values. Nothing else to wire.
@@ -128,13 +136,40 @@ Real product photographs live in `assets/img/`:
 | `odys-range.webp` / `-820.webp` | the three label finishes side by side | the *Un flacon, trois finitions* band on the home page |
 | `odys-og.jpg` | 1200×630 link preview | `og:image` on every customer-facing page |
 
-**How a photograph reaches the page.** Add `photo` (plus `photoW` / `photoH`) to a product in `data.js` and `OD.bottle()` returns an `<img>` instead of the generated SVG — cards, the product page, search results and the cart all pick it up at once. Products without a `photo` keep the drawn flacon, so the two can coexist while the rest of the range is shot. Today only ODYS 01 has one; the other 23 are still drawings, and the grid shows the difference.
+**How a photograph reaches the page.** Add `photo` (plus `photoW` / `photoH`) to a product in `data.js` and `OD.bottle()` returns an `<img>` instead of the generated SVG — cards, the product page, search results and the cart all pick it up at once. Products without a `photo` keep the drawn flacon, so the two can coexist while the rest of the range is shot. ODYS 01 has a real photograph; ODYS 02–12 use renders from the photo robot (below); diffuseurs and oud are still drawings.
 
 **Link previews.** A link shared on WhatsApp shows `odys-og.jpg` with the page's French title, because WhatsApp is where the orders come from and a bare link looks like spam. The absolute URLs assume `odysparfum.ma` — same assumption as `robots.txt` and the sitemap. WhatsApp does not run JavaScript, so those tags are static per page and always French, whatever language the reader would have seen.
 
 **Shoot list, in the order it pays off:** the other eleven parfums (the grid is visibly mixed today), the six diffuseurs with their rattan sticks, the oud bâtonnets at 5 g / 30 g / 100 g so the weights read as real quantities, and a coffret open with its ribbon. `odys-01-coffret.webp` is only 407×611 — it holds up in a card but it is soft on a large screen, so re-export it at 1200 px or wider when you have the original.
 
 **Read off the artwork, worth confirming:** the bottles say *extrait de parfum*, so all twelve parfums in `data.js` now say `Extrait de Parfum` instead of `Eau de Parfum` (translated in both `i18n-content.js` and the number-carrying rule in `i18n-labels.js`). The range image shows **30 ml** bottles while the box shows **50 ml** — the site is built entirely on 50 ml at 69 MAD, so if 30 ml is a real size it needs its own price and its own point value. That image also says **ODYS PARFUMS** while the box and the whole site say **ODYS PARFUM**, and it numbers bottles **07, 11 and 14** while the catalogue stops at 12.
+
+## The product-photo robot
+
+`scripts/studio.js` renders the 3D flacon for every parfum and writes the images the shop and social posts use. The look borrows the layout of tahara.ma's product cards — ivory ground, bottle on one side, name in large serif, three key notes, three words — with our own bottle and our own type.
+
+```bash
+npm install                        # once: Playwright, used only by the robot
+npm run studio                     # all 12 parfums: shop shot + French card
+npm run studio -- odys-02 odys-07  # just these
+npm run studio -- --lang fr,ar,en  # cards in several languages
+npm run notes                      # ingredient photos from Gemini (needs GEMINI_API_KEY), then studio again
+```
+
+It writes to `assets/img/products/`:
+
+| file | size | for |
+|---|---|---|
+| `odys-02.webp` | 800×1200 | the flacon alone — the shop grid, search, cart and product page (wired through `photo` in `data.js`) |
+| `odys-02-card-fr.webp` | 1080×1080 | the square card — Instagram, WhatsApp status, catalogue |
+
+**Every word and colour on the images comes from `data.js`**: name, number, family, gender, the first top / heart / base note, the moods and profile (for the three words), and `juice`, the liquid colour. Change one and run the robot again. Preview any image live at `studio/?id=odys-02&lang=fr` (add `&shot=bottle` for the shop shot).
+
+- **Bottle photographs win over the 3D render.** Save a square photo of a parfum's bottle as `assets/img/bottles/<id>.jpg` (`odys-02.jpg`, or `.png` / `.webp`), bottle centred on a plain ivory background — prompt A in `gemini-prompts.md` makes exactly that — and the next `npm run studio` builds that product's shop image and cards from it. The card takes its background colour from the photo's corners, so the two meet without a seam. ODYS 01 has one; the others fall back to the render until theirs is added. The robot's log says which source each image came from.
+- **The flacon** is `assets/js/flacon3d.js`, the same model `bottle3d.html` shows: thick glass, fluted black cap, gold crimp, tinted juice and the white printed label read off the ODYS 01 photograph. A pale juice gets dark ink automatically (below 3:1 contrast, white is unreadable).
+- **⚠ Juice colours are guesses** for everything except ODYS 01 (read off the photograph). Set the real ones in `data.js` once the bottles exist — and if a pale juice really is printed in white, say so and the ink rule changes.
+- **Note pictures come from Gemini.** `npm run notes` asks Gemini (`gemini-2.5-flash-image`, or `GEMINI_IMAGE_MODEL`) for a studio photograph of each note the cards show — first top, heart and base note of every parfum, about 30 images — and saves them as `assets/img/notes/<note>.webp`. Then `npm run studio` rebuilds the cards with them. It needs `GEMINI_API_KEY` (from Google AI Studio) in the environment; `--all` does every note, `--force` redoes existing ones, and naming notes (`npm run notes -- saffron rose-de-taif`) does just those. A picture that is already there is never replaced, so to get another take of one, delete its file and run again. What each note is photographed as — agarwood chips for *Oud Accord*, sparkling droplets for *Aldehydes* — is the `SUBJECT` table at the top of `scripts/notes-gemini.js`. The card fades each photo's edges into the ivory, so a background a shade off does not show as a square. A note without a picture falls back to a drawn medallion picked by ingredient kind (`studio/notes.js`); a real photograph saved under the same name works just as well.
+- Diffuseurs and oud are not drawn yet — the 3D model is the parfum flacon only.
 
 ## The flacon in 3D
 
@@ -148,7 +183,7 @@ Three things there are deliberate and easy to undo by accident:
 - tone mapping is **Neutral**, not ACES — ACES is graded for film and pulls the cream background grey as it passes through the glass;
 - the backdrop and floor are **real meshes**, because `scene.background` does not reach the buffer the glass samples.
 
-It is not wired into the shop: product pages still use the drawn SVG bottles. Putting it on a product page means ~450 KB of Three.js on that page, so it is worth a lazy load and a still image as the fallback.
+The model itself lives in `assets/js/flacon3d.js`, shared with the photo robot above. The interactive page is not wired into the shop (the robot's still renders are): putting it on a product page means ~450 KB of Three.js on that page, so it is worth a lazy load and a still image as the fallback.
 
 ## Prices you must confirm before launch
 
@@ -157,7 +192,7 @@ Everything marked `// ⚠` in `data.js`, all editable live in `admin.html`:
 - **Oud price per gram, per batch** — currently 10–22 MAD/g (Musk 10, Malaki 12, Rose & Oud 14, Cambodi 16, Hindi 18, Royal Noir 22)
 - **Gram tier multipliers** — 5 g ×1, 10 g ×0.96, 15 g ×0.93, 30 g ×0.88, 100 g ×0.80
 - **Special-order rate** — ×0.75 above 100 g
-- **Coffret écrin fee 29 MAD and coffret discount 8%**
+- **Coffret écrin fee 29 MAD and coffret discount 8%** — the fee applies to coffrets for oneself only; gifts are wrapped free
 - **Free shipping from 199 MAD** (set to the trio price so the hero basket always ships free), flat 35 MAD below it
 - **LE TRIO flat price 199 MAD** (`flatPrice` on the `cof-trio` coffret) — vs 242 MAD for three bottles plus delivery
 - **Referral points** — 3 on signup, 5 on their first order, 10% off for the friend
@@ -172,7 +207,7 @@ The 69 MAD perfume and the 49 MAD diffuseur are your numbers. The point rule and
 It is a folder of static files: copy it to any host (Netlify, Cloudflare Pages, Vercel, or plain nginx). No build, no environment variables, no database.
 
 1. Confirm everything in the list above, in `data.js` (or test it first in `admin.html`, which only changes your own browser).
-2. Put the real WhatsApp number in `config.whatsapp` — with no `+` and no spaces, e.g. `212612345678`. Every order button is a `wa.me` link built from it, so a wrong number means silent lost orders.
+2. Check the WhatsApp number in `config.whatsapp` (now `212684519444`, with no `+` and no spaces). Every order button is a `wa.me` link built from it, so a wrong number means silent lost orders.
 3. Set the real domain in `robots.txt` and `scripts/sitemap.js`, then run `node scripts/sitemap.js`.
 4. Bump the `?v=` stamp (see Cache busting) so returning visitors get the new CSS/JS.
 5. Serve over HTTPS and send these headers (Netlify/Cloudflare Pages read a `_headers` file; nginx uses `add_header`):

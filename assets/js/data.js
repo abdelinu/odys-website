@@ -18,7 +18,7 @@ window.ODYS = (function () {
     showRatings: false,
 
     /* ORDERING — WhatsApp + cash on delivery is the launch channel */
-    whatsapp: '212600000000',          // ⚠ PLACEHOLDER — put the real number here (country code, no +)
+    whatsapp: '212684519444',          // the shop's WhatsApp (06 84 51 94 44): country code, no +, no spaces
 
     /* POINTS — follow the dirham, not the unit.
        Keyed per gram, a cheap oud batch paid the same reward as an expensive one;
@@ -70,6 +70,8 @@ window.ODYS = (function () {
 
   const PERFUME = config.prices.perfume50;
 
+  /* juice: the liquid colour the product-photo robot (studio/) paints into the 3D flacon.
+     ⚠ Only ODYS 01's is read off a photograph; the rest are guesses from the family. */
   const parfums = [
     {
       id: 'odys-01', code: 'ODYS 01', name: "L'ICÔNE", type: 'parfum',
@@ -80,9 +82,10 @@ window.ODYS = (function () {
       notes: { top: ['Calabrian Bergamot', 'Pink Pepper', 'Cardamom'], heart: ['Orris', 'Violet Leaf', 'Cedar'], base: ['Atlas Cedarwood', 'Vetiver', 'White Musk'] },
       profile: { intensity: 4, longevity: 5, projection: 4, sweetness: 2, freshness: 3 },
       story: "The first chapter. Bergamot opens like morning over the Atlas, then the scent turns inward — dry cedar, cold iris, a thread of pepper that never quite settles. Worn by people who do not explain themselves.",
-      sku: 'ODY-01-50', stock: 142, c: P.icon,
-      // the real flacon with its box; every other product still uses the generated art
-      photo: 'assets/img/odys-01-coffret.webp', photoW: 407, photoH: 611
+      sku: 'ODY-01-50', stock: 142, c: P.icon, juice: '#8A5A1C',
+      // made by scripts/studio.js from the photograph in assets/img/bottles/; the others
+      // use the 3D render until their photograph is dropped in next to it
+      photo: 'assets/img/products/odys-01.webp', photoW: 800, photoH: 1200
     },
     {
       id: 'odys-02', code: 'ODYS 02', name: 'NUIT SAFRAN', type: 'parfum',
@@ -93,7 +96,8 @@ window.ODYS = (function () {
       notes: { top: ['Saffron', 'Nutmeg', 'Blood Orange'], heart: ['Rose de Taif', 'Immortelle', 'Cinnamon'], base: ['Labdanum', 'Amber', 'Benzoin'] },
       profile: { intensity: 5, longevity: 5, projection: 5, sweetness: 4, freshness: 1 },
       story: "Saffron burns slow. This is the hour after dinner when the lights go down and nobody is in a hurry — resin, rose, and a warmth that stays on wool for days.",
-      sku: 'ODY-02-50', stock: 127, c: P.amber
+      sku: 'ODY-02-50', stock: 127, c: P.amber, juice: '#7A3412',
+      photo: 'assets/img/products/odys-02.webp', photoW: 800, photoH: 1200
     },
     {
       id: 'odys-03', code: 'ODYS 03', name: 'JARDIN BLANC', type: 'parfum',
@@ -104,7 +108,8 @@ window.ODYS = (function () {
       notes: { top: ['Neroli', 'Green Mandarin', 'Pear'], heart: ['Orange Blossom', 'Jasmine Sambac', 'Tuberose'], base: ['Sandalwood', 'Musk', 'Cedar'] },
       profile: { intensity: 3, longevity: 3, projection: 3, sweetness: 3, freshness: 4 },
       story: "A courtyard in Fès at the end of April. Orange blossom over cool stone, water somewhere out of sight.",
-      sku: 'ODY-03-50', stock: 163, c: P.floral
+      sku: 'ODY-03-50', stock: 163, c: P.floral, juice: '#E6D6A6',
+      photo: 'assets/img/products/odys-03.webp', photoW: 800, photoH: 1200
     },
     {
       id: 'odys-04', code: 'ODYS 04', name: 'CÈDRE NOIR', type: 'parfum',
@@ -115,7 +120,8 @@ window.ODYS = (function () {
       notes: { top: ['Black Pepper', 'Elemi', 'Grapefruit Peel'], heart: ['Cedar', 'Guaiac Wood', 'Leather'], base: ['Vetiver', 'Birch Tar', 'Tonka'] },
       profile: { intensity: 5, longevity: 5, projection: 4, sweetness: 2, freshness: 2 },
       story: "Cedar cut in winter, left near a fire. Dry, resinous, faintly smoked — the most quietly masculine thing we make.",
-      sku: 'ODY-04-50', stock: 131, c: P.woody
+      sku: 'ODY-04-50', stock: 131, c: P.woody, juice: '#4A2C18',
+      photo: 'assets/img/products/odys-04.webp', photoW: 800, photoH: 1200
     },
     {
       id: 'odys-05', code: 'ODYS 05', name: 'MENTHE & SEL', type: 'parfum',
@@ -126,7 +132,8 @@ window.ODYS = (function () {
       notes: { top: ['Moroccan Mint', 'Lemon', 'Sea Salt'], heart: ['Green Fig', 'Basil', 'Geranium'], base: ['Ambrette', 'Driftwood', 'Musk'] },
       profile: { intensity: 2, longevity: 3, projection: 3, sweetness: 1, freshness: 5 },
       story: "Mint tea poured too high, salt still on the skin. The scent of a long afternoon with nothing scheduled.",
-      sku: 'ODY-05-50', stock: 188, c: P.fresh
+      sku: 'ODY-05-50', stock: 188, c: P.fresh, juice: '#CBD8B2',
+      photo: 'assets/img/products/odys-05.webp', photoW: 800, photoH: 1200
     },
     {
       id: 'odys-06', code: 'ODYS 06', name: 'ROSE DE NUIT', type: 'parfum',
@@ -137,7 +144,8 @@ window.ODYS = (function () {
       notes: { top: ['Raspberry', 'Pink Pepper', 'Bergamot'], heart: ['Rose Absolute', 'Oud Accord', 'Patchouli'], base: ['Amber', 'Vanilla Bourbon', 'Musk'] },
       profile: { intensity: 5, longevity: 5, projection: 5, sweetness: 4, freshness: 1 },
       story: "Rose, but after dark — deepened with oud and patchouli until it stops being polite.",
-      sku: 'ODY-06-50', stock: 124, c: P.floral
+      sku: 'ODY-06-50', stock: 124, c: P.floral, juice: '#C7848A',
+      photo: 'assets/img/products/odys-06.webp', photoW: 800, photoH: 1200
     },
     {
       id: 'odys-07', code: 'ODYS 07', name: 'AMBRE DOUX', type: 'parfum',
@@ -148,7 +156,8 @@ window.ODYS = (function () {
       notes: { top: ['Bitter Almond', 'Bergamot', 'Cinnamon'], heart: ['Orange Blossom Honey', 'Tonka', 'Heliotrope'], base: ['Amber', 'Vanilla', 'Sandalwood'] },
       profile: { intensity: 4, longevity: 5, projection: 4, sweetness: 5, freshness: 1 },
       story: "Honey left on a warm spoon. Almond, tonka, a soft amber that reads as skin by hour three.",
-      sku: 'ODY-07-50', stock: 155, c: P.gourmand
+      sku: 'ODY-07-50', stock: 155, c: P.gourmand, juice: '#B06C26',
+      photo: 'assets/img/products/odys-07.webp', photoW: 800, photoH: 1200
     },
     {
       id: 'odys-08', code: 'ODYS 08', name: 'OUD IMPÉRIAL', type: 'parfum',
@@ -159,7 +168,8 @@ window.ODYS = (function () {
       notes: { top: ['Saffron', 'Cypress', 'Cardamom'], heart: ['Oud Accord', 'Rose', 'Leather'], base: ['Sandalwood', 'Ambergris', 'Musk'] },
       profile: { intensity: 5, longevity: 5, projection: 5, sweetness: 2, freshness: 1 },
       story: "Our densest composition — oud at the centre, held up by saffron and rose. The bottle people come back for, and the one they hand to their brother.",
-      sku: 'ODY-08-50', stock: 112, c: P.oud
+      sku: 'ODY-08-50', stock: 112, c: P.oud, juice: '#3E1E12',
+      photo: 'assets/img/products/odys-08.webp', photoW: 800, photoH: 1200
     },
     {
       id: 'odys-09', code: 'ODYS 09', name: 'FIGUE SAUVAGE', type: 'parfum',
@@ -170,7 +180,8 @@ window.ODYS = (function () {
       notes: { top: ['Fig Leaf', 'Green Mandarin', 'Violet Leaf'], heart: ['Fig Milk', 'Iris', 'Coconut Wood'], base: ['Cedar', 'Musk', 'Benzoin'] },
       profile: { intensity: 3, longevity: 3, projection: 3, sweetness: 3, freshness: 4 },
       story: "Fig picked warm off the tree — green at first, then creamy, then wood.",
-      sku: 'ODY-09-50', stock: 171, c: P.fresh
+      sku: 'ODY-09-50', stock: 171, c: P.fresh, juice: '#BDBB7C',
+      photo: 'assets/img/products/odys-09.webp', photoW: 800, photoH: 1200
     },
     {
       id: 'odys-10', code: 'ODYS 10', name: 'MUSC BLANC', type: 'parfum',
@@ -181,7 +192,8 @@ window.ODYS = (function () {
       notes: { top: ['Aldehydes', 'Bergamot', 'Pear Blossom'], heart: ['Iris', 'Cotton Accord', 'Jasmine'], base: ['White Musk', 'Cashmere Wood', 'Ambrette'] },
       profile: { intensity: 2, longevity: 4, projection: 2, sweetness: 2, freshness: 4 },
       story: "The quiet one. Clean laundry, warm skin, nothing to declare — our most repurchased bottle.",
-      sku: 'ODY-10-50', stock: 204, c: P.musk
+      sku: 'ODY-10-50', stock: 204, c: P.musk, juice: '#EEE6D3',
+      photo: 'assets/img/products/odys-10.webp', photoW: 800, photoH: 1200
     },
     {
       id: 'odys-11', code: 'ODYS 11', name: 'TABAC & MIEL', type: 'parfum',
@@ -192,7 +204,8 @@ window.ODYS = (function () {
       notes: { top: ['Clove', 'Bergamot', 'Rum Accord'], heart: ['Tobacco Leaf', 'Honey', 'Cinnamon'], base: ['Tonka', 'Dry Woods', 'Vanilla'] },
       profile: { intensity: 5, longevity: 5, projection: 4, sweetness: 4, freshness: 1 },
       story: "Tobacco and honey, the way an old leather chair smells in a room that has seen conversation.",
-      sku: 'ODY-11-50', stock: 138, c: P.spicy
+      sku: 'ODY-11-50', stock: 138, c: P.spicy, juice: '#94561C',
+      photo: 'assets/img/products/odys-11.webp', photoW: 800, photoH: 1200
     },
     {
       id: 'odys-12', code: 'ODYS 12', name: 'NUIT D’ATLAS', type: 'parfum',
@@ -203,7 +216,8 @@ window.ODYS = (function () {
       notes: { top: ['Juniper', 'Cold Mint', 'Grapefruit'], heart: ['Lavender Absolute', 'Cypress', 'Stone Accord'], base: ['Vetiver', 'Ambergris', 'Cedar'] },
       profile: { intensity: 4, longevity: 4, projection: 3, sweetness: 1, freshness: 4 },
       story: "Altitude after sunset. Juniper, cold air, wet rock — a fresh scent with a shadow in it.",
-      sku: 'ODY-12-50', stock: 146, c: P.night
+      sku: 'ODY-12-50', stock: 146, c: P.night, juice: '#93A6AA',
+      photo: 'assets/img/products/odys-12.webp', photoW: 800, photoH: 1200
     }
   ];
 
