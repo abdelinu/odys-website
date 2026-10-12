@@ -61,7 +61,7 @@ In gift mode that step has **Votre mot**: six ready-made openings (anniversaire,
 4. **Personnalisation** — box colour, ribbon, engraving on the card, message
 5. **Livraison** — recipient, phone, address, date, hide prices, send directly (gift mode only)
 
-Price = contents − coffret discount + écrin fee; points = sum of the contents' points (diffuseurs contribute nothing). The whole composition travels with the cart line and into the order.
+Price = contents − coffret discount + écrin fee (none on a gift: the wrapping is included); points = sum of the contents' points (diffuseurs contribute nothing). The whole composition travels with the cart line and into the order.
 
 ## Pages
 
@@ -192,7 +192,7 @@ Everything marked `// ⚠` in `data.js`, all editable live in `admin.html`:
 - **Oud price per gram, per batch** — currently 10–22 MAD/g (Musk 10, Malaki 12, Rose & Oud 14, Cambodi 16, Hindi 18, Royal Noir 22)
 - **Gram tier multipliers** — 5 g ×1, 10 g ×0.96, 15 g ×0.93, 30 g ×0.88, 100 g ×0.80
 - **Special-order rate** — ×0.75 above 100 g
-- **Coffret écrin fee 29 MAD and coffret discount 8%**
+- **Coffret écrin fee 29 MAD and coffret discount 8%** — the fee applies to coffrets for oneself only; gifts are wrapped free
 - **Free shipping from 199 MAD** (set to the trio price so the hero basket always ships free), flat 35 MAD below it
 - **LE TRIO flat price 199 MAD** (`flatPrice` on the `cof-trio` coffret) — vs 242 MAD for three bottles plus delivery
 - **Referral points** — 3 on signup, 5 on their first order, 10% off for the friend
