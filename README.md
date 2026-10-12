@@ -135,6 +135,9 @@ Real product photographs live in `assets/img/`:
 | `odys-01-coffret.webp` | ODYS 01 L'ICÔNE with its box | the home hero, the ODYS 01 card and its product page |
 | `odys-range.webp` / `-820.webp` | the three label finishes side by side | the *Un flacon, trois finitions* band on the home page |
 | `odys-og.jpg` | 1200×630 link preview | `og:image` on every customer-facing page |
+| `hero/licone-desktop.webp` · `hero/licone-mobile.webp` | L'ICÔNE on a Marrakech terrace (Gemini art direction) | the home hero — desktop and phone |
+
+**The hero photographs carry no words.** The headline, button and the three facts are HTML laid over them, so they translate, link and stay sharp. The two files were cut from art-direction images that had the copy printed in: the desktop one keeps the whole scene and the frosted card sits exactly over where the printed words were (the hero keeps the picture's proportions so the card never drifts off them); the phone one is a crop around the flacon. A clean version of each — same scene, *no text, logo, icons or button* — would let the card go lighter; drop it in under the same name.
 
 **How a photograph reaches the page.** Add `photo` (plus `photoW` / `photoH`) to a product in `data.js` and `OD.bottle()` returns an `<img>` instead of the generated SVG — cards, the product page, search results and the cart all pick it up at once. Products without a `photo` keep the drawn flacon, so the two can coexist while the rest of the range is shot. ODYS 01 has a real photograph; ODYS 02–12 use renders from the photo robot (below); diffuseurs and oud are still drawings.
 

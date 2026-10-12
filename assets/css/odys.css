@@ -237,14 +237,6 @@ p{margin:0 0 1em}
 .hero-kicker{display:flex;align-items:baseline;gap:16px;margin:0 0 22px}
 .hero-kicker .eyebrow{color:var(--brass-lite);margin:0}
 .hero-ar{font-family:var(--arabic);font-size:clamp(28px,3vw,40px);line-height:1;color:var(--brass-lite);direction:rtl}
-/* prices as facts you can read, then what makes a first order feel safe */
-.hero-prices{list-style:none;padding:0;margin:30px 0 0;display:flex;flex-wrap:wrap;gap:10px}
-.hero-prices li{display:flex;gap:10px;align-items:baseline;padding:9px 14px;border:1px solid rgba(216,198,165,.28);border-radius:40px;
-  font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(243,235,221,.72)}
-.hero-prices b{font-weight:400;color:var(--sand);letter-spacing:.08em}
-.hero-trust{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-wrap:wrap;gap:10px 26px;font-size:13px;color:rgba(243,235,221,.8)}
-.hero-trust li{display:flex;align-items:center;gap:9px}
-.hero-trust svg{width:19px;height:19px;flex:none;stroke:var(--brass-lite);fill:none;stroke-width:1.3}
 
 .stage{position:relative;display:grid;place-items:center;min-height:420px}
 .stage .glow{
@@ -252,17 +244,7 @@ p{margin:0 0 1em}
   background:radial-gradient(circle,rgba(176,141,79,.45),transparent 62%);filter:blur(30px)
 }
 .bottle-3d{width:min(46vw,330px);animation:float 9s ease-in-out infinite;filter:drop-shadow(0 40px 50px rgba(0,0,0,.55))}
-/* The hero flacon sits in an ivory Moroccan arch the colour of the photograph's own
-   background (#F1E8DB), with a brass hairline inside — the photo becomes the window,
-   not a rectangle pasted on burgundy. */
-.arch{position:relative;display:block;width:min(36vw,400px);aspect-ratio:5/7;background:#F1E8DB;overflow:hidden;
-  border-radius:999px 999px 6px 6px;box-shadow:0 50px 90px -30px rgba(0,0,0,.75),0 0 0 1px rgba(216,198,165,.35)}
-.arch::after{content:"";position:absolute;inset:10px;border:1px solid rgba(176,141,79,.55);border-radius:999px 999px 2px 2px;pointer-events:none}
-.arch img.art-photo{width:100%;height:100%;object-fit:cover;object-position:50% 58%;transition:transform 1.2s var(--ease)}
-.arch:hover img.art-photo{transform:scale(1.035)}
-.arch svg{width:62%;margin:22% auto 0;display:block}
-.arch-tag{position:absolute;left:0;right:0;bottom:24px;text-align:center;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:#7E5F27}
-@media(prefers-reduced-motion:reduce){.arch img.art-photo{transition:none}}
+
 @keyframes float{0%,100%{transform:translateY(0) rotate(-1.2deg)}50%{transform:translateY(-16px) rotate(1.2deg)}}
 .smoke{position:absolute;inset:0;overflow:hidden;pointer-events:none}
 .smoke i{
@@ -280,6 +262,55 @@ p{margin:0 0 1em}
   left:var(--x);top:var(--y);opacity:.5;animation:drift var(--d,12s) ease-in-out infinite;animation-delay:var(--dl,0s)
 }
 @keyframes drift{0%,100%{transform:translate(0,0);opacity:.2}50%{transform:translate(14px,-26px);opacity:.85}}
+
+/* ── photo hero ─────────────────────────────────────────────
+   Desktop: the photograph fills a box of its own proportions, so anything placed in
+   percentages stays on the same part of the picture at every width. The card sits
+   where the art direction put the words — frosted ivory, so the scene shows through. */
+.hero-photo{display:block;min-height:0;aspect-ratio:1672/781;background:#C9A27A;color:var(--ink)}
+.hero-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-card{position:absolute;left:8.5%;top:4.5%;width:31%;height:61%;display:flex;flex-direction:column;justify-content:center;
+  padding:0 clamp(22px,2.6vw,46px);background:rgba(251,247,239,.84);
+  -webkit-backdrop-filter:blur(22px) saturate(1.05);backdrop-filter:blur(22px) saturate(1.05);
+  border:1px solid rgba(255,255,255,.55);box-shadow:0 30px 60px -30px rgba(40,18,8,.45)}
+.hero-photo .hero-kicker{margin:0 0 clamp(8px,1vw,16px)}
+.hero-photo .hero-kicker .eyebrow{color:var(--accent);font-size:clamp(9px,.72vw,11px)}
+.hero-photo .hero-ar{color:var(--brass-deep);font-size:clamp(20px,1.8vw,30px)}
+.hero-photo h1{font-size:clamp(38px,4.6vw,78px);line-height:.95;letter-spacing:.01em;color:var(--ink)}
+.hero-sub{font-size:clamp(9.5px,.8vw,12.5px);letter-spacing:.3em;text-transform:uppercase;margin:clamp(10px,1.1vw,18px) 0 0;color:var(--ink)}
+.hero-rule{display:block;width:44px;height:1px;background:var(--brass);margin:clamp(12px,1.4vw,22px) 0}
+@media(min-width:901px){[dir=rtl] .hero-rule{margin-inline-start:0}}
+.hero-line{font-family:var(--display);font-style:italic;font-size:clamp(15px,1.35vw,22px);line-height:1.35;margin:0 0 clamp(14px,1.6vw,26px);color:var(--ink-soft)}
+.hero-photo .hero-cta{align-items:center;gap:22px}
+.hero-photo .btn .arr{display:inline-block;transition:transform .35s var(--ease)}
+.hero-photo .btn:hover .arr{transform:translateX(4px)}
+[dir=rtl] .hero-photo .btn .arr{transform:scaleX(-1)}
+.hero-feats{position:absolute;left:0;right:0;bottom:0;list-style:none;margin:0;padding:48px var(--pad) 22px;
+  display:flex;justify-content:center;gap:clamp(18px,4vw,64px);
+  background:linear-gradient(to top,rgba(26,10,6,.62),rgba(26,10,6,0));color:#F7EFE2}
+.hero-feats li{display:flex;align-items:center;gap:10px;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase}
+.hero-feats svg{width:20px;height:20px;flex:none;stroke:#E4C98F;fill:none;stroke-width:1.2}
+@media(max-width:1280px){.hero-feats li{letter-spacing:.12em;font-size:10px}.hero-feats{gap:28px}}
+.lang-ar .hero-feats li,.lang-ar .hero-sub{letter-spacing:0;font-size:13px}
+
+/* Phone: the picture on top, kept short enough that the button stays above the
+   bottom bar, then the words on the house burgundy. */
+@media(max-width:900px){
+  .hero-photo{aspect-ratio:auto;background:radial-gradient(120% 80% at 50% 0%,#5A1E22,#3D1216 50%,#1E0709);color:var(--ivory)}
+  .hero-bg img{position:static;display:block;height:min(42svh,420px);object-position:50% 0}   /* keep the cap */
+  .hero-card{position:static;width:auto;height:auto;padding:22px var(--pad) 8px;text-align:center;align-items:center;
+    background:none;-webkit-backdrop-filter:none;backdrop-filter:none;border:0;box-shadow:none}
+  .hero-photo .hero-kicker{justify-content:center}
+  .hero-photo .hero-kicker .eyebrow,.hero-photo .hero-ar{color:var(--brass-lite)}
+  .hero-photo h1{color:var(--ivory);font-size:clamp(40px,12vw,58px)}
+  .hero-sub{color:var(--sand);font-size:10.5px}
+  .hero-rule{margin:14px auto}
+  .hero-line{color:rgba(243,235,221,.78);font-size:17px;margin-bottom:18px}
+  .hero-photo .hero-cta{justify-content:center;flex-direction:column;gap:14px;width:100%}
+  .hero-photo .hero-cta .btn{flex:none;width:100%;max-width:360px}
+  .hero-photo .link-u{color:var(--sand)}
+  .hero-feats{position:static;background:none;flex-direction:column;align-items:center;gap:12px;padding:18px var(--pad) 30px}
+}
 
 /* discovery pills */
 .pills{display:flex;flex-wrap:wrap;gap:10px}
@@ -627,11 +658,8 @@ img.art-photo{display:block;max-width:100%;height:auto}
   .hero-kicker{justify-content:center;margin-bottom:14px}
   .hero-cta{justify-content:center}
   .hero-cta .btn{flex:1 1 220px}
-  .hero-prices,.hero-trust{justify-content:center}
   .stage{min-height:0;order:-1}
   .stage .glow{width:80vw}
-  .arch{width:min(44vw,200px)}
-  .arch-tag{display:none}
   .split{grid-template-columns:1fr}
   .grid-4,.grid-3{grid-template-columns:repeat(2,1fr)}
   .mnav{display:grid}
