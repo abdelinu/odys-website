@@ -181,9 +181,8 @@
   const langBar = (cls) => window.I18N ? `<div class="langs ${cls || ''}" role="group" aria-label="Language">
       ${LANGS.map(l => `<button data-lang="${l}"${I18N.lang === l ? ' aria-current="true"' : ''} lang="${l}">${I18N.labels[l]}</button>`).join('')}
     </div>` : '';
-  const ANN = [
-    'Your journey starts here',
-    'Parfum 50 ML · ' + money(C.prices.perfume50) + ' — diffuseur 50 ML · ' + money(C.prices.diffuseur50),
+  const ANN = [   // the hero already says "your journey starts here"; the bar carries the facts
+    T('Parfum 50 ML') + ' · ' + money(C.prices.perfume50) + ' — ' + T('Diffuseur 50 ML') + ' · ' + money(C.prices.diffuseur50),
     'Order on WhatsApp · cash on delivery across Morocco',
     'Free shipping from ' + money(C.freeShipFrom)
   ];
