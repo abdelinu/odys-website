@@ -1,5 +1,7 @@
 # ODYS PARFUM: prompts for Gemini (AI Studio / Gemini app)
 
+A = plain bottle shot · B = ingredient photos for the cards · C = each parfum's bottle with its own ingredients
+
 Use the model "Nano Banana" (gemini-2.5-flash-image) or any newer Gemini image model.
 Ask for a square 1:1 image each time.
 
@@ -389,5 +391,240 @@ A single small, tidy arrangement in the centre of a square frame, filling about 
 Plain seamless warm ivory background, colour #F3EBDD, the same tone edge to edge — no surface line, no table, no gradient.
 Soft natural daylight from the upper left, a faint soft shadow, crisp focus, photorealistic, high-end fragrance advertising.
 No text, no labels, no bottle, no packaging, no hands, no other objects.
+```
+
+
+---
+
+# C. One picture per parfum: the bottle with its own ingredients (12)
+
+Attach your real bottle photo, then paste the prompt for that parfum. Each prompt is complete on its own.
+
+## ODYS 01: L'ICÔNE
+
+```
+Using the attached photo as the exact reference for the bottle, create a premium studio photograph of this same perfume bottle surrounded by its ingredients.
+
+The bottle must stay identical to the reference: a square, thick, clear glass flacon with a heavy clear glass base, pale golden-yellow liquid, a thin dip tube, and a glossy black cylindrical cap with a thin silver collar.
+Its label is a white rectangular sticker with rounded corners and a thin gold hairline border, with this text centred and perfectly sharp:
+- line 1, large elegant black serif: "L'ICÔNE"
+- line 2, small spaced gold capitals: "EXTRAIT DE PARFUM"
+- line 3, small black sans-serif: "N° 01 · 50 ml · 1.7 FL.OZ"
+Spell the text exactly as written. No other text or logos anywhere.
+
+The bottle stands upright in the centre, front view turned slightly to the side, filling about 60% of the frame height, the label fully visible and never covered.
+Around its base, a low, elegant, uncluttered arrangement of real ingredients: a halved Calabrian bergamot and a whole one, a few pink peppercorns, two green cardamom pods, pale orris root pieces with one purple iris flower, a small split block of reddish cedar wood and a tied bundle of golden vetiver roots. Each ingredient clearly recognisable, nothing in front of the label, nothing taller than the bottle's shoulder.
+Plain seamless warm ivory background, colour #F3EBDD, the same tone edge to edge, no table line, no gradient.
+Soft natural daylight from the upper left, soft realistic shadows, gentle reflections in the glass, crisp focus, photorealistic, high-end fragrance advertising. Square 1:1 image.
+No hands, no people, no second bottle, no packaging.
+```
+
+## ODYS 02: NUIT SAFRAN
+
+```
+Using the attached photo as the exact reference for the bottle, create a premium studio photograph of this same perfume bottle surrounded by its ingredients.
+
+The bottle must stay identical to the reference: a square, thick, clear glass flacon with a heavy clear glass base, pale golden-yellow liquid, a thin dip tube, and a glossy black cylindrical cap with a thin silver collar.
+Its label is a white rectangular sticker with rounded corners and a thin gold hairline border, with this text centred and perfectly sharp:
+- line 1, large elegant black serif: "NUIT SAFRAN"
+- line 2, small spaced gold capitals: "EXTRAIT DE PARFUM"
+- line 3, small black sans-serif: "N° 02 · 50 ml · 1.7 FL.OZ"
+Spell the text exactly as written. No other text or logos anywhere.
+
+The bottle stands upright in the centre, front view turned slightly to the side, filling about 60% of the frame height, the label fully visible and never covered.
+Around its base, a low, elegant, uncluttered arrangement of real ingredients: a small heap of deep red saffron threads with a purple crocus flower, a halved blood orange, two whole nutmegs, fresh pink Taif rose petals and one rose, a few cinnamon sticks, and glowing pieces of golden amber and dark labdanum resin. Each ingredient clearly recognisable, nothing in front of the label, nothing taller than the bottle's shoulder.
+Plain seamless warm ivory background, colour #F3EBDD, the same tone edge to edge, no table line, no gradient.
+Soft natural daylight from the upper left, soft realistic shadows, gentle reflections in the glass, crisp focus, photorealistic, high-end fragrance advertising. Square 1:1 image.
+No hands, no people, no second bottle, no packaging.
+```
+
+## ODYS 03: JARDIN BLANC
+
+```
+Using the attached photo as the exact reference for the bottle, create a premium studio photograph of this same perfume bottle surrounded by its ingredients.
+
+The bottle must stay identical to the reference: a square, thick, clear glass flacon with a heavy clear glass base, pale golden-yellow liquid, a thin dip tube, and a glossy black cylindrical cap with a thin silver collar.
+Its label is a white rectangular sticker with rounded corners and a thin gold hairline border, with this text centred and perfectly sharp:
+- line 1, large elegant black serif: "JARDIN BLANC"
+- line 2, small spaced gold capitals: "EXTRAIT DE PARFUM"
+- line 3, small black sans-serif: "N° 03 · 50 ml · 1.7 FL.OZ"
+Spell the text exactly as written. No other text or logos anywhere.
+
+The bottle stands upright in the centre, front view turned slightly to the side, filling about 60% of the frame height, the label fully visible and never covered.
+Around its base, a low, elegant, uncluttered arrangement of real ingredients: a sprig of white neroli (orange-tree) flowers, two small green mandarins with leaves, one halved pale pear, a small cluster of white jasmine sambac flowers, a stem of white tuberose and a few pale sandalwood chips. Each ingredient clearly recognisable, nothing in front of the label, nothing taller than the bottle's shoulder.
+Plain seamless warm ivory background, colour #F3EBDD, the same tone edge to edge, no table line, no gradient.
+Soft natural daylight from the upper left, soft realistic shadows, gentle reflections in the glass, crisp focus, photorealistic, high-end fragrance advertising. Square 1:1 image.
+No hands, no people, no second bottle, no packaging.
+```
+
+## ODYS 04: CÈDRE NOIR
+
+```
+Using the attached photo as the exact reference for the bottle, create a premium studio photograph of this same perfume bottle surrounded by its ingredients.
+
+The bottle must stay identical to the reference: a square, thick, clear glass flacon with a heavy clear glass base, pale golden-yellow liquid, a thin dip tube, and a glossy black cylindrical cap with a thin silver collar.
+Its label is a white rectangular sticker with rounded corners and a thin gold hairline border, with this text centred and perfectly sharp:
+- line 1, large elegant black serif: "CÈDRE NOIR"
+- line 2, small spaced gold capitals: "EXTRAIT DE PARFUM"
+- line 3, small black sans-serif: "N° 04 · 50 ml · 1.7 FL.OZ"
+Spell the text exactly as written. No other text or logos anywhere.
+
+The bottle stands upright in the centre, front view turned slightly to the side, filling about 60% of the frame height, the label fully visible and never covered.
+Around its base, a low, elegant, uncluttered arrangement of real ingredients: a small heap of black peppercorns, curled strips of pink grapefruit peel, split dark cedar wood, a rolled piece of soft dark tan leather, a curl of white birch bark, a tied bundle of vetiver roots and a few dark tonka beans. Each ingredient clearly recognisable, nothing in front of the label, nothing taller than the bottle's shoulder.
+Plain seamless warm ivory background, colour #F3EBDD, the same tone edge to edge, no table line, no gradient.
+Soft natural daylight from the upper left, soft realistic shadows, gentle reflections in the glass, crisp focus, photorealistic, high-end fragrance advertising. Square 1:1 image.
+No hands, no people, no second bottle, no packaging.
+```
+
+## ODYS 05: MENTHE & SEL
+
+```
+Using the attached photo as the exact reference for the bottle, create a premium studio photograph of this same perfume bottle surrounded by its ingredients.
+
+The bottle must stay identical to the reference: a square, thick, clear glass flacon with a heavy clear glass base, pale golden-yellow liquid, a thin dip tube, and a glossy black cylindrical cap with a thin silver collar.
+Its label is a white rectangular sticker with rounded corners and a thin gold hairline border, with this text centred and perfectly sharp:
+- line 1, large elegant black serif: "MENTHE & SEL"
+- line 2, small spaced gold capitals: "EXTRAIT DE PARFUM"
+- line 3, small black sans-serif: "N° 05 · 50 ml · 1.7 FL.OZ"
+Spell the text exactly as written. No other text or logos anywhere.
+
+The bottle stands upright in the centre, front view turned slightly to the side, filling about 60% of the frame height, the label fully visible and never covered.
+Around its base, a low, elegant, uncluttered arrangement of real ingredients: a fresh bunch of Moroccan spearmint, a halved lemon, a small heap of coarse white sea-salt crystals, two fresh green figs (one halved showing pink flesh), a sprig of basil and a small piece of sun-bleached driftwood. Each ingredient clearly recognisable, nothing in front of the label, nothing taller than the bottle's shoulder.
+Plain seamless warm ivory background, colour #F3EBDD, the same tone edge to edge, no table line, no gradient.
+Soft natural daylight from the upper left, soft realistic shadows, gentle reflections in the glass, crisp focus, photorealistic, high-end fragrance advertising. Square 1:1 image.
+No hands, no people, no second bottle, no packaging.
+```
+
+## ODYS 06: ROSE DE NUIT
+
+```
+Using the attached photo as the exact reference for the bottle, create a premium studio photograph of this same perfume bottle surrounded by its ingredients.
+
+The bottle must stay identical to the reference: a square, thick, clear glass flacon with a heavy clear glass base, pale golden-yellow liquid, a thin dip tube, and a glossy black cylindrical cap with a thin silver collar.
+Its label is a white rectangular sticker with rounded corners and a thin gold hairline border, with this text centred and perfectly sharp:
+- line 1, large elegant black serif: "ROSE DE NUIT"
+- line 2, small spaced gold capitals: "EXTRAIT DE PARFUM"
+- line 3, small black sans-serif: "N° 06 · 50 ml · 1.7 FL.OZ"
+Spell the text exactly as written. No other text or logos anywhere.
+
+The bottle stands upright in the centre, front view turned slightly to the side, filling about 60% of the frame height, the label fully visible and never covered.
+Around its base, a low, elegant, uncluttered arrangement of real ingredients: a full deep pink-red rose with a few petals, a small cluster of fresh raspberries, a few pink peppercorns, dark agarwood (oud) chips, dried patchouli leaves, pieces of golden amber resin and two dark glossy vanilla pods. Each ingredient clearly recognisable, nothing in front of the label, nothing taller than the bottle's shoulder.
+Plain seamless warm ivory background, colour #F3EBDD, the same tone edge to edge, no table line, no gradient.
+Soft natural daylight from the upper left, soft realistic shadows, gentle reflections in the glass, crisp focus, photorealistic, high-end fragrance advertising. Square 1:1 image.
+No hands, no people, no second bottle, no packaging.
+```
+
+## ODYS 07: AMBRE DOUX
+
+```
+Using the attached photo as the exact reference for the bottle, create a premium studio photograph of this same perfume bottle surrounded by its ingredients.
+
+The bottle must stay identical to the reference: a square, thick, clear glass flacon with a heavy clear glass base, pale golden-yellow liquid, a thin dip tube, and a glossy black cylindrical cap with a thin silver collar.
+Its label is a white rectangular sticker with rounded corners and a thin gold hairline border, with this text centred and perfectly sharp:
+- line 1, large elegant black serif: "AMBRE DOUX"
+- line 2, small spaced gold capitals: "EXTRAIT DE PARFUM"
+- line 3, small black sans-serif: "N° 07 · 50 ml · 1.7 FL.OZ"
+Spell the text exactly as written. No other text or logos anywhere.
+
+The bottle stands upright in the centre, front view turned slightly to the side, filling about 60% of the frame height, the label fully visible and never covered.
+Around its base, a low, elegant, uncluttered arrangement of real ingredients: a small heap of almonds (a few cracked open), a few cinnamon sticks, a small glass jar of golden honey with a wooden dipper and a sprig of white orange blossom, dark tonka beans, two vanilla pods and pieces of warm golden amber resin. Each ingredient clearly recognisable, nothing in front of the label, nothing taller than the bottle's shoulder.
+Plain seamless warm ivory background, colour #F3EBDD, the same tone edge to edge, no table line, no gradient.
+Soft natural daylight from the upper left, soft realistic shadows, gentle reflections in the glass, crisp focus, photorealistic, high-end fragrance advertising. Square 1:1 image.
+No hands, no people, no second bottle, no packaging.
+```
+
+## ODYS 08: OUD IMPÉRIAL
+
+```
+Using the attached photo as the exact reference for the bottle, create a premium studio photograph of this same perfume bottle surrounded by its ingredients.
+
+The bottle must stay identical to the reference: a square, thick, clear glass flacon with a heavy clear glass base, pale golden-yellow liquid, a thin dip tube, and a glossy black cylindrical cap with a thin silver collar.
+Its label is a white rectangular sticker with rounded corners and a thin gold hairline border, with this text centred and perfectly sharp:
+- line 1, large elegant black serif: "OUD IMPÉRIAL"
+- line 2, small spaced gold capitals: "EXTRAIT DE PARFUM"
+- line 3, small black sans-serif: "N° 08 · 50 ml · 1.7 FL.OZ"
+Spell the text exactly as written. No other text or logos anywhere.
+
+The bottle stands upright in the centre, front view turned slightly to the side, filling about 60% of the frame height, the label fully visible and never covered.
+Around its base, a low, elegant, uncluttered arrangement of real ingredients: dark resinous agarwood (oud) chips, a small heap of deep red saffron threads, green cardamom pods, a sprig of cypress with two round cones, one dark red rose, a rolled piece of soft dark leather and a small sandalwood log. Each ingredient clearly recognisable, nothing in front of the label, nothing taller than the bottle's shoulder.
+Plain seamless warm ivory background, colour #F3EBDD, the same tone edge to edge, no table line, no gradient.
+Soft natural daylight from the upper left, soft realistic shadows, gentle reflections in the glass, crisp focus, photorealistic, high-end fragrance advertising. Square 1:1 image.
+No hands, no people, no second bottle, no packaging.
+```
+
+## ODYS 09: FIGUE SAUVAGE
+
+```
+Using the attached photo as the exact reference for the bottle, create a premium studio photograph of this same perfume bottle surrounded by its ingredients.
+
+The bottle must stay identical to the reference: a square, thick, clear glass flacon with a heavy clear glass base, pale golden-yellow liquid, a thin dip tube, and a glossy black cylindrical cap with a thin silver collar.
+Its label is a white rectangular sticker with rounded corners and a thin gold hairline border, with this text centred and perfectly sharp:
+- line 1, large elegant black serif: "FIGUE SAUVAGE"
+- line 2, small spaced gold capitals: "EXTRAIT DE PARFUM"
+- line 3, small black sans-serif: "N° 09 · 50 ml · 1.7 FL.OZ"
+Spell the text exactly as written. No other text or logos anywhere.
+
+The bottle stands upright in the centre, front view turned slightly to the side, filling about 60% of the frame height, the label fully visible and never covered.
+Around its base, a low, elegant, uncluttered arrangement of real ingredients: one large lobed green fig leaf, two fresh green figs (one halved showing pink flesh), a small green mandarin with a leaf, a few glossy violet leaves, one purple iris flower, a halved coconut and a small split block of cedar wood. Each ingredient clearly recognisable, nothing in front of the label, nothing taller than the bottle's shoulder.
+Plain seamless warm ivory background, colour #F3EBDD, the same tone edge to edge, no table line, no gradient.
+Soft natural daylight from the upper left, soft realistic shadows, gentle reflections in the glass, crisp focus, photorealistic, high-end fragrance advertising. Square 1:1 image.
+No hands, no people, no second bottle, no packaging.
+```
+
+## ODYS 10: MUSC BLANC
+
+```
+Using the attached photo as the exact reference for the bottle, create a premium studio photograph of this same perfume bottle surrounded by its ingredients.
+
+The bottle must stay identical to the reference: a square, thick, clear glass flacon with a heavy clear glass base, pale golden-yellow liquid, a thin dip tube, and a glossy black cylindrical cap with a thin silver collar.
+Its label is a white rectangular sticker with rounded corners and a thin gold hairline border, with this text centred and perfectly sharp:
+- line 1, large elegant black serif: "MUSC BLANC"
+- line 2, small spaced gold capitals: "EXTRAIT DE PARFUM"
+- line 3, small black sans-serif: "N° 10 · 50 ml · 1.7 FL.OZ"
+Spell the text exactly as written. No other text or logos anywhere.
+
+The bottle stands upright in the centre, front view turned slightly to the side, filling about 60% of the frame height, the label fully visible and never covered.
+Around its base, a low, elegant, uncluttered arrangement of real ingredients: a soft tuft of white cotton with a sprig of white cotton bolls, one pale iris flower, a small branch of white pear blossom, a sprig of white jasmine, a halved bergamot and a folded piece of soft beige cashmere. Each ingredient clearly recognisable, nothing in front of the label, nothing taller than the bottle's shoulder.
+Plain seamless warm ivory background, colour #F3EBDD, the same tone edge to edge, no table line, no gradient.
+Soft natural daylight from the upper left, soft realistic shadows, gentle reflections in the glass, crisp focus, photorealistic, high-end fragrance advertising. Square 1:1 image.
+No hands, no people, no second bottle, no packaging.
+```
+
+## ODYS 11: TABAC & MIEL
+
+```
+Using the attached photo as the exact reference for the bottle, create a premium studio photograph of this same perfume bottle surrounded by its ingredients.
+
+The bottle must stay identical to the reference: a square, thick, clear glass flacon with a heavy clear glass base, pale golden-yellow liquid, a thin dip tube, and a glossy black cylindrical cap with a thin silver collar.
+Its label is a white rectangular sticker with rounded corners and a thin gold hairline border, with this text centred and perfectly sharp:
+- line 1, large elegant black serif: "TABAC & MIEL"
+- line 2, small spaced gold capitals: "EXTRAIT DE PARFUM"
+- line 3, small black sans-serif: "N° 11 · 50 ml · 1.7 FL.OZ"
+Spell the text exactly as written. No other text or logos anywhere.
+
+The bottle stands upright in the centre, front view turned slightly to the side, filling about 60% of the frame height, the label fully visible and never covered.
+Around its base, a low, elegant, uncluttered arrangement of real ingredients: a few dried golden-brown tobacco leaves, a small glass jar of golden honey with a wooden dipper, a small heap of cloves, a few cinnamon sticks, dark tonka beans, two vanilla pods and a small glass of dark rum. Each ingredient clearly recognisable, nothing in front of the label, nothing taller than the bottle's shoulder.
+Plain seamless warm ivory background, colour #F3EBDD, the same tone edge to edge, no table line, no gradient.
+Soft natural daylight from the upper left, soft realistic shadows, gentle reflections in the glass, crisp focus, photorealistic, high-end fragrance advertising. Square 1:1 image.
+No hands, no people, no second bottle, no packaging.
+```
+
+## ODYS 12: NUIT D’ATLAS
+
+```
+Using the attached photo as the exact reference for the bottle, create a premium studio photograph of this same perfume bottle surrounded by its ingredients.
+
+The bottle must stay identical to the reference: a square, thick, clear glass flacon with a heavy clear glass base, pale golden-yellow liquid, a thin dip tube, and a glossy black cylindrical cap with a thin silver collar.
+Its label is a white rectangular sticker with rounded corners and a thin gold hairline border, with this text centred and perfectly sharp:
+- line 1, large elegant black serif: "NUIT D’ATLAS"
+- line 2, small spaced gold capitals: "EXTRAIT DE PARFUM"
+- line 3, small black sans-serif: "N° 12 · 50 ml · 1.7 FL.OZ"
+Spell the text exactly as written. No other text or logos anywhere.
+
+The bottle stands upright in the centre, front view turned slightly to the side, filling about 60% of the frame height, the label fully visible and never covered.
+Around its base, a low, elegant, uncluttered arrangement of real ingredients: a sprig of juniper with dark blue berries, a small bunch of purple lavender, a sprig of cypress with round cones, fresh mint leaves with a few ice crystals, a halved pink grapefruit, a few smooth grey stones and a tied bundle of vetiver roots. Each ingredient clearly recognisable, nothing in front of the label, nothing taller than the bottle's shoulder.
+Plain seamless warm ivory background, colour #F3EBDD, the same tone edge to edge, no table line, no gradient.
+Soft natural daylight from the upper left, soft realistic shadows, gentle reflections in the glass, crisp focus, photorealistic, high-end fragrance advertising. Square 1:1 image.
+No hands, no people, no second bottle, no packaging.
 ```
 
