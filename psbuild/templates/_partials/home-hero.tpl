@@ -60,11 +60,21 @@
   {assign var='odysTitle2' value=Configuration::get('ODYS_HERO_TITLE_2')}
   {assign var='odysLede' value=Configuration::get('ODYS_HERO_LEDE')}
   {assign var='odysCta' value=Configuration::get('ODYS_HERO_CTA')}
+  {* Les destinations aussi se reglent en Back Office : le bouton menait
+     toujours a la collection de parfums, ce qui empechait d'ouvrir la
+     banniere sur une nouveaute ou sur un coffret. Le controleur refuse
+     tout ce qui ne commence pas par https:// ou par / . *}
+  {assign var='odysCtaUrl' value=Configuration::get('ODYS_HERO_CTA_URL')}
+  {assign var='odysLink' value=Configuration::get('ODYS_HERO_LINK')}
+  {assign var='odysLinkUrl' value=Configuration::get('ODYS_HERO_LINK_URL')}
   {if !$odysEyebrow}{assign var='odysEyebrow' value="L'art de l'essence"}{/if}
   {if !$odysTitle1}{assign var='odysTitle1' value="Plus qu'un parfum,"}{/if}
   {if !$odysTitle2}{assign var='odysTitle2' value='une émotion'}{/if}
   {if !$odysLede}{assign var='odysLede' value="Des essences rares, un savoir-faire intemporel. Découvrez l'univers ODYS."}{/if}
   {if !$odysCta}{assign var='odysCta' value='Découvrir la collection'}{/if}
+  {if !$odysCtaUrl}{assign var='odysCtaUrl' value=$odysUrlParfums}{/if}
+  {if !$odysLink}{assign var='odysLink' value='Oud & Boukhour'}{/if}
+  {if !$odysLinkUrl}{assign var='odysLinkUrl' value=$odysUrlOud}{/if}
 
   {assign var='odysSlides' value=[
     [
@@ -74,11 +84,15 @@
       't2' => $odysTitle2,
       'lede' => $odysLede,
       'cta' => $odysCta,
-      'url' => $odysUrlParfums,
-      'lbl2' => 'Oud & Boukhour',
-      'url2' => $odysUrlOud
-    ],
-    [
+      'url' => $odysCtaUrl,
+      'lbl2' => $odysLink,
+      'url2' => $odysLinkUrl
+    ]
+  ]}
+  {* Le second visuel se coupe en Back Office. Jamais enregistre vaut oui :
+     une boutique qui n'a pas ouvert l'ecran garde la banniere d'avant. *}
+  {if Configuration::get('ODYS_HERO_SLIDE2') !== '0'}
+    {append var='odysSlides' value=[
       'img' => "`$urls.theme_assets`img/nuit-riad.webp",
       'eyebrow' => 'Oud & Boukhour',
       't1' => 'Le bois',
@@ -88,8 +102,8 @@
       'url' => $odysUrlOud,
       'lbl2' => 'Tous les parfums',
       'url2' => $odysUrlParfums
-    ]
-  ]}
+    ]}
+  {/if}
 
   <div class="oh-film" data-odys-film data-odys-carrousel aria-hidden="true">
     {foreach from=$odysSlides item=odysSlide name=sl}
@@ -131,9 +145,10 @@
         {/if}
         <p class="nv-lede">{$odysSlide.lede|escape:'html':'UTF-8'}</p>
         <div class="nv-hero-cta">
-          <a href="{$odysSlide.url}" class="nv-btn"{if !$smarty.foreach.tx.first} tabindex="-1"{/if}>{$odysSlide.cta|escape:'html':'UTF-8'}
+          {* ces deux adresses peuvent venir du Back Office : on les echappe *}
+          <a href="{$odysSlide.url|escape:'html':'UTF-8'}" class="nv-btn"{if !$smarty.foreach.tx.first} tabindex="-1"{/if}>{$odysSlide.cta|escape:'html':'UTF-8'}
             <span class="arw" aria-hidden="true">&rarr;</span></a>
-          <a href="{$odysSlide.url2}" class="nv-link"{if !$smarty.foreach.tx.first} tabindex="-1"{/if}>{$odysSlide.lbl2|escape:'html':'UTF-8'}</a>
+          <a href="{$odysSlide.url2|escape:'html':'UTF-8'}" class="nv-link"{if !$smarty.foreach.tx.first} tabindex="-1"{/if}>{$odysSlide.lbl2|escape:'html':'UTF-8'}</a>
         </div>
       </div>
     {/foreach}

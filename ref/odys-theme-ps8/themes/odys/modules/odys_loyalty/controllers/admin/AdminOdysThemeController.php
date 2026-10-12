@@ -25,6 +25,15 @@ class AdminOdysThemeController extends ModuleAdminController
         'ODYS_HERO_TITLE_2' => ['Titre — seconde ligne', 'text', 'Vide : « une émotion »'],
         'ODYS_HERO_LEDE'    => ['Texte sous le titre', 'textarea', 'Deux lignes au maximum se lisent bien.'],
         'ODYS_HERO_CTA'     => ['Bouton principal', 'text', 'Vide : « Découvrir la collection »'],
+        'ODYS_HERO_CTA_URL' => ['Bouton principal — destination', 'text',
+            'Où mène le bouton. Une adresse complète (https://…) ou un chemin du site '
+            . 'commençant par / , par exemple /12-l-icone. Vide : la collection de parfums.'],
+        'ODYS_HERO_LINK'    => ['Lien secondaire', 'text', 'À droite du bouton. Vide : « Oud & Boukhour »'],
+        'ODYS_HERO_LINK_URL' => ['Lien secondaire — destination', 'text',
+            'Même règle que ci-dessus. Vide : la catégorie Oud & Boukhour.'],
+        'ODYS_HERO_SLIDE2'  => ['Second visuel de la bannière', 'switch',
+            'La bannière alterne entre deux visuels. Non : elle ne montre que le premier, '
+            . 'celui réglé ci-dessus, et les pastilles disparaissent.'],
         'ODYS_ANNOUNCE'     => ['Bandeau d\'annonces', 'textarea',
             'Un message par ligne. Vide : les huit messages d\'origine. '
             . 'Le bandeau défile, donc les messages courts passent mieux.'],
@@ -117,6 +126,7 @@ class AdminOdysThemeController extends ModuleAdminController
      */
     private function save(): string
     {
+        $refus = [];
         foreach (array_keys(self::FIELDS) as $key) {
             if (!Tools::getIsset($key)) {
                 continue;
@@ -136,6 +146,18 @@ class AdminOdysThemeController extends ModuleAdminController
             } elseif ($key === 'ODYS_GRAM_MIN') {
                 $clean = (string) max(0, min(1000, (int) $clean));
                 $clean = $clean === '0' ? '' : $clean;
+            } elseif (self::FIELDS[$key][1] === 'switch') {
+                $clean = $clean === '1' ? '1' : '0';
+            } elseif (Tools::substr($key, -4) === '_URL') {
+                // Cette valeur finit dans un href. Un employe tape une adresse,
+                // pas du code : on n'accepte qu'une adresse http(s) ou un chemin
+                // interne. « javascript: » et « data: » sont refuses, et le dire
+                // vaut mieux que de vider la case en silence.
+                if ($clean !== '' && !preg_match('#^(https?://|/)#i', $clean)) {
+                    $refus[] = self::FIELDS[$key][0] . ' : adresse refusée. Elle doit commencer '
+                        . 'par https:// ou par / .';
+                    continue;
+                }
             }
             $limit = $key === 'ODYS_ANNOUNCE' ? 2000 : 300;
             Configuration::updateValue($key, Tools::substr($clean, 0, $limit));
@@ -150,7 +172,7 @@ class AdminOdysThemeController extends ModuleAdminController
         $this->saveAmbiances();
 
         // displayConfirmation() belongs to Module, not to AdminController
-        $problems = array_merge($this->saveUploads(), $this->saveAmbianceUploads());
+        $problems = array_merge($refus, $this->saveUploads(), $this->saveAmbianceUploads());
 
         return ($problems ? '<div class="alert alert-warning">' . implode('<br>', $problems) . '</div>' : '')
             . '<div class="alert alert-success">Réglages enregistrés. '
@@ -233,8 +255,8 @@ class AdminOdysThemeController extends ModuleAdminController
 
         $inputs = [];
         foreach (self::FIELDS as $key => $field) {
-            $helper->fields_value[$key] = Configuration::get($key);
-            $inputs[] = [
+            $valeur = Configuration::get($key);
+            $input = [
                 'type' => $field[1],
                 'label' => $field[0],
                 'name' => $key,
@@ -242,6 +264,17 @@ class AdminOdysThemeController extends ModuleAdminController
                 'cols' => 60,
                 'rows' => $key === 'ODYS_ANNOUNCE' ? 9 : 3,
             ];
+            if ($field[1] === 'switch') {
+                // jamais enregistre = ce que le theme fait aujourd'hui, c'est-a-dire oui
+                $valeur = $valeur === false ? 1 : (int) $valeur;
+                $input['is_bool'] = true;
+                $input['values'] = [
+                    ['id' => $key . '_on', 'value' => 1, 'label' => 'Oui'],
+                    ['id' => $key . '_off', 'value' => 0, 'label' => 'Non'],
+                ];
+            }
+            $helper->fields_value[$key] = $valeur;
+            $inputs[] = $input;
         }
 
         foreach (self::UPLOADS as $key => $spec) {

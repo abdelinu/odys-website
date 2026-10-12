@@ -7347,6 +7347,29 @@ for _g in _gabarits:
 if not _gabarits:
     raise SystemExit("aucun gabarit dans dist/ : lancez psbuild/build_theme.py d'abord")
 
+# Le module odys_loyalty porte l'ecran Back Office -> Apparence -> Theme ODYS :
+# c'est la que la maison change les mots de la banniere, et desormais aussi ses
+# destinations. Il ne figurait dans aucune liste — pas une seule fois dans ce
+# fichier — donc aucune version de cet ecran n'est jamais partie en production.
+# Troisieme fois que le lot laisse un correctif fini derriere lui ; on enumere,
+# comme pour les gabarits.
+#
+# Deux destinations, parce que PrestaShop lit deux endroits : le PHP du module
+# s'execute depuis modules/, tandis que ses gabarits sont surcharges par le
+# theme depuis themes/odys/modules/. On envoie chaque fichier a sa place, et le
+# PHP aux deux, pour qu'une reinstallation du theme ne ressuscite pas une
+# version ancienne.
+_mod = sorted((DIST / "themes" / "odys" / "modules" / "odys_loyalty").rglob("*"))
+_mod = [m for m in _mod if m.is_file()]
+for _m in _mod:
+    _rel = _m.relative_to(DIST).as_posix()
+    FICHIERS.setdefault(_rel, _rel)
+    if _m.suffix == ".php":
+        _vif = _m.relative_to(DIST / "themes" / "odys" / "modules").as_posix()
+        FICHIERS.setdefault("modules/" + _vif, _rel)
+if not _mod:
+    raise SystemExit("odys_loyalty absent de dist/ : lancez psbuild/build_theme.py d'abord")
+
 
 
 
@@ -19621,6 +19644,57 @@ Configuration::updateValue('PS_NB_DAYS_NEW_PRODUCT', 30);
 
 
 echo "  un produit est neuf pendant 30 jours apres sa date d'ajout
+
+
+
+
+";
+
+echo "
+Option cadeau
+";
+// PrestaShop sait deja offrir : une case a l'etape de livraison, un message
+// joint a la commande et lisible en Back Office, sur la fiche de commande et
+// sur le bon de livraison. On l'allume, on ne la reecrit pas.
+//
+// Le prix de l'emballage reste a zero. Le faire payer est une decision
+// commerciale, pas technique : elle se prend en Back Office -> Parametres de
+// la boutique -> Commandes.
+Configuration::updateValue('PS_GIFT_WRAPPING', 1);
+if (!Configuration::get('PS_GIFT_WRAPPING_PRICE')) {
+    Configuration::updateValue('PS_GIFT_WRAPPING_PRICE', 0);
+}
+
+// Le libelle livre par PrestaShop promet un papier-cadeau. Rien ne dit que la
+// maison en fournit un, et une promesse non tenue se paie au deballage. La
+// phrase est donc surchargee la ou le Back Office ecrit les siennes : dans
+// ps_translation. La maison peut la reecrire d'un clic sous International ->
+// Traductions, sans toucher au code — et ce script ne repasse jamais par
+// dessus une phrase deja choisie.
+$odysCleCadeau = 'I would like my order to be gift wrapped %cost%';
+$odysLangues = Db::getInstance()->executeS(
+    'SELECT id_lang FROM ' . _DB_PREFIX_ . 'lang WHERE active = 1');
+$odysPoses = 0;
+foreach ((array) $odysLangues as $odysL) {
+    $odysIdLang = (int) $odysL['id_lang'];
+    $odysDeja = (int) Db::getInstance()->getValue(
+        'SELECT COUNT(*) FROM ' . _DB_PREFIX_ . 'translation'
+        . ' WHERE id_lang = ' . $odysIdLang
+        . ' AND domain = "ShopThemeCheckout"'
+        . ' AND `key` = "' . pSQL($odysCleCadeau) . '"');
+    if ($odysDeja) {
+        continue;
+    }
+    Db::getInstance()->insert('translation', array(
+        'id_lang' => $odysIdLang,
+        'key' => pSQL($odysCleCadeau),
+        'translation' => pSQL('C’est un cadeau %cost%'),
+        'domain' => 'ShopThemeCheckout',
+        'theme' => null,
+    ));
+    ++$odysPoses;
+}
+echo "  l'option cadeau est active, le message est joint a la commande (" . $odysPoses . " libelle(s) pose(s))
 
 
 

@@ -4482,3 +4482,166 @@ button[data-action="show-password"]{min-height:44px;padding:0 14px}
   transition:transform .4s cubic-bezier(.25,.46,.45,.94),visibility 0s linear .4s}
 .notes-panel.on{visibility:visible;
   transition:transform .4s cubic-bezier(.25,.46,.45,.94),visibility 0s linear 0s}
+
+/* ══════════════════════════════════════════════════════════════════════
+   OFFRIR : LA CASE A COCHER ET SON MESSAGE
+
+   PrestaShop sait deja faire cela — une case a l'etape de livraison, un
+   message joint a la commande, lisible en Back Office. Rien a reecrire.
+
+   Mais le gabarit livre la zone du message dans un `div.collapse`, que le
+   theme classique ouvre et ferme avec son propre JavaScript. Ce theme ne
+   charge pas les ressources du parent : `.collapse` n'existe donc nulle
+   part, la zone restait ouverte en permanence et la case ne commandait
+   rien. Un client qui n'offre pas se voyait quand meme demander un mot.
+
+   C'est la case qui decide, et en CSS seul : pas de script a charger pour
+   ouvrir un bloc. `:has()` regarde l'etat de la case et ferme la zone tant
+   qu'elle n'est pas cochee. Un navigateur qui ignore `:has()` jette la
+   regle entiere et garde la zone visible — exactement ce qu'il affiche
+   aujourd'hui, donc rien ne se perd.
+   ══════════════════════════════════════════════════════════════════════ */
+.order-options{display:flex;flex-direction:column;gap:14px;margin:18px 0 6px}
+.order-options .custom-checkbox{align-items:flex-start}
+
+/* Les deux zones de texte libre de cette etape — le commentaire de commande
+   et le mot du cadeau — portent une PHRASE, pas un intitule de champ. La
+   regle generale des libelles les ecrivait en capitales, et elle gagnait :
+   `.form-fields label:not(.checkbox-inline):not(.radio-inline)` compte trois
+   classes, la ou `label[for="gift_message"]` n'en compte aucune. Un
+   `:not()` de plus aurait relance la course ; l'identifiant du bloc, lui,
+   la termine. */
+#delivery label,
+#gift label,
+/* « C'est un cadeau » est une phrase elle aussi. Ici pas d'identifiant a
+   viser : on egale le poids de la regle generale (trois classes) et on
+   gagne par l'ordre, les deux regles vivant dans ce meme fichier, celle-ci
+   plus bas. */
+.order-options .custom-checkbox label[for]{
+  font-size:13px;
+  line-height:1.6;
+  letter-spacing:normal;
+  text-transform:none;
+  color:var(--odys-text);
+}
+
+#gift{
+  border-left:2px solid var(--odys-champagne-deep);
+  padding:2px 0 2px 14px;
+  margin:0;
+}
+.order-options:has(#input_gift:not(:checked)) #gift{display:none}
+
+/* La zone de saisie reprend celle du commentaire de livraison : meme
+   cadre, meme respiration. Deux lignes suffisent a un mot de carte. */
+#gift textarea,
+#delivery textarea{
+  width:100%;
+  min-height:84px;
+  padding:11px 13px;
+  border:1px solid var(--border);
+  border-radius:2px;
+  background:var(--odys-surface);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:13px;
+  line-height:1.6;
+  resize:vertical;
+}
+#gift textarea:focus,
+#delivery textarea:focus{outline:none;border-color:var(--odys-gold-text)}
+
+/* ══════════════════════════════════════════════════════════════════════
+   LA CARTE D'ADRESSE N'EST PAS LE PIED DE PAGE
+
+   Le pied du site est habille par des regles qui visent `footer` tout
+   court — dans identity.css comme dans le prototype, tous deux concatenes
+   avant ce fichier. PrestaShop, lui, met un <footer> dans la carte
+   d'adresse : elle recevait donc le fond noir et les 52 px du pied de
+   page. Un bloc sombre en travers du tunnel, juste sous l'adresse du
+   client, avec « Modifier » et « Supprimer » noyes dedans.
+
+   Reecrire les dix selecteurs nus demanderait d'editer le prototype, que
+   le theme partage : on rend plutot a cette carte ce qui lui appartient,
+   la ou le degat se produit.
+   ══════════════════════════════════════════════════════════════════════ */
+.address-footer{
+  background:none;
+  color:inherit;
+  padding:0;
+  margin:0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px 18px;
+  font-size:12px;
+}
+.address-footer a{color:var(--odys-gold-text);text-decoration:none}
+.address-footer a:hover{text-decoration:underline}
+
+/* ══════════════════════════════════════════════════════════════════════
+   CHOISIR SON TRANSPORTEUR
+
+   PrestaShop livre cette liste dans la grille de Bootstrap — col-sm-5,
+   col-sm-4, col-sm-3 — que ce theme ne charge pas. Le nom, le delai et le
+   prix tombaient donc chacun sur sa ligne, en capitales, et le bouton
+   radio se detachait de son libelle. Trois lignes grises pour un choix a
+   faire, a l'etape juste avant le paiement.
+
+   On ne reimplemente pas la grille : on remet chaque transporteur sur une
+   ligne, avec son prix a droite, et la carte retenue se voit sans avoir a
+   chercher le point du radio.
+   ══════════════════════════════════════════════════════════════════════ */
+.delivery-options{display:flex;flex-direction:column;gap:10px}
+.delivery-option{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:0;
+  padding:14px 16px;
+  border:1px solid var(--border);
+  border-radius:2px;
+  background:var(--odys-surface);
+  transition:border-color .2s,background .2s;
+}
+.delivery-option:hover{border-color:var(--odys-gold-text)}
+.delivery-option:has(input:checked){
+  border-color:var(--odys-gold-text);
+  background:var(--odys-champagne);
+}
+.delivery-option > div{flex:0 0 auto;width:auto;margin:0;padding:0}
+
+/* Le libelle enveloppe tout le reste de la carte : il doit s'etendre, et
+   surtout ne pas etre lu comme un intitule de champ. Quatre classes pour
+   passer devant la regle generale des libelles, qui en pese trois. */
+.delivery-options .delivery-option > label[for]{
+  flex:1 1 auto;
+  margin:0;
+  padding:0;
+  cursor:pointer;
+  font-size:13px;
+  line-height:1.5;
+  letter-spacing:normal;
+  text-transform:none;
+  color:var(--odys-text);
+}
+/* PrestaShop empile ses colonnes dans des .row, et la page du tunnel pose
+   deja une grille sur TOUTE .row qu'elle contient : `body.checkout .row`,
+   deux colonnes, une seule sous 900 px. Le nom, le delai et le prix du
+   transporteur tombaient donc l'un sous l'autre. Trois classes passent
+   devant ses deux classes et son element, sans toucher a la grille de la
+   page, qui porte la mise en page du tunnel. */
+.delivery-options .delivery-option .row{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:2px 18px;
+  width:100%;
+  margin:0;
+  grid-template-columns:none;
+}
+.delivery-options .delivery-option .row > div{flex:0 1 auto;width:auto;padding:0}
+.delivery-options .delivery-option .carrier{display:block;width:auto;margin:0}
+.delivery-option .carrier-name{font-size:13px;font-weight:500;color:var(--odys-text)}
+.delivery-option .carrier-delay{font-size:12px;color:var(--odys-muted)}
+.delivery-options .delivery-option .row > div:has(.carrier-price){margin-left:auto}
+.delivery-option .carrier-price{font-size:13px;color:var(--odys-text);white-space:nowrap}

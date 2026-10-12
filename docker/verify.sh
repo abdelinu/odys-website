@@ -3454,6 +3454,123 @@ else
 
 fi
 
+step "Offrir : la case cadeau et le mot qui l accompagne"
+
+# PrestaShop sait deja offrir : une case a l etape de livraison, un message
+# joint a la commande, lisible en Back Office sur la fiche et sur le bon de
+# livraison. Rien a reecrire — il fallait l allumer, et reparer deux choses.
+[ "$(sql "SELECT value FROM ps_configuration WHERE name='PS_GIFT_WRAPPING'")" = "1" ] \
+  && ok "l option cadeau est active" \
+  || no "l option cadeau est eteinte : la case ne s affiche pas dans le tunnel"
+
+# Premiere reparation. Le gabarit livre la zone du message dans un
+# div.collapse, que le theme classique ouvre et ferme avec son JavaScript.
+# Ce theme ne charge pas les ressources du parent : .collapse n existait
+# nulle part, la zone restait ouverte en permanence et la case ne commandait
+# rien. C est la case qui decide, et en CSS seul.
+grep -q 'order-options:has(#input_gift:not(:checked)) #gift{display:none}' "$cssf" \
+  && ok "la zone du message s ouvre avec la case, sans une ligne de script" \
+  || no "la zone du message du cadeau reste ouverte en permanence"
+
+# Seconde reparation. « C est un cadeau » et « Vous pouvez ajouter un message »
+# sont des phrases, pas des intitules de champ. La regle generale des libelles
+# les ecrivait en capitales et gagnait : trois classes contre aucune.
+# la regle tient sur plusieurs lignes dans la feuille construite : on la relit
+# d un seul tenant plutot que ligne par ligne. La feuille construite est en
+# CRLF : sans le retour chariot les selecteurs restent separes, et le motif
+# ne tombe pas.
+tr -d '\r\n' < "$cssf" | grep -q '#delivery label,#gift label' \
+  && ok "les deux consignes du tunnel sont des phrases, pas des capitales" \
+  || no "les consignes du tunnel sont encore ecrites en capitales"
+
+# Le libelle livre promet un papier-cadeau. Rien ne dit que la maison en
+# fournit un, et une promesse non tenue se paie au deballage.
+lib=$(sql "SELECT translation FROM ps_translation WHERE domain='ShopThemeCheckout' LIMIT 1")
+case "$lib" in
+  *cadeau*) ok "le libelle de la case est celui de la maison : $lib";;
+  "")       no "aucun libelle surcharge : la case promet un papier-cadeau";;
+  *)        no "libelle inattendu : $lib";;
+esac
+
+# Le mot doit survivre jusqu a la commande, pas seulement jusqu au panier.
+cols=$(sql "SELECT COUNT(*) FROM information_schema.columns WHERE table_schema=DATABASE() AND table_name='ps_orders' AND column_name IN ('gift','gift_message')")
+[ "${cols:-0}" = "2" ] \
+  && ok "la commande transporte le drapeau et le message" \
+  || no "ps_orders ne porte pas gift/gift_message : le mot s arrete au panier"
+
+grep -q "PS_GIFT_WRAPPING" ../dist/deploy/maj-telephone.php \
+  && ok "le lot de mise a jour allume l option cadeau en production" \
+  || no "le lot n allume pas l option cadeau"
+grep -q "ShopThemeCheckout" ../dist/deploy/maj-telephone.php \
+  && ok "le lot pose le libelle de la case" \
+  || no "le lot ne pose pas le libelle de la case"
+
+step "La banniere se regle en Back Office, destinations comprises"
+
+# Les mots de la banniere s editaient deja ; le bouton, lui, menait toujours
+# a la collection de parfums. Impossible d ouvrir la page d accueil sur une
+# nouveaute ou sur un coffret sans reconstruire le theme.
+ctl=../dist/odys-theme-ps8/themes/odys/modules/odys_loyalty/controllers/admin/AdminOdysThemeController.php
+for c in ODYS_HERO_CTA_URL ODYS_HERO_LINK ODYS_HERO_LINK_URL ODYS_HERO_SLIDE2; do
+  grep -q "'$c'" "$ctl" \
+    && ok "l ecran Theme ODYS propose $c" \
+    || no "$c manque a l ecran Theme ODYS"
+done
+
+# Une destination tapee par un employe finit dans un href : « javascript: »
+# n y a pas sa place, et le refus se dit plutot que de vider la case.
+grep -qF 'https?://|/' "$ctl" \
+  && ok "une destination doit commencer par https:// ou par /" \
+  || no "l ecran accepte n importe quelle destination, javascript: compris"
+
+hero=../dist/odys-theme-ps8/themes/odys/templates/_partials/home-hero.tpl
+grep -q "odysSlide.url|escape" "$hero" \
+  && ok "les adresses de la banniere sont echappees a l affichage" \
+  || no "une adresse venue du Back Office est ecrite telle quelle dans un href"
+grep -q "ODYS_HERO_SLIDE2') !== '0'" "$hero" \
+  && ok "le second visuel se coupe en Back Office" \
+  || no "le second visuel de la banniere n est pas debrayable"
+
+# Le module qui porte cet ecran n a JAMAIS figure dans le lot : aucune
+# version de l ecran Theme ODYS n est jamais partie en production.
+python - <<'EOPY' && ok "le module odys_loyalty est dans le lot, a sa place vivante" || no "l ecran Theme ODYS n atteindra pas la production"
+import pathlib, re, sys
+lot = pathlib.Path("../dist/deploy/maj-telephone.php")
+if not lot.exists():
+    print("  maj-telephone.php absent"); sys.exit(1)
+txt = lot.read_text(encoding="utf-8", errors="replace")
+livres = set(re.findall(r"'(modules/odys_loyalty/[^']+)' => \[", txt))
+attendu = "modules/odys_loyalty/controllers/admin/AdminOdysThemeController.php"
+if attendu not in livres:
+    print("  manque :", attendu); sys.exit(1)
+print("  %d fichier(s) du module dans le lot" % len(livres))
+EOPY
+grep -q '_mod = sorted' ../psbuild/make_maj_telephone.py \
+  && ok "le module est enumere depuis dist/, pas tenu a la main" \
+  || no "la liste des fichiers du module est de nouveau tenue a la main"
+
+
+step "L etape de livraison se lit d un coup d oeil"
+
+# PrestaShop met un <footer> dans la carte d adresse. Le pied du site est
+# habille par des regles qui visent `footer` tout court — dans identity.css
+# comme dans le prototype : la carte recevait le fond noir et les 52 px du
+# pied de page, un bloc sombre en travers du tunnel avec « Modifier » et
+# « Supprimer » noyes dedans.
+tr -d '\r\n' < "$cssf" | grep -qE '\.address-footer\{ *background:none' \
+  && ok "la carte d adresse n est plus peinte comme le pied de page" \
+  || no "la carte d adresse reprend le fond noir du pied de page"
+
+# La liste des transporteurs arrive dans la grille de Bootstrap, que ce
+# theme ne charge pas, et la page du tunnel pose en plus sa propre grille
+# sur toute .row qu elle contient — une seule colonne sous 900 px. Le nom,
+# le delai et le prix tombaient chacun sur sa ligne, a l etape juste avant
+# le paiement.
+tr -d '\r\n' < "$cssf" | grep -qE '\.delivery-options \.delivery-option \.row\{ *display:flex' \
+  && ok "chaque transporteur tient sur une ligne, prix a droite" \
+  || no "le nom, le delai et le prix du transporteur s empilent"
+
+
 step "No new PHP exceptions"
 
 recent=$(psh "tail -3 /var/www/html/var/logs/*exception.log 2>/dev/null | grep -c ERROR" | tr -d '\r')
