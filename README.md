@@ -40,9 +40,16 @@ Redeeming converts points into a *voucher* held on the account; the voucher come
 There is no payment gateway and no backend, by design for launch. `OD.waLink()` serialises the basket (items, weights, coffret composition, rewards applied, totals, name/address/city) into a `wa.me` message in the customer's language. Two entry points:
 
 - **Order on WhatsApp** — the primary button in the cart, and a WhatsApp icon in the header plus the number in the footer (the trust signal a COD shopper looks for).
+- A **coffret line spells out what the shop has to prepare**: each piece (with its weight), the box and ribbon, the engraving, the card message and its signature, and for a gift the recipient, their phone and address, the date, "no prices on the slip" and "send directly".
 - **Or leave your address here** — the same form as before; submitting opens WhatsApp pre-filled *and* records the order locally so points and rewards still work.
 
 ⚠ `config.whatsapp` is a placeholder (`212600000000`). Put the real number there — or in `admin.html` — before showing anyone the site.
+
+## Gifting
+
+**Offrir à quelqu'un** sits under add-to-cart on every product page and as a gift icon beside "Ajouter au voyage" on every product card. It opens `coffrets.html?offrir=<id>` (oud adds `&g=<grams>` from the product page): gift mode, the Coffret Signature (the free mix, the only coffret that takes any kind of piece), the product already inside, and the page scrolled to the personalisation step.
+
+In gift mode that step has **Votre mot**: six ready-made openings (anniversaire, merci, félicitations, Aïd, mariage, je pense à toi — translated in Arabic) that fill the message and stay editable, a 240-character message with a counter, a signature, and a live preview of the ivory card addressed to the recipient. The words travel with the cart line into the WhatsApp order.
 
 ## Coffrets
 
@@ -85,6 +92,7 @@ The site ships trilingual with a switcher in the header and footer, and full RTL
 - **French is the default.** An Arabic browser gets Arabic; English is opt-in through the switcher. Choosing a language stores it under `odys.lang` and reloads. Arabic sets `dir="rtl"`, swaps the UI face to Tajawal, and the stylesheet mirrors the drawer, journey rail, meters, badges and card overlays.
 - Composites that mix copy with numbers go through `OD.T()` in the page code, so atoms are translated *before* they are joined.
 - Deliberately left in English: brand and product names, prices in MAD and platform names.
+- **Search is instant.** The search panel shows popular searches and the bestsellers before the first letter, then a short list of matches from the second (rows, not cards, so a phone shows several); arrow keys move through them, Enter opens the highlighted one or `shop.html?q=…`, which lists every match with the usual tabs and filters on top. Accents never decide a match (*icone* finds L'ICÔNE), names outrank notes, notes outrank the story, and products are also indexed on their translated family and notes, so *bergamote* or *زعفران* find what *Bergamot* or *Saffron* would.
 - **Search understands French and Arabic.** `QMAP` in `app.js` maps FR/AR query words (sucré, hiver, bâtonnets, حلو, شتاء, مبخرة…) onto the English catalogue vocabulary, handles French elision and peels Arabic prefixes (للشتاء → شتاء). The Discovery prompts are written natively per language.
 
 To add a string: add the English source as a key in the last block of `i18n-labels.js` with its FR and AR values. Nothing else to wire.

@@ -21,7 +21,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 <!-- outside Arabic the page needs Amiri for one decorative line, so only those letters are fetched (35 KB, not 125 KB). i18n.js pulls the full face when the reader switches to Arabic. -->
 <link href="https://fonts.googleapis.com/css2?family=Amiri&text=%D8%A1%D8%A3%D8%A6%D8%A7%D8%A8%D8%A9%D8%AA%D8%AC%D8%AD%D8%AE%D8%AF%D8%B0%D8%B1%D8%B2%D8%B3%D8%B4%D8%B5%D8%B6%D8%B7%D8%B8%D8%B9%D9%81%D9%82%D9%83%D9%84%D9%85%D9%86%D9%87%D9%88%D9%89%D9%8A%D9%91%C2%B7&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/odys.css?v=20261012e">
+<link rel="stylesheet" href="assets/css/odys.css?v=20261012h">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%233D1216'/%3E%3Ctext x='16' y='22' font-family='serif' font-size='16' fill='%23B08D4F' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
 </head>
 <body>
@@ -66,10 +66,10 @@
 
 <div id="odys-footer"></div>
 
-<script src="assets/js/i18n.js?v=20261012e"></script>
-<script src="assets/js/i18n-content.js?v=20261012e"></script>
-<script src="assets/js/i18n-labels.js?v=20261012e"></script>
-<script src="assets/js/data.js?v=20261012e"></script>
+<script src="assets/js/i18n.js?v=20261012h"></script>
+<script src="assets/js/i18n-content.js?v=20261012h"></script>
+<script src="assets/js/i18n-labels.js?v=20261012h"></script>
+<script src="assets/js/data.js?v=20261012h"></script>
 <script>
 window.PAGE = function (OD) {
   const { D, C, $, $$, money, num, esc, find, bottle, S, save } = OD;
@@ -81,9 +81,31 @@ window.PAGE = function (OD) {
     mode: null,                 // 'self' | 'gift' — asked first, on purpose
     coffret: null,
     items: [],                  // [{id, grams}]
-    custom: { box: 'oud', ribbon: 'brass', engraving: '', message: '' },
+    custom: { box: 'oud', ribbon: 'brass', engraving: '', message: '', signed: '' },
     gift: { name: '', phone: '', addr: '', date: '', hidePrices: true, direct: true }
   };
+
+  /* Ready-made words for the gift card: one tap fills the message, then it is theirs to change */
+  const NOTE_MAX = 240;
+  const NOTES = [
+    ['Anniversaire', 'Joyeux anniversaire ! Que cette nouvelle année te ressemble : belle, libre et parfumée.'],
+    ['Merci', 'Merci pour tout. Ce parfum, c’est un peu de ma gratitude à porter chaque jour.'],
+    ['Félicitations', 'Félicitations ! Un nouveau chapitre commence — voici de quoi le parfumer.'],
+    ['Aïd Moubarak', 'Aïd Moubarak ! Que cette fête t’apporte paix, joie et douceur.'],
+    ['Mariage', 'Tous nos vœux de bonheur pour cette belle histoire qui commence.'],
+    ['Je pense à toi', 'Je pense à toi. Un parfum pour que tu penses aussi un peu à moi.']
+  ];
+  /* the card as it will be printed, redrawn on every keystroke */
+  function noteCard() {
+    return `<p class="nc-to">${OD.T('Pour')} ${B.gift.name ? esc(B.gift.name) : '…'}</p>
+      <p class="nc-msg">${B.custom.message ? esc(B.custom.message).replace(/\n/g, '<br>') : '<span class="muted">' + OD.T('Votre message apparaîtra ici.') + '</span>'}</p>
+      ${B.custom.signed ? `<p class="nc-sign">— ${esc(B.custom.signed)}</p>` : ''}
+      <p class="nc-brand">ODYS</p>`;
+  }
+  function updateNote() {
+    const c = $('#notecard'); if (c) c.innerHTML = noteCard();
+    const n = $('#msgcount'); if (n) n.textContent = (B.custom.message || '').length + ' / ' + NOTE_MAX;
+  }
 
   const preset = () => D.coffrets.find(c => c.id === B.coffret) || null;
   const isCustom = () => { const p = preset(); return !!(p && p.custom); };
@@ -197,7 +219,7 @@ window.PAGE = function (OD) {
 
       ${B.coffret ? `
       <div class="box" style="margin-bottom:16px">
-        <p class="eyebrow">4 · Personnalisation</p>
+        <p class="eyebrow" id="perso">4 · Personnalisation</p>
         <p class="mono muted" style="margin-bottom:14px">Couleur du coffret</p>
         <div class="pills" style="margin-bottom:20px">
           ${BOXES.map(b => `<button class="pill${B.custom.box === b[0] ? ' on' : ''}" data-box="${b[0]}">
@@ -210,8 +232,24 @@ window.PAGE = function (OD) {
         </div>
         <label class="field"><span>Gravure sur la carte (max 20 caractères)</span>
           <input id="engraving" maxlength="20" value="${esc(B.custom.engraving)}" placeholder="Salma"></label>
-        <label class="field" style="margin:0"><span>Message ${B.mode === 'gift' ? '(imprimé sur carte ivoire)' : '(pour vous, ou laissez vide)'}</span>
-          <textarea id="message" rows="3" placeholder="Pour le prochain chapitre. — O.">${esc(B.custom.message)}</textarea></label>
+        ${B.mode === 'gift' ? `
+        <div class="giftnote" id="giftnote">
+          <p class="eyebrow" style="margin:6px 0 4px">Votre mot</p>
+          <p class="muted" style="font-size:13px;margin:0 0 14px">Imprimé sur une carte ivoire, glissée dans le colis. Choisissez un début ou écrivez le vôtre.</p>
+          <div class="pills" style="margin-bottom:16px">${NOTES.map((n, i) => `<button type="button" class="pill" data-note="${i}">${n[0]}</button>`).join('')}</div>
+          <div class="giftnote-grid">
+            <div>
+              <label class="field"><span>Message</span>
+                <textarea id="message" rows="5" maxlength="${NOTE_MAX}" placeholder="Pour le prochain chapitre…">${esc(B.custom.message)}</textarea>
+                <small class="mono muted" id="msgcount" style="display:block;text-align:end;margin-top:6px">${(B.custom.message || '').length} / ${NOTE_MAX}</small></label>
+              <label class="field" style="margin:0"><span>Signé</span>
+                <input id="signed" maxlength="40" value="${esc(B.custom.signed)}" placeholder="Avec amour, Yasmine"></label>
+            </div>
+            <figure class="notecard" aria-label="Aperçu de la carte" id="notecard">${noteCard()}</figure>
+          </div>
+        </div>` : `
+        <label class="field" style="margin:0"><span>Message (pour vous, ou laissez vide)</span>
+          <textarea id="message" rows="3" maxlength="${NOTE_MAX}" placeholder="Pour le prochain chapitre. — O.">${esc(B.custom.message)}</textarea></label>`}
       </div>` : ''}
 
       ${B.coffret && B.mode === 'gift' ? `
@@ -285,6 +323,12 @@ window.PAGE = function (OD) {
     if (box) { B.custom.box = box.dataset.box; return render(); }
     const rib = e.target.closest('[data-ribbon]');
     if (rib) { B.custom.ribbon = rib.dataset.ribbon; return render(); }
+    const note = e.target.closest('[data-note]');
+    if (note) {
+      B.custom.message = OD.T(NOTES[Number(note.dataset.note)][1]).slice(0, NOTE_MAX);
+      const t = $('#message'); if (t) t.value = B.custom.message;
+      return updateNote();
+    }
   });
 
   $('#builder').addEventListener('change', e => {
@@ -295,12 +339,13 @@ window.PAGE = function (OD) {
   });
 
   $('#builder').addEventListener('input', e => {
-    const map = { engraving: 'engraving', message: 'message' };
-    if (map[e.target.id]) { B.custom[map[e.target.id]] = e.target.value; return; }
+    const map = { engraving: 'engraving', message: 'message', signed: 'signed' };
+    if (map[e.target.id]) { B.custom[map[e.target.id]] = e.target.value; return updateNote(); }
     const gmap = { gname: 'name', gphone: 'phone', gaddr: 'addr', gdate: 'date' };
     if (gmap[e.target.id]) {
       B.gift[gmap[e.target.id]] = e.target.value;
       drawSteps();
+      updateNote();
       const btn = $('#addcoffret');
       if (btn) btn.disabled = !(B.mode && B.coffret && filled() && (B.mode !== 'gift' || (B.gift.name && B.gift.addr)));
     }
@@ -312,9 +357,17 @@ window.PAGE = function (OD) {
     OD.addLine({
       key: 'coffret:' + Date.now(),
       id: p.id, kind: 'coffret', code: 'COFFRET', title: p.name,
-      sub: B.items.length + ' pièces · ' + (B.mode === 'gift' ? 'cadeau pour ' + B.gift.name : 'pour moi'),
+      sub: B.items.length + (B.items.length > 1 ? ' pièces · ' : ' pièce · ') + (B.mode === 'gift' ? 'cadeau pour ' + B.gift.name : 'pour moi'),
       unit: t.total, points: t.points, qty: 1, items: B.items.length,
-      meta: { mode: B.mode, items: B.items.slice(), custom: Object.assign({}, B.custom), gift: B.mode === 'gift' ? Object.assign({}, B.gift) : null },
+      meta: {
+        mode: B.mode, items: B.items.slice(),
+        /* the words travel with the order, so the WhatsApp message can spell them out */
+        custom: Object.assign({}, B.custom, {
+          boxLabel: OD.T((BOXES.find(b => b[0] === B.custom.box) || [])[1] || ''),
+          ribbonLabel: OD.T((RIBBONS.find(b => b[0] === B.custom.ribbon) || [])[1] || '')
+        }),
+        gift: B.mode === 'gift' ? Object.assign({}, B.gift) : null
+      },
       c: p.c
     });
   });
@@ -367,11 +420,11 @@ window.PAGE = function (OD) {
   }
   render();
   if (give) {
-    $('#steps').scrollIntoView();
+    ($('#perso') || $('#steps')).scrollIntoView();
     OD.toast(OD.T('Ready to gift — add a message, then their address'));
   }
 };
 </script>
-<script src="assets/js/app.js?v=20261012e"></script>
+<script src="assets/js/app.js?v=20261012h"></script>
 </body>
 </html>

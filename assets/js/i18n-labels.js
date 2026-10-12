@@ -599,7 +599,15 @@ I18N.add('fr', {
     'Back to the home page': "Retour à l'accueil",
     'are quoted individually and confirmed before shipping.': 'font l\'objet d\'un devis et sont confirmées avant expédition.',
     'Give to someone': 'Offrir à quelqu\'un',
-    'Ready to gift — add a message, then their address': 'Prêt à offrir — ajoutez un mot, puis son adresse'
+    'Ready to gift — add a message, then their address': 'Prêt à offrir — ajoutez un mot, puis son adresse',
+    'Popular searches': 'Recherches fréquentes', 'Bestsellers': 'Les plus vendus',
+    'Fresh for summer': 'Frais pour l\'été', 'Sweet for winter': 'Sucré pour l\'hiver',
+    'Diffuseur for the living room': 'Diffuseur pour le salon', 'Gift': 'Cadeau',
+    'See all results': 'Voir tous les résultats', 'No match yet — try one of these:': 'Aucun résultat — essayez plutôt :',
+    'Results for': 'Résultats pour',
+    'Box': 'Boîte', 'Ribbon': 'Ruban', 'Engraving': 'Gravure', 'Card message': 'Mot sur la carte', 'Card signed': 'Carte signée',
+    'Gift for': 'Cadeau pour', 'Deliver to': 'Livrer à', 'No prices on the delivery slip': 'Sans prix sur le bon de livraison',
+    'Send directly to the recipient': 'Envoyer directement au destinataire'
   }
 });
 
@@ -698,6 +706,35 @@ I18N.add('ar', {
     'Back to the home page': 'العودة إلى الصفحة الرئيسية',
     'are quoted individually and confirmed before shipping.': 'تُسعَّر كلٌّ على حدة وتُؤكَّد قبل الشحن.',
     'Give to someone': 'أهدِه لشخص عزيز',
-    'Ready to gift — add a message, then their address': 'جاهز للإهداء — أضف رسالة، ثم عنوانه'
+    'Ready to gift — add a message, then their address': 'جاهز للإهداء — أضف رسالة، ثم عنوانه',
+    'Popular searches': 'عمليات بحث شائعة', 'Bestsellers': 'الأكثر مبيعًا',
+    'Fresh for summer': 'منعش للصيف', 'Sweet for winter': 'حلو للشتاء',
+    'Diffuseur for the living room': 'مبخرة للصالون', 'Gift': 'هدية', 'Musk': 'مسك', 'Rose': 'ورد', 'Oud': 'عود',
+    'See all results': 'عرض كل النتائج', 'No match yet — try one of these:': 'لا نتائج — جرّب أحد هذه:',
+    'Results for': 'نتائج البحث عن',
+    'Box': 'العلبة', 'Ribbon': 'الشريط', 'Engraving': 'النقش', 'Card message': 'رسالة البطاقة', 'Card signed': 'توقيع البطاقة',
+    'Gift for': 'هدية إلى', 'Deliver to': 'التوصيل إلى', 'No prices on the delivery slip': 'بدون أسعار على وصل التسليم',
+    'Send directly to the recipient': 'إرسال مباشرة إلى المُهدى إليه',
+    /* the gift card on the coffret page, written in French first */
+    'Votre mot': 'كلمتك', 'Message': 'الرسالة', 'Signé': 'التوقيع', 'Pour': 'إلى',
+    'Imprimé sur une carte ivoire, glissée dans le colis. Choisissez un début ou écrivez le vôtre.':
+      'تُطبع على بطاقة عاجية وتوضع داخل الطرد. اختر بداية جاهزة أو اكتب رسالتك.',
+    'Votre message apparaîtra ici.': 'ستظهر رسالتك هنا.',
+    'Message (pour vous, ou laissez vide)': 'رسالة (لك، أو اتركها فارغة)',
+    'Pour le prochain chapitre…': 'للفصل القادم…', 'Avec amour, Yasmine': 'مع حبي، ياسمين', 'Aperçu de la carte': 'معاينة البطاقة',
+    'Anniversaire': 'عيد ميلاد', 'Merci': 'شكرًا', 'Félicitations': 'تهانينا', 'Aïd Moubarak': 'عيد مبارك',
+    'Mariage': 'زفاف', 'Je pense à toi': 'أفكر فيك',
+    'Joyeux anniversaire ! Que cette nouvelle année te ressemble : belle, libre et parfumée.':
+      'عيد ميلاد سعيد! لتكن سنتك الجديدة مثلك: جميلة، حرّة، وعطِرة.',
+    'Merci pour tout. Ce parfum, c’est un peu de ma gratitude à porter chaque jour.':
+      'شكرًا على كل شيء. هذا العطر قليل من امتناني، تحمله معك كل يوم.',
+    'Félicitations ! Un nouveau chapitre commence — voici de quoi le parfumer.':
+      'تهانينا! فصل جديد يبدأ — وهذا ما يعطّره.',
+    'Aïd Moubarak ! Que cette fête t’apporte paix, joie et douceur.':
+      'عيد مبارك! أتمنى أن يحمل لك هذا العيد السلام والفرح والسكينة.',
+    'Tous nos vœux de bonheur pour cette belle histoire qui commence.':
+      'أطيب التمنيات بالسعادة لهذه القصة الجميلة التي تبدأ.',
+    'Je pense à toi. Un parfum pour que tu penses aussi un peu à moi.':
+      'أفكر فيك. عطر لتفكر فيّ أنت أيضًا قليلًا.'
   }
 });
