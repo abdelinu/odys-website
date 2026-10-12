@@ -18,7 +18,7 @@ window.ODYS = (function () {
     showRatings: false,
 
     /* ORDERING — WhatsApp + cash on delivery is the launch channel */
-    whatsapp: '212600000000',          // ⚠ PLACEHOLDER — put the real number here (country code, no +)
+    whatsapp: '212684519444',          // the shop's WhatsApp (06 84 51 94 44): country code, no +, no spaces
 
     /* POINTS — follow the dirham, not the unit.
        Keyed per gram, a cheap oud batch paid the same reward as an expensive one;

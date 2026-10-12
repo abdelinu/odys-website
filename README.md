@@ -43,7 +43,7 @@ There is no payment gateway and no backend, by design for launch. `OD.waLink()` 
 - A **coffret line spells out what the shop has to prepare**: each piece (with its weight), the box and ribbon, the engraving, the card message and its signature, and for a gift the recipient, their phone and address, the date, "no prices on the slip" and "send directly".
 - **Or leave your address here** — the same form as before; submitting opens WhatsApp pre-filled *and* records the order locally so points and rewards still work.
 
-⚠ `config.whatsapp` is a placeholder (`212600000000`). Put the real number there — or in `admin.html` — before showing anyone the site.
+`config.whatsapp` is the shop's number, `212684519444` (06 84 51 94 44): country code, no `+`, no spaces. Every order button is built from it.
 
 ## Gifting
 
@@ -207,7 +207,7 @@ The 69 MAD perfume and the 49 MAD diffuseur are your numbers. The point rule and
 It is a folder of static files: copy it to any host (Netlify, Cloudflare Pages, Vercel, or plain nginx). No build, no environment variables, no database.
 
 1. Confirm everything in the list above, in `data.js` (or test it first in `admin.html`, which only changes your own browser).
-2. Put the real WhatsApp number in `config.whatsapp` — with no `+` and no spaces, e.g. `212612345678`. Every order button is a `wa.me` link built from it, so a wrong number means silent lost orders.
+2. Check the WhatsApp number in `config.whatsapp` (now `212684519444`, with no `+` and no spaces). Every order button is a `wa.me` link built from it, so a wrong number means silent lost orders.
 3. Set the real domain in `robots.txt` and `scripts/sitemap.js`, then run `node scripts/sitemap.js`.
 4. Bump the `?v=` stamp (see Cache busting) so returning visitors get the new CSS/JS.
 5. Serve over HTTPS and send these headers (Netlify/Cloudflare Pages read a `_headers` file; nginx uses `add_header`):

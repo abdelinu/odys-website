@@ -226,7 +226,7 @@
             <div>
               <div class="brand" style="margin-bottom:16px"><b>ODYS</b><small class="ar">عطور وعود</small></div>
               <p class="muted" style="font-size:13px;max-width:34ch;color:rgba(243,235,221,.6)">More than a fragrance. It's a journey. Parfums 50 ML, diffuseurs and oud by the gram — composed in Morocco.</p>
-              <a class="link-u" href="${waHref(T('Hello ODYS, I have a question'))}" target="_blank" rel="noopener" style="display:inline-block;margin-top:14px;color:#D4B676;border-color:#B08D4F">WhatsApp +${C.whatsapp}</a>
+              <a class="link-u" href="${waHref(T('Hello ODYS, I have a question'))}" target="_blank" rel="noopener" style="display:inline-block;margin-top:14px;color:#D4B676;border-color:#B08D4F"><bdi>WhatsApp ${waShown()}</bdi></a>
               <p class="mono" style="margin-top:12px;color:rgba(243,235,221,.45)">Casablanca · cash on delivery</p>
             </div>
             <div><h5>Shop</h5>${[['Parfums', 'shop.html'], ['Diffuseurs', 'diffuseurs.html'], ['Oud au gramme', 'oud.html'], ['Coffrets', 'coffrets.html'], ['Discovery', 'discover.html']].map(l => `<a href="${l[1]}">${l[0]}</a><br>`).join('')}</div>
@@ -396,6 +396,8 @@
      The launch channel: no backend, no payment gateway. The cart is serialised
      into a wa.me message; the shop replies, confirms and ships cash on delivery. */
   const waHref = text => 'https://wa.me/' + C.whatsapp + (text ? '?text=' + encodeURIComponent(text) : '');
+  /* the number as people read it: +212 6 84 51 94 44 */
+  const waShown = () => String(C.whatsapp).replace(/^212(\d)(\d{2})(\d{2})(\d{2})(\d{2})$/, '+212 $1 $2 $3 $4 $5').replace(/^(\d)/, '+$1');
   /* A coffret line carries what the shop has to prepare: the pieces, the box, the card
      and, for a gift, where it goes. Without these the order arrives as "COFFRET SIGNATURE". */
   function coffretDetail(l) {
@@ -887,7 +889,7 @@
     award, awardOnce, tierOf, nextReward, unlocked, subtotal, cartCount, cartPoints, cartPointsAwarded,
     pointsFor, ptsLabel, ptsWord, rewardDiscount, waLink, waHref, sticksFor, sticksLabel, jsonLd,
     gramPrice, gramRate, isSpecial, oudPoints, unitPoints, priceOf,
-    search, paint, observe, recommend, mountQuiz, icons: I, setQty, closeOverlay, openOverlay, renderCart
+    waShown, search, paint, observe, recommend, mountQuiz, icons: I, setQty, closeOverlay, openOverlay, renderCart
   };
   window.OD = api;
 
