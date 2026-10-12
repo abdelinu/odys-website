@@ -314,6 +314,13 @@ img.art-photo{display:block;max-width:100%;height:auto}
 }
 .card-add:hover{background:var(--accent-ink);color:var(--ink-on-accent);border-color:var(--accent-ink)}
 .dark .card-add:hover{background:var(--sand);color:var(--oud-deep);border-color:var(--sand)}
+/* add-to-cart and, beside it, "give to someone" — an icon, since a phone card has no room for the words */
+.card-acts{display:flex;gap:6px;margin-top:12px}
+.card-acts .card-add{margin-top:0;flex:1;min-width:0}
+.card-gift{flex:none;width:44px;display:grid;place-items:center;border:1px solid var(--line);color:inherit;transition:.4s var(--ease)}
+.card-gift svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.3}
+.card-gift:hover{background:var(--accent-ink);color:var(--ink-on-accent);border-color:var(--accent-ink)}
+.dark .card-gift:hover{background:var(--sand);color:var(--oud-deep);border-color:var(--sand)}
 
 .trio{display:flex;gap:clamp(16px,3vw,34px);align-items:center;flex-wrap:wrap;
   background:linear-gradient(120deg,rgba(176,141,79,.14),transparent 65%);transition:.4s var(--ease)}

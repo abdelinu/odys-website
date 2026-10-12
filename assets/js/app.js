@@ -515,7 +515,10 @@
           ${C.showRatings && p.rating ? `<span class="stars">${stars(p.rating)}<small>${p.reviews}</small></span>` : ''}
         </div>
         <div class="card-pts ${pts ? '' : 'off'}">${pts ? '+' + ptsLabel(pts) + ' ' + ptsWord(pts) + (p.type === 'oud' ? ' / ' + C.oud.minGrams + ' g' : '') : T('Hors programme points')}</div>
-        <button class="card-add" data-add="${p.id}">${p.type === 'oud' ? 'Choose a weight' : 'Add to journey'}</button>
+        <div class="card-acts">
+          <button class="card-add" data-add="${p.id}">${p.type === 'oud' ? 'Choose a weight' : 'Add to journey'}</button>
+          <a class="card-gift" href="coffrets.html?offrir=${p.id}" aria-label="Give to someone" title="Give to someone">${I.gift}</a>
+        </div>
       </div>
     </article>`;
   }
