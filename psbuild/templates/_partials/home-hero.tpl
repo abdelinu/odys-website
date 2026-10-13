@@ -58,6 +58,7 @@
   {assign var='odysEyebrow' value=Configuration::get('ODYS_HERO_EYEBROW')}
   {assign var='odysTitle1' value=Configuration::get('ODYS_HERO_TITLE_1')}
   {assign var='odysTitle2' value=Configuration::get('ODYS_HERO_TITLE_2')}
+  {assign var='odysSub' value=Configuration::get('ODYS_HERO_SUB')}
   {assign var='odysLede' value=Configuration::get('ODYS_HERO_LEDE')}
   {assign var='odysCta' value=Configuration::get('ODYS_HERO_CTA')}
   {* Les destinations aussi se reglent en Back Office : le bouton menait
@@ -69,7 +70,14 @@
   {assign var='odysLinkUrl' value=Configuration::get('ODYS_HERO_LINK_URL')}
   {if !$odysEyebrow}{assign var='odysEyebrow' value="L'art de l'essence"}{/if}
   {if !$odysTitle1}{assign var='odysTitle1' value="Plus qu'un parfum,"}{/if}
-  {if !$odysTitle2}{assign var='odysTitle2' value='une émotion'}{/if}
+  {* Un titre d'un seul mot existe : « L'Icône ». Vider la seconde ligne
+     en Back Office doit donc la supprimer, pas rappeler celle d'origine.
+     Jamais enregistree (false) = on sert celle du theme ; enregistree
+     vide ('') = la maison n'en veut pas. Les autres champs gardent leur
+     repli : un bouton sans libelle ou une banniere sans titre seraient
+     une page cassee, pas un choix. *}
+  {if $odysTitle2 === false}{assign var='odysTitle2' value='une émotion'}{/if}
+  {if !$odysSub}{assign var='odysSub' value='Une essence de liberté et de féminité'}{/if}
   {if !$odysLede}{assign var='odysLede' value="Des essences rares, un savoir-faire intemporel. Découvrez l'univers ODYS."}{/if}
   {if !$odysCta}{assign var='odysCta' value='Découvrir la collection'}{/if}
   {if !$odysCtaUrl}{assign var='odysCtaUrl' value=$odysUrlParfums}{/if}
@@ -82,6 +90,7 @@
       'eyebrow' => $odysEyebrow,
       't1' => $odysTitle1,
       't2' => $odysTitle2,
+      'sub' => $odysSub,
       'lede' => $odysLede,
       'cta' => $odysCta,
       'url' => $odysCtaUrl,
@@ -97,6 +106,7 @@
       'eyebrow' => 'Oud & Boukhour',
       't1' => 'Le bois',
       't2' => 'avant le parfum',
+      'sub' => 'Vendus au gramme, pesés devant vous',
       'lede' => 'Oud, boukhour et encens, vendus au gramme.',
       'cta' => "Découvrir l'oud",
       'url' => $odysUrlOud,
@@ -138,10 +148,17 @@
         <p class="nv-eyebrow">{$odysSlide.eyebrow|escape:'html':'UTF-8'}</p>
         {* un seul <h1> par page : les visuels suivants prennent un <h2>,
            qui porte le meme style *}
+        {* Le titre tient sur deux lignes, et la seconde peut etre vide : un
+           titre d'un seul mot ne doit pas trainer un <br> derriere lui. *}
         {if $smarty.foreach.tx.first}
-          <h1 id="nv-hero-title">{$odysSlide.t1|escape:'html':'UTF-8'}<br>{$odysSlide.t2|escape:'html':'UTF-8'}</h1>
+          <h1 id="nv-hero-title">{$odysSlide.t1|escape:'html':'UTF-8'}{if $odysSlide.t2}<br>{$odysSlide.t2|escape:'html':'UTF-8'}{/if}</h1>
         {else}
-          <h2 class="nv-h1">{$odysSlide.t1|escape:'html':'UTF-8'}<br>{$odysSlide.t2|escape:'html':'UTF-8'}</h2>
+          <h2 class="nv-h1">{$odysSlide.t1|escape:'html':'UTF-8'}{if $odysSlide.t2}<br>{$odysSlide.t2|escape:'html':'UTF-8'}{/if}</h2>
+        {/if}
+        {* Le sous-titre : la phrase qui qualifie le parfum, entre le titre et
+           le texte. Vide, il ne laisse pas de place vide. *}
+        {if $odysSlide.sub}
+          <p class="nv-sub">{$odysSlide.sub|escape:'html':'UTF-8'}</p>
         {/if}
         <p class="nv-lede">{$odysSlide.lede|escape:'html':'UTF-8'}</p>
         <div class="nv-hero-cta">

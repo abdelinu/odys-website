@@ -19701,6 +19701,57 @@ echo "  l'option cadeau est active, le message est joint a la commande (" . $ody
 
 ";
 
+echo "
+Les mots de la banniere
+";
+// La banniere ouvre desormais sur L'Icone, photographiee sur une terrasse
+// de Marrakech. Les mots qui l'accompagnent sont poses ici une seule fois :
+// ils vivent en Back Office (Apparence -> Theme ODYS), et ce script ne
+// repasse jamais par-dessus un choix deja fait par la maison.
+//
+// La destination du bouton n'est pas ecrite en dur : elle est demandee a
+// PrestaShop pour le produit de reference 01. Une adresse recopiee serait
+// fausse le jour ou l'identifiant ou le nom de l'URL changent.
+$odysIdIcone = (int) Db::getInstance()->getValue(
+    'SELECT id_product FROM ' . _DB_PREFIX_ . 'product WHERE reference = "01"');
+$odysLienIcone = '';
+if ($odysIdIcone) {
+    $odysUrlIcone = Context::getContext()->link->getProductLink($odysIdIcone);
+    $odysChemin = parse_url((string) $odysUrlIcone, PHP_URL_PATH);
+    if ($odysChemin) {
+        $odysLienIcone = '/' . ltrim($odysChemin, '/');
+    }
+}
+$odysMotsBanniere = array(
+    'ODYS_HERO_EYEBROW' => 'Collection signature',
+    'ODYS_HERO_TITLE_1' => 'L’Icône',
+    'ODYS_HERO_TITLE_2' => '',
+    'ODYS_HERO_SUB'     => 'Une essence de liberté et de féminité',
+    'ODYS_HERO_LEDE'    => 'L’inspiration d’un classique, l’âme du Maroc.',
+    'ODYS_HERO_CTA'     => 'Découvrir',
+);
+if ($odysLienIcone !== '') {
+    $odysMotsBanniere['ODYS_HERO_CTA_URL'] = $odysLienIcone;
+}
+$odysPosesBanniere = 0;
+foreach ($odysMotsBanniere as $odysCle => $odysMot) {
+    // Jamais enregistre = la maison n'a pas encore touche a ce champ.
+    // Une seconde ligne de titre volontairement vide ('') compte comme un
+    // choix : on la laisse tranquille.
+    if (Configuration::hasKey($odysCle)) {
+        continue;
+    }
+    Configuration::updateValue($odysCle, $odysMot);
+    ++$odysPosesBanniere;
+}
+echo "  " . $odysPosesBanniere . " mot(s) de banniere pose(s)"
+    . ($odysLienIcone !== '' ? ", bouton vers " . $odysLienIcone : ", produit 01 introuvable : bouton inchange") . "
+
+
+
+
+";
+
 
 
 

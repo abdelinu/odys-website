@@ -6926,6 +6926,33 @@ button[data-action="show-password"]{min-height:44px;padding:0 14px}
 .cta-row{flex-wrap:wrap}
 .cta-row .btn-cart{flex:1 1 210px;min-width:210px}
 
+/* ══════════════════════════════════════════════════════════════════════
+   LE SOUS-TITRE DE LA BANNIERE
+
+   La maquette porte quatre niveaux de texte : l'accroche, le titre, une
+   phrase qui qualifie le parfum, puis le texte courant. Le gabarit n'en
+   avait que trois — le sous-titre tombait soit dans le titre, ou il
+   prenait 47 px, soit dans le texte, ou il se confondait avec lui.
+
+   Il a sa place maintenant : en capitales espacees comme l'accroche, mais
+   plus grand et plus clair, pour se tenir entre les deux sans imiter ni
+   l'un ni l'autre.
+   ══════════════════════════════════════════════════════════════════════ */
+.nv-sub{
+  margin:0 0 18px;
+  max-width:30ch;
+  font-family:var(--sans);
+  font-size:14px;
+  font-weight:400;
+  letter-spacing:.14em;
+  line-height:1.5;
+  text-transform:uppercase;
+  color:var(--odys-on-dark);
+}
+@media (max-width:860px){
+  .nv-sub{font-size:12px;letter-spacing:.12em;margin-bottom:14px;color:var(--odys-text)}
+}
+
 
 /* ═══════════════════════════════════════════════════════════════════════
    ODYS PARFUMS — OUD & BOUKHOUR (PrestaShop)

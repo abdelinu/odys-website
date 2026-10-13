@@ -23,6 +23,9 @@ class AdminOdysThemeController extends ModuleAdminController
         'ODYS_HERO_EYEBROW' => ['Accroche (au-dessus du titre)', 'text', "Vide : « L'art de l'essence »"],
         'ODYS_HERO_TITLE_1' => ['Titre — première ligne', 'text', 'Vide : « Plus qu\'un parfum, »'],
         'ODYS_HERO_TITLE_2' => ['Titre — seconde ligne', 'text', 'Vide : « une émotion »'],
+        'ODYS_HERO_SUB'     => ['Sous-titre', 'text',
+            'La phrase qui qualifie, entre le titre et le texte. '
+            . "Vide : « Une essence de liberté et de féminité »"],
         'ODYS_HERO_LEDE'    => ['Texte sous le titre', 'textarea', 'Deux lignes au maximum se lisent bien.'],
         'ODYS_HERO_CTA'     => ['Bouton principal', 'text', 'Vide : « Découvrir la collection »'],
         'ODYS_HERO_CTA_URL' => ['Bouton principal — destination', 'text',

@@ -1218,9 +1218,15 @@ case "$home" in *'odys-essence-poster.webp'*) ok "the poster is set (the film's 
 
 # the words must be in the HTML, not burned into the video
 
-case "$home" in *'Plus qu&#039;un parfum'*|*"Plus qu'un parfum"*) ok "the headline is real text";; *) no "the headline is not in the markup";; esac
+echo "$home" | grep -qE '<h1 id="nv-hero-title">[^<]{3,}' \
+  && ok "le titre du hero est du vrai texte" \
+  || no "le titre du hero est vide ou absent"
 
-case "$home" in *'Découvrir la collection'*) ok "the call to action is real text";; *) no "no call to action in the hero";; esac
+# Ce qui compte n est pas la phrase mais qu elle soit du texte dans la page :
+# un bouton rendu, avec une destination. Les mots viennent du Back Office.
+echo "$home" | grep -qE '<a href="[^"]+" class="nv-btn"' \
+  && ok "le bouton du hero est du vrai texte, et il mene quelque part" \
+  || no "le bouton du hero manque ou n a pas de destination"
 
 film=$(curl -s -o /dev/null -m 60 -w "%{http_code} %{size_download}" "$SHOP/themes/odys/assets/img/hero/odys-essence.mp4")
 
@@ -1437,7 +1443,9 @@ home=$(curl -s -m 40 "$SHOP/")
 
 # l'apostrophe sort en &#039;. Les deux formes sont le meme texte.
 
-case "$home" in *"L'art de l'essence"*|*"L&#039;art de l&#039;essence"*) ok "hero copy renders (fallback in use)";; *) no "hero eyebrow missing";; esac
+echo "$home" | grep -qE '<p class="nv-eyebrow">[^<]{3,}' \
+  && ok "l accroche du hero est du vrai texte" \
+  || no "l accroche du hero est vide ou absente"
 
 tpl=$(cat ../dist/odys-theme-ps8/themes/odys/templates/_partials/home-hero.tpl 2>/dev/null)
 
@@ -3659,6 +3667,35 @@ print("  %dx%d, rapport %.3f" % (w, h, r))
 if abs(r - 21 / 9) > 0.08:
     print("  attendu 2.333 (21:9)"); sys.exit(1)
 EOPY
+
+
+step "Les mots de la banniere"
+
+# Le gabarit n'avait que trois niveaux de texte ; la maquette en porte
+# quatre. Le sous-titre tombait soit dans le titre, a 47 px, soit dans le
+# texte courant, ou il s'y confondait.
+grep -q "ODYS_HERO_SUB" "$ctl" \
+  && ok "le sous-titre de la banniere se regle en Back Office" \
+  || no "le sous-titre de la banniere n est pas reglable"
+grep -q 'class="nv-sub"' ../dist/odys-theme-ps8/themes/odys/templates/_partials/home-hero.tpl \
+  && ok "le sous-titre a sa place entre le titre et le texte" \
+  || no "le sous-titre n est pas rendu"
+
+# « L'Icone » tient sur une ligne. Vider la seconde ligne du titre doit la
+# supprimer, pas rappeler celle du theme — sinon le titre dit « L'Icone »
+# puis « une emotion ».
+grep -q "odysTitle2 === false" ../dist/odys-theme-ps8/themes/odys/templates/_partials/home-hero.tpl \
+  && ok "une seconde ligne de titre videe reste vide" \
+  || no "vider la seconde ligne du titre rappelle celle d origine"
+
+# Le lot pose ces mots, et la destination du bouton est demandee a
+# PrestaShop plutot que recopiee : un identifiant change, le lien suit.
+grep -q "Collection signature" ../dist/deploy/maj-telephone.php \
+  && ok "le lot pose les mots de la banniere" \
+  || no "les mots de la banniere n atteindront pas la production"
+grep -q "odysLienIcone" ../dist/deploy/maj-telephone.php \
+  && ok "le bouton de la banniere pointe sur la fiche, resolue a l execution" \
+  || no "la destination du bouton est ecrite en dur"
 
 
 step "No new PHP exceptions"
