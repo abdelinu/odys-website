@@ -124,11 +124,14 @@ def main():
     print("  voile rgba%s, opacite max %.2f" % (voile, max(a for _, a in paliers)))
 
     rates = 0
+    mesures = 0
     for nom in ["hero/odys-essence-poster.webp", "nuit-riad.webp"]:
         chemin = IMAGES / nom
         if not chemin.exists():
-            print("  ok   %-30s absente, ignoree" % nom)
+            print("  ABSENTE %-27s rien a mesurer" % nom)
+            rates += 1
             continue
+        mesures += 1
         c = contraste(chemin, voile, paliers)
         bon = c >= SEUIL
         if not bon:
@@ -136,9 +139,16 @@ def main():
         print("  %s %-30s %.2f:1" % ("ok  " if bon else "ECHEC", nom, c))
 
     print("")
+    # Un visuel absent faisait passer le test en silence : il annoncait
+    # « tous les visuels tiennent le contraste » sans en avoir mesure un
+    # seul. Une banniere qui n'arrive pas en ligne est un defaut, pas un
+    # succes.
+    if not mesures:
+        print("  aucun visuel mesure : la banniere n'a pas ete construite.")
+        return 1
     if rates:
-        print("  %d visuel(s) sous %.1f:1 : le titre du hero deviendrait dur a lire."
-              % (rates, SEUIL))
+        print("  %d visuel(s) sous %.1f:1 ou absent(s) : le titre du hero"
+              " deviendrait dur a lire." % (rates, SEUIL))
         return 1
     print("  Tous les visuels du hero tiennent le contraste.")
     return 0

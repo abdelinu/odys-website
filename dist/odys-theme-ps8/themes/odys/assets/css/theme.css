@@ -4152,9 +4152,28 @@ h2.sugg-title{margin:0}
        reste necessaire — 0,74 ramene ce 95e centile a 48 et tient le
        contraste du titre dore — mais il n'atteint plus jamais l'opacite
        pleine, et il emprunte sa teinte aux ombres de la photo. */
-    linear-gradient(90deg, rgba(24,14,8,.74) 0%, rgba(24,14,8,.70) 24%,
-      rgba(24,14,8,.56) 34%, rgba(24,14,8,.30) 43%,
-      rgba(24,14,8,.10) 49%, rgba(24,14,8,0) 56%),
+    /* Et ce reglage-la valait pour une photo SOMBRE — un flacon dans la
+       fumee, sur fond noir. La banniere montre maintenant Marrakech a
+       l'heure doree : ciel clair, pierre blonde, montagnes enneigees. Le
+       meme voile n'y tenait plus rien. Mesure sur les rectangles reels
+       des lignes, pixels de l'image composites avec les deux degrades :
+       le titre tombait a 2,06 (il lui faut 3), l'accroche a 3,09 et le
+       texte a 2,94 (il leur faut 4,5). Trois textes sur quatre illisibles.
+
+       Le voile descend donc plus bas et s'eteint plus loin. Deux mesures
+       l'ont fixe. Dans le navigateur, sur les rectangles reels des lignes :
+       4,80 pour le titre, 5,6 pour l'accroche, 5,9 pour le texte. Et
+       psbuild/tests/hero_contraste.py, qui relit ces paliers et les
+       applique colonne par colonne a chaque visuel du carrousel : 5,00:1
+       sur cette photo, 6,58:1 sur le riad. Ce test exige 4,5:1 la ou la
+       norme demande 3:1 pour un grand texte — la marge est voulue, et un
+       premier reglage plus leger (0,86) a ete refuse a 4,22:1.
+
+       Une banniere encore plus claire redemanderait cette mesure : le CSS
+       ne sait pas lire l'image qu'on lui donne. Le test, lui, la lit. */
+    linear-gradient(90deg, rgba(24,14,8,.88) 0%, rgba(24,14,8,.85) 28%,
+      rgba(24,14,8,.74) 40%, rgba(24,14,8,.52) 50%,
+      rgba(24,14,8,.24) 58%, rgba(24,14,8,0) 68%),
     linear-gradient(0deg, rgba(24,14,8,.62) 0%, rgba(24,14,8,0) 32%)}
 
 

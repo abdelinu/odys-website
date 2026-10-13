@@ -3625,6 +3625,42 @@ tr -d '\r\n' < "$cssf" | grep -qE '\.cta-row \.btn-cart\{ *flex:1 1 210px' \
   || no "le bouton d achat peut etre reduit a quelques pixels"
 
 
+step "La banniere : le visuel et le voile qui le rend lisible"
+
+# La photo d'attente est passee d'un flacon dans la fumee — sombre — a
+# Marrakech a l'heure doree : ciel clair, pierre blonde. Le voile taille
+# pour la premiere ne tenait plus rien sur la seconde. Mesure sur les
+# rectangles reels des lignes, pixels composites avec les deux degrades :
+# le titre tombait a 2,06 pour un seuil de 3, l'accroche a 3,09 et le
+# texte a 2,94 pour un seuil de 4,5.
+tr -d '\r\n' < "$cssf" | grep -qF 'rgba(24,14,8,.88) 0%' \
+  && ok "le voile de la banniere est celui mesure sur la photo claire" \
+  || no "le voile de la banniere est revenu a un reglage trop leger"
+
+# La banniere est une bande 21:9. Une photo en 16:9 se fait rogner sur les
+# cotes — c'est ce qui coupait « L'ICONE » en « 'ICONE » sur la maquette.
+python - <<'EOPY' && ok "la photo de la banniere est bien en 21:9" || no "la photo de la banniere n est pas au format de la bande"
+import pathlib, struct, sys
+p = pathlib.Path("../dist/odys-theme-ps8/themes/odys/assets/img/hero/odys-essence-poster.webp")
+if not p.exists():
+    print("  poster absent de dist/"); sys.exit(1)
+d = p.read_bytes()
+if d[:4] != b"RIFF" or d[8:12] != b"WEBP":
+    print("  ce n est pas un WebP"); sys.exit(1)
+k = d[12:16]
+if k == b"VP8X":
+    w = int.from_bytes(d[24:27], "little") + 1; h = int.from_bytes(d[27:30], "little") + 1
+elif k == b"VP8 ":
+    w = struct.unpack("<H", d[26:28])[0] & 0x3fff; h = struct.unpack("<H", d[28:30])[0] & 0x3fff
+else:
+    print("  variante WebP non lue :", k); sys.exit(1)
+r = w / h
+print("  %dx%d, rapport %.3f" % (w, h, r))
+if abs(r - 21 / 9) > 0.08:
+    print("  attendu 2.333 (21:9)"); sys.exit(1)
+EOPY
+
+
 step "No new PHP exceptions"
 
 recent=$(psh "tail -3 /var/www/html/var/logs/*exception.log 2>/dev/null | grep -c ERROR" | tr -d '\r')
