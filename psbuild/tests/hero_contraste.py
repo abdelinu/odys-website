@@ -109,6 +109,60 @@ def contraste(chemin, voile, paliers):
     return (Ltxt + 0.05) / (pire + 0.05)
 
 
+# ── La barre de navigation ──────────────────────────────────────────────
+# Le menu de l'accueil flotte sur la meme photographie, sans voile a lui
+# jusqu'a la hauteur de la barre. Il a ete illisible en ligne : l'encre
+# sombre de la maquette gagnait le cascade. Le contraste se mesure ici de
+# la meme facon, en relisant le degrade de la barre dans theme.css.
+BARRE = (244, 239, 229)      # --odys-on-dark, la couleur du menu sur photo
+NAV_H = 76
+# Ce que la barre porte, en fraction de sa largeur, mesure au navigateur.
+ZONES = [("logo", 0.02, 0.09, 4.5),
+         ("menu", 0.33, 0.60, 4.5),
+         ("icones", 0.82, 0.99, 3.0)]   # un trace, pas du texte : 3:1
+
+
+def lis_la_barre(css):
+    """Le degrade de la barre flottante de l'accueil, relu dans la feuille."""
+    bloc = re.search(
+        r"body\.index #header:not\(\.stuck\) \.odys-nav\{[^}]*?"
+        r"linear-gradient\(180deg,rgba\((\d+),(\d+),(\d+),([\d.]+)\)", css)
+    if not bloc:
+        return None, None
+    return tuple(int(bloc.group(i)) for i in (1, 2, 3)), float(bloc.group(4))
+
+
+def contraste_barre(chemin, voile, paliers, teinte, opacite):
+    im = Image.open(chemin).convert("RGB")
+    W, H = 1920, 880                       # le hero sur un ecran de bureau
+    r = max(W / im.width, H / im.height)
+    im = im.resize((round(im.width * r), round(im.height * r)))
+    gx = (im.width - W) // 2
+    gy = (im.height - H) // 2
+    im = im.crop((gx, gy, gx + W, gy + H))
+    px = im.load()
+
+    Ltxt = luminance(BARRE)
+    out = []
+    for nom, x0, x1, seuil in ZONES:
+        pire = 0.0
+        for i in range(int(x0 * 400), int(x1 * 400) + 1):
+            p = i / 400.0
+            x = min(W - 1, int(W * p))
+            a = alpha(paliers, p) if p <= paliers[-1][0] else 0.0
+            vals = []
+            for y in range(26, 50):        # la ligne de texte dans la barre
+                c = px[x, y]
+                c = tuple(a * voile[k] + (1 - a) * c[k] for k in range(3))
+                ab = opacite * (1 - y / NAV_H)
+                c = tuple(ab * teinte[k] + (1 - ab) * c[k] for k in range(3))
+                vals.append(luminance(c))
+            vals.sort()
+            pire = max(pire, vals[int(len(vals) * 0.95)])
+        out.append((nom, (Ltxt + 0.05) / (pire + 0.05), seuil))
+    return out
+
+
 def main():
     if not CSS.exists():
         print("  theme.css introuvable : lancez psbuild/build_theme.py d'abord")
@@ -138,6 +192,23 @@ def main():
             rates += 1
         print("  %s %-30s %.2f:1" % ("ok  " if bon else "ECHEC", nom, c))
 
+    teinte, opacite = lis_la_barre(CSS.read_text(encoding="utf-8"))
+    if not teinte:
+        print("  ECHEC : le voile de la barre de navigation est introuvable")
+        rates += 1
+    else:
+        chemin = IMAGES / "hero/odys-essence-poster.webp"
+        if chemin.exists():
+            print("")
+            print("  barre de navigation sur le visuel d'accueil :")
+            for nom, c, seuil in contraste_barre(chemin, voile, paliers,
+                                                 teinte, opacite):
+                bon = c >= seuil
+                if not bon:
+                    rates += 1
+                print("  %s %-30s %.2f:1  (seuil %.1f)"
+                      % ("ok  " if bon else "ECHEC", nom, c, seuil))
+
     print("")
     # Un visuel absent faisait passer le test en silence : il annoncait
     # « tous les visuels tiennent le contraste » sans en avoir mesure un
@@ -147,8 +218,8 @@ def main():
         print("  aucun visuel mesure : la banniere n'a pas ete construite.")
         return 1
     if rates:
-        print("  %d visuel(s) sous %.1f:1 ou absent(s) : le titre du hero"
-              " deviendrait dur a lire." % (rates, SEUIL))
+        print("  %d mesure(s) sous leur seuil ou visuel absent : le hero"
+              " deviendrait dur a lire." % rates)
         return 1
     print("  Tous les visuels du hero tiennent le contraste.")
     return 0

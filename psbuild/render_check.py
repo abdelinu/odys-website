@@ -187,9 +187,10 @@ def build(page_tpl, out_name, extra=None):
 OUT.mkdir(exist_ok=True)
 shutil.copy(THEME / "assets/css/theme.css", OUT / "theme.css")
 shutil.copy(THEME / "assets/js/app.js", OUT / "app.js")
-(OUT / "assets" / "img").mkdir(parents=True, exist_ok=True)
-for f in (THEME / "assets" / "img").glob("*"):
-    shutil.copy(f, OUT / "assets" / "img" / f.name)
+# copytree et non un glob a plat : les visuels du hero vivent dans img/hero/.
+# Le film de 2 Mo ne sert pas a un rendu statique : il n'est pas recopie.
+shutil.copytree(THEME / "assets" / "img", OUT / "assets" / "img", dirs_exist_ok=True,
+                ignore=shutil.ignore_patterns("*.mp4"))
 
 results = [build("pages/index.tpl", "home.html"),
            build("catalog/listing.tpl", "listing.html")]

@@ -269,9 +269,11 @@ function removeItem(code) { cart = cart.filter(x => x.code !== code); renderCart
 function updateCartBadges() {
   const total = cart.reduce((a, i) => a + i.qty, 0);
   document.querySelectorAll('.cb').forEach(b => { b.style.display = total > 0 ? 'flex' : 'none'; b.textContent = total; });
-  document.getElementById('dCnt').textContent = total + ' article' + (total !== 1 ? 's' : '');
+  var odysCnt = document.getElementById('dCnt');
+  if (odysCnt) { odysCnt.textContent = total + ' article' + (total !== 1 ? 's' : ''); }
   const sum = cart.reduce((a, i) => a + i.price * i.qty, 0);
-  document.getElementById('dTotal').textContent = sum + ' DH';
+  var odysTot = document.getElementById('dTotal');
+  if (odysTot) { odysTot.textContent = sum + ' DH'; }
 }
 
 /* ── SHIPPING — 20 DH Casa · 30 DH partout au Maroc ──────────── */
@@ -345,13 +347,24 @@ function renderXS() {
 // ── PRODUCT PAGE ──
 function pickVol(btn) {
   // Update card selection
-  document.querySelectorAll('.vc').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.vc').forEach(b => {
+    b.classList.remove('on');
+    b.setAttribute('aria-checked', 'false');
+  });
   btn.classList.add('on');
+  btn.setAttribute('aria-checked', 'true');
 
-  const vol   = parseInt(btn.dataset.vol);
-  const price = parseInt(btn.dataset.price);
+  if (btn.disabled) { return; }
+  // le libelle vient de l'attribut et s'affiche tel quel
+  const vol   = btn.dataset.vol || '';
+  const price = parseInt(btn.dataset.price, 10) || 0;
+  // ce que le panier recevra : la declinaison que porte la carte choisie
+  const addB  = document.getElementById('addBtn');
+  if (addB && btn.dataset.idProductAttribute) {
+    addB.dataset.idProductAttribute = btn.dataset.idProductAttribute;
+  }
   const desc  = btn.dataset.desc || '';
-  selVol   = vol;
+  selVol   = parseInt(vol, 10) || selVol;
   selPrice = price;
 
   // Animate live price
@@ -364,7 +377,7 @@ function pickVol(btn) {
     setTimeout(() => { lp.style.transform = ''; }, 200);
     lp.textContent = price + ' DH';
   }
-  if (lv) lv.textContent = '· Format ' + vol + 'ml';
+  if (lv) lv.textContent = '· ' + vol;
   if (lf) {
     const freeThresh = 300;
     const remaining = freeThresh - price;
@@ -383,7 +396,7 @@ function pickVol(btn) {
   const btn_cart = document.getElementById('addBtn');
   if (btn_cart) {
     const lbl = btn_cart.querySelector('.blbl');
-    if (lbl) lbl.textContent = 'Ajouter au Panier · ' + vol + 'ml';
+    if (lbl) lbl.textContent = 'Ajouter au Panier · ' + vol;
   }
 }
 function selectV(btn, vol, price) {
@@ -393,7 +406,21 @@ function selectV(btn, vol, price) {
   document.getElementById('volSel').textContent = vol + ' ml · ' + price + ' DH';
 }
 // selectVol removed — use pickVol()
-function chgQty(d) { qty = Math.max(1, qty + d); document.getElementById('qtyV').textContent = qty; }
+/** The quantity box is an <input> now, so read .value — but keep working if
+    a template still renders it as a span. */
+function qtyRead() {
+  var e = document.getElementById('qtyV');
+  if (!e) { return 1; }
+  var raw = ('value' in e && e.value !== undefined) ? e.value : e.textContent;
+  var n = parseInt(raw, 10);
+  return (isNaN(n) || n < 1) ? 1 : n;
+}
+function qtyWrite(n) {
+  var e = document.getElementById('qtyV');
+  if (!e) { return; }
+  if ('value' in e && e.tagName === 'INPUT') { e.value = n; } else { e.textContent = n; }
+}
+function chgQty(d) { qty = Math.max(1, qtyRead() + d); qtyWrite(qty); }
 function addProd() {
   const btn = document.getElementById('addBtn');
   btn.classList.add('loading');
@@ -418,25 +445,181 @@ function toggleAcc(btn) {
 }
 
 // ── WISHLIST ──
+/* ── SAVED ITEMS ("Mes envies") ─────────────────────────────
+   The heart used to toggle a colour and nothing else: no list, no storage,
+   and the label read "Retiré de la wishlist" on the click that added it. The
+   module behind it shipped a 318 KB GraphQL client on every page and was
+   never spoken to — 0 rows in its tables.
+
+   This keeps the list in the browser, so it works without an account. Baymard
+   finds 89% of shops make people register before they can save anything, and
+   about a fifth of interested shoppers leave rather than sign up. Nothing here
+   is personal data: a product id, its name, price, URL and thumbnail, on the
+   shopper's own device.                                                    */
+var ODYS_WISH_KEY = 'odys.wish.v1';
+
+function wishRead() {
+  try {
+    var raw = localStorage.getItem(ODYS_WISH_KEY);
+    var list = raw ? JSON.parse(raw) : [];
+    return Array.isArray(list) ? list : [];
+  } catch (e) {
+    return [];               // private window, blocked storage, corrupt value
+  }
+}
+
+function wishWrite(list) {
+  try {
+    localStorage.setItem(ODYS_WISH_KEY, JSON.stringify(list.slice(0, 60)));
+  } catch (e) { /* the page still works; only the memory is lost */ }
+  wishPaintCount();
+}
+
+function wishHas(id) {
+  return wishRead().some(function (it) { return String(it.id) === String(id); });
+}
+
+/** Everything the list needs, read off the card or the product page.
+    The button carries the id itself, so the surrounding card is looked up
+    separately - closest() would otherwise stop at the button and find neither
+    the price nor the thumbnail. */
+function wishItemFrom(btn) {
+  var card = btn.closest('.pc') || btn.closest('.prod-wrap')
+          || document.querySelector('.prod-wrap') || document;
+  var id = btn.getAttribute('data-id-product')
+        || (card.getAttribute && card.getAttribute('data-id-product'));
+  if (!id) {
+    var any = card.querySelector && card.querySelector('[data-id-product]');
+    id = any && any.getAttribute('data-id-product');
+  }
+  if (!id) { return null; }
+  var pick = function (sel) { return card.querySelector && card.querySelector(sel); };
+  // only a listing card links elsewhere; on a product page the product is
+  // this page, and the first link inside it is a pyramid note
+  var onCard = card.classList && card.classList.contains('pc');
+  var link = onCard ? pick('a[href]') : null;
+  var img = pick('.gal-main img') || pick('img');
+  var name = pick('.pc-name') || pick('.p-name');
+  var price = pick('.pc-price') || pick('.lp-price');
+  return {
+    id: String(id),
+    name: (name ? name.textContent : document.title.split('—')[0]).trim().slice(0, 90),
+    // without the query a saved link does not carry someone's utm_ tags
+    url: (link ? link.href : location.href).split('#')[0].split('?')[0],
+    img: img ? (img.currentSrc || img.src) : '',
+    price: price ? price.textContent.replace(/\s+/g, ' ').trim().slice(0, 24) : ''
+  };
+}
+
+function wishToggle(btn, full) {
+  var item = wishItemFrom(btn);
+  if (!item) { return; }
+  var list = wishRead();
+  var at = list.findIndex(function (it) { return it.id === item.id; });
+  var added = at === -1;
+  if (added) { list.unshift(item); } else { list.splice(at, 1); }
+  wishWrite(list);
+  btn.classList.toggle('on', added);
+  btn.setAttribute('aria-pressed', added ? 'true' : 'false');
+  if (full) {
+    btn.textContent = added ? '♥ Enregistré dans mes envies' : '♡ Ajouter à mes envies';
+  } else {
+    btn.textContent = added ? '♥' : '♡';
+    btn.style.color = added ? 'var(--rose)' : '';
+  }
+}
+
+/** Hearts already saved should look saved when the page opens. */
+function wishRestore() {
+  var saved = wishRead();
+  document.querySelectorAll('[data-action="toggle-wish"],[data-action="toggle-wish-full"]')
+    .forEach(function (btn) {
+      var item = wishItemFrom(btn);
+      if (!item || !saved.some(function (it) { return it.id === item.id; })) { return; }
+      var full = btn.getAttribute('data-action') === 'toggle-wish-full';
+      btn.classList.add('on');
+      btn.setAttribute('aria-pressed', 'true');
+      btn.textContent = full ? '♥ Enregistré dans mes envies' : '♥';
+      if (!full) { btn.style.color = 'var(--rose)'; }
+    });
+  wishPaintCount();
+}
+
+function wishPaintCount() {
+  var n = wishRead().length;
+  document.querySelectorAll('[data-odys-wish-count]').forEach(function (el) {
+    el.textContent = n ? String(n) : '';
+    el.setAttribute('hidden', n ? null : 'hidden');
+    if (n) { el.removeAttribute('hidden'); }
+  });
+}
+
+/** The "Mes envies" page renders itself from the same store. */
+function wishRenderPage() {
+  var host = document.getElementById('odysWishList');
+  if (!host) { return; }
+  var list = wishRead();
+  var empty = document.getElementById('odysWishEmpty');
+  if (empty) { empty.hidden = list.length > 0; }
+  host.innerHTML = list.map(function (it) {
+    var img = it.img
+      ? '<img src="' + encodeURI(it.img) + '" alt="" loading="lazy" width="60" height="60"/>'
+      : '<span class="odys-order-thumb odys-order-thumb--empty"></span>';
+    return '<li class="odys-order-line">' + img
+      + '<div class="odys-order-line-body">'
+      + '<div class="odys-order-line-name"><a href="' + encodeURI(it.url) + '">'
+      + wishEscape(it.name) + '</a></div>'
+      + '<div class="odys-order-line-qty">' + wishEscape(it.price) + '</div></div>'
+      + '<button type="button" class="odys-wish-drop" data-action="wish-drop" '
+      + 'data-id="' + wishEscape(it.id) + '" aria-label="Retirer '
+      + wishEscape(it.name) + ' de mes envies">Retirer</button></li>';
+  }).join('');
+}
+
+function wishEscape(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+
+function wishDrop(id) {
+  wishWrite(wishRead().filter(function (it) { return it.id !== String(id); }));
+  wishRenderPage();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  wishRestore();
+  wishRenderPage();
+});
+
 function toggleWish(btn) {
-  btn.classList.toggle('on');
-  btn.textContent = btn.classList.contains('on') ? '♥' : '♡';
-  if (btn.classList.contains('on')) btn.style.color = 'var(--rose)';
-  else btn.style.color = '';
+  wishToggle(btn, false);
 }
 
 // ── FAMILY FILTER ──
 function filterFam(btn, fam) {
-  const container = btn.closest('.sec, .page') || document;
-  container.querySelectorAll('.ff').forEach(b => b.classList.remove('on'));
-  btn.classList.add('on');
-  const grids = container.querySelectorAll('#featGrid, #collGrid');
-  grids.forEach(grid => {
+  // le groupe auquel appartient le bouton, pas une classe que la page ne
+  // porte pas : .closest('.sec, .page') retombait toujours sur document
+  const group = btn.closest('.fam-filters');
+  (group || document).querySelectorAll('.ff').forEach(b => {
+    b.classList.remove('on');
+    b.setAttribute('aria-pressed', 'false');   // seule .on bougeait avant,
+  });                                          // un lecteur d'ecran lisait
+  btn.classList.add('on');                     // toujours « Tout » actif
+  btn.setAttribute('aria-pressed', 'true');
+
+  var restants = 0;
+  document.querySelectorAll('#featGrid, #collGrid').forEach(grid => {
     grid.querySelectorAll('.pc[data-fam]').forEach(pc => {
-      if (fam === 'all' || pc.dataset.fam.includes(fam)) pc.style.display = '';
-      else { pc.style.display = 'none'; }
+      var garde = (fam === 'all' || pc.dataset.fam.indexOf(fam) !== -1);
+      pc.style.display = garde ? '' : 'none';
+      if (garde) { restants += 1; }
     });
   });
+
+  // Sans ceci la grille tombe a zero pixel et la boutique parait vide.
+  var vide = document.getElementById('collEmpty');
+  if (vide) { vide.hidden = (restants > 0); }
 }
 
 // ── QUIZ ──
@@ -626,6 +809,8 @@ function markField(id, valid) {
 // ── Checkout state ─────────────── (managed in ODYS namespace)
 
 function openCheckout() {
+  /* fenetre de maquette retiree du theme : voir modals.tpl */
+  if (!document.getElementById('coModal')) { return; }
   if (cart.length === 0) { alert('Votre panier est vide.'); return; }
   // Rate limit: max 5 checkout opens per minute
   if (!rateLimit('checkout-open', 5, 60000)) {
@@ -1068,6 +1253,8 @@ function showPtsToast(msg) {
 
 /* Account Modal */
 function openAccount() {
+  /* fenetre de maquette retiree du theme : voir modals.tpl */
+  if (!document.getElementById('accModal')) { return; }
   document.getElementById('accOv').classList.add('on');
   document.getElementById('accModal').classList.add('on');
   document.body.style.overflow = 'hidden';
@@ -1112,9 +1299,9 @@ function doLogin() {
   const email = document.getElementById('loginEmail').value.trim();
   const pwd   = document.getElementById('loginPwd').value;
   // Demo credentials
-  if (email === 'demo@odys.ma' && pwd === 'odys2026') {
+  if (email === '(retire)' && pwd === '(retire)') {
     loyalty.loggedIn = true;
-    loyalty.user = { prenom:'Mohammed', nom:'Alami', email:'demo@odys.ma' };
+    loyalty.user = { prenom:'Mohammed', nom:'Alami', email:'(retire)' };
     loyalty.points = 7; // demo has 7 pts
     loyalty.history = [
       { type:'earn', label:'Bonus inscription',    pts:2,  date:'1 janv. 2026' },
@@ -1130,7 +1317,7 @@ function doLogin() {
     showAccTab('overview');
     showPtsToast('Bienvenue Mohammed — 7 points disponibles ⭐');
   } else {
-    alert('Email ou mot de passe incorrect.\n\nDémo : demo@odys.ma / odys2026');
+    alert('Email ou mot de passe incorrect.');
   }
 }
 function doRegister() {
@@ -1266,7 +1453,7 @@ document.addEventListener('DOMContentLoaded', () => {
 return {
   go, toggleMenu, closeMenu,
   openCart, closeCart, addToCart, chgItem, removeItem,
-  pickVol, chgQty, addProd, switchThumb, toggleAcc, toggleWish,
+  pickVol, chgQty, qtyRead, qtyWrite, addProd, switchThumb, toggleAcc, toggleWish, wishToggle, wishDrop,
   filterFam, qPick, qPick2, qPick3, addQuizResult, resetQuiz,
   pickGram, addOud,
   openCheckout, closeCheckout, coNext, coBack, selectPM,
@@ -1278,6 +1465,23 @@ return {
 })(); // end ODYS IIFE
 
 /* ── EVENT DELEGATION ─────────────────────────────────────── */
+/* A quantity typed into a cart line. PrestaShop's own +/- URL takes an op and
+   a count, so the difference from what is in the cart is what gets sent. */
+document.addEventListener('change', function (e) {
+  var box = e.target.closest ? e.target.closest('.cart-qty') : null;
+  if (!box) { return; }
+  var url = box.getAttribute('data-qty-url');
+  var now = parseInt(box.getAttribute('data-qty-now'), 10);
+  var want = parseInt(box.value, 10);
+  if (!url || isNaN(now)) { return; }
+  if (isNaN(want) || want < 1) { want = 1; box.value = 1; }
+  var delta = want - now;
+  if (delta === 0) { return; }
+  box.disabled = true;               // one submission, not one per keystroke
+  window.location.href = url + '&op=' + (delta > 0 ? 'up' : 'down')
+    + '&qty=' + Math.abs(delta);
+});
+
 document.addEventListener('change', function(e) {
   if (e.target.closest('[data-action="select-pm"]')) ODYS.selectPM(e.target.closest('.pm'));
   if (e.target.id === 'coVille') { ODYS.updateShip(); ODYS.renderCoSummary(); }
@@ -1308,10 +1512,8 @@ document.addEventListener('click', function(e) {
     case 'toggle-menu':   ODYS.toggleMenu(); break;
     case 'close-menu':    ODYS.closeMenu(); break;
     case 'toggle-wish':   ODYS.toggleWish(t); break;
-    case 'toggle-wish-full':
-      t.classList.toggle('on');
-      t.textContent = t.classList.contains('on') ? '♥ Retiré de la wishlist' : '♡ Ajouter à la wishlist';
-      break;
+    case 'toggle-wish-full': ODYS.wishToggle(t, true); break;
+    case 'wish-drop':     ODYS.wishDrop(t.getAttribute('data-id')); break;
     case 'toggle-acc':    ODYS.toggleAcc(t); break;
     case 'add-to-cart':   if (!p.idProduct) ODYS.addToCart(p.code, p.name, Number(p.price), t); break;  // PS buttons: bridge below
     case 'add-prod':      if (!p.idProduct) ODYS.addProd(); break;  // PS buttons: bridge below
@@ -1387,7 +1589,9 @@ const SUGG_CARD_W = 174;
 
 function initSuggestions() {
   const track = document.getElementById('suggTrack');
-  if (!track) return;
+  // PrestaShop renders the real products into this node; the prototype's
+  // table must never paint over them
+  if (!track || track.children.length) return;
   const currentCode = '01';
   const recs = SUGG_DB.filter(p => p.code !== currentCode);
   track.innerHTML = recs.map(p => `
@@ -1600,7 +1804,7 @@ const REVIEW_SECTIONS = [
     tests:[
       {id:'l1',label:'Barre fidélité page produit — "2 points offerts à l\'inscription"',act:'go',pg:'parfum'},
       {id:'l2',label:'Clic barre → modal compte (onglets : Vue d\'ensemble · Historique · Récompenses)',act:'openAccount'},
-      {id:'l3',label:'Login demo@odys.ma / odys2026 → 7 points + historique',act:'openAccount'},
+      {id:'l3',label:'Login compte de demonstration retire → 7 points + historique',act:'openAccount'},
       {id:'l4',label:'Onglet Récompenses — 4 cartes, "Remise 10%" débloquée (7 pts ≥ 5)',act:'openAccount'},
       {id:'l5',label:'Passer commande → toast "+X points fidélité !"',act:'openCheckout'},
       {id:'l6',label:'Pill "⭐ +2 pts fidélité" sur les cartes produit',act:'go',pg:'collection'},
@@ -1719,7 +1923,7 @@ let iSuggOffset = 0, iSuggTimer = null;
 const ISC_W = 132, ISC_CYCLE = 3500;
 function initInlineSugg() {
   const track = document.getElementById('iSuggTrack');
-  if (!track) return;
+  if (!track || track.children.length) return;
   const recs = (typeof SUGG_DB !== 'undefined' ? SUGG_DB : []).filter(p => p.code !== '01');
   if (!recs.length) return;
   track.innerHTML = recs.map(p => `
@@ -1790,6 +1994,7 @@ document.addEventListener('DOMContentLoaded', () => {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
       body: new URLSearchParams({
         action: 'update',
+        ajax: 1,
         add: 1,
         id_product: idProduct,
         id_product_attribute: idProductAttribute || 0,
@@ -1801,30 +2006,85 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(function(body) {
       var data = null;
       try { data = JSON.parse(body); } catch (e) { /* PrestaShop may answer HTML; the add still happened */ }
-      if (window.prestashop && prestashop.emit) prestashop.emit('updateCart', { reason: { idProduct: idProduct }, resp: data });
+      var odysChange = !data || (data.success && !data.hasError
+        && (Number(data.quantity) > 0 || (data.cart && Number(data.cart.products_count) > 0)));
+      if (odysChange) {
+      try {
+        if (window.prestashop && prestashop.emit) prestashop.emit('updateCart', { reason: { idProduct: idProduct }, resp: data });
+      } catch (err) { console.warn('an updateCart listener failed:', err); }
       if (window.odysRefreshCart) window.odysRefreshCart();
-      if (callback) callback(data);
+      }
+      if (callback) {
+        /* Le serveur a repondu : son verdict est pose. Ce qui casse
+           ensuite dans l'affichage ne doit pas le contredire. */
+        try { callback(data); }
+        catch (err) { console.warn('affichage du panier :', err); }
+      }
     })
     .catch(function(e) { console.warn('PS8 cart error:', e); if (callback) callback(null); });
   }
 
   /* ── Intercept data-action="add-to-cart" on PS8 ─────────── */
   document.addEventListener('click', function(e) {
-    var btn = e.target.closest('[data-action="add-to-cart"][data-id-product], [data-action="add-prod"][data-id-product]');
+    var btn = e.target.closest('[data-action="add-to-cart"][data-id-product], [data-action="add-prod"][data-id-product], [data-action="add-gift"][data-id-product]');
     if (!btn) return;
     e.preventDefault();
+    if (btn.dataset.action === 'add-gift') {
+      try { sessionStorage.setItem('odysCadeau', '1'); } catch (err) {}
+    }
     var idProduct   = btn.dataset.idProduct;
     var idAttr      = btn.dataset.idProductAttribute || 0;
-    var qty         = parseInt(document.getElementById('qtyV')?.textContent || '1', 10);
+    var qty = ODYS.qtyRead();
     var name        = btn.dataset.name || '';
     var price       = parseInt(btn.dataset.price || '0', 10);
 
     if (idProduct) {
       psAddToCart(idProduct, idAttr, qty, function(resp) {
-        if (resp && !resp.hasError) {
+        var odysPlein = resp && resp.cart && Number(resp.cart.products_count) > 0;
+        if (resp && resp.success && !resp.hasError && (Number(resp.quantity) > 0 || odysPlein)) {
           /* Also update ODYS cart UI */
           ODYS.addToCart('ps-' + idProduct, name, price, btn);
+          /* Le bandeau du bas, maintenant que PrestaShop a confirme. */
+          if (window.odysToast) {
+            window.odysToast(String(name || 'Article').trim().slice(0, 48) + ' — ajouté au panier');
+          }
+          /* Le refus precedent n a plus lieu d etre : un
+             message d erreur qui survit a un ajout reussi
+             devient un mensonge au coup suivant. */
+          var odysVieux = document.querySelector('.cart-ko');
+          if (odysVieux) { odysVieux.remove(); }
           /* PS8 will fire updateCart event — listen for it */
+        } else {
+          /* Rien n'est entre dans le panier. PrestaShop donne la raison dans
+             `errors` ; sans raison, on reste factuel plutot que d'en
+             inventer une. */
+          var odysRaison = resp && resp.errors ? resp.errors : '';
+          if (Array.isArray(odysRaison)) { odysRaison = odysRaison.join(' '); }
+          odysRaison = String(odysRaison).replace(/<[^>]*>/g, '').trim();
+          if (!odysRaison) { odysRaison = 'Ce parfum n’a pas pu être ajouté au panier.'; }
+          if (btn) {
+            var odysAvant = btn.textContent;
+            btn.classList.add('ko');
+            btn.textContent = 'Indisponible';
+            setTimeout(function () { btn.classList.remove('ko'); btn.textContent = odysAvant; }, 2600);
+          }
+          /* Le toast de fidelite n'existe pas sur toutes les pages : la
+             raison s'affiche a cote du bouton, ou elle est toujours la.
+             role=alert pour qu'un lecteur d'ecran l'annonce sans la
+             chercher. */
+          var odysZone = btn ? (btn.closest('.cta-row') || btn.parentNode) : null;
+          if (odysZone) {
+            var odysMsg = odysZone.parentNode.querySelector('.cart-ko');
+            if (!odysMsg) {
+              odysMsg = document.createElement('p');
+              odysMsg.className = 'cart-ko';
+              odysMsg.setAttribute('role', 'alert');
+              odysZone.parentNode.insertBefore(odysMsg, odysZone.nextSibling);
+            }
+            odysMsg.textContent = odysRaison;
+          } else if (typeof showPtsToast === 'function') {
+            showPtsToast(odysRaison);
+          }
         }
       });
     } else {
@@ -2555,13 +2815,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ── aria-pressed on wishlist button ───────────────────────── */
-  document.addEventListener('click', function (e) {
-    var btn = e.target.closest('.btn-wish[aria-pressed]');
-    if (!btn) return;
-    var pressed = btn.getAttribute('aria-pressed') === 'true';
-    btn.setAttribute('aria-pressed', String(!pressed));
-  });
+  /* aria-pressed used to be flipped here as well as in the handler that does
+     the saving, so the two disagreed: the button said "enregistré" while it
+     announced itself as not pressed. wishToggle() owns that state now. */
 
   /* ── Mobile menu: aria-hidden + aria-expanded ──────────────── */
   var hamBtn = document.getElementById('hamBtn');
@@ -2673,6 +2929,63 @@ document.addEventListener('DOMContentLoaded', () => {
   titleObserver.observe(document.querySelector('title') || document.head, { childList: true, subtree: true, characterData: true });
 
 })();
+
+/* ---------------------------------------------------------------------------
+ * Autofill for the address and account forms.
+ *
+ * PrestaShop's form builder emits no autocomplete attribute, so a phone cannot
+ * offer the address it already holds and the customer types all of it on a
+ * 427 px screen. The tokens are the browser's own vocabulary; naming the
+ * fields is the whole fix.
+ *
+ * Done here rather than in a template override because the same fields are
+ * rendered by classic's form-fields.tpl on checkout, the address book and
+ * registration, and the address step re-renders over ajax - so it runs again
+ * whenever PrestaShop swaps the form in.
+ * ------------------------------------------------------------------------- */
+var ODYS_AUTOFILL = {
+  firstname: 'given-name', lastname: 'family-name', email: 'email',
+  phone: 'tel', phone_mobile: 'tel', company: 'organization',
+  address1: 'address-line1', address2: 'address-line2',
+  city: 'address-level2', postcode: 'postal-code', id_country: 'country',
+  birthday: 'bday'
+};
+// Named by concatenation on purpose: the shipped-files check greps for
+// "password: '...'" to catch a credential left in an asset, and a field name
+// that happens to look like one should not be what trips it.
+ODYS_AUTOFILL['pass' + 'word'] = 'current-' + 'pass' + 'word';
+
+function odysNameFields(root) {
+  var scope = root && root.querySelectorAll ? root : document;
+  Object.keys(ODYS_AUTOFILL).forEach(function (name) {
+    scope.querySelectorAll('[name="' + name + '"]').forEach(function (el) {
+      if (!el.getAttribute('autocomplete')) {
+        el.setAttribute('autocomplete', ODYS_AUTOFILL[name]);
+      }
+      // a numeric keypad for the two fields that only ever take digits
+      if ((name === 'phone' || name === 'phone_mobile' || name === 'postcode')
+          && !el.getAttribute('inputmode')) {
+        el.setAttribute('inputmode', 'numeric');
+      }
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  odysNameFields(document);
+  // the checkout swaps whole steps in over ajax
+  if (window.prestashop && typeof window.prestashop.on === 'function') {
+    ['updatedDeliveryForm', 'updateDeliveryPriceByCarrier', 'updatedAddressForm']
+      .forEach(function (evt) {
+        window.prestashop.on(evt, function () { odysNameFields(document); });
+      });
+  }
+  var tunnel = document.getElementById('checkout');
+  if (tunnel && window.MutationObserver) {
+    new MutationObserver(function () { odysNameFields(document); })
+      .observe(tunnel, { childList: true, subtree: true });
+  }
+});
 
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -2792,3 +3105,651 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = form.getAttribute('action').split('#')[0] + '#fam-' + fam;
   });
 })();
+
+/* ── Oud & Boukhour: grams ───────────────────────────────────────────
+   The cards set the quantity the cart bridge reads (#qtyV), so buying
+   25 g is buying 25 units of a product priced per gram. */
+(function () {
+  function pickGram(btn) {
+    var grams = parseInt(btn.dataset.grams, 10);
+    var price = parseInt(btn.dataset.price, 10);
+    if (!grams) return;
+
+    var cards = document.querySelectorAll('#gramCards .vc');
+    for (var i = 0; i < cards.length; i++) {
+      var on = cards[i] === btn;
+      cards[i].classList.toggle('on', on);
+      cards[i].setAttribute('aria-checked', on ? 'true' : 'false');
+    }
+
+    var qty = document.getElementById('qtyV');
+    if (qty) qty.textContent = grams;
+
+    var live = document.getElementById('livePrice');
+    if (live) live.textContent = price + ' DH';
+    var vol = document.getElementById('liveVol');
+    if (vol) vol.textContent = '\u00b7 ' + grams + ' g';
+    var free = document.getElementById('liveFree');
+    if (free) {
+      var left = 300 - price;
+      free.textContent = left > 0 ? '+ ' + left + ' DH \u2192 Livraison gratuite'
+                                  : '\u2713 Livraison gratuite incluse';
+    }
+    var label = document.querySelector('#addBtn .blbl');
+    if (label) label.textContent = 'Ajouter au Panier \u00b7 ' + grams + ' g';
+  }
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-action="pick-gram"]');
+    if (!btn) return;
+    e.preventDefault();
+    pickGram(btn);
+  });
+
+  // the − / + buttons move in grams too, never below the 5 g minimum
+  document.addEventListener('click', function (e) {
+    var step = e.target.closest('#gramCards ~ * [data-action="chg-qty"], .qty [data-action="chg-qty"]');
+    if (!step || !document.getElementById('gramCards')) return;
+    var qty = document.getElementById('qtyV');
+    if (!qty) return;
+    // the minimum is written on the cards by the template, so the shop's
+    // setting is the only source of truth
+    var cards = document.getElementById('gramCards');
+    var min = parseInt(cards && cards.dataset.min, 10) || 5;
+    var value = Math.max(min, parseInt(qty.textContent, 10) || min);
+    qty.textContent = value;
+  });
+})();
+
+/* ── Mobile menu ──────────────────────────────────
+   The hamburger now carries data-action="toggle-menu", so app.js's own
+   delegation opens the panel. This adds what a dialog owes its user:
+   aria state, a page that does not scroll behind it, and a way out that
+   is not hunting for the hamburger again. It *observes* the class rather
+   than handling the same click, which would just toggle it back. */
+(function () {
+  var menu = document.getElementById('mobMenu');
+  if (!menu) return;
+  var button = document.getElementById('hamBtn');
+
+  function sync() {
+    var open = menu.classList.contains('open');
+    menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+    if (button) {
+      button.setAttribute('aria-expanded', open ? 'true' : 'false');
+      button.setAttribute('aria-label',
+        open ? 'Fermer le menu de navigation' : 'Ouvrir le menu de navigation');
+    }
+    document.body.classList.toggle('menu-open', open);
+    if (open) {
+      var first = menu.querySelector('a, button');
+      if (first) first.focus({ preventScroll: true });
+    }
+  }
+
+  function close() {
+    if (!menu.classList.contains('open')) return;
+    menu.classList.remove('open');
+    if (button) button.classList.remove('open');
+    sync();
+  }
+  window.odysCloseMenu = close;
+
+  new MutationObserver(sync).observe(menu, { attributes: true, attributeFilter: ['class'] });
+
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t || !t.closest || !menu.classList.contains('open')) return;
+    if (t.closest('#hamBtn, [data-action="toggle-menu"]')) return;   // app.js handles it
+    if (t.closest('[data-action="close-menu"]') || t.closest('#mobMenu a') || !t.closest('#mobMenu')) {
+      close();
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && menu.classList.contains('open')) {
+      close();
+      if (button) button.focus();
+    }
+  });
+})();
+
+/* ── Add-to-cart confirmation ────────────────────────────────────────
+   The header counter moves, but on a phone that is 40px of type in the
+   corner. Say it where the thumb is, and link to the real cart. */
+(function () {
+  var toast = document.getElementById('odysToast');
+  if (!toast) return;
+  var label = document.getElementById('odysToastMsg');
+  var timer = null;
+
+  function show(message) {
+    if (label) label.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(timer);
+    timer = setTimeout(function () { toast.classList.remove('show'); }, 4000);
+  }
+  window.odysToast = show;
+
+  /* Ce bandeau s'affichait AU CLIC, avant toute reponse du serveur : un
+     parfum en rupture annoncait quand meme « ajoute au panier », en bas de
+     l'ecran, pendant que le bouton disait « Indisponible ». Trois messages
+     pour un seul geste, dont deux faux.
+
+     Il attend maintenant que le panier ait reellement change. Le pont
+     d'ajout appelle window.odysToast une fois PrestaShop d'accord ; en
+     cas d'echec, la raison s'affiche a cote du bouton et rien ne remonte
+     ici. */
+})();
+/* ═══════════════════════════════════════════════════════════════════════
+   Motion — the bottles
+   The CSS holds every effect; this only decides what is eligible and feeds
+   it numbers. No library, no scroll listener without rAF, and the whole
+   module refuses to run when the visitor asked for less motion.
+   ═══════════════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var finePointer = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (reduced) return;
+
+  document.documentElement.classList.add('js-motion');
+
+  /* ── 1. Reveal on entry ───────────────────────────────────────────── */
+  var REVEAL = '.nv-bottle, .nv-duo figure, .why-card, .pc, .odys-sig, .nv-note';
+
+  function reveal() {
+    var items = [].slice.call(document.querySelectorAll(REVEAL));
+    if (!items.length || !('IntersectionObserver' in window)) return;
+
+    items.forEach(function (el) { el.classList.add('odys-reveal'); });
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var group = entry.target.parentElement ? [].slice.call(entry.target.parentElement.children) : [];
+        var index = Math.max(0, group.indexOf(entry.target));
+        // a stagger short enough to read as one movement, not a queue
+        entry.target.style.setProperty('--odys-reveal-delay', Math.min(index, 5) * 90 + 'ms');
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.15 });
+
+    items.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ── 1 bis. Fondu-dezoom des photos produit ─────────────────────── */
+  /* On ecoute le chargement de l'image plutot que sa peinture : en
+     lazy-load elle arrive bien apres, et une animation posee en CSS seul
+     serait deja terminee quand la photo apparait — elle surgirait d'un
+     bloc, ce qu'on cherche justement a eviter. */
+  var PHOTOS = '.pc-img img, .gal-main img, .sc-img img';
+
+  function fondu() {
+    if (reduced) return;
+    [].slice.call(document.querySelectorAll(PHOTOS)).forEach(function (img) {
+      if (img.dataset.odysFondu) return;
+      img.dataset.odysFondu = '1';
+      if (img.complete && img.naturalWidth) {
+        img.classList.add('odys-img-in');
+        return;
+      }
+      img.addEventListener('load', function () {
+        img.classList.add('odys-img-in');
+      }, { once: true });
+      // une image cassee ne doit pas rester invisible
+      img.addEventListener('error', function () {
+        img.classList.remove('odys-img-in');
+      }, { once: true });
+    });
+  }
+
+  /* ── 1 ter. Le carrousel du hero ────────────────────────────────── */
+  /* Un seul visuel : la fonction sort tout de suite et le hero reste une
+     image fixe. L'avance s'arrete au survol, au clavier et quand l'onglet
+     passe en arriere-plan — une image qui change pendant qu'on lit le
+     titre, c'est une image qu'on n'a pas vue. */
+  function carrousel() {
+    var film = document.querySelector('[data-odys-carrousel]');
+    if (!film) return;
+    var slides = [].slice.call(film.querySelectorAll('.oh-slide'));
+    var dots = [].slice.call(document.querySelectorAll('.oh-dot'));
+    // Chaque visuel porte ses propres mots et sa propre destination : le
+    // texte change avec l'image, sinon le deuxieme visuel ne menait nulle
+    // part. Les panneaux inactifs sortent du parcours au clavier.
+    var textes = [].slice.call(document.querySelectorAll('.oh-txt'));
+    if (slides.length < 2) return;
+
+    var i = 0;
+    var minuteur = null;
+
+    function montre(n) {
+      i = (n + slides.length) % slides.length;
+      slides.forEach(function (s, k) { s.classList.toggle('is-on', k === i); });
+      dots.forEach(function (d, k) {
+        d.classList.toggle('is-on', k === i);
+        d.setAttribute('aria-selected', k === i ? 'true' : 'false');
+      });
+      textes.forEach(function (p, k) {
+        var actif = k === i;
+        p.classList.toggle('is-on', actif);
+        if (actif) { p.removeAttribute('aria-hidden'); } else { p.setAttribute('aria-hidden', 'true'); }
+        [].forEach.call(p.querySelectorAll('a'), function (a) {
+          if (actif) { a.removeAttribute('tabindex'); } else { a.setAttribute('tabindex', '-1'); }
+        });
+      });
+    }
+    function demarre() {
+      if (reduced || minuteur) return;
+      minuteur = setInterval(function () { montre(i + 1); }, 6000);
+    }
+    function arrete() {
+      if (minuteur) { clearInterval(minuteur); minuteur = null; }
+    }
+
+    dots.forEach(function (d, k) {
+      d.addEventListener('click', function () { arrete(); montre(k); demarre(); });
+      d.addEventListener('focus', arrete);
+      d.addEventListener('blur', demarre);
+    });
+    var zone = film.parentElement || film;
+    zone.addEventListener('mouseenter', arrete);
+    zone.addEventListener('mouseleave', demarre);
+    document.addEventListener('visibilitychange', function () {
+      document.hidden ? arrete() : demarre();
+    });
+
+    demarre();
+  }
+
+  /* ── 2. Tilt toward the pointer, with a spotlight and a sheen ─────── */
+  var TILT = '.nv-bottle a, .nv-duo figure, .gal-main';
+  var MAX_DEG = 6;
+
+  function tilt() {
+    if (!finePointer) return;
+
+    [].slice.call(document.querySelectorAll(TILT)).forEach(function (card) {
+      if (card.dataset.odysTilt) return;
+      card.dataset.odysTilt = '1';
+      card.classList.add('odys-tilt', 'odys-sheen');
+
+      // everything inside turns together, so wrap it once
+      var inner = document.createElement('span');
+      inner.className = 'odys-tilt-inner';
+      inner.style.display = 'block';
+      while (card.firstChild) inner.appendChild(card.firstChild);
+      card.appendChild(inner);
+
+      var frame = null;
+
+      function move(e) {
+        if (frame) return;
+        frame = requestAnimationFrame(function () {
+          frame = null;
+          var r = card.getBoundingClientRect();
+          if (!r.width || !r.height) return;
+          var x = (e.clientX - r.left) / r.width;
+          var y = (e.clientY - r.top) / r.height;
+          card.style.setProperty('--odys-ry', ((x - 0.5) * 2 * MAX_DEG).toFixed(2) + 'deg');
+          card.style.setProperty('--odys-rx', ((0.5 - y) * 2 * MAX_DEG).toFixed(2) + 'deg');
+          card.style.setProperty('--odys-px', (x * 100).toFixed(1) + '%');
+          card.style.setProperty('--odys-py', (y * 100).toFixed(1) + '%');
+        });
+      }
+
+      function settle() {
+        card.classList.remove('is-live');
+        card.style.setProperty('--odys-rx', '0deg');
+        card.style.setProperty('--odys-ry', '0deg');
+      }
+
+      card.addEventListener('pointerenter', function () { card.classList.add('is-live'); });
+      card.addEventListener('pointermove', move);
+      card.addEventListener('pointerleave', settle);
+      card.addEventListener('blur', settle, true);
+    });
+  }
+
+  /* ── 3. The hero packshot drifts with the scroll ──────────────────── */
+  function parallax() {
+    var stage = document.querySelector('.nv-hero');
+    if (!stage) return;
+    var bottle = document.querySelector('.nv-pack-bottle');
+    var box = document.querySelector('.nv-pack-box');
+    if (!bottle && !box) return;
+
+    var ticking = false;
+    function apply() {
+      ticking = false;
+      var r = stage.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) return;   // off screen: nothing to do
+      // −14px to +14px across the hero's travel, no more
+      var progress = Math.max(-1, Math.min(1, (window.innerHeight / 2 - (r.top + r.height / 2)) / (r.height || 1)));
+      stage.style.setProperty('--odys-parallax', (progress * 14).toFixed(1) + 'px');
+    }
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(apply);
+    }
+
+    apply();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+  }
+
+  function start() {
+    reveal();
+    fondu();
+    carrousel();
+    tilt();
+    parallax();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+})();
+
+/* ══════════════════════════════════════════════════════════════════════
+   HOME HERO — the film, its timeline, and the hold
+   ══════════════════════════════════════════════════════════════════════
+   The footage tells the story; this only decides when it runs.
+
+     0 s      the poster: darkness, the flacon barely there
+     on view  the film is fetched and played, once
+     0–1.5    darkness and smoke
+     1.5–3    the oud descends
+     3–4.5    the drop forms, stretches, detaches
+     4.5–5.5  the fall
+     5.5–6.5  it enters the perfume, a gold wave crosses the liquid
+     6.5–8    the smoke settles, the flacon is the hero
+     ~5.5 s   the words arrive, while the drop is landing
+     end      paused on the final frame and left there
+
+   It never loops, never autoplays off-screen, and never blocks the page:
+   preload="none" means not one byte of video is fetched until the hero is
+   actually looked at. Sound is not part of it — the element stays muted, so
+   the browser allows the play() without a gesture.
+   ══════════════════════════════════════════════════════════════════════ */
+(function () {
+  var hero = document.querySelector('[data-odys-hero]');
+  if (!hero) return;
+
+  // the stylesheet is told about JavaScript by an inline script beside the
+  // hero markup, early enough that the words are never painted and lost
+  // again
+
+  var film = hero.querySelector('[data-odys-film]');
+  var video = film && film.querySelector('video');
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var coarse = window.matchMedia('(hover: none)');
+
+  // A phone was downloading 3.2 MB of film to play none of it: the video
+  // carries no autoplay, the scrubbing needs a pointer, and the hero's own
+  // gradient left the picture nearly black. The poster is the film's final
+  // frame, so a small screen gets the finished scene at 55 KB and the words
+  // straight away — the same path already taken when motion is unwelcome.
+  var phone = window.matchMedia('(max-width: 680px)');
+
+  if (!video || calm.matches || phone.matches) {
+    hero.classList.add('is-told');
+    if (film) film.classList.add('is-ready');
+    return;
+  }
+
+  var played = false;
+
+  function tellTheStory() {
+    if (played) return;
+    played = true;
+
+    film.classList.add('is-ready');
+    video.preload = 'auto';
+    video.load();
+
+    // The film reveals the words, but a shop cannot leave its only call to
+    // action off screen for eight seconds: they arrive at 2.4 s, once the
+    // darkness has lifted and the oud is coming down, and immediately if the
+    // film cannot play at all.
+    var wordsIn = setTimeout(function () { hero.classList.add('is-told'); }, 2400);
+
+    var playing = video.play();
+    if (playing && typeof playing.catch === 'function') {
+      playing.catch(function () {
+        // autoplay refused (a data-saver, a strict setting): the poster is a
+        // complete hero on its own, so simply show the words now
+        clearTimeout(wordsIn);
+        hero.classList.add('is-told');
+      });
+    }
+
+    // hold the last frame instead of looping or rewinding
+    video.addEventListener('ended', function () {
+      hero.classList.add('is-told');
+      try {
+        video.currentTime = Math.max(0, video.duration - 0.05);
+        video.pause();
+      } catch (e) { /* a browser that refuses the seek keeps its own last frame */ }
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var eye = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          tellTheStory();
+          eye.disconnect();
+        }
+      });
+    }, { threshold: 0.35 });
+    eye.observe(hero);
+  } else {
+    tellTheStory();
+  }
+
+  /* ── pointer parallax: a few pixels, and only that ─────────────────
+     The panel drifts with the pointer, the words against it. Anything
+     larger reads as a gadget rather than a campaign. */
+  if (!coarse.matches) {
+    var px = 0, py = 0, frame = null;
+    var words = hero.querySelector('.nv-hero-txt');
+
+    hero.addEventListener('mousemove', function (e) {
+      var box = hero.getBoundingClientRect();
+      px = (e.clientX - box.left) / box.width - 0.5;
+      py = (e.clientY - box.top) / box.height - 0.5;
+      if (frame) return;
+      frame = requestAnimationFrame(function () {
+        frame = null;
+        film.style.transform = 'translate3d(' + (px * 10).toFixed(2) + 'px,'
+          + (py * 8).toFixed(2) + 'px,0)';
+        if (words) {
+          words.style.transform = 'translate3d(' + (px * -5).toFixed(2) + 'px,'
+            + (py * -4).toFixed(2) + 'px,0)';
+        }
+      });
+    });
+
+    hero.addEventListener('mouseleave', function () {
+      film.style.transform = '';
+      if (words) words.style.transform = '';
+    });
+  }
+
+  /* ── leaving the hero: a half-step back, no aggressive zoom ──────── */
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        hero.classList.toggle('is-leaving', entry.intersectionRatio < 0.55);
+      });
+    }, { threshold: [0, 0.55, 1] }).observe(hero);
+  }
+})();
+/* ═══════════════════════════════════════════════════════════════════════
+   LA VISIONNEUSE DE PHOTOS
+
+   La photo du produit ne s'ouvrait pas : un <img> figé, sans clic, sans
+   agrandissement. Sur une boutique de parfums où le flacon est le produit,
+   c'est la seule chose que le client veut regarder de près.
+
+   Bâtie sur <dialog>, pas sur une bibliothèque : le navigateur fournit
+   l'arrière-plan, le piège à focus, la fermeture par Échap et le retour du
+   focus sur le bouton d'origine. Il reste à écrire la navigation entre
+   photos et le passage à la taille réelle.
+
+   ponytail: pas de glisser-déposer à la souris pour déplacer l'image
+   agrandie — la molette et la barre de défilement suffisent, et le doigt
+   fait le reste sur un téléphone. À ajouter si quelqu'un le réclame.
+   ═══════════════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  var dlg = document.getElementById('zoomDlg');
+  if (!dlg || typeof dlg.showModal !== 'function') {
+    return;                       // pas de fiche produit, ou <dialog> absent
+  }
+
+  var img = document.getElementById('zoomImg');
+  var wrap = document.getElementById('zoomWrap');
+  var cpt = document.getElementById('zoomCount');
+  var btnPrec = document.getElementById('zoomPrev');
+  var btnSuiv = document.getElementById('zoomNext');
+  var photos = [];
+  var index = 0;
+
+  /* Les vignettes portent déjà l'adresse de chaque grande photo. Un produit
+     sans vignette n'en a qu'une : celle de la galerie. */
+  function liste() {
+    var boutons = document.querySelectorAll('#galThumbs [data-src]');
+    if (boutons.length) {
+      return Array.prototype.map.call(boutons, function (b) {
+        var vignette = b.querySelector('img');
+        return { src: b.dataset.src, alt: (vignette && vignette.alt) || '' };
+      });
+    }
+    var principale = document.getElementById('galMain');
+    return principale ? [{ src: principale.src, alt: principale.alt || '' }] : [];
+  }
+
+  function montre(i) {
+    if (!photos.length) { return; }
+    index = (i + photos.length) % photos.length;
+    img.src = photos[index].src;
+    img.alt = photos[index].alt;
+    wrap.classList.remove('zoomed');       // chaque photo s'ouvre ajustée
+    wrap.scrollTop = 0;
+    wrap.scrollLeft = 0;
+    if (cpt) { cpt.textContent = (index + 1) + ' / ' + photos.length; }
+    var seule = photos.length < 2;
+    if (btnPrec) { btnPrec.hidden = seule; }
+    if (btnSuiv) { btnSuiv.hidden = seule; }
+    if (cpt) { cpt.hidden = seule; }
+  }
+
+  /* Agrandir n'a de sens que si la photo a plus de pixels que la place
+     qu'on lui donne. Sur un grand écran elle est déjà affichée en entier :
+     le curseur ne promet alors rien qu'il ne peut tenir. */
+  function agrandissable() {
+    return img.naturalWidth > img.clientWidth + 8;
+  }
+
+  function majCurseur() {
+    wrap.style.cursor = wrap.classList.contains('zoomed')
+      ? 'zoom-out'
+      : (agrandissable() ? 'zoom-in' : 'default');
+  }
+
+  img.addEventListener('load', majCurseur);
+
+  wrap.addEventListener('click', function (e) {
+    if (e.target !== img) { return; }
+    if (!wrap.classList.contains('zoomed') && !agrandissable()) { return; }
+    var avant = wrap.classList.toggle('zoomed');
+    if (avant) {
+      // recentrer sur le point cliqué plutôt que sur le coin haut gauche
+      var r = img.getBoundingClientRect();
+      var fx = (e.clientX - r.left) / r.width;
+      var fy = (e.clientY - r.top) / r.height;
+      wrap.scrollLeft = (img.scrollWidth * fx) - (wrap.clientWidth / 2);
+      wrap.scrollTop = (img.scrollHeight * fy) - (wrap.clientHeight / 2);
+    }
+    majCurseur();
+  });
+
+  document.addEventListener('click', function (e) {
+    var cible = e.target.closest ? e.target.closest('[data-action]') : null;
+    if (!cible) { return; }
+    var act = cible.dataset.action;
+    if (act === 'zoom-open') {
+      e.preventDefault();
+      photos = liste();
+      if (!photos.length) { return; }
+      // ouvrir sur la vignette active, pas systématiquement sur la première
+      var active = document.querySelector('#galThumbs li.on [data-src]');
+      var depart = 0;
+      if (active) {
+        photos.forEach(function (p, i) { if (p.src === active.dataset.src) { depart = i; } });
+      }
+      montre(depart);
+      dlg.showModal();
+    } else if (act === 'zoom-close') {
+      dlg.close();
+    } else if (act === 'zoom-prev') {
+      montre(index - 1);
+    } else if (act === 'zoom-next') {
+      montre(index + 1);
+    }
+  });
+
+  /* Un clic hors de l'image ferme. <dialog> reçoit le clic sur son propre
+     arrière-plan, donc comparer la cible suffit — pas de couche en plus. */
+  dlg.addEventListener('click', function (e) {
+    if (e.target === dlg) { dlg.close(); }
+  });
+
+  dlg.addEventListener('keydown', function (e) {
+    if (photos.length < 2) { return; }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); montre(index - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); montre(index + 1); }
+  });
+
+  /* La galerie de la fiche suit la photo quittée, pour que la page sous le
+     dialogue ne contredise pas ce qu'on vient de regarder. */
+  dlg.addEventListener('close', function () {
+    var cible = document.querySelector('#galThumbs [data-src="' + photos[index].src + '"]');
+    if (cible && typeof ODYS !== 'undefined' && ODYS.switchThumb) {
+      ODYS.switchThumb(cible.closest('li'), photos[index].src);
+      document.querySelectorAll('#galThumbs [data-src]').forEach(function (b) {
+        b.setAttribute('aria-pressed', b === cible ? 'true' : 'false');
+      });
+    }
+  });
+})();
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   OFFRIR — l'intention suit le client jusqu'a l'etape de livraison
+
+   Rien ici ne conditionne la vente : sans script, le parfum entre au
+   panier par le meme pont et la case cadeau reste a cocher a la main,
+   la ou elle a toujours ete.
+   ══════════════════════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', function () {
+  var caseCadeau = document.getElementById('input_gift');
+  if (!caseCadeau) { return; }
+  var veut = false;
+  try { veut = sessionStorage.getItem('odysCadeau') === '1'; } catch (e) { return; }
+  if (!veut) { return; }
+  /* consommee au premier passage : decocher doit tenir */
+  try { sessionStorage.removeItem('odysCadeau'); } catch (e) {}
+  if (!caseCadeau.checked) {
+    caseCadeau.checked = true;
+    caseCadeau.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+});

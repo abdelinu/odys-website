@@ -7444,8 +7444,14 @@ nav.stuck,#header.stuck .odys-nav{background:rgba(244,239,229,.96)!important;
 nav .ni:hover{background:rgba(197,164,106,.16)!important}
 .cb{color:var(--odys-vert)}
 /* Home: the bar floats over the hero photograph until the page scrolls */
+/* Le voile de la barre : il tient le creme au-dessus de la photographie.
+   Mesure par colonne sur le visuel servi, voile du hero compris
+   (psbuild/tests/hero_contraste.py) : le menu passe de 4,0 a 5,0:1 et les
+   icones de 2,6 a 3,2:1 — 4,5 pour du texte, 3 pour un trace. Le vert
+   fonce d'avant posait un noir froid a cote du brun chaud du hero ; cette
+   teinte-ci est celle des ombres de la photo. */
 body.index #header:not(.stuck) .odys-nav{
-  background:linear-gradient(180deg,rgba(24,40,32,.55),rgba(24,40,32,0))!important;
+  background:linear-gradient(180deg,rgba(24,14,8,.78),rgba(24,14,8,0))!important;
   border-bottom-color:transparent!important;
   backdrop-filter:none;-webkit-backdrop-filter:none}
 
@@ -7727,8 +7733,24 @@ body.index #header:not(.stuck) .odys-logo-w,
 .site-footer .odys-logo-w,.footer-logo .odys-logo-w{color:var(--odys-on-dark)}
 body.index #header:not(.stuck) .odys-logo-p,
 .site-footer .odys-logo-p,.footer-logo .odys-logo-p{color:rgba(244,239,229,.74)}
+/* Le !important n'est pas une commodite : la maquette v5.0 ecrit
+   `.nav-links a{color:var(--odys-text)!important}` et `nav .ni{...!important}`
+   pour sa barre creme. Sans le meme poids, la regle ci-dessous perdait, et
+   le menu de l'accueil etait pose en encre sombre sur la photographie :
+   COFFRETS et DIFFUSEURS a 1,3:1 sur le ciel, l'icone de recherche invisible
+   sur le mur du riad. Seul « A propos » se voyait — en dore, parce que la
+   page courante a sa propre regle, elle aussi en !important. */
 body.index #header:not(.stuck) nav a,
-body.index #header:not(.stuck) .odys-nav a{color:var(--odys-on-dark)}
+body.index #header:not(.stuck) .odys-nav a,
+body.index #header:not(.stuck) .odys-nav .ni,
+/* le panier vient de PrestaShop : son libelle est pose sur un <div>, pas
+   sur un lien, et echappait a la regle ci-dessus */
+body.index #header:not(.stuck) .odys-nav #_desktop_cart .header{
+  color:var(--odys-on-dark)!important}
+body.index #header:not(.stuck) .odys-nav #_desktop_cart .cart-products-count{
+  color:var(--odys-soft-gold)!important}
+body.index #header:not(.stuck) .odys-nav .ham span{background:var(--odys-on-dark)!important}
+body.index #header:not(.stuck) .odys-nav .ni:hover{background:rgba(244,239,229,.16)!important}
 
 /* 7. Motion - the bottles */
 /* ═══════════════════════════════════════════════════════════════════════

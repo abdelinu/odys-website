@@ -3698,6 +3698,33 @@ grep -q "odysLienIcone" ../dist/deploy/maj-telephone.php \
   || no "la destination du bouton est ecrite en dur"
 
 
+step "Le menu se lit sur la photographie"
+
+# Sur l'accueil la barre flotte au-dessus du hero : le menu y est ecrit en
+# creme. Mais la maquette v5.0 pose `.nav-links a{color:var(--odys-text)
+# !important}` pour sa barre creme, et sans le meme poids la regle de
+# l'accueil perdait : le menu partait en ligne en encre sombre sur la
+# photographie. Deux entrees sur cinq etaient illisibles et l'icone de
+# recherche invisible.
+cssn=$(tr -d '\r' < ../dist/odys-theme-ps8/themes/odys/assets/css/theme.css)
+# La regle porte plusieurs selecteurs : on lit le bloc entier, sans ses
+# retours a la ligne, et on verifie qui il couvre et avec quel poids.
+bloc=$(echo "$cssn" | sed -n '/^body.index #header:not(.stuck) nav a,/,/}/p' | tr -d '
+')
+case "$bloc" in
+  *".odys-nav .ni,"*"#_desktop_cart .header{"*"var(--odys-on-dark)!important}")
+    ok "le menu, les icones et le panier gardent leur couleur claire";;
+  *) no "le menu de l accueil repasse en encre sombre sur la photo";;
+esac
+echo "$cssn" | grep -q 'body.index #header:not(.stuck) .odys-nav .ham span{background:var(--odys-on-dark)!important}' \
+  && ok "le bouton du menu reste visible sur la photo" \
+  || no "les trois traits du menu repassent en sombre"
+# Et le voile de la barre emprunte sa teinte aux ombres du hero : deux noirs
+# differents cote a cote faisaient une couture visible.
+echo "$cssn" | grep -q 'linear-gradient(180deg,rgba(24,14,8,.78),rgba(24,14,8,0))!important' \
+  && ok "le voile de la barre est celui du hero, mesure a 5,0:1 sur le menu" \
+  || no "le voile de la barre a change sans etre remesure"
+
 step "Le lot de mise a jour s analyse"
 
 # 880 Ko de PHP engendres depuis des chaines Python. Une apostrophe mal
