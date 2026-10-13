@@ -3698,6 +3698,29 @@ grep -q "odysLienIcone" ../dist/deploy/maj-telephone.php \
   || no "la destination du bouton est ecrite en dur"
 
 
+step "Le lot de mise a jour s analyse"
+
+# 880 Ko de PHP engendres depuis des chaines Python. Une apostrophe mal
+# echappee et le fichier ne s'execute pas du tout : la mise a jour est
+# deposee, ouverte, et ne fait rien. C'est arrive — dans une chaine Python,
+# \' est une echappement de Python, pas de PHP : le backslash disparait
+# avant d'arriver dans le fichier.
+MSYS_NO_PATHCONV=1 docker compose cp ../dist/deploy/maj-telephone.php shop:/tmp/verif-maj.php >/dev/null 2>&1
+analyse=$(psh "php -l /tmp/verif-maj.php" | tr -d '\r')
+case "$analyse" in
+  *"No syntax errors"*) ok "le lot est du PHP valide";;
+  *) no "le lot ne s analyse pas : il ne ferait rien en production"; echo "    $(echo "$analyse" | head -1)";;
+esac
+psh "rm -f /tmp/verif-maj.php" >/dev/null 2>&1
+
+# Et les mots de la banniere ne doivent se poser que sur une banniere que
+# personne n'a encore ecrite : une version precedente sautait toute cle
+# deja presente, donc toutes, et aucun mot n'arrivait.
+grep -q 'odysBanniereEcrite' ../dist/deploy/maj-telephone.php \
+  && ok "les mots de la banniere respectent une banniere deja ecrite" \
+  || no "le lot ecrase ou ignore les mots de la banniere"
+
+
 step "No new PHP exceptions"
 
 recent=$(psh "tail -3 /var/www/html/var/logs/*exception.log 2>/dev/null | grep -c ERROR" | tr -d '\r')

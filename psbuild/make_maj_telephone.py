@@ -19734,23 +19734,54 @@ if ($odysLienIcone !== '') {
     $odysMotsBanniere['ODYS_HERO_CTA_URL'] = $odysLienIcone;
 }
 $odysPosesBanniere = 0;
-foreach ($odysMotsBanniere as $odysCle => $odysMot) {
-    // Jamais enregistre = la maison n'a pas encore touche a ce champ.
-    // Une seconde ligne de titre volontairement vide ('') compte comme un
-    // choix : on la laisse tranquille.
-    if (Configuration::hasKey($odysCle)) {
-        continue;
+// Premiere version : on sautait toute cle deja presente. Sur une boutique en
+// service ces cles EXISTENT depuis l'installation, vides ou portant les mots
+// d'origine du theme : aucun mot n'est donc arrive, et la banniere a garde
+// « Plus qu'un parfum, » — sans sa seconde ligne, puisque le gabarit respecte
+// desormais une seconde ligne videe. Un titre a virgule pendante.
+//
+// Ce qu'il fallait demander n'est pas « cette cle existe-t-elle ? » mais
+// « la maison a-t-elle deja ecrit sa banniere ? ». On compare donc aux mots
+// d'origine : un seul champ qui s'en ecarte, et on ne touche a rien.
+// ATTENTION : ce PHP vit dans une chaine Python. Un \' y est une
+// echappement de Python, pas de PHP : il disparait avant d'arriver dans le
+// fichier, et le PHP ne s'analyse plus. Les apostrophes passent donc par
+// des guillemets doubles, qui n'en demandent aucune.
+$odysOriginaux = array(
+    'ODYS_HERO_EYEBROW' => "L'art de l'essence",
+    'ODYS_HERO_TITLE_1' => "Plus qu'un parfum,",
+    'ODYS_HERO_TITLE_2' => 'une émotion',
+    'ODYS_HERO_LEDE'    => "Des essences rares, un savoir-faire intemporel. Découvrez l'univers ODYS.",
+    'ODYS_HERO_CTA'     => 'Découvrir la collection',
+);
+$odysBanniereEcrite = false;
+foreach ($odysOriginaux as $odysCle => $odysOrigine) {
+    $odysActuel = (string) Configuration::get($odysCle);
+    if ($odysActuel !== '' && $odysActuel !== $odysOrigine) {
+        $odysBanniereEcrite = true;
+        break;
     }
-    Configuration::updateValue($odysCle, $odysMot);
-    ++$odysPosesBanniere;
 }
-echo "  " . $odysPosesBanniere . " mot(s) de banniere pose(s)"
-    . ($odysLienIcone !== '' ? ", bouton vers " . $odysLienIcone : ", produit 01 introuvable : bouton inchange") . "
+if ($odysBanniereEcrite) {
+    echo "  banniere deja ecrite par la maison : mots inchanges
 
 
 
 
 ";
+} else {
+    foreach ($odysMotsBanniere as $odysCle => $odysMot) {
+        Configuration::updateValue($odysCle, $odysMot);
+        ++$odysPosesBanniere;
+    }
+    echo "  " . $odysPosesBanniere . " mot(s) de banniere pose(s)"
+        . ($odysLienIcone !== '' ? ", bouton vers " . $odysLienIcone : ", produit 01 introuvable : bouton inchange") . "
+
+
+
+
+";
+}
 
 
 
