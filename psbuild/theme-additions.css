@@ -4756,3 +4756,109 @@ button[data-action="show-password"]{min-height:44px;padding:0 14px}
 @media (max-width:860px){
   .nv-sub{font-size:12px;letter-spacing:.12em;margin-bottom:14px;color:var(--odys-text)}
 }
+
+/* ── Les onglets de l'accueil ───────────────────────────────────────── */
+/* Les rayons de la boutique, au-dessus des familles olfactives. Deux
+   rangees de boutons de meme forme se seraient confondues : les onglets
+   sont des mots soulignes, les familles restent des pastilles. La
+   hierarchie se lit sans legende — on choisit d'abord un rayon, puis une
+   famille a l'interieur.
+   Ils defilent lateralement sur telephone plutot que de passer a la ligne :
+   quatre rayons sur deux rangees poussaient la grille sous la ligne de
+   flottaison. */
+.og-onglets{display:flex;gap:4px;margin:0 0 18px;overflow-x:auto;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.og-onglets::-webkit-scrollbar{display:none}
+.og{flex:none;background:none;border:0;border-bottom:1px solid transparent;
+  color:var(--odys-muted);font-family:var(--font-body);font-size:10px;
+  font-weight:500;letter-spacing:var(--tracking-wide);text-transform:uppercase;
+  padding:12px 14px;min-height:44px;cursor:pointer;white-space:nowrap;
+  transition:color var(--transition-quick),border-color var(--transition-quick)}
+.og:hover{color:var(--odys-gold)}
+.og.on{color:var(--odys-text);border-bottom-color:var(--odys-gold)}
+/* Le trait du dessous n'est pas lisible par tout le monde : l'onglet actif
+   porte aussi un poids plus franc. */
+.og.on{font-weight:600}
+.pg-vide{margin:28px 0 0;font:300 14px/1.7 var(--font-body);
+  color:var(--odys-muted);text-align:center}
+
+/* ── Les avis clients ───────────────────────────────────────────────── */
+/* Le module officiel productcomments ecrit du Bootstrap : des .modal qu'une
+   feuille absente devait cacher, et des boutons .btn que ce theme ne
+   connait pas. Sans ces regles, les quatre fenetres du module se
+   deroulaient en clair au bas de la fiche — « Votre signalement ne peut pas
+   etre envoye » s'affichait a quelqu'un qui n'avait rien signale. */
+.pr-avis{max-width:var(--maxw);margin:0 auto;
+  padding:clamp(40px,6vw,72px) var(--page-gutter) 0}
+.pr-avis:empty{display:none}
+.modal{display:none;position:fixed;inset:0;z-index:1200;overflow-y:auto;
+  background:rgba(24,14,8,.62);padding:max(16px,4vh) 16px}
+.modal.odys-modal-on{display:block}
+body.odys-modal-ouvert{overflow:hidden}
+.modal .modal-dialog{max-width:540px;margin:0 auto}
+.modal .modal-content{background:var(--odys-cream,#F4EFE5);
+  border:1px solid var(--odys-border);border-radius:var(--radius);
+  padding:clamp(20px,4vw,32px)}
+.modal .modal-header{display:flex;align-items:flex-start;
+  justify-content:space-between;gap:16px;margin:0 0 16px}
+.modal .modal-title{font-family:var(--font-display);font-weight:400;
+  font-size:22px;letter-spacing:.02em;margin:0}
+.modal .close{background:none;border:0;font-size:22px;line-height:1;
+  min-width:44px;min-height:44px;cursor:pointer;color:var(--odys-muted)}
+.modal .modal-footer{display:flex;gap:12px;justify-content:flex-end;
+  flex-wrap:wrap;margin:20px 0 0}
+/* Les icones du module viennent de Material Icons, que ce theme ne charge
+   pas : sans cette regle, le mot « edit » s'affichait avant « Donner votre
+   avis ». */
+.pr-avis .material-icons,.modal .material-icons{display:none}
+.pr-avis .btn-comment,.modal .btn-primary,.modal .btn-comment{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:48px;padding:0 24px;border:1px solid var(--odys-vert);
+  border-radius:var(--radius);background:var(--odys-vert);
+  color:var(--odys-on-dark);font-family:var(--font-body);font-size:10px;
+  font-weight:500;letter-spacing:var(--tracking-wide);text-transform:uppercase;
+  cursor:pointer}
+.modal .btn-secondary{min-height:48px;padding:0 24px;background:none;
+  border:1px solid var(--odys-border);border-radius:var(--radius);
+  color:var(--odys-text);font-size:10px;letter-spacing:var(--tracking-wide);
+  text-transform:uppercase;cursor:pointer}
+.product-comment-list-item{border-top:1px solid var(--odys-line);
+  padding:22px 0}
+.product-comment-list-item .comment-author{font:500 11px/1.6 var(--font-body);
+  letter-spacing:var(--tracking-wide);text-transform:uppercase;
+  color:var(--odys-muted)}
+.product-comment-list-item .comment-content p{font:300 15px/1.8 var(--font-body);
+  color:var(--odys-text);margin:6px 0 0}
+.grade-stars{display:inline-flex;gap:2px}
+/* Tant que personne n'a ecrit, la fiche ne dit rien. « Commentaires (0) »
+   suivi de « Aucun avis n'a ete publie » sur chaque fiche d'une boutique
+   qui ouvre, c'est un vide qu'on exhibe. Le bouton « Donner votre avis »
+   d'un client connecte vit plus haut, dans le bloc du prix : il reste. */
+.pr-avis #product-comments-list-header:has(+ #empty-product-comment){display:none}
+.pr-avis #empty-product-comment{display:none}
+
+/* ── La bande des avis ──────────────────────────────────────────────── */
+.avis-sec{padding:clamp(48px,7vw,96px) 0}
+.avis-grid{display:grid;gap:clamp(16px,2vw,24px);list-style:none;margin:0;
+  padding:0;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.avis-card{display:flex;flex-direction:column;gap:10px;
+  border:1px solid var(--odys-line);border-radius:var(--radius);
+  padding:clamp(18px,2.4vw,26px)}
+.avis-note{margin:0;color:var(--odys-gold-text);font-size:15px;letter-spacing:2px}
+.avis-titre{margin:0;font-family:var(--font-display);font-weight:400;
+  font-size:18px;letter-spacing:.02em;color:var(--odys-text)}
+.avis-texte{margin:0;font:300 15px/1.8 var(--font-body);color:var(--odys-text)}
+.avis-pied{display:flex;flex-wrap:wrap;gap:4px 12px;margin:auto 0 0;
+  font:500 10px/1.6 var(--font-body);letter-spacing:var(--tracking-wide);
+  text-transform:uppercase;color:var(--odys-muted)}
+.avis-prod{color:var(--odys-gold-text);text-decoration:none;
+  border-bottom:1px solid transparent}
+.avis-prod:hover{border-bottom-color:currentColor}
+.odys-order-avis p{margin:0 0 12px;font:300 15px/1.7 var(--font-body);
+  color:var(--odys-text)}
+.odys-avis-liens{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.odys-avis-liens a{display:inline-block;padding:10px 0;min-height:44px;
+  font:500 11px/1.6 var(--font-body);letter-spacing:var(--tracking-wide);
+  text-transform:uppercase;color:var(--odys-gold-text);text-decoration:none;
+  border-bottom:1px solid rgba(154,123,67,.4)}
+.odys-avis-liens a:hover{color:var(--odys-text);border-bottom-color:currentColor}

@@ -613,6 +613,16 @@
 </section>
 {/if}
 
+{* Les avis. Le module officiel de PrestaShop (productcomments) tient la
+   liste, le formulaire et la moderation ; il ne rend rien tant que personne
+   n'a ecrit, et seuls les clients connectes peuvent poster. Le gabarit
+   appelait deja displayProductAdditionalInfo, qui n'affiche que la note
+   moyenne et le lien : sans ce crochet-ci, le lien ne menait nulle part et
+   le formulaire n'existait sur aucune page. *}
+<section class="pr-avis" id="avis">
+  {hook h='displayFooterProduct' product=$product category=$category}
+</section>
+
 {hook h='displayReassurance'}
 
 {* La visionneuse. <dialog> plutot qu'une bibliotheque : le navigateur

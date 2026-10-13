@@ -2371,7 +2371,10 @@ step "Les fiches produit se lisent"
 
 curl -s -m 40 "$SHOP/parfums/23-l-oriental.html" -o /tmp/fiche.html
 
-grep -q '&lt;p&gt;' /tmp/fiche.html \
+# On regarde la description elle-meme, pas la page entiere : le module
+# d'avis y pose un gabarit JavaScript dont les balises sont echappees pour
+# de bonnes raisons, et la recherche large le prenait pour le defaut.
+sed -n 's/.*id="acc-desc"[^>]*>//p' /tmp/fiche.html | head -1 | grep -q '&lt;p&gt;' \
   && no "la description affiche ses balises HTML en clair" \
   || ok "la description n'affiche plus ses balises"
 
@@ -3697,6 +3700,85 @@ grep -q "odysLienIcone" ../dist/deploy/maj-telephone.php \
   && ok "le bouton de la banniere pointe sur la fiche, resolue a l execution" \
   || no "la destination du bouton est ecrite en dur"
 
+
+step "La boutique tient sur l accueil"
+
+# L'accueil ne montrait que les parfums : l'oud au gramme et les diffuseurs
+# n'existaient que dans le menu. Les trois rayons sont maintenant dans la
+# meme grille, derriere des onglets qui filtrent sans recharger la page.
+acc=$(curl -s -m 40 "$SHOP/")
+nbo=$(printf '%s' "$acc" | grep -o 'data-action="filter-onglet"' | wc -l | tr -d ' ')
+[ "${nbo:-0}" -ge 3 ] \
+  && ok "$nbo onglets de rayon sur l accueil" \
+  || no "les onglets de l accueil ont disparu"
+for rayon in parfums oud-boukhour diffuseurs; do
+  printf '%s' "$acc" | grep -q "data-onglet=\"$rayon\"" \
+    && ok "le rayon $rayon est dans la grille d accueil" \
+    || no "le rayon $rayon manque a la grille d accueil"
+done
+
+# Une carte sans famille olfactive ne doit pas en recevoir une d'office :
+# « fresh » par defaut faisait sortir neuf boukhours sous la pastille Frais.
+printf '%s' "$acc" | grep -q 'data-fam="fresh"[^>]*data-onglet="oud-boukhour"' \
+  && no "l oud repasse sous une famille olfactive qu il n a pas" \
+  || ok "l oud et les diffuseurs ne portent pas de famille inventee"
+
+# Et le bouton doit atteindre une fonction qui existe.
+jsf=../dist/odys-theme-ps8/themes/odys/assets/js/app.js
+grep -q "function filterOnglet" "$jsf" && grep -q "ODYS.filterOnglet(t, p.onglet)" "$jsf" \
+  && ok "le clic sur un onglet atteint une fonction exportee" \
+  || no "l onglet est pose mais rien ne l ecoute"
+# Les deux filtres se composent : un seul etat lu pour les deux rangees.
+grep -q "fam === 'all' || pc.dataset.fam.indexOf(fam) !== -1)" "$jsf" \
+  && grep -q "ong === 'all' ||" "$jsf" \
+  && ok "rayon et famille se croisent au lieu de s effacer" \
+  || no "le dernier bouton clique efface le filtre de l autre rangee"
+
+step "Les avis clients"
+
+# Le module officiel (productcomments) tient la liste, le formulaire, la
+# moderation et le RGPD. Il etait livre avec la boutique mais eteint.
+fiche=$(curl -s -m 40 "$SHOP/parfums/20-l-icone.html")
+printf '%s' "$fiche" | grep -q 'product-comments-list-header' \
+  && ok "la fiche produit porte le bloc d avis du module officiel" \
+  || no "le module d avis n est pas branche sur la fiche produit"
+
+# Ce theme ne charge pas Bootstrap : sans le pont, $(x).modal() n'existe pas
+# et les quatre fenetres du module se deroulaient en clair dans la page.
+jsf=../dist/odys-theme-ps8/themes/odys/assets/js/app.js
+grep -q '\$.fn.modal = function' "$jsf" \
+  && ok "les fenetres du module s ouvrent sans Bootstrap" \
+  || no "le bouton Donner votre avis n ouvre rien"
+cssf=../dist/odys-theme-ps8/themes/odys/assets/css/theme.css
+tr -d '\r\n' < "$cssf" | grep -qE '\.modal\{ *display:none' \
+  && ok "les fenetres du module restent fermees tant qu on ne les ouvre pas" \
+  || no "les fenetres du module se deroulent en clair sur la fiche"
+tr -d '\r\n' < "$cssf" | grep -qF '.pr-avis #empty-product-comment{display:none}' \
+  && ok "une fiche sans avis ne dit pas qu elle n en a pas" \
+  || no "chaque fiche annonce « Commentaires (0) »"
+
+# Et rien n'est invente : sans avis valide, la bande de l accueil n existe pas.
+nbavis=$(sql "SELECT COUNT(*) FROM ps_product_comment WHERE validate = 1 AND deleted = 0")
+acc2=$(curl -s -m 40 "$SHOP/")
+if [ "${nbavis:-0}" -gt 0 ]; then
+  printf '%s' "$acc2" | grep -q 'avis-sec' \
+    && ok "la bande d avis montre les $nbavis avis publies" \
+    || no "des avis sont publies mais l accueil ne les montre pas"
+else
+  printf '%s' "$acc2" | grep -q 'avis-sec' \
+    && no "l accueil affiche une bande d avis alors qu il n y en a aucun" \
+    || ok "aucun avis publie : l accueil n affiche pas de bande vide"
+fi
+
+# La demande d avis : le seul canal possible tant que l envoi d e-mails
+# n est pas configure, c est la page de la commande.
+grep -q 'odys-order-avis' ../dist/odys-theme-ps8/themes/odys/templates/customer/order-detail.tpl \
+  && ok "la page d une commande invite a donner son avis" \
+  || no "rien ne demande son avis au client apres l achat"
+
+grep -q 'getInstanceByName("productcomments")' ../dist/deploy/maj-telephone.php \
+  && ok "le lot allume le module d avis en production" \
+  || no "le module d avis resterait eteint en production"
 
 step "Le menu se lit sur la photographie"
 

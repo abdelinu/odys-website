@@ -12,7 +12,15 @@
     {if $odysFeature.name == 'Famille olfactive'}{assign var='odysFam' value=$odysFeature.value|lower}{/if}
   {/foreach}
 {/if}
-<article class="pc" data-fam="{$odysFam|default:'fresh'|escape:'html':'UTF-8'}"
+{* L'onglet d'ou vient la carte sur l'accueil (parfums, oud, diffuseurs).
+   Ailleurs il n'est pas pose : l'attribut reste vide et ne filtre rien. *}
+{* Pas de famille inventee. « fresh » etait servi par defaut a tout ce qui
+   n'en declare pas : tant que la grille ne se filtrait pas, personne ne le
+   voyait. Depuis que l'accueil a des onglets, la pastille « Frais » sortait
+   neuf boukhours et trois diffuseurs, qui n'ont pas de famille olfactive du
+   tout. Vide, la carte se montre sous « Tout » et sous aucune famille. *}
+<article class="pc" data-fam="{$odysFam|escape:'html':'UTF-8'}"
+         {if isset($odysOnglet) && $odysOnglet}data-onglet="{$odysOnglet|escape:'html':'UTF-8'}"{/if}
          itemscope itemtype="https://schema.org/Product">
   <meta itemprop="name" content="{$product.name|escape:'html':'UTF-8'}"/>
 

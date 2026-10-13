@@ -12,3 +12,9 @@ tmpwork/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Les paquets que PrestaShop assemble lui-meme (CCC) : un nom par empreinte,
+# refaits a chaque changement de feuille. Les suivre ne versionnait rien
+# d'utile et laissait trainer des bundles perimes.
+dist/odys-theme-ps8/themes/odys/assets/cache/*.css
+dist/odys-theme-ps8/themes/odys/assets/cache/*.js

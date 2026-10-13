@@ -19651,6 +19651,42 @@ echo "  un produit est neuf pendant 30 jours apres sa date d'ajout
 ";
 
 echo "
+Avis clients
+";
+// productcomments est le module officiel de PrestaShop : il tient la liste,
+// le formulaire, la moderation et le RGPD. Il est livre avec la boutique
+// mais reste eteint par defaut. On l'allume ici plutot qu'en recopier le
+// travail, et on pose les deux reglages qui comptent :
+//   - la moderation, pour que rien ne se publie sans etre relu ;
+//   - les invites refuses, pour qu'un avis vienne d'un compte client.
+// Les deux restent modifiables en Back Office ; ce script ne repasse pas par
+// dessus une valeur deja choisie.
+$odysAvisMod = Module::getInstanceByName("productcomments");
+if (!$odysAvisMod) {
+    echo "  module d avis introuvable : rien de fait
+";
+} else {
+    $odysEtat = "deja actif";
+    if (!Module::isInstalled("productcomments")) {
+        $odysAvisMod->install();
+        $odysEtat = "installe";
+    } elseif (!Module::isEnabled("productcomments")) {
+        $odysAvisMod->enable();
+        $odysEtat = "active";
+    }
+    if (Configuration::get("PRODUCT_COMMENTS_MODERATE") === false) {
+        Configuration::updateValue("PRODUCT_COMMENTS_MODERATE", 1);
+    }
+    if (Configuration::get("PRODUCT_COMMENTS_ALLOW_GUESTS") === false) {
+        Configuration::updateValue("PRODUCT_COMMENTS_ALLOW_GUESTS", 0);
+    }
+    echo "  avis clients : " . $odysEtat
+        . ", moderation " . (Configuration::get("PRODUCT_COMMENTS_MODERATE") ? "oui" : "non")
+        . ", invites " . (Configuration::get("PRODUCT_COMMENTS_ALLOW_GUESTS") ? "oui" : "non") . "
+";
+}
+
+echo "
 Option cadeau
 ";
 // PrestaShop sait deja offrir : une case a l'etape de livraison, un message

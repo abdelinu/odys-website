@@ -128,6 +128,27 @@
     {/if}
   {/block}
 
+  {* ── l'invitation a donner son avis ───────────────────────────────── *}
+  {* C'est le seul endroit ou la boutique peut demander un avis aujourd'hui :
+     l'envoi d'e-mails n'est pas encore configure (PS_MAIL_SERVER vaut
+     « smtp. »), donc aucune relance automatique ne partirait. Ici, la
+     demande arrive quand le client revient voir sa commande, et elle ne
+     promet rien : le module officiel n'accepte l'avis que d'un client
+     connecte, et la moderation passe avant la publication. *}
+  {if $order.products}
+    <section class="odys-order-card odys-order-avis">
+      <h2 class="odys-order-h2">Votre colis est arrivé ?</h2>
+      <p>Dites-nous ce que vous en pensez — votre avis aide les prochains à
+        choisir. Il est relu avant d'être publié.</p>
+      <ul class="odys-avis-liens" role="list">
+        {foreach from=$order.products item=product}
+          <li><a href="{$product.url|escape:'html':'UTF-8'}#avis">Donner mon avis sur
+            {$product.name|escape:'html':'UTF-8'}</a></li>
+        {/foreach}
+      </ul>
+    </section>
+  {/if}
+
   <section class="odys-order-help">
     <h2 class="odys-order-h2">Une question sur cette commande ?</h2>
     <p>Indiquez la référence <strong>{$order.details.reference}</strong>, nous retrouvons le colis tout de suite.</p>

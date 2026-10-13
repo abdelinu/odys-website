@@ -25,8 +25,8 @@
     <div>
       <div class="sec-hd">
         <div class="sec-hd-left">
-          <p>Sélection du moment</p>
-          <h2 id="home-featured-title">Nos parfums</h2>
+          <p>Commencez ici</p>
+          <h2 id="home-featured-title">La boutique</h2>
         </div>
         <a href="{$odysUrlParfums}" class="sec-see-all">Voir tout</a>
       </div>
@@ -35,6 +35,23 @@
          qui ne filtre rien n'a pas de raison d'etre affichee. Le script du
          theme ecoute deja #featGrid comme il ecoute #collGrid (app.js,
          filtre-fam) — il n'y avait que ce balisage a poser. *}
+      {* Les onglets : un par rayon rempli. Ils ne rechargent pas la page —
+         les cartes des trois rayons sont deja dans la grille, chacune
+         marquee de son rayon, et le filtre du theme n'en montre qu'un.
+         Sans script, aucun bouton ne repond et la grille reste entiere :
+         on voit toute la boutique, ce qui est le bon repli. *}
+      {if isset($odysOnglets) && $odysOnglets|@count > 1}
+        <div class="og-onglets" role="group" aria-label="Rayons de la boutique">
+          <button class="og on" type="button" data-action="filter-onglet"
+                  data-onglet="all" aria-pressed="true">Tout</button>
+          {foreach from=$odysOnglets key=odysOngCle item=odysOngNom}
+            <button class="og" type="button" data-action="filter-onglet"
+                    data-onglet="{$odysOngCle|escape:'html':'UTF-8'}"
+                    aria-pressed="false">{$odysOngNom|escape:'html':'UTF-8'}</button>
+          {/foreach}
+        </div>
+      {/if}
+
       {assign var='odysFamsAcc' value=[]}
       {foreach from=$featuredProducts item=odysPA}
         {assign var='odysFA' value=''}
@@ -70,9 +87,15 @@
 
       <div class="pg" id="featGrid">
         {foreach from=$featuredProducts item=product}
-          {include file='catalog/_partials/miniatures/product.tpl' product=$product}
+          {include file='catalog/_partials/miniatures/product.tpl' product=$product
+                   odysOnglet=$product.odys_onglet|default:''}
         {/foreach}
       </div>
+      {* Deux filtres qui se croisent peuvent ne rien laisser : « Diffuseurs »
+         et « Sucré », par exemple. Sans ce mot la grille tombait a zero
+         pixel et la boutique paraissait vide. *}
+      <p class="pg-vide" id="accVide" hidden>Rien dans ce rayon pour cette
+        famille. Changez l'un ou l'autre.</p>
     </div>
   </section>
   {/if}
@@ -218,6 +241,8 @@
       </ol>
     </div>
   </section>
+
+  {include file='_partials/home-avis.tpl'}
 
   {include file='_partials/home-values.tpl'}
 

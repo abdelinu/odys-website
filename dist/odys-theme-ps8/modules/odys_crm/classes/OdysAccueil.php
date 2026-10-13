@@ -128,4 +128,68 @@ class OdysAccueil
 
         return $sortie;
     }
+
+    /**
+     * Les avis publies, pour la bande de l'accueil.
+     *
+     * Rien n'est ecrit en dur et rien n'est invente : la requete ne prend que
+     * les commentaires que la moderation a valides (`validate = 1`), avec le
+     * parfum qu'ils visent. Aucun avis, aucune bande — l'accueil d'une
+     * boutique qui ouvre ne doit pas afficher une section vide, et encore
+     * moins un temoignage qui n'existe pas.
+     *
+     * Le module officiel productcomments tient la table ; s'il n'est pas
+     * installe, elle n'existe pas et on repond simplement rien.
+     *
+     * @return array
+     */
+    public static function avis(Context $context, $combien = 6)
+    {
+        $idLang = (int) $context->language->id;
+        $idShop = (int) $context->shop->id;
+        $combien = max(1, min(12, (int) $combien));
+
+        $tables = Db::getInstance()->executeS(
+            'SHOW TABLES LIKE "' . _DB_PREFIX_ . 'product_comment"'
+        );
+        if (!$tables) {
+            return [];
+        }
+
+        try {
+            $lignes = Db::getInstance()->executeS(
+                'SELECT pc.`id_product`, pc.`customer_name`, pc.`title`,
+                        pc.`content`, pc.`grade`, pc.`date_add`, pl.`name`
+                 FROM `' . _DB_PREFIX_ . 'product_comment` pc
+                 INNER JOIN `' . _DB_PREFIX_ . 'product_lang` pl
+                         ON pl.`id_product` = pc.`id_product`
+                        AND pl.`id_lang` = ' . $idLang . '
+                        AND pl.`id_shop` = ' . $idShop . '
+                 INNER JOIN `' . _DB_PREFIX_ . 'product` p
+                         ON p.`id_product` = pc.`id_product` AND p.`active` = 1
+                 WHERE pc.`validate` = 1 AND pc.`deleted` = 0
+                 ORDER BY pc.`date_add` DESC'
+            );
+        } catch (Exception $e) {
+            return [];
+        }
+        if (!$lignes) {
+            return [];
+        }
+
+        $sortie = [];
+        foreach (array_slice($lignes, 0, $combien) as $ligne) {
+            $sortie[] = [
+                'auteur' => $ligne['customer_name'],
+                'titre' => $ligne['title'],
+                'texte' => $ligne['content'],
+                'note' => (int) $ligne['grade'],
+                'date' => $ligne['date_add'],
+                'produit' => $ligne['name'],
+                'url' => $context->link->getProductLink((int) $ligne['id_product']),
+            ];
+        }
+
+        return $sortie;
+    }
 }

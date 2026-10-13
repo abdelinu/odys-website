@@ -588,9 +588,41 @@ class Odys_crm extends Module
         // Page d'accueil : remplir la grille de produits que le gabarit tient
         // prete mais que personne n'alimentait. Voir classes/OdysAccueil.php.
         if (isset($controleur->php_self) && $controleur->php_self === 'index') {
-            $parfums = OdysAccueil::produits($this->context);
-            if ($parfums) {
-                $this->context->smarty->assign('featuredProducts', $parfums);
+            // La grille d'achat de l'accueil. Elle ne montrait que les
+            // parfums ; l'oud au gramme et les diffuseurs n'apparaissaient
+            // qu'en ouvrant le menu. Les trois rayons arrivent maintenant
+            // dans la meme grille, derriere des onglets, et chaque carte
+            // sait d'ou elle vient (data-onglet) pour que le filtre du
+            // theme la retrouve sans redemander la page.
+            $rayons = array(
+                'parfums' => 'Parfums',
+                'oud-boukhour' => 'Oud & Boukhour',
+                'diffuseurs' => 'Diffuseurs',
+            );
+            $grille = array();
+            $onglets = array();
+            foreach ($rayons as $slug => $nom) {
+                // Pas de repli sur l'Accueil : un rayon absent ne doit pas
+                // verser le catalogue entier sous le nom d'un autre.
+                $lot = OdysAccueil::produits($this->context, $slug, 12, false);
+                if (!$lot) {
+                    continue;
+                }
+                foreach ($lot as $presente) {
+                    $presente['odys_onglet'] = $slug;
+                    $grille[] = $presente;
+                }
+                $onglets[$slug] = $nom;
+            }
+            // Aucune de ces categories (boutique neuve, slugs changes) :
+            // on retombe sur la grille d'avant plutot que sur du vide.
+            if (!$grille) {
+                $grille = OdysAccueil::produits($this->context);
+                $onglets = array();
+            }
+            if ($grille) {
+                $this->context->smarty->assign('featuredProducts', $grille);
+                $this->context->smarty->assign('odysOnglets', $onglets);
             }
 
             // Les coffrets. Le « pack decouverte » existait au catalogue mais
@@ -601,6 +633,15 @@ class Odys_crm extends Module
             $coffrets = OdysAccueil::produits($this->context, 'coffrets', 4, false);
             if ($coffrets) {
                 $this->context->smarty->assign('odysCoffrets', $coffrets);
+            }
+
+            // Les avis publies. La bande n'existe que s'il y en a : une
+            // boutique qui ouvre n'a pas de temoignages, et un bandeau
+            // « ce qu'en disent nos clients » vide ou invente serait pire
+            // que pas de bandeau du tout.
+            $avis = OdysAccueil::avis($this->context);
+            if ($avis) {
+                $this->context->smarty->assign('odysAvis', $avis);
             }
 
             return;

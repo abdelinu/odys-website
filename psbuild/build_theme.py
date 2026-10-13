@@ -669,10 +669,35 @@ NEW_FILTERFAM = """function filterFam(btn, fam) {
   btn.classList.add('on');                     // toujours « Tout » actif
   btn.setAttribute('aria-pressed', 'true');
 
+  odysFiltres();
+}
+
+// L'accueil porte deux rangees de boutons : les onglets (parfums, oud,
+// diffuseurs) et les familles olfactives. Chacune filtrait la grille pour
+// son compte, donc la derniere cliquee effacait l'autre. Les deux etats
+// sont lus ici, sur les boutons eux-memes, et appliques ensemble.
+function filterOnglet(btn, onglet) {
+  var groupe = btn.closest('.og-onglets');
+  (groupe || document).querySelectorAll('.og').forEach(b => {
+    b.classList.remove('on');
+    b.setAttribute('aria-pressed', 'false');
+  });
+  btn.classList.add('on');
+  btn.setAttribute('aria-pressed', 'true');
+  odysFiltres();
+}
+
+function odysFiltres() {
+  var fam = document.querySelector('.fam-filters .ff.on');
+  var ong = document.querySelector('.og-onglets .og.on');
+  fam = fam ? (fam.dataset.fam || 'all') : 'all';
+  ong = ong ? (ong.dataset.onglet || 'all') : 'all';
+
   var restants = 0;
   document.querySelectorAll('#featGrid, #collGrid').forEach(grid => {
     grid.querySelectorAll('.pc[data-fam]').forEach(pc => {
-      var garde = (fam === 'all' || pc.dataset.fam.indexOf(fam) !== -1);
+      var garde = (fam === 'all' || pc.dataset.fam.indexOf(fam) !== -1)
+               && (ong === 'all' || (pc.dataset.onglet || '') === ong);
       pc.style.display = garde ? '' : 'none';
       if (garde) { restants += 1; }
     });
@@ -681,9 +706,23 @@ NEW_FILTERFAM = """function filterFam(btn, fam) {
   // Sans ceci la grille tombe a zero pixel et la boutique parait vide.
   var vide = document.getElementById('collEmpty');
   if (vide) { vide.hidden = (restants > 0); }
+  var rien = document.getElementById('accVide');
+  if (rien) { rien.hidden = (restants > 0); }
 }"""
 js, n = js.replace(OLD_FILTERFAM, NEW_FILTERFAM), js.count(OLD_FILTERFAM)
 must(n == 1, "filter: the empty result is announced, aria-pressed follows")
+
+# filterOnglet doit etre joignable : la maquette n'exporte et ne branche que
+# filterFam. Sans ces deux lignes, le clic sur un onglet ne fait rien.
+_old_exp = "  filterFam, qPick,"
+_new_exp = "  filterFam, filterOnglet, qPick,"
+js, n = js.replace(_old_exp, _new_exp), js.count(_old_exp)
+must(n == 1, "onglets: filterOnglet est exporte avec filterFam")
+
+_old_case = "    case 'filter-fam':    ODYS.filterFam(t, p.fam); break;"
+_new_case = _old_case + LF + "    case 'filter-onglet': ODYS.filterOnglet(t, p.onglet); break;"
+js, n = js.replace(_old_case, _new_case), js.count(_old_case)
+must(n == 1, "onglets: le clic sur un onglet atteint filterOnglet")
 
 # Le bandeau du bas (« X — ajoute au panier ») se declenchait AU CLIC,
 # avant toute reponse du serveur : un parfum en rupture l'affichait quand
@@ -793,6 +832,65 @@ new_cb = ("      if (callback) {" + NL
 must(js.count(old_cb) == 1, "panier: found the bridge callback")
 js = js.replace(old_cb, new_cb, 1)
 ok("panier: une erreur d'affichage ne fait plus passer un ajout reussi pour un echec")
+
+# ── Les fenetres du module d'avis ──────────────────────────────────────
+# productcomments est le module officiel : il tient la liste, le formulaire,
+# la moderation et le RGPD. Mais il ouvre ses fenetres avec $(x).modal(),
+# une extension de Bootstrap — et ce theme ne charge pas Bootstrap
+# (use_parent_assets: false). Resultat : aucune fenetre ne s'ouvrait, et
+# comme .modal{display:none} n'existait pas non plus, les quatre fenetres se
+# deroulaient en clair au bas de la fiche produit (« Votre avis ne peut pas
+# etre envoye », « Signaler le commentaire »...).
+#
+# Vingt lignes rendent le module utilisable, plutot que de recopier ses six
+# gabarits dans le theme — une copie qu'il faudrait suivre a chaque mise a
+# jour de PrestaShop.
+SHIM_MODAL = LF + LF.join([
+    "",
+    "/* ── Fenetres du module d'avis (sans Bootstrap) ── */",
+    "(function () {",
+    "  var $ = window.jQuery;",
+    "  if (!$ || $.fn.modal) { return; }   /* Bootstrap present : on se tait */",
+    "",
+    "  function montre(el, ouvert) {",
+    "    el.classList.toggle('odys-modal-on', ouvert);",
+    "    el.setAttribute('aria-hidden', ouvert ? 'false' : 'true');",
+    "    document.body.classList.toggle('odys-modal-ouvert',",
+    "      !!document.querySelector('.modal.odys-modal-on'));",
+    "    if (ouvert) {",
+    "      var premier = el.querySelector('input, textarea, button, [href]');",
+    "      if (premier) { try { premier.focus(); } catch (e) {} }",
+    "    }",
+    "  }",
+    "",
+    "  $.fn.modal = function (ordre) {",
+    "    return this.each(function () { montre(this, ordre !== 'hide'); });",
+    "  };",
+    "",
+    "  /* Bootstrap ferme aussi sur la croix, sur le fond et sur Echap. */",
+    "  document.addEventListener('click', function (e) {",
+    "    var fermeur = e.target.closest('[data-dismiss=\"modal\"]');",
+    "    if (fermeur) {",
+    "      var f = fermeur.closest('.modal');",
+    "      if (f) { montre(f, false); }",
+    "      return;",
+    "    }",
+    "    if (e.target.classList && e.target.classList.contains('modal')) {",
+    "      montre(e.target, false);",
+    "    }",
+    "  });",
+    "  document.addEventListener('keydown', function (e) {",
+    "    if (e.key !== 'Escape') { return; }",
+    "    document.querySelectorAll('.modal.odys-modal-on').forEach(function (f) {",
+    "      montre(f, false);",
+    "    });",
+    "  });",
+    "})();",
+    "",
+])
+must(SHIM_MODAL not in js, "avis: le pont vers les fenetres n'est pose qu'une fois")
+js = js + SHIM_MODAL
+ok("avis: les fenetres du module officiel s'ouvrent sans Bootstrap")
 
 js_path.write_text(js, encoding="utf-8")
 ok(f"progressive-enhancement module appended ({len(js):,} bytes)")

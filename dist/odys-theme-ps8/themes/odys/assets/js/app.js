@@ -608,10 +608,35 @@ function filterFam(btn, fam) {
   btn.classList.add('on');                     // toujours « Tout » actif
   btn.setAttribute('aria-pressed', 'true');
 
+  odysFiltres();
+}
+
+// L'accueil porte deux rangees de boutons : les onglets (parfums, oud,
+// diffuseurs) et les familles olfactives. Chacune filtrait la grille pour
+// son compte, donc la derniere cliquee effacait l'autre. Les deux etats
+// sont lus ici, sur les boutons eux-memes, et appliques ensemble.
+function filterOnglet(btn, onglet) {
+  var groupe = btn.closest('.og-onglets');
+  (groupe || document).querySelectorAll('.og').forEach(b => {
+    b.classList.remove('on');
+    b.setAttribute('aria-pressed', 'false');
+  });
+  btn.classList.add('on');
+  btn.setAttribute('aria-pressed', 'true');
+  odysFiltres();
+}
+
+function odysFiltres() {
+  var fam = document.querySelector('.fam-filters .ff.on');
+  var ong = document.querySelector('.og-onglets .og.on');
+  fam = fam ? (fam.dataset.fam || 'all') : 'all';
+  ong = ong ? (ong.dataset.onglet || 'all') : 'all';
+
   var restants = 0;
   document.querySelectorAll('#featGrid, #collGrid').forEach(grid => {
     grid.querySelectorAll('.pc[data-fam]').forEach(pc => {
-      var garde = (fam === 'all' || pc.dataset.fam.indexOf(fam) !== -1);
+      var garde = (fam === 'all' || pc.dataset.fam.indexOf(fam) !== -1)
+               && (ong === 'all' || (pc.dataset.onglet || '') === ong);
       pc.style.display = garde ? '' : 'none';
       if (garde) { restants += 1; }
     });
@@ -620,6 +645,8 @@ function filterFam(btn, fam) {
   // Sans ceci la grille tombe a zero pixel et la boutique parait vide.
   var vide = document.getElementById('collEmpty');
   if (vide) { vide.hidden = (restants > 0); }
+  var rien = document.getElementById('accVide');
+  if (rien) { rien.hidden = (restants > 0); }
 }
 
 // ── QUIZ ──
@@ -1454,7 +1481,7 @@ return {
   go, toggleMenu, closeMenu,
   openCart, closeCart, addToCart, chgItem, removeItem,
   pickVol, chgQty, qtyRead, qtyWrite, addProd, switchThumb, toggleAcc, toggleWish, wishToggle, wishDrop,
-  filterFam, qPick, qPick2, qPick3, addQuizResult, resetQuiz,
+  filterFam, filterOnglet, qPick, qPick2, qPick3, addQuizResult, resetQuiz,
   pickGram, addOud,
   openCheckout, closeCheckout, coNext, coBack, selectPM,
   openAccount, closeAccount, showAccTab, doLogin, doRegister, doLogout,
@@ -1522,6 +1549,7 @@ document.addEventListener('click', function(e) {
     case 'chg-item':      ODYS.chgItem(p.code, Number(p.delta)); break;
     case 'remove-item':   ODYS.removeItem(p.code); break;
     case 'filter-fam':    ODYS.filterFam(t, p.fam); break;
+    case 'filter-onglet': ODYS.filterOnglet(t, p.onglet); break;
     case 'q-pick':        ODYS.qPick(p.opt, p.fam); break;
     case 'q-pick2':       ODYS.qPick2(p.opt, p.occ); break;
     case 'q-pick3':       ODYS.qPick3(p.opt, p.intensity); break;
@@ -3753,3 +3781,44 @@ document.addEventListener('DOMContentLoaded', function () {
     caseCadeau.dispatchEvent(new Event('change', { bubbles: true }));
   }
 });
+
+
+/* ── Fenetres du module d'avis (sans Bootstrap) ── */
+(function () {
+  var $ = window.jQuery;
+  if (!$ || $.fn.modal) { return; }   /* Bootstrap present : on se tait */
+
+  function montre(el, ouvert) {
+    el.classList.toggle('odys-modal-on', ouvert);
+    el.setAttribute('aria-hidden', ouvert ? 'false' : 'true');
+    document.body.classList.toggle('odys-modal-ouvert',
+      !!document.querySelector('.modal.odys-modal-on'));
+    if (ouvert) {
+      var premier = el.querySelector('input, textarea, button, [href]');
+      if (premier) { try { premier.focus(); } catch (e) {} }
+    }
+  }
+
+  $.fn.modal = function (ordre) {
+    return this.each(function () { montre(this, ordre !== 'hide'); });
+  };
+
+  /* Bootstrap ferme aussi sur la croix, sur le fond et sur Echap. */
+  document.addEventListener('click', function (e) {
+    var fermeur = e.target.closest('[data-dismiss="modal"]');
+    if (fermeur) {
+      var f = fermeur.closest('.modal');
+      if (f) { montre(f, false); }
+      return;
+    }
+    if (e.target.classList && e.target.classList.contains('modal')) {
+      montre(e.target, false);
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') { return; }
+    document.querySelectorAll('.modal.odys-modal-on').forEach(function (f) {
+      montre(f, false);
+    });
+  });
+})();
