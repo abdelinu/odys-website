@@ -6842,6 +6842,71 @@ button[data-action="show-password"]{min-height:44px;padding:0 14px}
 .delivery-options .delivery-option .row > div:has(.carrier-price){margin-left:auto}
 .delivery-option .carrier-price{font-size:13px;color:var(--odys-text);white-space:nowrap}
 
+/* ══════════════════════════════════════════════════════════════════════
+   METTRE DE COTE, OU OFFRIR
+
+   Deux gestes, deux places. Le coeur remonte entre la quantite et l'achat :
+   il ne porte plus son libelle, l'icone suffit sur une ligne deja longue et
+   aria-label dit la phrase a qui ne la voit pas. Il garde ses 54 px, donc
+   un pouce l'atteint.
+
+   Sous le bouton d'achat, la ou vivait « Ajouter a mes envies », un geste
+   qui n'existait pas encore : offrir. Meme chemin que l'achat, plus une
+   intention — a l'etape de livraison la case cadeau sera deja cochee.
+   ══════════════════════════════════════════════════════════════════════ */
+.cta-row .btn-wish--icone{
+  flex:0 0 auto;
+  width:54px;
+  min-width:54px;
+  height:54px;
+  min-height:44px;
+  margin:0;
+  padding:0;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:19px;
+  letter-spacing:normal;
+  color:var(--odys-gold-text);
+}
+.cta-row .btn-wish--icone:hover{border-color:var(--odys-gold-text)}
+/* deja dans les envies : le coeur se remplit de sa couleur */
+.cta-row .btn-wish--icone[aria-pressed="true"]{
+  background:var(--odys-champagne);
+  border-color:var(--odys-gold-text);
+  color:var(--odys-gold-deep);
+}
+
+.btn-gift{
+  width:100%;
+  min-height:48px;
+  margin:0 0 14px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  background:var(--odys-champagne);
+  color:var(--odys-text);
+  border:1px solid var(--odys-gold-text);
+  border-radius:2px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:background .22s,color .22s,border-color .22s;
+}
+.btn-gift:hover{background:var(--odys-gold-text);color:var(--odys-on-dark)}
+.btn-gift:focus-visible{outline:2px solid var(--odys-gold-text);outline-offset:2px}
+
+/* Le coeur occupe maintenant une place dans la rangee, et la colonne du
+   produit est etroite bien avant que la fenetre ne le soit : le bouton
+   d'achat se retrouvait reduit a « AJO AU PAN ». Ce n'est pas la largeur
+   de l'ecran qui doit decider, mais celle qui reste. En dessous de 210 px
+   le bouton passe a la ligne, ou il s'etend. */
+.cta-row{flex-wrap:wrap}
+.cta-row .btn-cart{flex:1 1 210px;min-width:210px}
+
 
 /* ═══════════════════════════════════════════════════════════════════════
    ODYS PARFUMS — OUD & BOUKHOUR (PrestaShop)

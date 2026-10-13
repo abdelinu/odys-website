@@ -345,6 +345,16 @@
         <button data-action="chg-qty" data-delta="1"
                 aria-label="Augmenter la quantité">+</button>
       </div>
+      {* Le coeur se tient entre la quantite et l'achat, a portee du pouce.
+         Il ne porte plus son libelle : l'icone suffit la ou la ligne est
+         deja longue, et aria-label dit la phrase entiere a qui ne voit
+         pas l'icone. aria-pressed dit s'il est deja dans les envies. *}
+      <button class="btn-wish btn-wish--icone" data-action="toggle-wish-full"
+              aria-label="Ajouter {$product.name|escape:'html':'UTF-8'} à mes envies"
+              data-id-product="{$product.id_product}"
+              aria-pressed="false">
+        <span aria-hidden="true">♡</span>
+      </button>
       {if $odysAchetable}
       <button class="btn-cart" id="addBtn" data-action="add-prod"
               data-id-product="{$product.id_product}"
@@ -384,12 +394,20 @@
     {if $odysCodNote}
       <p class="odys-cod-note">{$odysCodNote|escape:'html':'UTF-8'}</p>
     {/if}
-    <button class="btn-wish" data-action="toggle-wish-full"
-            aria-label="Ajouter {$product.name|escape:'html':'UTF-8'} à mes envies"
-            data-id-product="{$product.id_product}"
-            aria-pressed="false">
-      <span aria-hidden="true">♡</span> Ajouter à mes envies
-    </button>
+    {* Offrir est un geste different d'acheter pour soi : il merite son
+       bouton. Celui-ci met le parfum au panier comme l'autre, et retient
+       qu'il s'agit d'un cadeau — a l'etape de livraison la case sera deja
+       cochee et le champ du message ouvert, sans que le client ait a le
+       chercher. Si le script ne tourne pas, le parfum entre quand meme au
+       panier et la case reste a cocher a la main : rien ne se perd. *}
+    {if $odysAchetable}
+      <button class="btn-gift" data-action="add-gift"
+              data-id-product="{$product.id_product}"
+              data-id-product-attribute="{$product.combinations[0].id_combination|default:0}"
+              aria-label="Offrir {$product.name|escape:'html':'UTF-8'} — ajouter au panier avec un message">
+        <span aria-hidden="true">✦</span> Offrir à quelqu'un
+      </button>
+    {/if}
 
     {* a COD buyer wants a human before a driver turns up asking for cash *}
     {include file='_partials/contact-links.tpl' style='inline'

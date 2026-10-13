@@ -2681,8 +2681,12 @@ echo "$envies" | grep -q "odysWishList" && ok "la liste se rend cote navigateur"
 
 prod=$(curl -s -m 40 "$SHOP/parfums/22-l-or.html")
 
-echo "$prod" | grep -q "Ajouter à mes envies\|Ajouter a mes envies" \
-  && ok "le bouton dit ce qu'il fait" || no "le bouton porte encore l'ancien libelle"
+# Le coeur n'a plus de libelle visible : il a repris sa place dans la
+# rangee d'achat, en icone seule. Ce qu'il annonce compte donc davantage —
+# une icone muette ne dit rien a qui ne la voit pas.
+echo "$prod" | grep -qE 'aria-label="Ajouter [^"]* (à|a) mes envies"' \
+  && ok "le coeur annonce ce qu'il fait, meme sans libelle visible" \
+  || no "le coeur est une icone muette"
 
 echo "$prod" | grep -q "Retiré de la wishlist" \
   && no "le libelle inverse est toujours la" || ok "plus de libelle inverse"
@@ -3569,6 +3573,56 @@ tr -d '\r\n' < "$cssf" | grep -qE '\.address-footer\{ *background:none' \
 tr -d '\r\n' < "$cssf" | grep -qE '\.delivery-options \.delivery-option \.row\{ *display:flex' \
   && ok "chaque transporteur tient sur une ligne, prix a droite" \
   || no "le nom, le delai et le prix du transporteur s empilent"
+
+
+step "Ajouter au panier, et offrir"
+
+jsf=../dist/odys-theme-ps8/themes/odys/assets/js/app.js
+prodtpl=../dist/odys-theme-ps8/themes/odys/templates/catalog/product.tpl
+
+# Le bogue vu en production : updateCartBadges() ecrivait dans #dCnt et
+# #dTotal, qui n'existent que dans le tiroir du panier. Sur une fiche
+# produit l'ajout levait donc une TypeError, le .catch du pont rappelait le
+# callback avec null, et le client lisait « Ce parfum n'a pas pu etre ajoute
+# au panier » pendant que PrestaShop repondait 200 et le mettait au panier.
+grep -q 'if (odysCnt)' "$jsf" && grep -q 'if (odysTot)' "$jsf" \
+  && ok "les compteurs du tiroir ne sont ecrits que s ils existent" \
+  || no "updateCartBadges ecrit encore dans des elements absents"
+grep -q 'try { callback(data); }' "$jsf" \
+  && ok "une erreur d affichage ne fait plus passer un ajout reussi pour un echec" \
+  || no "le verdict d un ajout depend encore de ce qui se passe apres"
+
+# Le coeur a quitte sa ligne pleine largeur : il se tient entre la quantite
+# et l achat, en icone seule, et garde son libelle pour qui ne voit pas
+# l icone.
+grep -q 'btn-wish--icone' "$prodtpl" \
+  && ok "le coeur est une icone, posee dans la rangee d achat" \
+  || no "le bouton des envies est reste une ligne pleine largeur"
+python - <<'EOPY' && ok "le coeur se tient entre la quantite et le bouton d achat" || no "le coeur n est pas entre la quantite et l achat"
+import pathlib, sys
+t = pathlib.Path("../dist/odys-theme-ps8/themes/odys/templates/catalog/product.tpl").read_text(encoding="utf-8")
+q, coeur, achat = t.find('class="qty"'), t.find('btn-wish--icone'), t.find('class="btn-cart"')
+if not (0 < q < coeur < achat):
+    print("  ordre trouve : qty=%d coeur=%d achat=%d" % (q, coeur, achat)); sys.exit(1)
+EOPY
+
+# Offrir : meme chemin que l achat, plus une intention que l etape de
+# livraison consomme pour cocher la case cadeau.
+grep -q 'data-action="add-gift"' "$prodtpl" \
+  && ok "la fiche propose d offrir le parfum" \
+  || no "le bouton Offrir a quelqu un manque a la fiche"
+grep -q '\[data-action="add-gift"\]\[data-id-product\]' "$jsf" \
+  && ok "Offrir passe par le pont PrestaShop, comme l achat" \
+  || no "le bouton Offrir n est pas branche sur le panier"
+grep -q "sessionStorage.setItem('odysCadeau'" "$jsf" && grep -q "removeItem('odysCadeau')" "$jsf" \
+  && ok "l intention d offrir est posee puis consommee une seule fois" \
+  || no "l intention d offrir ne se transmet pas au tunnel"
+
+# Trois elements dans la rangee et une colonne etroite : le bouton d achat
+# s etait retrouve reduit a « AJO AU PAN ».
+tr -d '\r\n' < "$cssf" | grep -qE '\.cta-row \.btn-cart\{ *flex:1 1 210px' \
+  && ok "le bouton d achat passe a la ligne plutot que de se laisser ecraser" \
+  || no "le bouton d achat peut etre reduit a quelques pixels"
 
 
 step "No new PHP exceptions"

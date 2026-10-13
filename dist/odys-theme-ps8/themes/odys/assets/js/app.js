@@ -269,9 +269,11 @@ function removeItem(code) { cart = cart.filter(x => x.code !== code); renderCart
 function updateCartBadges() {
   const total = cart.reduce((a, i) => a + i.qty, 0);
   document.querySelectorAll('.cb').forEach(b => { b.style.display = total > 0 ? 'flex' : 'none'; b.textContent = total; });
-  document.getElementById('dCnt').textContent = total + ' article' + (total !== 1 ? 's' : '');
+  var odysCnt = document.getElementById('dCnt');
+  if (odysCnt) { odysCnt.textContent = total + ' article' + (total !== 1 ? 's' : ''); }
   const sum = cart.reduce((a, i) => a + i.price * i.qty, 0);
-  document.getElementById('dTotal').textContent = sum + ' DH';
+  var odysTot = document.getElementById('dTotal');
+  if (odysTot) { odysTot.textContent = sum + ' DH'; }
 }
 
 /* ── SHIPPING — 20 DH Casa · 30 DH partout au Maroc ──────────── */
@@ -2012,16 +2014,24 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (err) { console.warn('an updateCart listener failed:', err); }
       if (window.odysRefreshCart) window.odysRefreshCart();
       }
-      if (callback) callback(data);
+      if (callback) {
+        /* Le serveur a repondu : son verdict est pose. Ce qui casse
+           ensuite dans l'affichage ne doit pas le contredire. */
+        try { callback(data); }
+        catch (err) { console.warn('affichage du panier :', err); }
+      }
     })
     .catch(function(e) { console.warn('PS8 cart error:', e); if (callback) callback(null); });
   }
 
   /* ── Intercept data-action="add-to-cart" on PS8 ─────────── */
   document.addEventListener('click', function(e) {
-    var btn = e.target.closest('[data-action="add-to-cart"][data-id-product], [data-action="add-prod"][data-id-product]');
+    var btn = e.target.closest('[data-action="add-to-cart"][data-id-product], [data-action="add-prod"][data-id-product], [data-action="add-gift"][data-id-product]');
     if (!btn) return;
     e.preventDefault();
+    if (btn.dataset.action === 'add-gift') {
+      try { sessionStorage.setItem('odysCadeau', '1'); } catch (err) {}
+    }
     var idProduct   = btn.dataset.idProduct;
     var idAttr      = btn.dataset.idProductAttribute || 0;
     var qty = ODYS.qtyRead();
@@ -3721,3 +3731,25 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 })();
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   OFFRIR — l'intention suit le client jusqu'a l'etape de livraison
+
+   Rien ici ne conditionne la vente : sans script, le parfum entre au
+   panier par le meme pont et la case cadeau reste a cocher a la main,
+   la ou elle a toujours ete.
+   ══════════════════════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', function () {
+  var caseCadeau = document.getElementById('input_gift');
+  if (!caseCadeau) { return; }
+  var veut = false;
+  try { veut = sessionStorage.getItem('odysCadeau') === '1'; } catch (e) { return; }
+  if (!veut) { return; }
+  /* consommee au premier passage : decocher doit tenir */
+  try { sessionStorage.removeItem('odysCadeau'); } catch (e) {}
+  if (!caseCadeau.checked) {
+    caseCadeau.checked = true;
+    caseCadeau.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+});

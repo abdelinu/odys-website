@@ -268,6 +268,27 @@ js, n = re.subn(r"document\.getElementById\('dTot'\)\.textContent = sum \+ ' DH'
                 "document.getElementById('dTotal').textContent = sum + ' DH';", js, count=1)
 must(n == 1, "cart total wired to #dTotal (was #dTot — always null)")
 
+NL = chr(10)
+
+# #dCnt et #dTotal vivent dans le tiroir du panier. Sur une fiche produit ils
+# n'existent pas : updateCartBadges() levait donc une TypeError a chaque ajout.
+# L'exception remontait jusqu'au .catch du pont, qui rappelait le callback avec
+# null — et le pont annoncait « Ce parfum n'a pas pu etre ajoute au panier »
+# alors que PrestaShop venait de repondre 200 et que le parfum y etait bien.
+# Le client voyait un refus, et son panier se remplissait quand meme.
+old_badges = ("  document.getElementById('dCnt').textContent = total + ' article' + (total !== 1 ? 's' : '');" + NL
+              + "  const sum = cart.reduce((a, i) => a + i.price * i.qty, 0);" + NL
+              + "  document.getElementById('dTotal').textContent = sum + ' DH';")
+new_badges = ("  var odysCnt = document.getElementById('dCnt');" + NL
+              + "  if (odysCnt) { odysCnt.textContent = total + ' article' + (total !== 1 ? 's' : ''); }" + NL
+              + "  const sum = cart.reduce((a, i) => a + i.price * i.qty, 0);" + NL
+              + "  var odysTot = document.getElementById('dTotal');" + NL
+              + "  if (odysTot) { odysTot.textContent = sum + ' DH'; }")
+must(js.count(old_badges) == 1, "panier: found the badge writer")
+js = js.replace(old_badges, new_badges, 1)
+ok("panier: les compteurs du tiroir ne sont ecrits que s'ils existent")
+
+
 for short, real in (("dsF", "dsFill"), ("dsV", "dsVal"), ("dsM", "dsMsg")):
     js, n = re.subn(r"document\.getElementById\('" + short + r"'\)",
                     "document.getElementById('" + real + "')", js, count=1)
@@ -350,7 +371,7 @@ must(js.count("function psAddToCart(") == 1, "add-to-cart: exactly one psAddToCa
 # prototype's in-page cart, or a live shop never receives the order.
 js, n = re.subn(
     re.escape("""var btn = e.target.closest('[data-action="add-to-cart"][data-id-product]');"""),
-    """var btn = e.target.closest('[data-action="add-to-cart"][data-id-product], [data-action="add-prod"][data-id-product]');""",
+    """var btn = e.target.closest('[data-action="add-to-cart"][data-id-product], [data-action="add-prod"][data-id-product], [data-action="add-gift"][data-id-product]');""",
     js, count=1)
 must(n == 1, "add-prod: PrestaShop bridge also handles the product page button")
 
@@ -491,7 +512,7 @@ new_guard = "  if (typeof prestashop !== 'undefined' && typeof prestashop.on ===
 must(js.count(old_guard) == 1, "guard: found the prestashop.on block")
 js = js.replace(old_guard, new_guard, 1)
 must("typeof prestashop.on === 'function'" in js, "guard: prestashop.on checked before use")
-must(js.count('[data-action="add-to-cart"][data-id-product], [data-action="add-prod"][data-id-product]') == 1, "add-to-cart: one PS click listener, covering the product page button")
+must(js.count('[data-action="add-to-cart"][data-id-product], [data-action="add-prod"][data-id-product], [data-action="add-gift"][data-id-product]') == 1, "add-to-cart: one PS click listener, covering the product page and gift buttons")
 
 # Scope. cart / addToCart / openCart / updateCartBadges live inside the ODYS
 # IIFE, so code outside it cannot see them: the bridge's
@@ -714,6 +735,64 @@ js = js.replace("'demo@odys.ma'", "'(retire)'").replace("'odys2026'", "'(retire)
 js = js.replace('demo@odys.ma / odys2026', 'compte de demonstration retire')
 must('demo@odys.ma' not in js, 'maquette: no demo credentials left in app.js')
 ok('maquette: plus aucun identifiant de demonstration dans la page')
+
+# « Offrir a quelqu'un » emprunte le meme chemin que l'achat ; ce qui le
+# distingue tient en une intention, retenue le temps du tunnel. A l'etape de
+# livraison la case cadeau est cochee pour le client, et le champ du message
+# s'ouvre tout seul — il n'a rien a chercher. Il peut toujours la decocher :
+# l'intention est consommee au premier passage et ne revient pas.
+# Ces deux lignes se retrouvent dans d'autres gestionnaires : on s'ancre
+# sur le selecteur qui les precede, lui unique.
+old_gift = ("""    var btn = e.target.closest('[data-action="add-to-cart"][data-id-product], [data-action="add-prod"][data-id-product], [data-action="add-gift"][data-id-product]');""" + NL
+            + "    if (!btn) return;" + NL + "    e.preventDefault();")
+new_gift = (old_gift + NL
+            + "    if (btn.dataset.action === 'add-gift') {" + NL
+            + "      try { sessionStorage.setItem('odysCadeau', '1'); } catch (err) {}" + NL
+            + "    }")
+must(js.count(old_gift) == 1, "cadeau: found the add handler head")
+js = js.replace(old_gift, new_gift, 1)
+ok("cadeau: le bouton Offrir retient son intention")
+
+js += """
+
+/* ══════════════════════════════════════════════════════════════════════
+   OFFRIR — l'intention suit le client jusqu'a l'etape de livraison
+
+   Rien ici ne conditionne la vente : sans script, le parfum entre au
+   panier par le meme pont et la case cadeau reste a cocher a la main,
+   la ou elle a toujours ete.
+   ══════════════════════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', function () {
+  var caseCadeau = document.getElementById('input_gift');
+  if (!caseCadeau) { return; }
+  var veut = false;
+  try { veut = sessionStorage.getItem('odysCadeau') === '1'; } catch (e) { return; }
+  if (!veut) { return; }
+  /* consommee au premier passage : decocher doit tenir */
+  try { sessionStorage.removeItem('odysCadeau'); } catch (e) {}
+  if (!caseCadeau.checked) {
+    caseCadeau.checked = true;
+    caseCadeau.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+});
+"""
+ok("cadeau: la case est cochee d'avance pour qui est venu par Offrir")
+
+# Et la cause structurelle, pas seulement celle-ci : le verdict d'un ajout
+# appartient au serveur. Tant que le callback s'executait DANS la chaine de
+# promesses, la moindre erreur d'affichage retombait dans son .catch et se
+# transformait en « ajout refuse ». On l'en sort : une panne d'interface se
+# voit dans la console, elle ne dement plus le panier.
+old_cb = "      if (callback) callback(data);"
+new_cb = ("      if (callback) {" + NL
+          + "        /* Le serveur a repondu : son verdict est pose. Ce qui casse" + NL
+          + "           ensuite dans l'affichage ne doit pas le contredire. */" + NL
+          + "        try { callback(data); }" + NL
+          + "        catch (err) { console.warn('affichage du panier :', err); }" + NL
+          + "      }")
+must(js.count(old_cb) == 1, "panier: found the bridge callback")
+js = js.replace(old_cb, new_cb, 1)
+ok("panier: une erreur d'affichage ne fait plus passer un ajout reussi pour un echec")
 
 js_path.write_text(js, encoding="utf-8")
 ok(f"progressive-enhancement module appended ({len(js):,} bytes)")
@@ -958,8 +1037,11 @@ if prod_tpl.exists():
     # choisi, et pickVol remplace la valeur des qu'une carte est cliquee.
     OLD_BTN = 'data-id-product-attribute="{$product.combinations[0].id_combination|default:0}"'
     NEW_BTN = 'data-id-product-attribute="{$product.id_product_attribute|intval}"'
+    # Deux boutons portent desormais cette cle : « Ajouter au panier » et
+    # « Offrir a quelqu'un ». Offrir met le meme flacon au panier : il part
+    # donc sur la meme declinaison, sans quoi il ajouterait la mauvaise.
     pt, n = pt.replace(OLD_BTN, NEW_BTN), pt.count(OLD_BTN)
-    must(n == 1, "vol-cards: the cart button starts on the default combination")
+    must(n == 2, "vol-cards: les deux boutons partent sur la declinaison par defaut")
 
     # ── 3b-septies. une seule description structuree ───────────────────
     _deb = pt.index('<script type="application/ld+json">')
