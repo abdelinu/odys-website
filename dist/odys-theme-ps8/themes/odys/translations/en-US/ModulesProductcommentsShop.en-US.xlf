@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr-FR" target-language="en-US"
+        datatype="plaintext" original="themes/odys">
+    <body>
+      <trans-unit id="1" resname="Are you sure that you want to report this comment?">
+        <source>Are you sure that you want to report this comment?</source>
+        <target>Are you sure that you want to report this comment?</target>
+      </trans-unit>
+      <trans-unit id="2" resname="Be the first to write your review">
+        <source>Be the first to write your review</source>
+        <target>Be the first to write your review</target>
+      </trans-unit>
+      <trans-unit id="3" resname="Cancel">
+        <source>Cancel</source>
+        <target>Cancel</target>
+      </trans-unit>
+      <trans-unit id="4" resname="Close">
+        <source>Close</source>
+        <target>Close</target>
+      </trans-unit>
+      <trans-unit id="5" resname="Comments">
+        <source>Comments</source>
+        <target>Comments</target>
+      </trans-unit>
+      <trans-unit id="6" resname="Grade">
+        <source>Grade</source>
+        <target>Grade</target>
+      </trans-unit>
+      <trans-unit id="7" resname="No">
+        <source>No</source>
+        <target>No</target>
+      </trans-unit>
+      <trans-unit id="8" resname="No customer reviews for the moment.">
+        <source>No customer reviews for the moment.</source>
+        <target>No customer reviews for the moment.</target>
+      </trans-unit>
+      <trans-unit id="9" resname="OK">
+        <source>OK</source>
+        <target>OK</target>
+      </trans-unit>
+      <trans-unit id="10" resname="Please choose a rating for your review.">
+        <source>Please choose a rating for your review.</source>
+        <target>Please choose a rating for your review.</target>
+      </trans-unit>
+      <trans-unit id="11" resname="Product Name">
+        <source>Product Name</source>
+        <target>Product Name</target>
+      </trans-unit>
+      <trans-unit id="12" resname="Read user reviews">
+        <source>Read user reviews</source>
+        <target>Read user reviews</target>
+      </trans-unit>
+      <trans-unit id="13" resname="Report abuse">
+        <source>Report abuse</source>
+        <target>Report abuse</target>
+      </trans-unit>
+      <trans-unit id="14" resname="Report comment">
+        <source>Report comment</source>
+        <target>Report comment</target>
+      </trans-unit>
+      <trans-unit id="15" resname="Report sent">
+        <source>Report sent</source>
+        <target>Report sent</target>
+      </trans-unit>
+      <trans-unit id="16" resname="Required fields">
+        <source>Required fields</source>
+        <target>Required fields</target>
+      </trans-unit>
+      <trans-unit id="17" resname="Review">
+        <source>Review</source>
+        <target>Review</target>
+      </trans-unit>
+      <trans-unit id="18" resname="Review sent">
+        <source>Review sent</source>
+        <target>Review sent</target>
+      </trans-unit>
+      <trans-unit id="19" resname="Send">
+        <source>Send</source>
+        <target>Send</target>
+      </trans-unit>
+      <trans-unit id="20" resname="Sorry, your review cannot be posted.">
+        <source>Sorry, your review cannot be posted.</source>
+        <target>Sorry, your review cannot be posted.</target>
+      </trans-unit>
+      <trans-unit id="21" resname="Title">
+        <source>Title</source>
+        <target>Title</target>
+      </trans-unit>
+      <trans-unit id="22" resname="Write your review">
+        <source>Write your review</source>
+        <target>Write your review</target>
+      </trans-unit>
+      <trans-unit id="23" resname="Yes">
+        <source>Yes</source>
+        <target>Yes</target>
+      </trans-unit>
+      <trans-unit id="24" resname="Your comment has been added!">
+        <source>Your comment has been added!</source>
+        <target>Your comment has been added!</target>
+      </trans-unit>
+      <trans-unit id="25" resname="Your comment has been submitted and will be available once approved by a moderator.">
+        <source>Your comment has been submitted and will be available once approved by a moderator.</source>
+        <target>Your comment has been submitted and will be available once approved by a moderator.</target>
+      </trans-unit>
+      <trans-unit id="26" resname="Your name">
+        <source>Your name</source>
+        <target>Your name</target>
+      </trans-unit>
+      <trans-unit id="27" resname="Your report cannot be sent">
+        <source>Your report cannot be sent</source>
+        <target>Your report cannot be sent</target>
+      </trans-unit>
+      <trans-unit id="28" resname="Your report has been submitted and will be considered by a moderator.">
+        <source>Your report has been submitted and will be considered by a moderator.</source>
+        <target>Your report has been submitted and will be considered by a moderator.</target>
+      </trans-unit>
+      <trans-unit id="29" resname="Your review appreciation cannot be sent">
+        <source>Your review appreciation cannot be sent</source>
+        <target>Your review appreciation cannot be sent</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr-FR" target-language="ar-SA"
+        datatype="plaintext" original="themes/odys">
+    <body>
+      <trans-unit id="1" resname="Are you sure that you want to report this comment?">
+        <source>Are you sure that you want to report this comment?</source>
+        <target>هل تريد فعلًا الإبلاغ عن هذا التعليق؟</target>
+      </trans-unit>
+      <trans-unit id="2" resname="Be the first to write your review">
+        <source>Be the first to write your review</source>
+        <target>كن أول من يكتب رأيه</target>
+      </trans-unit>
+      <trans-unit id="3" resname="Cancel">
+        <source>Cancel</source>
+        <target>إلغاء</target>
+      </trans-unit>
+      <trans-unit id="4" resname="Close">
+        <source>Close</source>
+        <target>إغلاق</target>
+      </trans-unit>
+      <trans-unit id="5" resname="Comments">
+        <source>Comments</source>
+        <target>التعليقات</target>
+      </trans-unit>
+      <trans-unit id="6" resname="Grade">
+        <source>Grade</source>
+        <target>التقييم</target>
+      </trans-unit>
+      <trans-unit id="7" resname="No">
+        <source>No</source>
+        <target>لا</target>
+      </trans-unit>
+      <trans-unit id="8" resname="No customer reviews for the moment.">
+        <source>No customer reviews for the moment.</source>
+        <target>لا توجد آراء زبناء حاليًا.</target>
+      </trans-unit>
+      <trans-unit id="9" resname="OK">
+        <source>OK</source>
+        <target>موافق</target>
+      </trans-unit>
+      <trans-unit id="10" resname="Please choose a rating for your review.">
+        <source>Please choose a rating for your review.</source>
+        <target>اختر تقييمًا من فضلك.</target>
+      </trans-unit>
+      <trans-unit id="11" resname="Product Name">
+        <source>Product Name</source>
+        <target>اسم المنتج</target>
+      </trans-unit>
+      <trans-unit id="12" resname="Read user reviews">
+        <source>Read user reviews</source>
+        <target>اقرأ آراء الزبناء</target>
+      </trans-unit>
+      <trans-unit id="13" resname="Report abuse">
+        <source>Report abuse</source>
+        <target>الإبلاغ عن إساءة</target>
+      </trans-unit>
+      <trans-unit id="14" resname="Report comment">
+        <source>Report comment</source>
+        <target>الإبلاغ عن التعليق</target>
+      </trans-unit>
+      <trans-unit id="15" resname="Report sent">
+        <source>Report sent</source>
+        <target>تم إرسال البلاغ</target>
+      </trans-unit>
+      <trans-unit id="16" resname="Required fields">
+        <source>Required fields</source>
+        <target>حقول إلزامية</target>
+      </trans-unit>
+      <trans-unit id="17" resname="Review">
+        <source>Review</source>
+        <target>الرأي</target>
+      </trans-unit>
+      <trans-unit id="18" resname="Review sent">
+        <source>Review sent</source>
+        <target>تم إرسال الرأي</target>
+      </trans-unit>
+      <trans-unit id="19" resname="Send">
+        <source>Send</source>
+        <target>إرسال</target>
+      </trans-unit>
+      <trans-unit id="20" resname="Sorry, your review cannot be posted.">
+        <source>Sorry, your review cannot be posted.</source>
+        <target>عذرًا، تعذّر نشر رأيك.</target>
+      </trans-unit>
+      <trans-unit id="21" resname="Title">
+        <source>Title</source>
+        <target>العنوان</target>
+      </trans-unit>
+      <trans-unit id="22" resname="Write your review">
+        <source>Write your review</source>
+        <target>اكتب رأيك</target>
+      </trans-unit>
+      <trans-unit id="23" resname="Yes">
+        <source>Yes</source>
+        <target>نعم</target>
+      </trans-unit>
+      <trans-unit id="24" resname="Your comment has been added!">
+        <source>Your comment has been added!</source>
+        <target>تمت إضافة تعليقك!</target>
+      </trans-unit>
+      <trans-unit id="25" resname="Your comment has been submitted and will be available once approved by a moderator.">
+        <source>Your comment has been submitted and will be available once approved by a moderator.</source>
+        <target>تم إرسال تعليقك وسيُنشر بعد مراجعته.</target>
+      </trans-unit>
+      <trans-unit id="26" resname="Your name">
+        <source>Your name</source>
+        <target>اسمك</target>
+      </trans-unit>
+      <trans-unit id="27" resname="Your report cannot be sent">
+        <source>Your report cannot be sent</source>
+        <target>تعذّر إرسال بلاغك</target>
+      </trans-unit>
+      <trans-unit id="28" resname="Your report has been submitted and will be considered by a moderator.">
+        <source>Your report has been submitted and will be considered by a moderator.</source>
+        <target>تم إرسال بلاغك وسيُنظر فيه.</target>
+      </trans-unit>
+      <trans-unit id="29" resname="Your review appreciation cannot be sent">
+        <source>Your review appreciation cannot be sent</source>
+        <target>تعذّر إرسال تقديرك لهذا الرأي</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

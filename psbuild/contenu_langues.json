@@ -1,0 +1,157 @@
+{
+  "_lisez_moi": [
+    "Le contenu de la boutique en anglais et en arabe : categories, fiches,",
+    "pages. Le theme, lui, est traduit ailleurs (traductions.json).",
+    "",
+    "Pose par maj-contenu.php, qui n'ecrit QUE si la langue d'arrivee porte",
+    "encore la copie du francais. Des qu'une phrase a ete retouchee en Back",
+    "Office, le script passe son chemin : la maison a toujours le dernier mot.",
+    "",
+    "Les noms des parfums ne sont pas traduits. « L'Icone » est un nom propre",
+    "au meme titre qu'ODYS, et les maisons de parfum gardent leurs noms en",
+    "lettres latines sur leurs sites arabes. Les marques citees en reference",
+    "olfactive ne le sont pas non plus : ce sont des marques deposees."
+  ],
+  "categories": {
+    "10": {
+      "fr_nom": "Parfums",
+      "en": {
+        "nom": "Fragrances",
+        "description": "<p>Our extraits de parfum are composed and blended in Morocco. The concentration, between 18 and 20 %, is that of an extrait and not of an eau de toilette: the hold is counted in hours, not minutes, and little is needed.</p><p>Every bottle holds 50 ml. You pay on delivery, anywhere in Morocco, within 24 to 48 hours — and delivery is free above 300 DH.</p>"
+      },
+      "ar": {
+        "nom": "العطور",
+        "description": "<p>خلاصاتنا العطرية تُركَّب وتُمزَج في المغرب. التركيز، بين 18 و20٪، هو تركيز الخلاصة لا ماء التواليت: الثبات يُحسب بالساعات لا بالدقائق، وتكفي منه كمية قليلة.</p><p>كل قارورة 50 مل. تؤدي عند الاستلام، في كل أنحاء المغرب، خلال 24 إلى 48 ساعة — والتوصيل مجاني ابتداءً من 300 درهم.</p>"
+      }
+    },
+    "11": {
+      "fr_nom": "Oud & Boukhour",
+      "en": {
+        "nom": "Oud & Boukhour",
+        "description": "<p>Oud is chosen by the gram, because one does not buy a precious wood the way one buys a bottle. Our chips are ordered from 5 g: enough to try an origin before growing attached to it.</p><p>You will find Hindi and Thai here in several grades, as well as our Boukhour Prestige for the mabkhara. The price shown is the price per gram; the total follows the quantity you choose.</p>"
+      },
+      "ar": {
+        "nom": "العود والبخور",
+        "description": "<p>العود يُختار بالغرام، لأن الخشب الثمين لا يُشترى كما تُشترى قارورة. رقائقنا تُطلب ابتداءً من 5 غرامات: ما يكفي لتجربة منشأ قبل التعلّق به.</p><p>تجد هنا الهندي والتايلاندي بعدة درجات، إضافة إلى بخور بريستيج للمبخرة. الثمن المعروض هو ثمن الغرام؛ والمجموع يتبع الكمية التي تختارها.</p>"
+      }
+    },
+    "12": {
+      "fr_nom": "Coffrets",
+      "en": {
+        "nom": "Gift sets",
+        "description": "<p>A gift set avoids the question that blocks every perfume gift: which one? The duo and the trio bring several signatures together, enough to let the person find their own.</p><p>All our gift sets pass the free-delivery threshold.</p>"
+      },
+      "ar": {
+        "nom": "علب الهدايا",
+        "description": "<p>علبة الهدية تُجنّبك السؤال الذي يعطّل كل هدية عطر: أيّ واحد؟ الثنائية والثلاثية تجمعان عدة بصمات، بما يكفي ليجد الشخص بصمته.</p><p>كل علبنا تتجاوز عتبة التوصيل المجاني.</p>"
+      }
+    },
+    "13": {
+      "fr_nom": "Diffuseurs",
+      "en": {
+        "nom": "Diffusers",
+        "description": "<p>A reed diffuser scents a room continuously, with no flame, no electricity and nothing to think about. The reeds carry the fragrance up little by little; you turn them over when you want to revive the diffusion.</p><p>Our diffusers come in 100 and 200 ml, and the refills let you keep the bottle.</p>"
+      },
+      "ar": {
+        "nom": "موزّعات العطر",
+        "description": "<p>موزّع العيدان يعطّر الغرفة باستمرار، بلا لهب ولا كهرباء ودون أن تنشغل به. العيدان ترفع العطر شيئًا فشيئًا؛ تقلبها حين تريد تجديد الانتشار.</p><p>موزّعاتنا متوفرة بحجم 100 و200 مل، والعبوات البديلة تتيح لك الاحتفاظ بالقارورة.</p>"
+      }
+    },
+    "14": {
+      "fr_nom": "Homme",
+      "en": {
+        "nom": "Men",
+        "description": "<p>The house's masculine signatures, from fresh woods to spiced oriental. Filter by olfactory family to go straight to what you already like to wear.</p>"
+      },
+      "ar": {
+        "nom": "للرجال",
+        "description": "<p>بصمات الدار الرجالية، من الخشبي المنعش إلى الشرقي الحار. صفِّ حسب العائلة العطرية لتصل مباشرة إلى ما تحب أن تضعه.</p>"
+      }
+    },
+    "15": {
+      "fr_nom": "Femme",
+      "en": {
+        "nom": "Women",
+        "description": "<p>The house's feminine signatures. The collection is growing: come back to it, or write to us to know what is coming.</p>"
+      },
+      "ar": {
+        "nom": "للنساء",
+        "description": "<p>بصمات الدار النسائية. المجموعة في اتساع: عد إليها، أو راسلنا لتعرف ما هو قادم.</p>"
+      }
+    },
+    "16": {
+      "fr_nom": "Unisexe",
+      "en": {
+        "nom": "Unisex",
+        "description": "<p>Compositions that take no side — oud and amber woods sit badly with one. To be worn by whoever loves them.</p>"
+      },
+      "ar": {
+        "nom": "للجنسين",
+        "description": "<p>تركيبات لا تنحاز لجهة — العود والأخشاب العنبرية لا تستقيم مع الانحياز. يضعها من يحبها.</p>"
+      }
+    }
+  },
+  "produits": {
+    "20": {
+      "en": {
+        "court": "Inspired by Dolce &amp; Gabbana L'Impératrice. Extrait de parfum made in Morocco.",
+        "long": "<p class=\"pd-accords\"><strong>Fruity · Floral · Musky</strong> · light intensity</p>\n<p>It opens on a green, tart fruit — kiwi, rhubarb — which a touch of pink pepper keeps from behaving. The heart softens: watermelon and white flowers, an almost sweet freshness. By the end of the day what remains is citron, musk and a discreet sandalwood.</p>\n<p class=\"pd-pour\"><strong>To wear:</strong> Working days, the warm months, and those who would rather be noticed from near than from far.</p>\n<p class=\"pd-insp\">An original ODYS composition, inspired by Dolce &amp; Gabbana L'Impératrice. The brands named belong to their respective owners and have no connection with ODYS Parfums.</p>\n<p class=\"pd-maison\">Extrait de parfum made in Morocco, 18–20 % concentration.</p>"
+      },
+      "ar": {
+        "court": "مستوحى من Dolce &amp; Gabbana L'Impératrice. خلاصة عطرية مصنوعة بالمغرب.",
+        "long": "<p class=\"pd-accords\"><strong>فاكهي · زهري · مسكي</strong> · قوة خفيفة</p>\n<p>يفتتح بفاكهة خضراء حامضة — كيوي وراوند — يمنعها رشّ من الفلفل الوردي من أن تكون وديعة. ثم يلين القلب: بطيخ وأزهار بيضاء، انتعاش يكاد يكون حلوًا. وفي آخر النهار يبقى الأترج والمسك وخشب صندل خفيف.</p>\n<p class=\"pd-pour\"><strong>متى يُوضع:</strong> أيام العمل، والشهور الدافئة، ولمن تفضّل أن يُلاحَظ عطرها عن قرب لا عن بعد.</p>\n<p class=\"pd-insp\">تركيبة أوديس أصلية، مستوحاة من Dolce &amp; Gabbana L'Impératrice. العلامات المذكورة تعود لأصحابها ولا علاقة لها بأوديس بارفان.</p>\n<p class=\"pd-maison\">خلاصة عطرية مصنوعة بالمغرب، بتركيز 18–20٪.</p>"
+      }
+    },
+    "21": {
+      "en": {
+        "court": "Inspired by Jean Paul Gaultier Le Mâle Élixir. Extrait de parfum made in Morocco.",
+        "long": "<p class=\"pd-accords\"><strong>Aromatic · Vanilla · Amber</strong> · sustained intensity</p>\n<p>A minted lavender opens the fragrance, clean, almost cold. Vanilla and benzoin then warm it, and the base takes its time: honey, tonka bean, and a note of blond tobacco that gives it its nocturnal character.</p>\n<p class=\"pd-pour\"><strong>To wear:</strong> Evenings, autumn and winter, and those who want a trail people recognise.</p>\n<p class=\"pd-insp\">An original ODYS composition, inspired by Jean Paul Gaultier Le Mâle Élixir. The brands named belong to their respective owners and have no connection with ODYS Parfums.</p>\n<p class=\"pd-maison\">Extrait de parfum made in Morocco, 18–20 % concentration.</p>"
+      },
+      "ar": {
+        "court": "مستوحى من Jean Paul Gaultier Le Mâle Élixir. خلاصة عطرية مصنوعة بالمغرب.",
+        "long": "<p class=\"pd-accords\"><strong>عطري · فانيليا · عنبري</strong> · قوة عالية</p>\n<p>تفتتحه خزامى بنكهة النعناع، صافية وشبه باردة. ثم تدفئها الفانيليا واللبان الجاوي، ويأخذ القاع وقته: عسل وحبّة التونكا ولمسة تبغ أشقر تمنحه طابعه الليلي.</p>\n<p class=\"pd-pour\"><strong>متى يُوضع:</strong> السهرات، والخريف والشتاء، ولمن يريد أثرًا يُعرف صاحبه به.</p>\n<p class=\"pd-insp\">تركيبة أوديس أصلية، مستوحاة من Jean Paul Gaultier Le Mâle Élixir. العلامات المذكورة تعود لأصحابها ولا علاقة لها بأوديس بارفان.</p>\n<p class=\"pd-maison\">خلاصة عطرية مصنوعة بالمغرب، بتركيز 18–20٪.</p>"
+      }
+    },
+    "22": {
+      "en": {
+        "court": "Inspired by Rabanne 1 Million. Extrait de parfum made in Morocco.",
+        "long": "<p class=\"pd-accords\"><strong>Spicy · Amber · Leather</strong> · strong intensity</p>\n<p>A bright citrus start — blood mandarin, grapefruit — freshened by mint. Cinnamon and spices quickly take over, softened by a discreet rose. The base is frank: amber, leather and patchouli.</p>\n<p class=\"pd-pour\"><strong>To wear:</strong> Evenings out, and the occasions where one wants to be seen.</p>\n<p class=\"pd-insp\">An original ODYS composition, inspired by Rabanne 1 Million. The brands named belong to their respective owners and have no connection with ODYS Parfums.</p>\n<p class=\"pd-maison\">Extrait de parfum made in Morocco, 18–20 % concentration.</p>"
+      },
+      "ar": {
+        "court": "مستوحى من Rabanne 1 Million. خلاصة عطرية مصنوعة بالمغرب.",
+        "long": "<p class=\"pd-accords\"><strong>حار · عنبري · جلدي</strong> · قوة كبيرة</p>\n<p>بداية من حمضيات حيّة — مندرين دموي وليمون هندي — ينعشها النعناع. ثم يعلو القرفة والتوابل، وتلطّفها وردة خفيفة. والقاع صريح: عنبر وجلد وباتشولي.</p>\n<p class=\"pd-pour\"><strong>متى يُوضع:</strong> سهرات المساء، والمناسبات التي يُراد فيها الحضور.</p>\n<p class=\"pd-insp\">تركيبة أوديس أصلية، مستوحاة من Rabanne 1 Million. العلامات المذكورة تعود لأصحابها ولا علاقة لها بأوديس بارفان.</p>\n<p class=\"pd-maison\">خلاصة عطرية مصنوعة بالمغرب، بتركيز 18–20٪.</p>"
+      }
+    },
+    "23": {
+      "en": {
+        "court": "Inspired by Tom Ford Oud Wood. Extrait de parfum made in Morocco.",
+        "long": "<p class=\"pd-accords\"><strong>Woody · Spicy · Warm</strong> · strong intensity</p>\n<p>The opening is spicy and dry: cardamom and Sichuan pepper set on rosewood. Then comes the oud, softened by sandalwood and held by vetiver. The base rounds the whole off — tonka bean, amber, a barely sweetened vanilla.</p>\n<p class=\"pd-pour\"><strong>To wear:</strong> Evenings, ceremonies, and those who love oriental woods.</p>\n<p class=\"pd-insp\">An original ODYS composition, inspired by Tom Ford Oud Wood. The brands named belong to their respective owners and have no connection with ODYS Parfums.</p>\n<p class=\"pd-maison\">Extrait de parfum made in Morocco, 18–20 % concentration.</p>"
+      },
+      "ar": {
+        "court": "مستوحى من Tom Ford Oud Wood. خلاصة عطرية مصنوعة بالمغرب.",
+        "long": "<p class=\"pd-accords\"><strong>خشبي · حار · دافئ</strong> · قوة كبيرة</p>\n<p>الافتتاح حار وجاف: هيل وفلفل سيشوان على خشب الورد. ثم يأتي العود، يلطّفه الصندل ويمسكه نبات الفيتيفر. والقاع يدوّر الصورة — حبّة التونكا والعنبر وفانيليا بالكاد محلّاة.</p>\n<p class=\"pd-pour\"><strong>متى يُوضع:</strong> السهرات والمناسبات، ولمن يحب الخشبيات الشرقية.</p>\n<p class=\"pd-insp\">تركيبة أوديس أصلية، مستوحاة من Tom Ford Oud Wood. العلامات المذكورة تعود لأصحابها ولا علاقة لها بأوديس بارفان.</p>\n<p class=\"pd-maison\">خلاصة عطرية مصنوعة بالمغرب، بتركيز 18–20٪.</p>"
+      }
+    },
+    "24": {
+      "en": {
+        "court": "Inspired by Yves Saint Laurent Black Opium. Extrait de parfum made in Morocco.",
+        "long": "<p class=\"pd-accords\"><strong>Gourmand · Floral · Coffee</strong> · sustained intensity</p>\n<p>Pear and mandarin to begin, short and luminous. The heart is floral and vanilla-led, orange blossom first. It is the base that signs it: a bitter black coffee, cedar and patchouli, which keep the gourmand side from turning sugary.</p>\n<p class=\"pd-pour\"><strong>To wear:</strong> Evenings and the cold seasons.</p>\n<p class=\"pd-insp\">An original ODYS composition, inspired by Yves Saint Laurent Black Opium. The brands named belong to their respective owners and have no connection with ODYS Parfums.</p>\n<p class=\"pd-maison\">Extrait de parfum made in Morocco, 18–20 % concentration.</p>"
+      },
+      "ar": {
+        "court": "مستوحى من Yves Saint Laurent Black Opium. خلاصة عطرية مصنوعة بالمغرب.",
+        "long": "<p class=\"pd-accords\"><strong>حلواني · زهري · قهوة</strong> · قوة عالية</p>\n<p>إجاص ومندرين في البداية، قصيران ومضيئان. القلب زهري بالفانيليا، وزهر البرتقال في المقدمة. لكن القاع هو الذي يوقّعه: قهوة سوداء مرّة وأرز وباتشولي، تمنع الجانب الحلو من أن يصير سكّريًا.</p>\n<p class=\"pd-pour\"><strong>متى يُوضع:</strong> السهرات والفصول الباردة.</p>\n<p class=\"pd-insp\">تركيبة أوديس أصلية، مستوحاة من Yves Saint Laurent Black Opium. العلامات المذكورة تعود لأصحابها ولا علاقة لها بأوديس بارفان.</p>\n<p class=\"pd-maison\">خلاصة عطرية مصنوعة بالمغرب، بتركيز 18–20٪.</p>"
+      }
+    },
+    "25": {
+      "en": {
+        "court": "Inspired by Chanel Bleu de Chanel Eau de Parfum. Extrait de parfum made in Morocco.",
+        "long": "<p class=\"pd-accords\"><strong>Citrus · Woody · Incense</strong> · medium intensity</p>\n<p>A clean citrus opening — grapefruit, lemon, bergamot — lifted with mint and pink pepper. The heart turns spicy, ginger and nutmeg over a light floral. Then the incense arrives and the fragrance becomes woody: cedar, sandalwood, patchouli.</p>\n<p class=\"pd-pour\"><strong>To wear:</strong> The office as much as the evening, and all year round.</p>\n<p class=\"pd-insp\">An original ODYS composition, inspired by Chanel Bleu de Chanel Eau de Parfum. The brands named belong to their respective owners and have no connection with ODYS Parfums.</p>\n<p class=\"pd-maison\">Extrait de parfum made in Morocco, 18–20 % concentration.</p>"
+      },
+      "ar": {
+        "court": "مستوحى من Chanel Bleu de Chanel Eau de Parfum. خلاصة عطرية مصنوعة بالمغرب.",
+        "long": "<p class=\"pd-accords\"><strong>حمضي · خشبي · بخور</strong> · قوة متوسطة</p>\n<p>افتتاح حمضي صافٍ — ليمون هندي وحامض وبرغموت — يرفعه النعناع والفلفل الوردي. ثم يصير القلب حارًا، زنجبيل وجوزة الطيب على زهري خفيف. ويأتي البخور فيتحوّل العطر إلى خشبي: أرز وصندل وباتشولي.</p>\n<p class=\"pd-pour\"><strong>متى يُوضع:</strong> في المكتب كما في المساء، وعلى مدار السنة.</p>\n<p class=\"pd-insp\">تركيبة أوديس أصلية، مستوحاة من Chanel Bleu de Chanel Eau de Parfum. العلامات المذكورة تعود لأصحابها ولا علاقة لها بأوديس بارفان.</p>\n<p class=\"pd-maison\">خلاصة عطرية مصنوعة بالمغرب، بتركيز 18–20٪.</p>"
+      }
+    }
+  },
+  "pages": {}
+}

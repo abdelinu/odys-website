@@ -1767,6 +1767,124 @@
         "en": "Search",
         "ar": "بحث"
       }
+    },
+    "ModulesProductcommentsShop": {
+      "Are you sure that you want to report this comment?": {
+        "en": "Are you sure that you want to report this comment?",
+        "ar": "هل تريد فعلًا الإبلاغ عن هذا التعليق؟"
+      },
+      "Be the first to write your review": {
+        "en": "Be the first to write your review",
+        "ar": "كن أول من يكتب رأيه"
+      },
+      "Cancel": {
+        "en": "Cancel",
+        "ar": "إلغاء"
+      },
+      "Close": {
+        "en": "Close",
+        "ar": "إغلاق"
+      },
+      "Comments": {
+        "en": "Comments",
+        "ar": "التعليقات"
+      },
+      "Grade": {
+        "en": "Grade",
+        "ar": "التقييم"
+      },
+      "No": {
+        "en": "No",
+        "ar": "لا"
+      },
+      "No customer reviews for the moment.": {
+        "en": "No customer reviews for the moment.",
+        "ar": "لا توجد آراء زبناء حاليًا."
+      },
+      "OK": {
+        "en": "OK",
+        "ar": "موافق"
+      },
+      "Please choose a rating for your review.": {
+        "en": "Please choose a rating for your review.",
+        "ar": "اختر تقييمًا من فضلك."
+      },
+      "Product Name": {
+        "en": "Product Name",
+        "ar": "اسم المنتج"
+      },
+      "Read user reviews": {
+        "en": "Read user reviews",
+        "ar": "اقرأ آراء الزبناء"
+      },
+      "Report abuse": {
+        "en": "Report abuse",
+        "ar": "الإبلاغ عن إساءة"
+      },
+      "Report comment": {
+        "en": "Report comment",
+        "ar": "الإبلاغ عن التعليق"
+      },
+      "Report sent": {
+        "en": "Report sent",
+        "ar": "تم إرسال البلاغ"
+      },
+      "Required fields": {
+        "en": "Required fields",
+        "ar": "حقول إلزامية"
+      },
+      "Review": {
+        "en": "Review",
+        "ar": "الرأي"
+      },
+      "Review sent": {
+        "en": "Review sent",
+        "ar": "تم إرسال الرأي"
+      },
+      "Send": {
+        "en": "Send",
+        "ar": "إرسال"
+      },
+      "Sorry, your review cannot be posted.": {
+        "en": "Sorry, your review cannot be posted.",
+        "ar": "عذرًا، تعذّر نشر رأيك."
+      },
+      "Title": {
+        "en": "Title",
+        "ar": "العنوان"
+      },
+      "Write your review": {
+        "en": "Write your review",
+        "ar": "اكتب رأيك"
+      },
+      "Yes": {
+        "en": "Yes",
+        "ar": "نعم"
+      },
+      "Your comment has been added!": {
+        "en": "Your comment has been added!",
+        "ar": "تمت إضافة تعليقك!"
+      },
+      "Your comment has been submitted and will be available once approved by a moderator.": {
+        "en": "Your comment has been submitted and will be available once approved by a moderator.",
+        "ar": "تم إرسال تعليقك وسيُنشر بعد مراجعته."
+      },
+      "Your name": {
+        "en": "Your name",
+        "ar": "اسمك"
+      },
+      "Your report cannot be sent": {
+        "en": "Your report cannot be sent",
+        "ar": "تعذّر إرسال بلاغك"
+      },
+      "Your report has been submitted and will be considered by a moderator.": {
+        "en": "Your report has been submitted and will be considered by a moderator.",
+        "ar": "تم إرسال بلاغك وسيُنظر فيه."
+      },
+      "Your review appreciation cannot be sent": {
+        "en": "Your review appreciation cannot be sent",
+        "ar": "تعذّر إرسال تقديرك لهذا الرأي"
+      }
     }
   }
 }
