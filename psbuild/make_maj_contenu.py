@@ -154,7 +154,9 @@ def section_produits(prods):
     for id_prod, bloc_p in sorted(prods.items(), key=lambda kv: int(kv[0])):
         for iso in ("en", "ar"):
             part = bloc_p.get(iso) or {}
-            for colonne, cle_json in (("description_short", "court"),
+            # le nom n'est ecrit que s'il est donne : un nom propre reste
+            for colonne, cle_json in (("name", "nom"),
+                                      ("description_short", "court"),
                                       ("description", "long")):
                 valeur = part.get(cle_json)
                 if not valeur:

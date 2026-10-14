@@ -10,7 +10,8 @@
     "Les noms des parfums ne sont pas traduits. « L'Icone » est un nom propre",
     "au meme titre qu'ODYS, et les maisons de parfum gardent leurs noms en",
     "lettres latines sur leurs sites arabes. Les marques citees en reference",
-    "olfactive ne le sont pas non plus : ce sont des marques deposees."
+    "olfactive ne le sont pas non plus : ce sont des marques deposees.",
+    "Un nom propre reste : L'Icone, La Nuit, Nuit d'Ambre. Un nom commun se traduit : « Diffuseur a roseaux », « Recharge », « Sampler », « Pack », « Duo », « Trio », « Boukhour ». C'est la seule ligne qui tienne."
   ],
   "categories": {
     "10": {
@@ -150,6 +151,244 @@
       "ar": {
         "court": "مستوحى من Chanel Bleu de Chanel Eau de Parfum. خلاصة عطرية مصنوعة بالمغرب.",
         "long": "<p class=\"pd-accords\"><strong>حمضي · خشبي · بخور</strong> · قوة متوسطة</p>\n<p>افتتاح حمضي صافٍ — ليمون هندي وحامض وبرغموت — يرفعه النعناع والفلفل الوردي. ثم يصير القلب حارًا، زنجبيل وجوزة الطيب على زهري خفيف. ويأتي البخور فيتحوّل العطر إلى خشبي: أرز وصندل وباتشولي.</p>\n<p class=\"pd-pour\"><strong>متى يُوضع:</strong> في المكتب كما في المساء، وعلى مدار السنة.</p>\n<p class=\"pd-insp\">تركيبة أوديس أصلية، مستوحاة من Chanel Bleu de Chanel Eau de Parfum. العلامات المذكورة تعود لأصحابها ولا علاقة لها بأوديس بارفان.</p>\n<p class=\"pd-maison\">خلاصة عطرية مصنوعة بالمغرب، بتركيز 18–20٪.</p>"
+      }
+    },
+    "40": {
+      "en": {
+        "court": "Inspired by Givenchy L'Interdit Eau de Parfum Rouge. Extrait de parfum made in Morocco.",
+        "long": "<p class=\"pd-accords\"><strong>Spicy · Floral · Woody</strong> · sustained intensity</p>\n<p>A blood orange, and at once a red spice accord that gives it bite. The heart is very floral — orange blossom, sambac jasmine — and the base brings the whole back towards wood: patchouli and sandalwood.</p>\n<p class=\"pd-pour\"><strong>To wear:</strong> Evenings and celebrations.</p>\n<p class=\"pd-insp\">An original ODYS composition, inspired by Givenchy L'Interdit Eau de Parfum Rouge. The brands named belong to their respective owners and have no connection with ODYS Parfums.</p>\n<p class=\"pd-maison\">Extrait de parfum made in Morocco, 18–20 % concentration.</p>"
+      },
+      "ar": {
+        "court": "مستوحى من Givenchy L'Interdit Eau de Parfum Rouge. خلاصة عطرية مصنوعة بالمغرب.",
+        "long": "<p class=\"pd-accords\"><strong>حار · زهري · خشبي</strong> · قوة عالية</p>\n<p>برتقال دموي، ثم مباشرة تناغم حار أحمر يمنحه حدّته. القلب زهري بامتياز — زهر البرتقال وياسمين السامباك — والقاع يعيد كل شيء نحو الخشب: باتشولي وصندل.</p>\n<p class=\"pd-pour\"><strong>متى يُوضع:</strong> السهرات والأعراس والحفلات.</p>\n<p class=\"pd-insp\">تركيبة أوديس أصلية، مستوحاة من Givenchy L'Interdit Eau de Parfum Rouge. العلامات المذكورة تعود لأصحابها ولا علاقة لها بأوديس بارفان.</p>\n<p class=\"pd-maison\">خلاصة عطرية مصنوعة بالمغرب، بتركيز 18–20٪.</p>"
+      }
+    },
+    "41": {
+      "en": {
+        "court": "Inspired by Emporio Armani Stronger With You. Extrait de parfum made in Morocco.",
+        "long": "<p class=\"pd-accords\"><strong>Spicy · Green · Vanilla</strong> · medium intensity</p>\n<p>Cardamom and pink pepper over a violet leaf: a spicy, green start. Sage holds the heart, herbal and restrained. The base is gourmand without excess — vanilla and candied chestnut.</p>\n<p class=\"pd-pour\"><strong>To wear:</strong> Every day, and for those who prefer a discreet gourmand.</p>\n<p class=\"pd-insp\">An original ODYS composition, inspired by Emporio Armani Stronger With You. The brands named belong to their respective owners and have no connection with ODYS Parfums.</p>\n<p class=\"pd-maison\">Extrait de parfum made in Morocco, 18–20 % concentration.</p>"
+      },
+      "ar": {
+        "court": "مستوحى من Emporio Armani Stronger With You. خلاصة عطرية مصنوعة بالمغرب.",
+        "long": "<p class=\"pd-accords\"><strong>حار · أخضر · فانيليا</strong> · قوة متوسطة</p>\n<p>هيل وفلفل وردي على ورقة البنفسج: بداية حارة وخضراء. المريمية تمسك القلب، عشبية ورزينة. والقاع حلواني بلا إفراط — فانيليا وكستناء مسكّرة.</p>\n<p class=\"pd-pour\"><strong>متى يُوضع:</strong> كل يوم، ولمن يفضّل الحلو الهادئ.</p>\n<p class=\"pd-insp\">تركيبة أوديس أصلية، مستوحاة من Emporio Armani Stronger With You. العلامات المذكورة تعود لأصحابها ولا علاقة لها بأوديس بارفان.</p>\n<p class=\"pd-maison\">خلاصة عطرية مصنوعة بالمغرب، بتركيز 18–20٪.</p>"
+      }
+    },
+    "42": {
+      "en": {
+        "court": "Inspired by Emporio Armani Stronger With You Absolutely. Extrait de parfum made in Morocco.",
+        "long": "<p class=\"pd-accords\"><strong>Vanilla · Woody · Liqueur</strong> · strong intensity</p>\n<p>Darker than Le Serment. An amber rum, resinous elemi, a bergamot for balance. Lavender and davana give the heart its almost fruity roundness. The base is thick: Madagascar vanilla, chestnut, cedar and patchouli.</p>\n<p class=\"pd-pour\"><strong>To wear:</strong> Winter evenings, and those who find vanillas too well behaved.</p>\n<p class=\"pd-insp\">An original ODYS composition, inspired by Emporio Armani Stronger With You Absolutely. The brands named belong to their respective owners and have no connection with ODYS Parfums.</p>\n<p class=\"pd-maison\">Extrait de parfum made in Morocco, 18–20 % concentration.</p>"
+      },
+      "ar": {
+        "court": "مستوحى من Emporio Armani Stronger With You Absolutely. خلاصة عطرية مصنوعة بالمغرب.",
+        "long": "<p class=\"pd-accords\"><strong>فانيليا · خشبي · كحولي</strong> · قوة كبيرة</p>\n<p>أغمق من لو سيرمان. رُم عنبري، وإيليمي راتنجي، وبرغموت للتوازن. الخزامى والدافانا تمنحان القلب استدارته شبه الفاكهية. والقاع كثيف: فانيليا مدغشقر وكستناء وأرز وباتشولي.</p>\n<p class=\"pd-pour\"><strong>متى يُوضع:</strong> ليالي الشتاء، ولمن يجد الفانيليا وديعة أكثر من اللازم.</p>\n<p class=\"pd-insp\">تركيبة أوديس أصلية، مستوحاة من Emporio Armani Stronger With You Absolutely. العلامات المذكورة تعود لأصحابها ولا علاقة لها بأوديس بارفان.</p>\n<p class=\"pd-maison\">خلاصة عطرية مصنوعة بالمغرب، بتركيز 18–20٪.</p>"
+      }
+    },
+    "43": {
+      "en": {
+        "court": "Inspired by Kayali Yum Boujee Marshmallow 81. Extrait de parfum made in Morocco.",
+        "long": "<p class=\"pd-accords\"><strong>Gourmand · Fruity · Milky</strong> · sustained intensity</p>\n<p>A fruity bouquet to begin — nectarine, apple, and a lemon that keeps the whole from growing heavy. Marshmallow, strawberry and coconut then set the dessert. The base is creamy: whipped cream, sugar, vanilla, and an ambroxan that makes it last.</p>\n<p class=\"pd-pour\"><strong>To wear:</strong> Outings with friends, birthdays, and those who own a gourmand fragrance without apology.</p>\n<p class=\"pd-insp\">An original ODYS composition, inspired by Kayali Yum Boujee Marshmallow 81. The brands named belong to their respective owners and have no connection with ODYS Parfums.</p>\n<p class=\"pd-maison\">Extrait de parfum made in Morocco, 18–20 % concentration.</p>"
+      },
+      "ar": {
+        "court": "مستوحى من Kayali Yum Boujee Marshmallow 81. خلاصة عطرية مصنوعة بالمغرب.",
+        "long": "<p class=\"pd-accords\"><strong>حلواني · فاكهي · حليبي</strong> · قوة عالية</p>\n<p>باقة فاكهية في البداية — نكتارين وتفاح وحامض يمنع الثقل. ثم يأتي المارشملو والفراولة وجوز الهند ليضعا الحلوى. والقاع كريمي: قشدة مخفوقة وسكر وفانيليا، وأمبروكسان يجعله يدوم.</p>\n<p class=\"pd-pour\"><strong>متى يُوضع:</strong> الخرجات مع الصديقات، وأعياد الميلاد، ولمن تحب العطر الحلو دون تردد.</p>\n<p class=\"pd-insp\">تركيبة أوديس أصلية، مستوحاة من Kayali Yum Boujee Marshmallow 81. العلامات المذكورة تعود لأصحابها ولا علاقة لها بأوديس بارفان.</p>\n<p class=\"pd-maison\">خلاصة عطرية مصنوعة بالمغرب، بتركيز 18–20٪.</p>"
+      }
+    },
+    "44": {
+      "en": {
+        "court": "Inspired by Kayali Vanilla Candy Rock Sugar 42. Extrait de parfum made in Morocco.",
+        "long": "<p class=\"pd-accords\"><strong>Vanilla · Caramel · Woody</strong> · sustained intensity</p>\n<p>A candied pear and a drop of rum open the fragrance; ylang-ylang gives it body. The heart is a white caramel softened with marshmallow, held by jasmine and labdanum. The base, though, is woody: tonka bean, sandalwood, vetiver and patchouli beneath the rock sugar.</p>\n<p class=\"pd-pour\"><strong>To wear:</strong> Autumn and winter, and those looking for a vanilla that is not only a dessert.</p>\n<p class=\"pd-insp\">An original ODYS composition, inspired by Kayali Vanilla Candy Rock Sugar 42. The brands named belong to their respective owners and have no connection with ODYS Parfums.</p>\n<p class=\"pd-maison\">Extrait de parfum made in Morocco, 18–20 % concentration.</p>"
+      },
+      "ar": {
+        "court": "مستوحى من Kayali Vanilla Candy Rock Sugar 42. خلاصة عطرية مصنوعة بالمغرب.",
+        "long": "<p class=\"pd-accords\"><strong>فانيليا · كراميل · خشبي</strong> · قوة عالية</p>\n<p>إجاص مسكّر وقطرة رُم يفتتحان العطر، ويمنحه الإيلنغ إيلنغ جسده. القلب كراميل أبيض يلطّفه المارشملو، ويمسكه الياسمين واللادن. أما القاع فخشبي: حبّة التونكا والصندل والفيتيفر والباتشولي تحت السكّر النبات.</p>\n<p class=\"pd-pour\"><strong>متى يُوضع:</strong> الخريف والشتاء، ولمن تبحث عن فانيليا ليست مجرد حلوى.</p>\n<p class=\"pd-insp\">تركيبة أوديس أصلية، مستوحاة من Kayali Vanilla Candy Rock Sugar 42. العلامات المذكورة تعود لأصحابها ولا علاقة لها بأوديس بارفان.</p>\n<p class=\"pd-maison\">خلاصة عطرية مصنوعة بالمغرب، بتركيز 18–20٪.</p>"
+      }
+    },
+    "45": {
+      "en": {
+        "court": "Inspired by Jean Paul Gaultier Le Beau Paradise Garden. Extrait de parfum made in Morocco.",
+        "long": "<p class=\"pd-accords\"><strong>Aquatic · Green · Salty</strong> · light intensity</p>\n<p>Water first: aquatic notes, mint, a cut green grass. The heart is saline — coconut water, salt, green fig, like skin coming out of the sea. Sandalwood and tonka bean warm the end.</p>\n<p class=\"pd-pour\"><strong>To wear:</strong> Summer, days in the sun, and those who flee heavy fragrances.</p>\n<p class=\"pd-insp\">An original ODYS composition, inspired by Jean Paul Gaultier Le Beau Paradise Garden. The brands named belong to their respective owners and have no connection with ODYS Parfums.</p>\n<p class=\"pd-maison\">Extrait de parfum made in Morocco, 18–20 % concentration.</p>"
+      },
+      "ar": {
+        "court": "مستوحى من Jean Paul Gaultier Le Beau Paradise Garden. خلاصة عطرية مصنوعة بالمغرب.",
+        "long": "<p class=\"pd-accords\"><strong>مائي · أخضر · مالح</strong> · قوة خفيفة</p>\n<p>الماء أولًا: نفحات مائية ونعناع وعشب أخضر مقطوف. القلب مالح — ماء جوز الهند والملح والتين الأخضر، كبشرة خارجة من البحر. ويدفّئ الصندل وحبّة التونكا النهاية.</p>\n<p class=\"pd-pour\"><strong>متى يُوضع:</strong> الصيف، وأيام الشمس، ولمن يهرب من العطور الثقيلة.</p>\n<p class=\"pd-insp\">تركيبة أوديس أصلية، مستوحاة من Jean Paul Gaultier Le Beau Paradise Garden. العلامات المذكورة تعود لأصحابها ولا علاقة لها بأوديس بارفان.</p>\n<p class=\"pd-maison\">خلاصة عطرية مصنوعة بالمغرب، بتركيز 18–20٪.</p>"
+      }
+    },
+    "46": {
+      "en": {
+        "court": "Inspired by Dolce &amp; Gabbana Light Blue. Extrait de parfum made in Morocco.",
+        "long": "<p class=\"pd-accords\"><strong>Citrus · Floral · Woody</strong> · light intensity</p>\n<p>Sicilian lemon and green apple: a frank opening, almost crisp. The heart is floral and green — jasmine, white rose, bamboo. The base stays light, cedar and musk over a hint of amber.</p>\n<p class=\"pd-pour\"><strong>To wear:</strong> Fine days, everyday life, and those who want a freshness that lasts.</p>\n<p class=\"pd-insp\">An original ODYS composition, inspired by Dolce &amp; Gabbana Light Blue. The brands named belong to their respective owners and have no connection with ODYS Parfums.</p>\n<p class=\"pd-maison\">Extrait de parfum made in Morocco, 18–20 % concentration.</p>"
+      },
+      "ar": {
+        "court": "مستوحى من Dolce &amp; Gabbana Light Blue. خلاصة عطرية مصنوعة بالمغرب.",
+        "long": "<p class=\"pd-accords\"><strong>حمضي · زهري · خشبي</strong> · قوة خفيفة</p>\n<p>ليمون صقلي وتفاح أخضر: افتتاح صريح يكاد يكون مقرمشًا. القلب زهري وأخضر — ياسمين ووردة بيضاء وخيزران. والقاع يبقى خفيفًا، أرز ومسك على لمسة عنبر.</p>\n<p class=\"pd-pour\"><strong>متى يُوضع:</strong> الأيام الجميلة واليومي، ولمن تريد انتعاشًا يدوم.</p>\n<p class=\"pd-insp\">تركيبة أوديس أصلية، مستوحاة من Dolce &amp; Gabbana Light Blue. العلامات المذكورة تعود لأصحابها ولا علاقة لها بأوديس بارفان.</p>\n<p class=\"pd-maison\">خلاصة عطرية مصنوعة بالمغرب، بتركيز 18–20٪.</p>"
+      }
+    },
+    "26": {
+      "en": {
+        "court": "<p>Two 50 ml extraits de parfum brought together in one gift box.</p>",
+        "long": "<p>Two 50 ml bottles in a single box: enough to give without hesitating between two fragrances, or to keep one and give the other.</p>\n<p>The same concentration as the bottles sold alone — extrait de parfum at 18–20 %, made in Morocco.</p>",
+        "nom": "Classic Duo"
+      },
+      "ar": {
+        "court": "<p>خلاصتان عطريتان من 50 مل في علبة واحدة.</p>",
+        "long": "<p>قارورتان من 50 مل في علبة واحدة: ما يكفي لتهدي دون تردّد بين عطرين، أو تحتفظ بواحد وتهدي الآخر.</p>\n<p>نفس التركيز الموجود في القوارير المباعة منفردة — خلاصة عطرية بتركيز 18–20٪، مصنوعة بالمغرب.</p>",
+        "nom": "الثنائية الكلاسيكية"
+      }
+    },
+    "27": {
+      "en": {
+        "court": "<p>Boukhour sold by the gram, 15 DH per gram.</p>",
+        "long": "<p>Boukhour sold by the gram: you take the quantity you want, and the price follows the weight.</p>\n<p>Fifteen dirhams a gram, shown in advance. The total updates while you choose the quantity.</p>",
+        "nom": "Boukhour Prestige"
+      },
+      "ar": {
+        "court": "<p>بخور يُباع بالغرام، 15 درهمًا للغرام.</p>",
+        "long": "<p>بخور يُباع بالغرام: تأخذ الكمية التي تريد، والثمن يتبع الوزن.</p>\n<p>خمسة عشر درهمًا للغرام، معروضة مسبقًا. والمجموع يتحدّث وأنت تختار الكمية.</p>",
+        "nom": "بخور بريستيج"
+      }
+    },
+    "28": {
+      "en": {
+        "court": "<p>Oud of Indian origin — Assam. Sold by the gram, 35 DH per gram.</p>",
+        "long": "<p>An oud of Indian origin, from the Assam region, sold by the gram.</p>\n<p>Thirty-five dirhams a gram, shown in advance: you choose the weight, the total is worked out in front of you. No imposed lot.</p>",
+        "nom": "Hindi Assam A"
+      },
+      "ar": {
+        "court": "<p>عود هندي المنشأ — آسام. يُباع بالغرام، 35 درهمًا للغرام.</p>",
+        "long": "<p>عود هندي المنشأ، من منطقة آسام، يُباع بالغرام.</p>\n<p>خمسة وثلاثون درهمًا للغرام، معروضة مسبقًا: تختار الوزن، والمجموع يُحسب أمامك. بدون كمية مفروضة.</p>",
+        "nom": "هندي آسام A"
+      }
+    },
+    "29": {
+      "en": {
+        "court": "<p>Oud of Indian origin. Sold by the gram, 45 DH per gram.</p>",
+        "long": "<p>An oud of Indian origin, sold by the gram.</p>\n<p>Forty-five dirhams a gram, shown in advance: you choose the weight, the total is worked out in front of you. No imposed lot.</p>",
+        "nom": "Royal Hindi B"
+      },
+      "ar": {
+        "court": "<p>عود هندي المنشأ. يُباع بالغرام، 45 درهمًا للغرام.</p>",
+        "long": "<p>عود هندي المنشأ، يُباع بالغرام.</p>\n<p>خمسة وأربعون درهمًا للغرام، معروضة مسبقًا: تختار الوزن، والمجموع يُحسب أمامك. بدون كمية مفروضة.</p>",
+        "nom": "رويال هندي B"
+      }
+    },
+    "30": {
+      "en": {
+        "court": "<p>Oud of Indian origin. Sold by the gram, 65 DH per gram.</p>",
+        "long": "<p>An oud of Indian origin, sold by the gram.</p>\n<p>Sixty-five dirhams a gram, shown in advance: you choose the weight, the total is worked out in front of you. No imposed lot.</p>",
+        "nom": "Royal Hindi C"
+      },
+      "ar": {
+        "court": "<p>عود هندي المنشأ. يُباع بالغرام، 65 درهمًا للغرام.</p>",
+        "long": "<p>عود هندي المنشأ، يُباع بالغرام.</p>\n<p>خمسة وستون درهمًا للغرام، معروضة مسبقًا: تختار الوزن، والمجموع يُحسب أمامك. بدون كمية مفروضة.</p>",
+        "nom": "رويال هندي C"
+      }
+    },
+    "31": {
+      "en": {
+        "court": "<p>Oud of Thai origin. Sold by the gram, 45 DH per gram.</p>",
+        "long": "<p>An oud of Thai origin, sold by the gram.</p>\n<p>Forty-five dirhams a gram, shown in advance: you choose the weight, the total is worked out in front of you. No imposed lot.</p>",
+        "nom": "Royal Thai B"
+      },
+      "ar": {
+        "court": "<p>عود تايلاندي المنشأ. يُباع بالغرام، 45 درهمًا للغرام.</p>",
+        "long": "<p>عود تايلاندي المنشأ، يُباع بالغرام.</p>\n<p>خمسة وأربعون درهمًا للغرام، معروضة مسبقًا: تختار الوزن، والمجموع يُحسب أمامك. بدون كمية مفروضة.</p>",
+        "nom": "رويال تاي B"
+      }
+    },
+    "32": {
+      "en": {
+        "court": "<p>Oud of Thai origin. Sold by the gram, 55 DH per gram.</p>",
+        "long": "<p>An oud of Thai origin, sold by the gram.</p>\n<p>Fifty-five dirhams a gram, shown in advance: you choose the weight, the total is worked out in front of you. No imposed lot.</p>",
+        "nom": "Royal Thai C"
+      },
+      "ar": {
+        "court": "<p>عود تايلاندي المنشأ. يُباع بالغرام، 55 درهمًا للغرام.</p>",
+        "long": "<p>عود تايلاندي المنشأ، يُباع بالغرام.</p>\n<p>خمسة وخمسون درهمًا للغرام، معروضة مسبقًا: تختار الوزن، والمجموع يُحسب أمامك. بدون كمية مفروضة.</p>",
+        "nom": "رويال تاي C"
+      }
+    },
+    "33": {
+      "en": {
+        "court": "<p>A box of three 5 g ouds, fifteen grams in all.</p>",
+        "long": "<p>Three 5 g ouds brought together in one box, fifteen grams in all. Enough to compare woods against each other rather than judge a single one.</p>\n<p>Oud is sold by the gram at ODYS: the price of the box is the price of its contents, shown in advance.</p>",
+        "nom": "Oud Prestige Pack"
+      },
+      "ar": {
+        "court": "<p>علبة من ثلاثة أعواد بـ5 غرامات، أي خمسة عشر غرامًا.</p>",
+        "long": "<p>ثلاثة أعواد بـ5 غرامات في علبة واحدة، خمسة عشر غرامًا في المجموع. ما يكفي لمقارنة الأخشاب ببعضها بدل الحكم على واحد وحده.</p>\n<p>العود يُباع بالغرام عند أوديس: ثمن العلبة هو ثمن محتواها، معروض مسبقًا.</p>",
+        "nom": "طقم العود بريستيج"
+      }
+    },
+    "34": {
+      "en": {
+        "court": "<p>Three 5 g Indian ouds, to compare before choosing.</p>",
+        "long": "<p>Three ouds of Indian origin, 5 g each. That is what a sampler is for: smelling side by side, at the same hour and in the same room, what a single bottle never lets you judge.</p>\n<p>Sold by the gram like the rest of the department: fifteen grams, and the price follows the weight.</p>",
+        "nom": "Hindi Sampler 3×5 g"
+      },
+      "ar": {
+        "court": "<p>ثلاثة أعواد هندية بـ5 غرامات، للمقارنة قبل الاختيار.</p>",
+        "long": "<p>ثلاثة أعواد هندية المنشأ، 5 غرامات لكل واحد. هذا دور العيّنة: أن تشمّها جنبًا إلى جنب، في نفس الساعة ونفس الغرفة، وهو ما لا تتيحه قارورة واحدة.</p>\n<p>تُباع بالغرام كباقي القسم: خمسة عشر غرامًا، والثمن يتبع الوزن.</p>",
+        "nom": "عيّنات هندي 3×5 غ"
+      }
+    },
+    "35": {
+      "en": {
+        "court": "<p>Three 5 g Thai ouds, to compare before choosing.</p>",
+        "long": "<p>Three ouds of Thai origin, 5 g each. That is what a sampler is for: smelling side by side, at the same hour and in the same room, what a single bottle never lets you judge.</p>\n<p>Sold by the gram like the rest of the department: fifteen grams, and the price follows the weight.</p>",
+        "nom": "Thai Sampler 3×5 g"
+      },
+      "ar": {
+        "court": "<p>ثلاثة أعواد تايلاندية بـ5 غرامات، للمقارنة قبل الاختيار.</p>",
+        "long": "<p>ثلاثة أعواد تايلاندية المنشأ، 5 غرامات لكل واحد. هذا دور العيّنة: أن تشمّها جنبًا إلى جنب، في نفس الساعة ونفس الغرفة، وهو ما لا تتيحه قارورة واحدة.</p>\n<p>تُباع بالغرام كباقي القسم: خمسة عشر غرامًا، والثمن يتبع الوزن.</p>",
+        "nom": "عيّنات تاي 3×5 غ"
+      }
+    },
+    "36": {
+      "en": {
+        "court": "<p>Three 50 ml extraits de parfum brought together in one gift box.</p>",
+        "long": "<p>Three 50 ml bottles to walk through the collection without choosing: the simplest way to discover a house whose accords you do not know yet.</p>\n<p>The same concentration as the bottles sold alone — extrait de parfum at 18–20 %, made in Morocco.</p>",
+        "nom": "Discovery Trio"
+      },
+      "ar": {
+        "court": "<p>ثلاث خلاصات عطرية من 50 مل في علبة واحدة.</p>",
+        "long": "<p>ثلاث قوارير من 50 مل لتتنقّل في المجموعة دون أن تختار: أبسط طريقة لاكتشاف دار لا تعرف تناغماتها بعد.</p>\n<p>نفس التركيز الموجود في القوارير المباعة منفردة — خلاصة عطرية بتركيز 18–20٪، مصنوعة بالمغرب.</p>",
+        "nom": "الثلاثية الاستكشافية"
+      }
+    },
+    "37": {
+      "en": {
+        "court": "<p>200 ml reed diffuser — cardamom, rose, incense, amber and oud wood.</p>",
+        "long": "<p>A 200 ml reed diffuser: cardamom and bergamot first, rose and incense next, then musk, amber and oud wood that hold the room.</p>\n<p>No flame and no electricity: the reeds do the work on their own. You turn them over now and then to revive the diffusion.</p>",
+        "nom": "Reed diffuser — Nuit d'Ambre"
+      },
+      "ar": {
+        "court": "<p>موزّع عيدان 200 مل — هيل، ورد، بخور، عنبر وخشب العود.</p>",
+        "long": "<p>موزّع عيدان من 200 مل: الهيل والبرغموت أولًا، ثم الورد والبخور، ثم المسك والعنبر وخشب العود الذي يمسك الغرفة.</p>\n<p>بلا لهب ولا كهرباء: العيدان تقوم بالعمل وحدها. تقلبها من حين لآخر لتجديد الانتشار.</p>",
+        "nom": "موزّع عيدان — Nuit d'Ambre"
+      }
+    },
+    "38": {
+      "en": {
+        "court": "<p>100 ml reed diffuser — lemon, neroli, jasmine, orange blossom and cedar.</p>",
+        "long": "<p>A 100 ml reed diffuser: lemon and neroli first, jasmine and orange blossom at the heart, cedar and white musk to finish.</p>\n<p>No flame and no electricity: the reeds do the work on their own. You turn them over now and then to revive the diffusion.</p>",
+        "nom": "Reed diffuser — Jardin de Fès"
+      },
+      "ar": {
+        "court": "<p>موزّع عيدان 100 مل — حامض، نيرولي، ياسمين، زهر البرتقال وأرز.</p>",
+        "long": "<p>موزّع عيدان من 100 مل: الحامض والنيرولي أولًا، والياسمين وزهر البرتقال في القلب، والأرز والمسك الأبيض في النهاية.</p>\n<p>بلا لهب ولا كهرباء: العيدان تقوم بالعمل وحدها. تقلبها من حين لآخر لتجديد الانتشار.</p>",
+        "nom": "موزّع عيدان — Jardin de Fès"
+      }
+    },
+    "39": {
+      "en": {
+        "court": "<p>200 ml refill for the Nuit d'Ambre diffuser, bottle only.</p>",
+        "long": "<p>The refill for the Nuit d'Ambre diffuser: 200 ml of the same composition, bottle only.</p>\n<p>The reeds of the first diffuser can be kept if the fragrance is the same; replace them to change it, otherwise the old one lingers in the new.</p>",
+        "nom": "Diffuser refill — Nuit d'Ambre"
+      },
+      "ar": {
+        "court": "<p>عبوة بديلة 200 مل لموزّع Nuit d'Ambre، القارورة وحدها.</p>",
+        "long": "<p>العبوة البديلة لموزّع Nuit d'Ambre: 200 مل من نفس التركيبة، القارورة وحدها.</p>\n<p>يمكن الاحتفاظ بعيدان الموزّع الأول إذا كان العطر نفسه؛ وتُستبدل عند تغييره، وإلا بقي القديم في الجديد.</p>",
+        "nom": "عبوة بديلة للموزّع — Nuit d'Ambre"
       }
     }
   },
