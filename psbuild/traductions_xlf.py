@@ -26,40 +26,46 @@ def ecrire(json_path, theme_dir):
     @return [(iso, nombre de mots), ...]
     """
     catalogue = json.loads(pathlib.Path(json_path).read_text(encoding="utf-8"))
-    domaine = catalogue["domaine"]
-    mots = catalogue["mots"]
     faits = []
+    # Le domaine du theme, puis ceux de PrestaShop qu'on complete : « Cart »
+    # et « Sign in » viennent de Shop.Theme.Actions, et le paquet arabe de
+    # PrestaShop ne les traduit pas — il retombe sur l'anglais, en plein
+    # milieu d'une page arabe. Un theme a le droit de les reecrire.
+    paquets = [(catalogue["domaine"], catalogue["mots"])]
+    for autre, mots_autre in catalogue.get("autres_domaines", {}).items():
+        paquets.append((autre, mots_autre))
 
-    for iso, locale in LOCALES.items():
-        dossier = pathlib.Path(theme_dir) / "translations" / locale
-        dossier.mkdir(parents=True, exist_ok=True)
+    for domaine, mots in paquets:
+      for iso, locale in LOCALES.items():
+          dossier = pathlib.Path(theme_dir) / "translations" / locale
+          dossier.mkdir(parents=True, exist_ok=True)
 
-        unites = []
-        for i, (cle, versions) in enumerate(mots.items(), start=1):
-            cible = versions.get(iso, "")
-            if not cible:
-                continue
-            unites.append(
-                "      <trans-unit id=%s resname=%s>"
-                % (quoteattr(str(i)), quoteattr(cle))
-            )
-            unites.append("        <source>%s</source>" % escape(cle))
-            unites.append("        <target>%s</target>" % escape(cible))
-            unites.append("      </trans-unit>")
+          unites = []
+          for i, (cle, versions) in enumerate(mots.items(), start=1):
+              cible = versions.get(iso, "")
+              if not cible:
+                  continue
+              unites.append(
+                  "      <trans-unit id=%s resname=%s>"
+                  % (quoteattr(str(i)), quoteattr(cle))
+              )
+              unites.append("        <source>%s</source>" % escape(cle))
+              unites.append("        <target>%s</target>" % escape(cible))
+              unites.append("      </trans-unit>")
 
-        lignes = [
-            '<?xml version="1.0" encoding="utf-8"?>',
-            '<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">',
-            '  <file source-language="fr-FR" target-language="%s"' % locale,
-            '        datatype="plaintext" original="themes/odys">',
-            "    <body>",
-        ]
-        lignes.extend(unites)
-        lignes.extend(["    </body>", "  </file>", "</xliff>", ""])
+          lignes = [
+              '<?xml version="1.0" encoding="utf-8"?>',
+              '<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">',
+              '  <file source-language="fr-FR" target-language="%s"' % locale,
+              '        datatype="plaintext" original="themes/odys">',
+              "    <body>",
+          ]
+          lignes.extend(unites)
+          lignes.extend(["    </body>", "  </file>", "</xliff>", ""])
 
-        fichier = dossier / ("%s.%s.xlf" % (domaine, locale))
-        fichier.write_text("\n".join(lignes), encoding="utf-8")
-        faits.append((iso, len(unites) // 4))
+          fichier = dossier / ("%s.%s.xlf" % (domaine, locale))
+          fichier.write_text("\n".join(lignes), encoding="utf-8")
+          faits.append((iso, len(unites) // 4))
 
     return faits
 

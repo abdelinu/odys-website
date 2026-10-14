@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr-FR" target-language="en-US"
+        datatype="plaintext" original="themes/odys">
+    <body>
+      <trans-unit id="1" resname="Cart">
+        <source>Cart</source>
+        <target>Cart</target>
+      </trans-unit>
+      <trans-unit id="2" resname="Sign in">
+        <source>Sign in</source>
+        <target>Sign in</target>
+      </trans-unit>
+      <trans-unit id="3" resname="Sign out">
+        <source>Sign out</source>
+        <target>Sign out</target>
+      </trans-unit>
+      <trans-unit id="4" resname="Search">
+        <source>Search</source>
+        <target>Search</target>
+      </trans-unit>
+      <trans-unit id="5" resname="Add to cart">
+        <source>Add to cart</source>
+        <target>Add to cart</target>
+      </trans-unit>
+      <trans-unit id="6" resname="Continue shopping">
+        <source>Continue shopping</source>
+        <target>Continue shopping</target>
+      </trans-unit>
+      <trans-unit id="7" resname="Proceed to checkout">
+        <source>Proceed to checkout</source>
+        <target>Proceed to checkout</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

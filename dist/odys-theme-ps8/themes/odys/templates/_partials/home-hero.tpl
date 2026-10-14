@@ -95,6 +95,20 @@
   {if !$odysLink}{assign var='odysLink' value='Oud & Boukhour'}{/if}
   {if !$odysLinkUrl}{assign var='odysLinkUrl' value=$odysUrlOud}{/if}
 
+  {* Ces mots viennent du Back Office, et ODYS_* n'a qu'UNE valeur pour les
+     trois langues : la banniere restait donc en francais sur /ar/ et /en/.
+     On les passe par le traducteur. Les mots livres avec le theme y sont
+     traduits ; des mots que la maison aura ecrits elle-meme n'y sont pas,
+     et ils s'affichent alors tels quels — en francais, ce qui est la
+     verite plutot qu'une traduction inventee. *}
+  {assign var='odysEyebrow' value={l s=$odysEyebrow d='Shop.Theme.Odys'}}
+  {assign var='odysTitle1' value={l s=$odysTitle1 d='Shop.Theme.Odys'}}
+  {if $odysTitle2}{assign var='odysTitle2' value={l s=$odysTitle2 d='Shop.Theme.Odys'}}{/if}
+  {if $odysSub}{assign var='odysSub' value={l s=$odysSub d='Shop.Theme.Odys'}}{/if}
+  {assign var='odysLede' value={l s=$odysLede d='Shop.Theme.Odys'}}
+  {assign var='odysCta' value={l s=$odysCta d='Shop.Theme.Odys'}}
+  {assign var='odysLink' value={l s=$odysLink d='Shop.Theme.Odys'}}
+
   {assign var='odysSlides' value=[
     [
       'img' => $odysImg1,
@@ -111,17 +125,27 @@
   ]}
   {* Le second visuel se coupe en Back Office. Jamais enregistre vaut oui :
      une boutique qui n'a pas ouvert l'ecran garde la banniere d'avant. *}
+  {* Smarty n'accepte pas un appel de fonction dans un litteral de tableau :
+     les mots du second visuel passent par le traducteur ici, puis le
+     tableau ne porte plus que des variables. *}
+  {assign var='odysS2Eyebrow' value={l s='Oud & Boukhour' d='Shop.Theme.Odys'}}
+  {assign var='odysS2T1' value={l s='Le bois' d='Shop.Theme.Odys'}}
+  {assign var='odysS2T2' value={l s='avant le parfum' d='Shop.Theme.Odys'}}
+  {assign var='odysS2Sub' value={l s='Vendus au gramme, pesés devant vous' d='Shop.Theme.Odys'}}
+  {assign var='odysS2Lede' value={l s='Oud, boukhour et encens, vendus au gramme.' d='Shop.Theme.Odys'}}
+  {assign var='odysS2Cta' value={l s='Découvrir l\'oud' d='Shop.Theme.Odys'}}
+  {assign var='odysS2Lbl2' value={l s='Tous les parfums' d='Shop.Theme.Odys'}}
   {if Configuration::get('ODYS_HERO_SLIDE2') !== '0'}
     {append var='odysSlides' value=[
       'img' => "`$urls.theme_assets`img/nuit-riad.webp",
-      'eyebrow' => 'Oud & Boukhour',
-      't1' => 'Le bois',
-      't2' => 'avant le parfum',
-      'sub' => 'Vendus au gramme, pesés devant vous',
-      'lede' => 'Oud, boukhour et encens, vendus au gramme.',
-      'cta' => "Découvrir l'oud",
+      'eyebrow' => $odysS2Eyebrow,
+      't1' => $odysS2T1,
+      't2' => $odysS2T2,
+      'sub' => $odysS2Sub,
+      'lede' => $odysS2Lede,
+      'cta' => $odysS2Cta,
       'url' => $odysUrlOud,
-      'lbl2' => 'Tous les parfums',
+      'lbl2' => $odysS2Lbl2,
       'url2' => $odysUrlParfums
     ]}
   {/if}

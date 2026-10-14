@@ -1423,6 +1423,205 @@
         La composition ODYS cherche à en retrouver l'accord.</source>
         <target>The notes of the fragrance this perfume draws on. The ODYS composition seeks to find that accord again.</target>
       </trans-unit>
+      <trans-unit id="352" resname="L’Icône">
+        <source>L’Icône</source>
+        <target>L’Icône</target>
+      </trans-unit>
+      <trans-unit id="353" resname="Une essence de liberté et de féminité">
+        <source>Une essence de liberté et de féminité</source>
+        <target>An essence of freedom and femininity</target>
+      </trans-unit>
+      <trans-unit id="354" resname="L’inspiration d’un classique, l’âme du Maroc.">
+        <source>L’inspiration d’un classique, l’âme du Maroc.</source>
+        <target>The inspiration of a classic, the soul of Morocco.</target>
+      </trans-unit>
+      <trans-unit id="355" resname="Découvrir">
+        <source>Découvrir</source>
+        <target>Discover</target>
+      </trans-unit>
+      <trans-unit id="356" resname="Plus qu’un parfum,">
+        <source>Plus qu’un parfum,</source>
+        <target>More than a fragrance,</target>
+      </trans-unit>
+      <trans-unit id="357" resname="une émotion">
+        <source>une émotion</source>
+        <target>an emotion</target>
+      </trans-unit>
+      <trans-unit id="358" resname="L’art de l’essence">
+        <source>L’art de l’essence</source>
+        <target>The art of essence</target>
+      </trans-unit>
+      <trans-unit id="359" resname="Des essences rares, un savoir-faire intemporel. Découvrez l’univers ODYS.">
+        <source>Des essences rares, un savoir-faire intemporel. Découvrez l’univers ODYS.</source>
+        <target>Rare essences, timeless craft. Discover the world of ODYS.</target>
+      </trans-unit>
+      <trans-unit id="360" resname="Oud &amp; Boukhour">
+        <source>Oud &amp; Boukhour</source>
+        <target>Oud &amp;amp; Boukhour</target>
+      </trans-unit>
+      <trans-unit id="361" resname="Le bois">
+        <source>Le bois</source>
+        <target>The wood</target>
+      </trans-unit>
+      <trans-unit id="362" resname="avant le parfum">
+        <source>avant le parfum</source>
+        <target>before the perfume</target>
+      </trans-unit>
+      <trans-unit id="363" resname="Vendus au gramme, pesés devant vous">
+        <source>Vendus au gramme, pesés devant vous</source>
+        <target>Sold by the gram, weighed in front of you</target>
+      </trans-unit>
+      <trans-unit id="364" resname="Oud, boukhour et encens, vendus au gramme.">
+        <source>Oud, boukhour et encens, vendus au gramme.</source>
+        <target>Oud, boukhour and incense, sold by the gram.</target>
+      </trans-unit>
+      <trans-unit id="365" resname="Découvrir l'oud">
+        <source>Découvrir l'oud</source>
+        <target>Discover the oud</target>
+      </trans-unit>
+      <trans-unit id="366" resname="Flacon ODYS Parfum 01 L'Icône et son coffret crème, sur marbre">
+        <source>Flacon ODYS Parfum 01 L'Icône et son coffret crème, sur marbre</source>
+        <target>ODYS Parfum 01 L'Icône bottle and its cream box, on marble</target>
+      </trans-unit>
+      <trans-unit id="367" resname="Livraison 20 DH Casa · 30 DH Maroc · Gratuite dès 300 DH">
+        <source>Livraison 20 DH Casa · 30 DH Maroc · Gratuite dès 300 DH</source>
+        <target>Delivery 20 DH Casablanca · 30 DH Morocco · Free from 300 DH</target>
+      </trans-unit>
+      <trans-unit id="368" resname="Paiement à la livraison disponible partout au Maroc">
+        <source>Paiement à la livraison disponible partout au Maroc</source>
+        <target>Cash on delivery available anywhere in Morocco</target>
+      </trans-unit>
+      <trans-unit id="369" resname="Extrait de parfum · Concentration exceptionnelle">
+        <source>Extrait de parfum · Concentration exceptionnelle</source>
+        <target>Extrait de parfum · Exceptional concentration</target>
+      </trans-unit>
+      <trans-unit id="370" resname="Élaboré au Maroc · Extrait de parfum 18–20 % concentré">
+        <source>Élaboré au Maroc · Extrait de parfum 18–20 % concentré</source>
+        <target>Made in Morocco · Extrait de parfum, 18–20 % concentrated</target>
+      </trans-unit>
+      <trans-unit id="371" resname="Élaboré au Maroc · À partir de 39 DH">
+        <source>Élaboré au Maroc · À partir de 39 DH</source>
+        <target>Made in Morocco · From 39 DH</target>
+      </trans-unit>
+      <trans-unit id="372" resname="Oud naturel · Vendu au gramme · Longévité 8h+">
+        <source>Oud naturel · Vendu au gramme · Longévité 8h+</source>
+        <target>Natural oud · Sold by the gram · Lasts 8h+</target>
+      </trans-unit>
+      <trans-unit id="373" resname="Coffrets prêts à offrir · Duo &amp;amp; Trio">
+        <source>Coffrets prêts à offrir · Duo &amp;amp; Trio</source>
+        <target>Gift sets ready to offer · Duo &amp;amp; Trio</target>
+      </trans-unit>
+      <trans-unit id="374" resname="Livraison 24–48h · Retours 14 jours">
+        <source>Livraison 24–48h · Retours 14 jours</source>
+        <target>Delivery in 24–48h · Returns within 14 days</target>
+      </trans-unit>
+      <trans-unit id="375" resname="Fermer le bandeau d'annonces">
+        <source>Fermer le bandeau d'annonces</source>
+        <target>Close the announcement bar</target>
+      </trans-unit>
+      <trans-unit id="376" resname="Livraison">
+        <source>Livraison</source>
+        <target>Delivery</target>
+      </trans-unit>
+      <trans-unit id="377" resname="De l'oud à l'essence : une goutte précieuse rejoint le&#10;    parfum ODYS.">
+        <source>De l'oud à l'essence : une goutte précieuse rejoint le
+    parfum ODYS.</source>
+        <target>From oud to essence: a precious drop joins the ODYS fragrance.</target>
+      </trans-unit>
+      <trans-unit id="378" resname="Occasion">
+        <source>Occasion</source>
+        <target>Occasion</target>
+      </trans-unit>
+      <trans-unit id="379" resname="Intensité">
+        <source>Intensité</source>
+        <target>Intensity</target>
+      </trans-unit>
+      <trans-unit id="380" resname="Pyramide de l'inspiration">
+        <source>Pyramide de l'inspiration</source>
+        <target>Pyramid of the inspiration</target>
+      </trans-unit>
+      <trans-unit id="381" resname="Offrir à quelqu'un">
+        <source>Offrir à quelqu'un</source>
+        <target>Offer it to someone</target>
+      </trans-unit>
+      <trans-unit id="382" resname="Instructions d'utilisation">
+        <source>Instructions d'utilisation</source>
+        <target>Instructions for use</target>
+      </trans-unit>
+      <trans-unit id="383" resname="Découvrez notre collection de parfums d'inspiration luxe">
+        <source>Découvrez notre collection de parfums d'inspiration luxe</source>
+        <target>Discover our collection of luxury-inspired fragrances</target>
+      </trans-unit>
+      <trans-unit id="384" resname="+2 points à l'inscription · 1 pt = 100 DH">
+        <source>+2 points à l'inscription · 1 pt = 100 DH</source>
+        <target>+2 points when you sign up · 1 pt = 100 DH</target>
+      </trans-unit>
+      <trans-unit id="385" resname="La référence figure sur l'email de confirmation — neuf lettres, par exemple">
+        <source>La référence figure sur l'email de confirmation — neuf lettres, par exemple</source>
+        <target>The reference is on the confirmation email — nine letters, for example</target>
+      </trans-unit>
+      <trans-unit id="386" resname="Indiquez l'adresse e-mail de votre compte. Vous recevrez un lien&#10;        temporaire pour choisir un nouveau mot de passe.">
+        <source>Indiquez l'adresse e-mail de votre compte. Vous recevrez un lien
+        temporaire pour choisir un nouveau mot de passe.</source>
+        <target>Give the email address of your account. You will receive a temporary link to choose a new password.</target>
+      </trans-unit>
+      <trans-unit id="387" resname="C'est envoyé.">
+        <source>C'est envoyé.</source>
+        <target>It has been sent.</target>
+      </trans-unit>
+      <trans-unit id="388" resname="Essayez un nom de parfum, une note olfactive, ou l'inspiration qui vous plaît.">
+        <source>Essayez un nom de parfum, une note olfactive, ou l'inspiration qui vous plaît.</source>
+        <target>Try a fragrance name, an olfactory note, or the inspiration you like.</target>
+      </trans-unit>
+      <trans-unit id="389" resname="Cette page s'est évaporée.">
+        <source>Cette page s'est évaporée.</source>
+        <target>This page has evaporated.</target>
+      </trans-unit>
+      <trans-unit id="390" resname="Le lien est peut-être ancien, ou l'adresse mal recopiée. Voici par où continuer.">
+        <source>Le lien est peut-être ancien, ou l'adresse mal recopiée. Voici par où continuer.</source>
+        <target>The link may be old, or the address mistyped. Here is where to go on.</target>
+      </trans-unit>
+      <trans-unit id="391" resname="← Retour à l'accueil">
+        <source>← Retour à l'accueil</source>
+        <target>← Back to home</target>
+      </trans-unit>
+      <trans-unit id="392" resname="Rien dans ce rayon pour cette&#10;        famille. Changez l'un ou l'autre.">
+        <source>Rien dans ce rayon pour cette
+        famille. Changez l'un ou l'autre.</source>
+        <target>Nothing in this department for this family. Change one or the other.</target>
+      </trans-unit>
+      <trans-unit id="393" resname="L'inspiration du luxe, le prix juste">
+        <source>L'inspiration du luxe, le prix juste</source>
+        <target>The inspiration of luxury, at a fair price</target>
+      </trans-unit>
+      <trans-unit id="394" resname="Concentration exceptionnelle">
+        <source>Concentration exceptionnelle</source>
+        <target>Exceptional concentration</target>
+      </trans-unit>
+      <trans-unit id="395" resname="18–20 % de concentré, l'équivalent d'un Eau de Parfum. Tenue mesurée 7 à 9 heures.">
+        <source>18–20 % de concentré, l'équivalent d'un Eau de Parfum. Tenue mesurée 7 à 9 heures.</source>
+        <target>18–20 % concentrate, the equivalent of an Eau de Parfum. Measured hold: 7 to 9 hours.</target>
+      </trans-unit>
+      <trans-unit id="396" resname="Élaboré au Maroc">
+        <source>Élaboré au Maroc</source>
+        <target>Made in Morocco</target>
+      </trans-unit>
+      <trans-unit id="397" resname="Notre coût d'achat plus une marge fixe. Le prix suit les récoltes, sans opacité.">
+        <source>Notre coût d'achat plus une marge fixe. Le prix suit les récoltes, sans opacité.</source>
+        <target>Our purchase cost plus a fixed margin. The price follows the harvests, with nothing hidden.</target>
+      </trans-unit>
+      <trans-unit id="398" resname="Flacon d'huile d'oud ambrée au bouchon doré">
+        <source>Flacon d'huile d'oud ambrée au bouchon doré</source>
+        <target>Bottle of amber oud oil with a golden cap</target>
+      </trans-unit>
+      <trans-unit id="399" resname="100 DH dépensés = 1 point. À 15 points, 5 g d'oud ou un coffret offert.">
+        <source>100 DH dépensés = 1 point. À 15 points, 5 g d'oud ou un coffret offert.</source>
+        <target>100 DH spent = 1 point. At 15 points, 5 g of oud or a gift set offered.</target>
+      </trans-unit>
+      <trans-unit id="400" resname="La page que vous recherchez n'existe pas ou a été déplacée.">
+        <source>La page que vous recherchez n'existe pas ou a été déplacée.</source>
+        <target>The page you are looking for does not exist or has been moved.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -16,7 +16,8 @@
     {assign var='odysAnnounce' value=Configuration::get('ODYS_ANNOUNCE')}
     {if $odysAnnounce}{foreach from="
 "|explode:$odysAnnounce item=odysMsg}{if $odysMsg|trim}
-      <span class="ai">{$odysMsg|trim|escape:'html':'UTF-8'}</span><span class="ai-dot" aria-hidden="true"></span>
+      {assign var='odysMsgT' value={l s=$odysMsg|trim d='Shop.Theme.Odys'}}
+      <span class="ai">{$odysMsgT|escape:'html':'UTF-8'}</span><span class="ai-dot" aria-hidden="true"></span>
     {/if}{/foreach}{else}
     <span class="ai">{l s='Livraison 20 DH Casa · 30 DH Maroc · Gratuite dès 300 DH' d='Shop.Theme.Odys'}</span><span class="ai-dot" aria-hidden="true"></span>
     <span class="ai">{l s='Paiement à la livraison disponible partout au Maroc' d='Shop.Theme.Odys'}</span><span class="ai-dot" aria-hidden="true"></span>

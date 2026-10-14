@@ -1417,6 +1417,248 @@
     "Les notes de la fragrance dont ce parfum s'inspire.\n        La composition ODYS cherche à en retrouver l'accord.": {
       "en": "The notes of the fragrance this perfume draws on. The ODYS composition seeks to find that accord again.",
       "ar": "نفحات العطر الذي استُلهم منه هذا التركيب. تسعى تركيبة أوديس إلى استعادة هذا التناغم."
+    },
+    "L’Icône": {
+      "en": "L’Icône",
+      "ar": "لِيكون"
+    },
+    "Une essence de liberté et de féminité": {
+      "en": "An essence of freedom and femininity",
+      "ar": "جوهر من الحرية والأنوثة"
+    },
+    "L’inspiration d’un classique, l’âme du Maroc.": {
+      "en": "The inspiration of a classic, the soul of Morocco.",
+      "ar": "وحي عطر كلاسيكي، وروح المغرب."
+    },
+    "Découvrir": {
+      "en": "Discover",
+      "ar": "اكتشف"
+    },
+    "Plus qu’un parfum,": {
+      "en": "More than a fragrance,",
+      "ar": "أكثر من عطر،"
+    },
+    "une émotion": {
+      "en": "an emotion",
+      "ar": "إحساس"
+    },
+    "L’art de l’essence": {
+      "en": "The art of essence",
+      "ar": "فنّ الجوهر"
+    },
+    "Des essences rares, un savoir-faire intemporel. Découvrez l’univers ODYS.": {
+      "en": "Rare essences, timeless craft. Discover the world of ODYS.",
+      "ar": "خلاصات نادرة وحرفة لا يطويها الزمن. اكتشف عالم أوديس."
+    },
+    "Oud & Boukhour": {
+      "en": "Oud &amp; Boukhour",
+      "ar": "العود والبخور"
+    },
+    "Le bois": {
+      "en": "The wood",
+      "ar": "الخشب"
+    },
+    "avant le parfum": {
+      "en": "before the perfume",
+      "ar": "قبل العطر"
+    },
+    "Vendus au gramme, pesés devant vous": {
+      "en": "Sold by the gram, weighed in front of you",
+      "ar": "يُباع بالغرام ويُوزن أمامك"
+    },
+    "Oud, boukhour et encens, vendus au gramme.": {
+      "en": "Oud, boukhour and incense, sold by the gram.",
+      "ar": "عود وبخور ولبان، تُباع بالغرام."
+    },
+    "Découvrir l'oud": {
+      "en": "Discover the oud",
+      "ar": "اكتشف العود"
+    },
+    "Flacon ODYS Parfum 01 L'Icône et son coffret crème, sur marbre": {
+      "en": "ODYS Parfum 01 L'Icône bottle and its cream box, on marble",
+      "ar": "قارورة أوديس بارفان 01 لِيكون وعلبتها الكريمية، على الرخام"
+    },
+    "Livraison 20 DH Casa · 30 DH Maroc · Gratuite dès 300 DH": {
+      "en": "Delivery 20 DH Casablanca · 30 DH Morocco · Free from 300 DH",
+      "ar": "التوصيل 20 درهمًا بالدار البيضاء · 30 درهمًا في المغرب · مجانًا ابتداءً من 300 درهم"
+    },
+    "Paiement à la livraison disponible partout au Maroc": {
+      "en": "Cash on delivery available anywhere in Morocco",
+      "ar": "الدفع عند الاستلام متاح في كل أنحاء المغرب"
+    },
+    "Extrait de parfum · Concentration exceptionnelle": {
+      "en": "Extrait de parfum · Exceptional concentration",
+      "ar": "خلاصة عطرية · تركيز استثنائي"
+    },
+    "Élaboré au Maroc · Extrait de parfum 18–20 % concentré": {
+      "en": "Made in Morocco · Extrait de parfum, 18–20 % concentrated",
+      "ar": "صناعة مغربية · خلاصة عطرية بتركيز 18–20٪"
+    },
+    "Élaboré au Maroc · À partir de 39 DH": {
+      "en": "Made in Morocco · From 39 DH",
+      "ar": "صناعة مغربية · ابتداءً من 39 درهمًا"
+    },
+    "Oud naturel · Vendu au gramme · Longévité 8h+": {
+      "en": "Natural oud · Sold by the gram · Lasts 8h+",
+      "ar": "عود طبيعي · يُباع بالغرام · يدوم أكثر من 8 ساعات"
+    },
+    "Coffrets prêts à offrir · Duo &amp; Trio": {
+      "en": "Gift sets ready to offer · Duo &amp; Trio",
+      "ar": "علب هدايا جاهزة · ثنائية وثلاثية"
+    },
+    "Livraison 24–48h · Retours 14 jours": {
+      "en": "Delivery in 24–48h · Returns within 14 days",
+      "ar": "التوصيل في 24–48 ساعة · الإرجاع خلال 14 يومًا"
+    },
+    "Fermer le bandeau d'annonces": {
+      "en": "Close the announcement bar",
+      "ar": "إغلاق شريط الإعلانات"
+    },
+    "Livraison": {
+      "en": "Delivery",
+      "ar": "التوصيل"
+    },
+    "De l'oud à l'essence : une goutte précieuse rejoint le\n    parfum ODYS.": {
+      "en": "From oud to essence: a precious drop joins the ODYS fragrance.",
+      "ar": "من العود إلى الجوهر: قطرة ثمينة تنضمّ إلى عطر أوديس."
+    },
+    "Occasion": {
+      "en": "Occasion",
+      "ar": "المناسبة"
+    },
+    "Intensité": {
+      "en": "Intensity",
+      "ar": "القوة"
+    },
+    "Pyramide de l'inspiration": {
+      "en": "Pyramid of the inspiration",
+      "ar": "هرم العطر المُلهِم"
+    },
+    "Offrir à quelqu'un": {
+      "en": "Offer it to someone",
+      "ar": "أهدِه لشخص عزيز"
+    },
+    "Instructions d'utilisation": {
+      "en": "Instructions for use",
+      "ar": "طريقة الاستعمال"
+    },
+    "Découvrez notre collection de parfums d'inspiration luxe": {
+      "en": "Discover our collection of luxury-inspired fragrances",
+      "ar": "اكتشف مجموعتنا من العطور المستوحاة من الفخامة"
+    },
+    "+2 points à l'inscription · 1 pt = 100 DH": {
+      "en": "+2 points when you sign up · 1 pt = 100 DH",
+      "ar": "نقطتان عند التسجيل · 1 نقطة = 100 درهم"
+    },
+    "La référence figure sur l'email de confirmation — neuf lettres, par exemple": {
+      "en": "The reference is on the confirmation email — nine letters, for example",
+      "ar": "رقم الطلب موجود في رسالة التأكيد — تسعة أحرف، مثلًا"
+    },
+    "Indiquez l'adresse e-mail de votre compte. Vous recevrez un lien\n        temporaire pour choisir un nouveau mot de passe.": {
+      "en": "Give the email address of your account. You will receive a temporary link to choose a new password.",
+      "ar": "أدخل البريد الإلكتروني لحسابك. ستتوصّل برابط مؤقت لاختيار كلمة سر جديدة."
+    },
+    "C'est envoyé.": {
+      "en": "It has been sent.",
+      "ar": "تم الإرسال."
+    },
+    "Essayez un nom de parfum, une note olfactive, ou l'inspiration qui vous plaît.": {
+      "en": "Try a fragrance name, an olfactory note, or the inspiration you like.",
+      "ar": "جرّب اسم عطر أو نفحة أو مصدر الإلهام الذي يعجبك."
+    },
+    "Cette page s'est évaporée.": {
+      "en": "This page has evaporated.",
+      "ar": "هذه الصفحة تبخّرت."
+    },
+    "Le lien est peut-être ancien, ou l'adresse mal recopiée. Voici par où continuer.": {
+      "en": "The link may be old, or the address mistyped. Here is where to go on.",
+      "ar": "قد يكون الرابط قديمًا أو العنوان غير صحيح. من هنا يمكنك المتابعة."
+    },
+    "← Retour à l'accueil": {
+      "en": "← Back to home",
+      "ar": "← العودة إلى الصفحة الرئيسية"
+    },
+    "Rien dans ce rayon pour cette\n        famille. Changez l'un ou l'autre.": {
+      "en": "Nothing in this department for this family. Change one or the other.",
+      "ar": "لا شيء في هذا القسم لهذه العائلة. غيّر أحدهما."
+    },
+    "L'inspiration du luxe, le prix juste": {
+      "en": "The inspiration of luxury, at a fair price",
+      "ar": "وحي الفخامة بثمن عادل"
+    },
+    "Concentration exceptionnelle": {
+      "en": "Exceptional concentration",
+      "ar": "تركيز استثنائي"
+    },
+    "18–20 % de concentré, l'équivalent d'un Eau de Parfum. Tenue mesurée 7 à 9 heures.": {
+      "en": "18–20 % concentrate, the equivalent of an Eau de Parfum. Measured hold: 7 to 9 hours.",
+      "ar": "تركيز 18–20٪، أي ما يعادل ماء عطر. ثبات مُقاس من 7 إلى 9 ساعات."
+    },
+    "Élaboré au Maroc": {
+      "en": "Made in Morocco",
+      "ar": "صناعة مغربية"
+    },
+    "Notre coût d'achat plus une marge fixe. Le prix suit les récoltes, sans opacité.": {
+      "en": "Our purchase cost plus a fixed margin. The price follows the harvests, with nothing hidden.",
+      "ar": "ثمن شرائنا زائد هامش ثابت. الثمن يتبع المواسم، بدون أي خفايا."
+    },
+    "Flacon d'huile d'oud ambrée au bouchon doré": {
+      "en": "Bottle of amber oud oil with a golden cap",
+      "ar": "قارورة زيت عود عنبري بغطاء ذهبي"
+    },
+    "100 DH dépensés = 1 point. À 15 points, 5 g d'oud ou un coffret offert.": {
+      "en": "100 DH spent = 1 point. At 15 points, 5 g of oud or a gift set offered.",
+      "ar": "100 درهم = نقطة واحدة. عند 15 نقطة، 5 غرامات من العود أو علبة هدية."
+    },
+    "La page que vous recherchez n'existe pas ou a été déplacée.": {
+      "en": "The page you are looking for does not exist or has been moved.",
+      "ar": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها."
+    }
+  },
+  "autres_domaines": {
+    "ShopThemeActions": {
+      "Cart": {
+        "en": "Cart",
+        "ar": "السلّة"
+      },
+      "Sign in": {
+        "en": "Sign in",
+        "ar": "تسجيل الدخول"
+      },
+      "Sign out": {
+        "en": "Sign out",
+        "ar": "تسجيل الخروج"
+      },
+      "Search": {
+        "en": "Search",
+        "ar": "بحث"
+      },
+      "Add to cart": {
+        "en": "Add to cart",
+        "ar": "أضف إلى السلّة"
+      },
+      "Continue shopping": {
+        "en": "Continue shopping",
+        "ar": "متابعة التسوّق"
+      },
+      "Proceed to checkout": {
+        "en": "Proceed to checkout",
+        "ar": "إتمام الطلب"
+      }
+    },
+    "ShopThemeCustomeraccount": {
+      "Log in to your customer account": {
+        "en": "Log in to your customer account",
+        "ar": "ادخل إلى حسابك"
+      },
+      "View my customer account": {
+        "en": "View my customer account",
+        "ar": "عرض حسابي"
+      },
+      "Log me out": {
+        "en": "Log me out",
+        "ar": "تسجيل الخروج"
+      }
     }
   }
 }
