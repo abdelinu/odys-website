@@ -36,11 +36,15 @@
 
   {* La barre de livraison offerte. Elle dit ce qui manque, pas un
      pourcentage : « encore 120 DH » se comprend sans calcul. *}
-  <div class="ot-liv" id="odysTiroirLiv" data-seuil="{$odysSeuil|intval}">
+  {* Les deux phrases sont ecrites ici, donc traduites comme le reste : le
+     script les recopiait en francais, et le tiroir parlait francais sur
+     une page arabe. Il remplace %d par ce qui manque. *}
+  <div class="ot-liv" id="odysTiroirLiv" data-seuil="{$odysSeuil|intval}"
+       data-mot-reste="{l s='Encore %montant% DH et la livraison est offerte' d='Shop.Theme.Odys'}"
+       data-mot-offerte="{l s='Livraison offerte' d='Shop.Theme.Odys'}">
     <p class="ot-liv-mot" id="odysTiroirLivMot">
-      {if $odysTotalPanier <= 0}Livraison offerte dès {$odysSeuil|intval} DH
-      {elseif $odysReste > 0}Encore {$odysReste|intval} DH et la livraison est offerte
-      {else}Livraison offerte{/if}
+      {if $odysReste > 0}{l s='Encore %montant% DH et la livraison est offerte' sprintf=['%montant%' => $odysReste|intval] d='Shop.Theme.Odys'}
+      {else}{l s='Livraison offerte' d='Shop.Theme.Odys'}{/if}
     </p>
     <div class="ot-liv-bar" role="progressbar" aria-valuemin="0"
          aria-valuemax="{$odysSeuil|intval}"

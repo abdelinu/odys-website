@@ -1622,6 +1622,54 @@
         <source>La page que vous recherchez n'existe pas ou a été déplacée.</source>
         <target>الصفحة التي تبحث عنها غير موجودة أو تم نقلها.</target>
       </trans-unit>
+      <trans-unit id="401" resname="Nos collections">
+        <source>Nos collections</source>
+        <target>مجموعاتنا</target>
+      </trans-unit>
+      <trans-unit id="402" resname="Quelle fragrance vous correspond ?">
+        <source>Quelle fragrance vous correspond ?</source>
+        <target>أي عطر يناسبك؟</target>
+      </trans-unit>
+      <trans-unit id="403" resname="Offre">
+        <source>Offre</source>
+        <target>عرض</target>
+      </trans-unit>
+      <trans-unit id="404" resname="Format">
+        <source>Format</source>
+        <target>الحجم</target>
+      </trans-unit>
+      <trans-unit id="405" resname="Quantité">
+        <source>Quantité</source>
+        <target>الكمية</target>
+      </trans-unit>
+      <trans-unit id="406" resname="Retours sous 14 jours">
+        <source>Retours sous 14 jours</source>
+        <target>الإرجاع خلال 14 يومًا</target>
+      </trans-unit>
+      <trans-unit id="407" resname="unité">
+        <source>unité</source>
+        <target>وحدة</target>
+      </trans-unit>
+      <trans-unit id="408" resname="Cette sélection est vide pour le moment.">
+        <source>Cette sélection est vide pour le moment.</source>
+        <target>هذا الاختيار فارغ حاليًا.</target>
+      </trans-unit>
+      <trans-unit id="409" resname="Choisissez votre format">
+        <source>Choisissez votre format</source>
+        <target>اختر الحجم</target>
+      </trans-unit>
+      <trans-unit id="410" resname="Encore %montant% DH et la livraison est offerte">
+        <source>Encore %montant% DH et la livraison est offerte</source>
+        <target>باقي %montant% درهمًا ويصبح التوصيل مجانيًا</target>
+      </trans-unit>
+      <trans-unit id="411" resname="Une maison de parfum née de la rencontre entre l'élégance contemporaine et l'âme du Maroc. Élaboré à Casablanca, avec passion.">
+        <source>Une maison de parfum née de la rencontre entre l'élégance contemporaine et l'âme du Maroc. Élaboré à Casablanca, avec passion.</source>
+        <target>دار عطور وُلدت من لقاء الأناقة المعاصرة بروح المغرب. تُصنع بالدار البيضاء، بشغف.</target>
+      </trans-unit>
+      <trans-unit id="412" resname="Parfums">
+        <source>Parfums</source>
+        <target>العطور</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -103,7 +103,7 @@
          Rien n'est inventé ici : la pastille ne paraît que si la boutique a
          réellement posé un prix spécial ou marqué le produit comme nouveau. *}
       {if $product.has_discount}
-        <span class="p-flag p-flag-promo">{if $product.discount_percentage}{$product.discount_percentage|escape:'html':'UTF-8'}{else}Offre{/if}</span>
+        <span class="p-flag p-flag-promo">{if $product.discount_percentage}{$product.discount_percentage|escape:'html':'UTF-8'}{else}{l s='Offre' d='Shop.Theme.Odys'}{/if}</span>
       {elseif isset($product.flags.new)}
         <span class="p-flag p-flag-new">{$product.flags.new.label|escape:'html':'UTF-8'}</span>
       {/if}
@@ -245,7 +245,7 @@
        « 89 DH · 50 ml ». Le format reste annoncé sous le nom du produit. *}
     {if $combinations}
     <div class="vol-sel" role="group" aria-labelledby="vol-sel-label">
-      <div class="vol-lbl" id="vol-sel-label">{if $combinations}Choisissez votre format{else}Format{/if}</div>
+      <div class="vol-lbl" id="vol-sel-label">{if $combinations}{l s='Choisissez votre format' d='Shop.Theme.Odys'}{else}{l s='Format' d='Shop.Theme.Odys'}{/if}</div>
       <div class="vol-cards" id="volCards" role="radiogroup" aria-label="{l s='Format du parfum' d='Shop.Theme.Odys'}">
         {* Les formats vendables du produit. PrestaShop appelle cela des
            declinaisons : une par volume, chacune avec son prix et son
@@ -449,7 +449,7 @@
 
     {* CTA — EAA: quantity labelled, button descriptive *}
     <div class="cta-row">
-      <div class="qty" role="group" aria-label="{if isset($product.unity) && $product.unity}Grammes{else}Quantité{/if}">
+      <div class="qty" role="group" aria-label="{if isset($product.unity) && $product.unity}Grammes{else}{l s='Quantité' d='Shop.Theme.Odys'}{/if}">
         <button data-action="chg-qty" data-delta="-1"
                 aria-label="{l s='Diminuer la quantité' d='Shop.Theme.Odys'}">−</button>
         {* typing the number is quicker than pressing + eleven times, and on a
@@ -458,7 +458,7 @@
         <input class="qty-v" id="qtyV" type="number" inputmode="numeric"
                min="1" step="1" autocomplete="off"
                value="{if isset($product.unity) && $product.unity}5{else}1{/if}"
-               aria-label="{if isset($product.unity) && $product.unity}Grammes{else}Quantité{/if}"/>
+               aria-label="{if isset($product.unity) && $product.unity}Grammes{else}{l s='Quantité' d='Shop.Theme.Odys'}{/if}"/>
         <button data-action="chg-qty" data-delta="1"
                 aria-label="{l s='Augmenter la quantité' d='Shop.Theme.Odys'}">+</button>
       </div>
@@ -532,10 +532,10 @@
 
     {* Services — discreet line icons, the same family as the header *}
     <ul class="svc-grid" aria-label="{l s='Nos services' d='Shop.Theme.Odys'}" role="list">
-      <li class="svc" role="listitem"><span class="svc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 7v5c0 4.4 3.2 7.6 8 9 4.8-1.4 8-4.6 8-9V7l-8-4Z"/><path d="m9.4 11.8 1.9 1.9 3.5-3.6"/></svg></span>{assign var='odysSvc1' value=Configuration::get('ODYS_SVC_1')}{if $odysSvc1}{$odysSvc1|escape:'html':'UTF-8'}{else}Élaboré au Maroc{/if}</li>
-      <li class="svc" role="listitem"><span class="svc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M7 15h3"/></svg></span>{assign var='odysSvc2' value=Configuration::get('ODYS_SVC_2')}{if $odysSvc2}{$odysSvc2|escape:'html':'UTF-8'}{else}Paiement à la livraison{/if}</li>
-      <li class="svc" role="listitem"><span class="svc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 7h10v9H3z"/><path d="M13 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg></span>{assign var='odysSvc3' value=Configuration::get('ODYS_SVC_3')}{if $odysSvc3}{$odysSvc3|escape:'html':'UTF-8'}{else}Livraison 24–48h{/if}</li>
-      <li class="svc" role="listitem"><span class="svc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4v4h4"/></svg></span>{assign var='odysSvc4' value=Configuration::get('ODYS_SVC_4')}{if $odysSvc4}{$odysSvc4|escape:'html':'UTF-8'}{else}Retours sous 14 jours{/if}</li>
+      <li class="svc" role="listitem"><span class="svc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 7v5c0 4.4 3.2 7.6 8 9 4.8-1.4 8-4.6 8-9V7l-8-4Z"/><path d="m9.4 11.8 1.9 1.9 3.5-3.6"/></svg></span>{assign var='odysSvc1' value=Configuration::get('ODYS_SVC_1')}{if $odysSvc1}{$odysSvc1|escape:'html':'UTF-8'}{else}{l s='Élaboré au Maroc' d='Shop.Theme.Odys'}{/if}</li>
+      <li class="svc" role="listitem"><span class="svc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M7 15h3"/></svg></span>{assign var='odysSvc2' value=Configuration::get('ODYS_SVC_2')}{if $odysSvc2}{$odysSvc2|escape:'html':'UTF-8'}{else}{l s='Paiement à la livraison' d='Shop.Theme.Odys'}{/if}</li>
+      <li class="svc" role="listitem"><span class="svc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 7h10v9H3z"/><path d="M13 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg></span>{assign var='odysSvc3' value=Configuration::get('ODYS_SVC_3')}{if $odysSvc3}{$odysSvc3|escape:'html':'UTF-8'}{else}{l s='Livraison 24–48h' d='Shop.Theme.Odys'}{/if}</li>
+      <li class="svc" role="listitem"><span class="svc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12a8 8 0 1 0 2.6-5.9"/><path d="M4 4v4h4"/></svg></span>{assign var='odysSvc4' value=Configuration::get('ODYS_SVC_4')}{if $odysSvc4}{$odysSvc4|escape:'html':'UTF-8'}{else}{l s='Retours sous 14 jours' d='Shop.Theme.Odys'}{/if}</li>
     </ul>
 
     {* Accordion — EAA: button[aria-expanded] *}

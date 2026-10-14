@@ -1622,6 +1622,54 @@
         <source>La page que vous recherchez n'existe pas ou a été déplacée.</source>
         <target>The page you are looking for does not exist or has been moved.</target>
       </trans-unit>
+      <trans-unit id="401" resname="Nos collections">
+        <source>Nos collections</source>
+        <target>Our collections</target>
+      </trans-unit>
+      <trans-unit id="402" resname="Quelle fragrance vous correspond ?">
+        <source>Quelle fragrance vous correspond ?</source>
+        <target>Which fragrance suits you?</target>
+      </trans-unit>
+      <trans-unit id="403" resname="Offre">
+        <source>Offre</source>
+        <target>Offer</target>
+      </trans-unit>
+      <trans-unit id="404" resname="Format">
+        <source>Format</source>
+        <target>Size</target>
+      </trans-unit>
+      <trans-unit id="405" resname="Quantité">
+        <source>Quantité</source>
+        <target>Quantity</target>
+      </trans-unit>
+      <trans-unit id="406" resname="Retours sous 14 jours">
+        <source>Retours sous 14 jours</source>
+        <target>Returns within 14 days</target>
+      </trans-unit>
+      <trans-unit id="407" resname="unité">
+        <source>unité</source>
+        <target>unit</target>
+      </trans-unit>
+      <trans-unit id="408" resname="Cette sélection est vide pour le moment.">
+        <source>Cette sélection est vide pour le moment.</source>
+        <target>This selection is empty for now.</target>
+      </trans-unit>
+      <trans-unit id="409" resname="Choisissez votre format">
+        <source>Choisissez votre format</source>
+        <target>Choose your size</target>
+      </trans-unit>
+      <trans-unit id="410" resname="Encore %montant% DH et la livraison est offerte">
+        <source>Encore %montant% DH et la livraison est offerte</source>
+        <target>Only %montant% DH more for free delivery</target>
+      </trans-unit>
+      <trans-unit id="411" resname="Une maison de parfum née de la rencontre entre l'élégance contemporaine et l'âme du Maroc. Élaboré à Casablanca, avec passion.">
+        <source>Une maison de parfum née de la rencontre entre l'élégance contemporaine et l'âme du Maroc. Élaboré à Casablanca, avec passion.</source>
+        <target>A perfume house born of the meeting between contemporary elegance and the soul of Morocco. Made in Casablanca, with passion.</target>
+      </trans-unit>
+      <trans-unit id="412" resname="Parfums">
+        <source>Parfums</source>
+        <target>Fragrances</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -17,8 +17,7 @@
           </span>
         </a>
         {assign var='odysBlurb' value=Configuration::get('ODYS_FOOTER_BLURB')}
-        <p>{if $odysBlurb}{$odysBlurb|escape:'html':'UTF-8'}{else}Une maison de parfum née de la rencontre entre l'élégance
-          contemporaine et l'âme du Maroc. Élaboré à Casablanca, avec passion.{/if}</p>
+        <p>{if $odysBlurb}{assign var='odysBlurbT' value={l s=$odysBlurb d='Shop.Theme.Odys'}}}{$odysBlurbT|escape:'html':'UTF-8'}{else}{l s='Une maison de parfum née de la rencontre entre l\'élégance contemporaine et l\'âme du Maroc. Élaboré à Casablanca, avec passion.' d='Shop.Theme.Odys'}{/if}</p>
 
         <div style="display:flex;gap:10px;margin-top:20px">
           {assign var='odysSocialInstagram' value=Configuration::get('ODYS_INSTAGRAM')}{if $odysSocialInstagram}<a href="{$odysSocialInstagram}"

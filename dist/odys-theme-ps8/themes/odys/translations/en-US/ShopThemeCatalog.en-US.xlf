@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr-FR" target-language="en-US"
+        datatype="plaintext" original="themes/odys">
+    <body>
+      <trans-unit id="1" resname="Relevance">
+        <source>Relevance</source>
+        <target>Relevance</target>
+      </trans-unit>
+      <trans-unit id="2" resname="Name, A to Z">
+        <source>Name, A to Z</source>
+        <target>Name, A to Z</target>
+      </trans-unit>
+      <trans-unit id="3" resname="Name, Z to A">
+        <source>Name, Z to A</source>
+        <target>Name, Z to A</target>
+      </trans-unit>
+      <trans-unit id="4" resname="Price, low to high">
+        <source>Price, low to high</source>
+        <target>Price, low to high</target>
+      </trans-unit>
+      <trans-unit id="5" resname="Price, high to low">
+        <source>Price, high to low</source>
+        <target>Price, high to low</target>
+      </trans-unit>
+      <trans-unit id="6" resname="Products">
+        <source>Products</source>
+        <target>Products</target>
+      </trans-unit>
+      <trans-unit id="7" resname="Search">
+        <source>Search</source>
+        <target>Search</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

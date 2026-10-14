@@ -152,9 +152,12 @@
       ? parseFloat(String(panier.subtotals.products.amount || 0)) : 0;
     if (bloc && seuil > 0) {
       var reste = Math.ceil(seuil - total);
+      /* Les deux phrases viennent du gabarit, donc traduites comme le
+         reste : ecrites ici, le tiroir parlait francais sur /ar/. */
+      var motReste = bloc.dataset.motReste || 'Encore %montant% DH';
+      var motOfferte = bloc.dataset.motOfferte || '';
       texte(document.getElementById('odysTiroirLivMot'),
-        reste > 0 ? 'Encore ' + reste + ' DH et la livraison est offerte'
-                  : 'Livraison offerte');
+        reste > 0 ? motReste.replace('%montant%', reste) : motOfferte);
       var fill = document.getElementById('odysTiroirLivFill');
       if (fill) { fill.style.width = Math.min(100, (total / seuil) * 100) + '%'; }
       var barre = bloc.querySelector('[role="progressbar"]');

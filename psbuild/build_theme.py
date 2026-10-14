@@ -1127,8 +1127,9 @@ if prod_tpl.exists():
     must(n == 1, "vol-cards: real PrestaShop combinations, priced per format")
 
     # le libelle du selecteur
-    OLD_LBL = "{if $product.combinations}Choisissez votre format{else}Format{/if}"
-    NEW_LBL = "{if $combinations}Choisissez votre format{else}Format{/if}"
+    # le gabarit porte maintenant des cles de traduction : l ancre suit
+    OLD_LBL = "{if $product.combinations}{l s='Choisissez votre format' d='Shop.Theme.Odys'}{else}{l s='Format' d='Shop.Theme.Odys'}{/if}"
+    NEW_LBL = "{if $combinations}{l s='Choisissez votre format' d='Shop.Theme.Odys'}{else}{l s='Format' d='Shop.Theme.Odys'}{/if}"
     pt, n = pt.replace(OLD_LBL, NEW_LBL), pt.count(OLD_LBL)
     must(n == 1, "vol-cards: the label follows the real combinations")
 

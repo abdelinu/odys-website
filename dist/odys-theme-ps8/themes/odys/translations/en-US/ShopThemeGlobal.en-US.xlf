@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr-FR" target-language="en-US"
+        datatype="plaintext" original="themes/odys">
+    <body>
+      <trans-unit id="1" resname="Get our latest news and special sales">
+        <source>Get our latest news and special sales</source>
+        <target>Get our latest news and special sales</target>
+      </trans-unit>
+      <trans-unit id="2" resname="Your email address">
+        <source>Your email address</source>
+        <target>Your email address</target>
+      </trans-unit>
+      <trans-unit id="3" resname="Subscribe">
+        <source>Subscribe</source>
+        <target>Subscribe</target>
+      </trans-unit>
+      <trans-unit id="4" resname="Newsletter">
+        <source>Newsletter</source>
+        <target>Newsletter</target>
+      </trans-unit>
+      <trans-unit id="5" resname="Sort by:">
+        <source>Sort by:</source>
+        <target>Sort by:</target>
+      </trans-unit>
+      <trans-unit id="6" resname="Sort by selection">
+        <source>Sort by selection</source>
+        <target>Sort by selection</target>
+      </trans-unit>
+      <trans-unit id="7" resname="Close">
+        <source>Close</source>
+        <target>Close</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

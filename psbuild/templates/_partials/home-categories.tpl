@@ -16,9 +16,9 @@
     {assign var='odysCollEyebrow' value=Configuration::get('ODYS_COLL_EYEBROW')}
     {assign var='odysCollTitle' value=Configuration::get('ODYS_COLL_TITLE')}
     {assign var='odysCollSub' value=Configuration::get('ODYS_COLL_SUB')}
-    <p class="nv-eyebrow">{if $odysCollEyebrow}{$odysCollEyebrow|escape:'html':'UTF-8'}{else}Nos collections{/if}</p>
-    <h2 class="nv-h2" id="nv-fam-title">{if $odysCollTitle}{$odysCollTitle|escape:'html':'UTF-8'}{else}Trouvez votre ODYS{/if}</h2>
-    <p class="nv-sub">{if $odysCollSub}{$odysCollSub|escape:'html':'UTF-8'}{else}Quelle fragrance vous correspond ?{/if}</p>
+    <p class="nv-eyebrow">{if $odysCollEyebrow}{$odysCollEyebrow|escape:'html':'UTF-8'}{else}{l s='Nos collections' d='Shop.Theme.Odys'}{/if}</p>
+    <h2 class="nv-h2" id="nv-fam-title">{if $odysCollTitle}{$odysCollTitle|escape:'html':'UTF-8'}{else}{l s='Trouvez votre ODYS' d='Shop.Theme.Odys'}{/if}</h2>
+    <p class="nv-sub">{if $odysCollSub}{$odysCollSub|escape:'html':'UTF-8'}{else}{l s='Quelle fragrance vous correspond ?' d='Shop.Theme.Odys'}{/if}</p>
 
     <div class="nv-fam-row">
       <ul class="nv-notes" role="list">

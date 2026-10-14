@@ -3,7 +3,7 @@
 {block name='content'}
 <div style="max-width:1280px;margin:0 auto;padding:48px max(20px,calc(52px + var(--safe-l))) 80px">
   <h1 style="font-family:var(--serif);font-size:28px;font-weight:500;margin-bottom:20px">
-    {if isset($searchQuery) && $searchQuery}Résultats pour « {$searchQuery|escape:'html':'UTF-8'} »{else}Rechercher{/if}
+    {if isset($searchQuery) && $searchQuery}Résultats pour « {$searchQuery|escape:'html':'UTF-8'} »{else}{l s='Rechercher' d='Shop.Theme.Odys'}{/if}
   </h1>
   <form action="{$urls.pages.search}" method="get" style="display:flex;gap:10px;max-width:500px;margin-bottom:36px">
     <input type="text" name="s" value="{if isset($searchQuery)}{$searchQuery|escape:'html':'UTF-8'}{/if}"

@@ -47,7 +47,7 @@
           {foreach from=$odysOnglets key=odysOngCle item=odysOngNom}
             <button class="og" type="button" data-action="filter-onglet"
                     data-onglet="{$odysOngCle|escape:'html':'UTF-8'}"
-                    aria-pressed="false">{$odysOngNom|escape:'html':'UTF-8'}</button>
+                    aria-pressed="false">{l s=$odysOngNom d='Shop.Theme.Odys'}</button>
           {/foreach}
         </div>
       {/if}
@@ -79,7 +79,7 @@
           {foreach from=$odysFamNomsAcc key=odysFamCleA item=odysFamNomA}
             {if $odysFamCleA|in_array:$odysFamsAcc}
               <button class="ff" type="button" data-action="filter-fam"
-                      data-fam="{$odysFamCleA}" aria-pressed="false">{$odysFamNomA}</button>
+                      data-fam="{$odysFamCleA}" aria-pressed="false">{l s=$odysFamNomA d='Shop.Theme.Odys'}</button>
             {/if}
           {/foreach}
         </div>

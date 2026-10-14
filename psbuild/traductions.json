@@ -1613,6 +1613,54 @@
     "La page que vous recherchez n'existe pas ou a été déplacée.": {
       "en": "The page you are looking for does not exist or has been moved.",
       "ar": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها."
+    },
+    "Nos collections": {
+      "en": "Our collections",
+      "ar": "مجموعاتنا"
+    },
+    "Quelle fragrance vous correspond ?": {
+      "en": "Which fragrance suits you?",
+      "ar": "أي عطر يناسبك؟"
+    },
+    "Offre": {
+      "en": "Offer",
+      "ar": "عرض"
+    },
+    "Format": {
+      "en": "Size",
+      "ar": "الحجم"
+    },
+    "Quantité": {
+      "en": "Quantity",
+      "ar": "الكمية"
+    },
+    "Retours sous 14 jours": {
+      "en": "Returns within 14 days",
+      "ar": "الإرجاع خلال 14 يومًا"
+    },
+    "unité": {
+      "en": "unit",
+      "ar": "وحدة"
+    },
+    "Cette sélection est vide pour le moment.": {
+      "en": "This selection is empty for now.",
+      "ar": "هذا الاختيار فارغ حاليًا."
+    },
+    "Choisissez votre format": {
+      "en": "Choose your size",
+      "ar": "اختر الحجم"
+    },
+    "Encore %montant% DH et la livraison est offerte": {
+      "en": "Only %montant% DH more for free delivery",
+      "ar": "باقي %montant% درهمًا ويصبح التوصيل مجانيًا"
+    },
+    "Une maison de parfum née de la rencontre entre l'élégance contemporaine et l'âme du Maroc. Élaboré à Casablanca, avec passion.": {
+      "en": "A perfume house born of the meeting between contemporary elegance and the soul of Morocco. Made in Casablanca, with passion.",
+      "ar": "دار عطور وُلدت من لقاء الأناقة المعاصرة بروح المغرب. تُصنع بالدار البيضاء، بشغف."
+    },
+    "Parfums": {
+      "en": "Fragrances",
+      "ar": "العطور"
     }
   },
   "autres_domaines": {
@@ -1658,6 +1706,66 @@
       "Log me out": {
         "en": "Log me out",
         "ar": "تسجيل الخروج"
+      }
+    },
+    "ShopThemeGlobal": {
+      "Get our latest news and special sales": {
+        "en": "Get our latest news and special sales",
+        "ar": "توصّل بجديدنا وبعروضنا الخاصة"
+      },
+      "Your email address": {
+        "en": "Your email address",
+        "ar": "بريدك الإلكتروني"
+      },
+      "Subscribe": {
+        "en": "Subscribe",
+        "ar": "اشترك"
+      },
+      "Newsletter": {
+        "en": "Newsletter",
+        "ar": "النشرة البريدية"
+      },
+      "Sort by:": {
+        "en": "Sort by:",
+        "ar": "ترتيب حسب:"
+      },
+      "Sort by selection": {
+        "en": "Sort by selection",
+        "ar": "اختيار الترتيب"
+      },
+      "Close": {
+        "en": "Close",
+        "ar": "إغلاق"
+      }
+    },
+    "ShopThemeCatalog": {
+      "Relevance": {
+        "en": "Relevance",
+        "ar": "الأنسب"
+      },
+      "Name, A to Z": {
+        "en": "Name, A to Z",
+        "ar": "الاسم، من أ إلى ي"
+      },
+      "Name, Z to A": {
+        "en": "Name, Z to A",
+        "ar": "الاسم، من ي إلى أ"
+      },
+      "Price, low to high": {
+        "en": "Price, low to high",
+        "ar": "الثمن، من الأدنى إلى الأعلى"
+      },
+      "Price, high to low": {
+        "en": "Price, high to low",
+        "ar": "الثمن، من الأعلى إلى الأدنى"
+      },
+      "Products": {
+        "en": "Products",
+        "ar": "المنتجات"
+      },
+      "Search": {
+        "en": "Search",
+        "ar": "بحث"
       }
     }
   }

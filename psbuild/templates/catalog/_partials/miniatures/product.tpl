@@ -32,7 +32,7 @@
        « on_sale » est une case à cocher du Back Office qui n'engage aucun
        prix : elle reste en dernier, et ne parle pas d'offre. *}
     {if $product.has_discount}
-      <span class="pcb pcb-promo">{if $product.discount_percentage}{$product.discount_percentage|escape:'html':'UTF-8'}{else}Offre{/if}</span>
+      <span class="pcb pcb-promo">{if $product.discount_percentage}{$product.discount_percentage|escape:'html':'UTF-8'}{else}{l s='Offre' d='Shop.Theme.Odys'}{/if}</span>
     {elseif $product.new}
       <span class="pcb pcb-new">{l s='Nouveau' d='Shop.Theme.Odys'}</span>
     {elseif $product.on_sale}
