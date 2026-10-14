@@ -171,10 +171,40 @@ def section_produits(prods):
     return chr(10).join(lignes) + chr(10)
 
 
+def section_pages(pages):
+    """Les pages CMS : titre, meta et contenu.
+
+    L'adresse (link_rewrite) ne bouge pas : une URL arabe tiendrait mal dans
+    un lien partage sur WhatsApp, et changer l'adresse d'une page deja
+    indexee se paie en visites perdues.
+    """
+    if not pages:
+        return ""
+    lignes = ['dire("");', 'dire("Pages");']
+    for id_cms, bloc_p in sorted(pages.items(), key=lambda kv: int(kv[0])):
+        for iso in ("en", "ar"):
+            part = bloc_p.get(iso) or {}
+            for colonne, cle_json in (("meta_title", "titre"),
+                                      ("meta_description", "meta"),
+                                      ("content", "contenu")):
+                valeur = part.get(cle_json)
+                if not valeur:
+                    continue
+                lignes.append(
+                    '$odysEtat = isset($odysLangues["%s"]) ? odysPoser("cms_lang",'
+                    ' "id_cms", %s, $odysLangues["%s"], $odysFr, "%s", %s)'
+                    ' : "langue absente";'
+                    % (iso, int(id_cms), iso, colonne, php(valeur)))
+                lignes.append('dire("  page %s %s (%s) : " . $odysEtat);'
+                              % (id_cms, colonne, iso))
+    return chr(10).join(lignes) + chr(10)
+
+
 def main():
     contenu = json.loads(CONTENU.read_text(encoding="utf-8"))
     corps = (ENTETE + section_categories(contenu.get("categories", {}))
-             + section_produits(contenu.get("produits", {})) + PIED)
+             + section_produits(contenu.get("produits", {}))
+             + section_pages(contenu.get("pages", {})) + PIED)
     SORTIE.parent.mkdir(parents=True, exist_ok=True)
     SORTIE.write_text(corps, encoding="utf-8")
     nc = sum(1 for b in contenu.get("categories", {}).values() for i in ("en", "ar") if b.get(i))
