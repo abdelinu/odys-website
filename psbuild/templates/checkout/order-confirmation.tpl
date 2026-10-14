@@ -20,21 +20,21 @@
 
   <section class="odys-confirm-top">
     <span class="odys-confirm-mark" aria-hidden="true">✓</span>
-    <h1 class="odys-confirm-h1">Merci, votre commande est confirmée</h1>
+    <h1 class="odys-confirm-h1">{l s='Merci, votre commande est confirmée' d='Shop.Theme.Odys'}</h1>
     <p class="odys-confirm-lede">
-      Rien n'est à régler maintenant. Vous paierez à la livraison.
+      {l s='Rien n\'est à régler maintenant. Vous paierez à la livraison.' d='Shop.Theme.Odys'}
     </p>
   </section>
 
   {* the reference is what guest tracking asks for; it has to be impossible
      to miss, not a line in a table at the bottom of the page *}
   <section class="odys-confirm-ref">
-    <span class="odys-confirm-reflabel">Votre référence</span>
+    <span class="odys-confirm-reflabel">{l s='Votre référence' d='Shop.Theme.Odys'}</span>
     <strong class="odys-confirm-refcode">{$order.details.reference}</strong>
     <p class="odys-confirm-refnote">
       Notez-la. Elle suffit à suivre votre colis
       {if isset($urls.pages.guest_tracking)}
-        — <a href="{$urls.pages.guest_tracking}">suivre ma commande</a>
+        — <a href="{$urls.pages.guest_tracking}">{l s='suivre ma commande' d='Shop.Theme.Odys'}</a>
       {/if}.
     </p>
   </section>
@@ -42,14 +42,14 @@
   <section class="odys-order-card">
     <dl class="odys-confirm-facts">
       <div>
-        <dt>À préparer pour la livraison</dt>
+        <dt>{l s='À préparer pour la livraison' d='Shop.Theme.Odys'}</dt>
         <dd class="odys-confirm-cash">{$order.totals.total.value}</dd>
       </div>
       {if $order.carrier.name}
-        <div><dt>Livraison</dt><dd>{$order.carrier.name}{if $order.carrier.delay} · {$order.carrier.delay}{/if}</dd></div>
+        <div><dt>{l s='Livraison' d='Shop.Theme.Odys'}</dt><dd>{$order.carrier.name}{if $order.carrier.delay} · {$order.carrier.delay}{/if}</dd></div>
       {/if}
       {if $order.addresses.delivery}
-        <div><dt>Adresse</dt>
+        <div><dt>{l s='Adresse' d='Shop.Theme.Odys'}</dt>
           <dd><address class="odys-order-address">{$order.addresses.delivery.formatted nofilter}</address></dd></div>
       {/if}
     </dl>
@@ -71,7 +71,7 @@
   </section>
 
   <section class="odys-order-card">
-    <h2 class="odys-order-h2">Votre commande</h2>
+    <h2 class="odys-order-h2">{l s='Votre commande' d='Shop.Theme.Odys'}</h2>
     <ul class="odys-order-lines">
       {foreach from=$order.products item=product}
         <li class="odys-order-line">
@@ -101,15 +101,15 @@
     </dl>
     <div class="odys-order-actions">
       {if $order.details.invoice_url}
-        <a class="btn-g" href="{$order.details.invoice_url}">Télécharger la facture</a>
+        <a class="btn-g" href="{$order.details.invoice_url}">{l s='Télécharger la facture' d='Shop.Theme.Odys'}</a>
       {/if}
-      <a class="btn-p" href="{$odysUrlParfums}">Continuer mes achats</a>
+      <a class="btn-p" href="{$odysUrlParfums}">{l s='Continuer mes achats' d='Shop.Theme.Odys'}</a>
     </div>
   </section>
 
   <section class="odys-order-help">
-    <h2 class="odys-order-h2">Une question sur cette commande ?</h2>
-    <p>Indiquez la référence <strong>{$order.details.reference}</strong>, nous retrouvons le colis tout de suite.</p>
+    <h2 class="odys-order-h2">{l s='Une question sur cette commande ?' d='Shop.Theme.Odys'}</h2>
+    <p>{l s='Indiquez la référence' d='Shop.Theme.Odys'} <strong>{$order.details.reference}</strong>{l s=', nous retrouvons le colis tout de suite.' d='Shop.Theme.Odys'}</p>
     {* La reference part avec le message. Sans elle, « indiquez la
        reference » demandait au client de recopier neuf caracteres a la
        main, depuis une page qu'il doit quitter pour ouvrir WhatsApp.

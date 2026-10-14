@@ -10,8 +10,8 @@
 {block name='content'}
 <div style="max-width:480px;margin:0 auto;padding:64px max(20px,32px) 80px">
   <div style="text-align:center;margin-bottom:36px">
-    <div style="font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--rose-deep);margin-bottom:10px">Espace Client</div>
-    <h1 style="font-family:var(--serif);font-size:30px;font-weight:500">Mot de passe oublié</h1>
+    <div style="font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--rose-deep);margin-bottom:10px">{l s='Espace Client' d='Shop.Theme.Odys'}</div>
+    <h1 style="font-family:var(--serif);font-size:30px;font-weight:500">{l s='Mot de passe oublié' d='Shop.Theme.Odys'}</h1>
   </div>
   <div style="background:var(--odys-surface);border:1px solid var(--border);border-radius:4px;padding:28px">
     <form action="{$urls.pages.password}" method="post">
@@ -19,17 +19,17 @@
         <div class="cf-err">{$erreur}</div>
       {/foreach}
       <p style="font-size:12px;line-height:1.8;color:var(--mid);margin-bottom:20px">
-        Indiquez l'adresse e-mail de votre compte. Vous recevrez un lien
-        temporaire pour choisir un nouveau mot de passe.
+        {l s='Indiquez l\'adresse e-mail de votre compte. Vous recevrez un lien
+        temporaire pour choisir un nouveau mot de passe.' d='Shop.Theme.Odys'}
       </p>
       <div class="cf" style="margin-bottom:20px">
-        <label for="email">Adresse e-mail *</label>
+        <label for="email">{l s='Adresse e-mail *' d='Shop.Theme.Odys'}</label>
         <input type="email" id="email" name="email" required maxlength="100" autocomplete="email"
                value="{if isset($smarty.post.email)}{$smarty.post.email|stripslashes|escape:'html':'UTF-8'}{/if}"
-               placeholder="votre@email.ma"/>
+               placeholder="{l s='votre@email.ma' d='Shop.Theme.Odys'}"/>
       </div>
       <button type="submit" name="submit" class="btn-p" style="width:100%;justify-content:center;padding:14px">
-        Envoyer le lien →
+        {l s='Envoyer le lien →' d='Shop.Theme.Odys'}
       </button>
     </form>
   </div>
@@ -42,15 +42,15 @@
      bloc de contact ne s'affiche pas si aucun numero n'est renseigne. *}
   <div style="margin-top:22px;text-align:center">
     <p style="font-size:12px;line-height:1.8;color:var(--mid);margin-bottom:10px">
-      Rien ne vous parvient&nbsp;? Écrivez-nous, nous rouvrons votre compte
-      avec vous.
+      {l s='Rien ne vous parvient&nbsp;? Écrivez-nous, nous rouvrons votre compte
+      avec vous.' d='Shop.Theme.Odys'}
     </p>
     {include file='_partials/contact-links.tpl' style='inline'
              subject="Bonjour ODYS, je n'arrive pas à reinitialiser mon mot de passe."}
   </div>
 
   <div style="margin-top:18px;text-align:center;font-size:12px;color:var(--mid)">
-    <a href="{$urls.pages.authentication}" style="color:var(--rose-deep)">← Retour à la connexion</a>
+    <a href="{$urls.pages.authentication}" style="color:var(--rose-deep)">{l s='← Retour à la connexion' d='Shop.Theme.Odys'}</a>
   </div>
 </div>
 {/block}

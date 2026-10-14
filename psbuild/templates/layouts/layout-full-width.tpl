@@ -194,17 +194,22 @@
    they open the terms. *}
 <body id="{$page.page_name}" class="{$page.page_name}{if $customer.is_logged} logged-in{/if}{if $isOud} oud{/if} lang-{$language.iso_code}"{if $odysAmbiance} data-ambiance="{$odysAmbiance|escape:'html':'UTF-8'}"{/if} role="document">
 
-  <a href="#main" class="skip-link">Aller au contenu principal</a>
+  <a href="#main" class="skip-link">{l s='Aller au contenu principal' d='Shop.Theme.Odys'}</a>
 
   {include file='_partials/announcement-bar.tpl'}
   {include file='_partials/header.tpl'}
   {include file='_partials/mobile-menu.tpl'}
+  {* Le panier qui s'ouvre sur le cote. Il existait depuis la maquette,
+     avec ses styles et son script, mais n'etait inclus nulle part : son
+     contenu venait d'un tableau JavaScript, pas de PrestaShop. Celui-ci
+     montre le vrai panier, rendu par le serveur. *}
+  {include file='_partials/cart-drawer.tpl'}
   {* No cart drawer: PrestaShop owns the cart, and a second panel with its
      own idea of the contents could only ever disagree with it. Adding to
      the cart confirms itself with a toast (see nuit.js). *}
   <div class="odys-toast" id="odysToast" role="status" aria-live="polite">
     <span id="odysToastMsg"></span>
-    <a href="{$urls.pages.cart}?action=show">Voir le panier</a>
+    <a href="{$urls.pages.cart}?action=show">{l s='Voir le panier' d='Shop.Theme.Odys'}</a>
   </div>
   {include file='_partials/modals.tpl'}
 
@@ -230,7 +235,7 @@
   {if $odysWa}
   <a href="https://wa.me/{$odysWa|escape:'url'}?text=Bonjour%20ODYS%20Parfums"
      class="wa-btn" target="_blank" rel="noopener noreferrer"
-     aria-label="Contacter ODYS Parfums sur WhatsApp">
+     aria-label="{l s='Contacter ODYS Parfums sur WhatsApp' d='Shop.Theme.Odys'}">
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.523 5.847L.057 23.882l6.174-1.44A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.518-5.16-1.42l-.37-.22-3.66.855.87-3.56-.24-.38A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
     </svg>

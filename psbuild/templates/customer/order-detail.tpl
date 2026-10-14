@@ -14,9 +14,9 @@
 
   <div class="odys-order-top">
     {if $customer.is_logged}
-      <a class="odys-order-back" href="{$urls.pages.history}">← Mes commandes</a>
+      <a class="odys-order-back" href="{$urls.pages.history}">{l s='← Mes commandes' d='Shop.Theme.Odys'}</a>
     {/if}
-    <div class="odys-order-eyebrow">Suivi de commande</div>
+    <div class="odys-order-eyebrow">{l s='Suivi de commande' d='Shop.Theme.Odys'}</div>
     <h1 class="odys-order-ref">{$order.details.reference}</h1>
 {* products_count counts order lines; two bottles of one perfume are
    two articles as far as the customer is concerned *}
@@ -33,7 +33,7 @@
 
   {* ── what is in the parcel ─────────────────────────────────────────── *}
   <section class="odys-order-card">
-    <h2 class="odys-order-h2">Votre commande</h2>
+    <h2 class="odys-order-h2">{l s='Votre commande' d='Shop.Theme.Odys'}</h2>
     <ul class="odys-order-lines">
       {foreach from=$order.products item=product}
         <li class="odys-order-line">
@@ -72,10 +72,10 @@
 
     <div class="odys-order-actions">
       {if $order.details.invoice_url}
-        <a class="btn-g" href="{$order.details.invoice_url}">Télécharger la facture</a>
+        <a class="btn-g" href="{$order.details.invoice_url}">{l s='Télécharger la facture' d='Shop.Theme.Odys'}</a>
       {/if}
       {if $order.details.reorder_url}
-        <a class="btn-p" href="{$order.details.reorder_url}">Commander à nouveau</a>
+        <a class="btn-p" href="{$order.details.reorder_url}">{l s='Commander à nouveau' d='Shop.Theme.Odys'}</a>
       {/if}
     </div>
   </section>
@@ -84,13 +84,13 @@
   <div class="odys-order-grid">
     {if $order.addresses.delivery}
       <section class="odys-order-card">
-        <h2 class="odys-order-h2">Livraison</h2>
+        <h2 class="odys-order-h2">{l s='Livraison' d='Shop.Theme.Odys'}</h2>
         <address class="odys-order-address">{$order.addresses.delivery.formatted nofilter}</address>
         {if $order.carrier.name}<div class="odys-order-note">{$order.carrier.name}</div>{/if}
       </section>
     {/if}
     <section class="odys-order-card">
-      <h2 class="odys-order-h2">Paiement</h2>
+      <h2 class="odys-order-h2">{l s='Paiement' d='Shop.Theme.Odys'}</h2>
       <div class="odys-order-note">{$order.details.payment}</div>
       <address class="odys-order-address">{$order.addresses.invoice.formatted nofilter}</address>
     </section>
@@ -98,7 +98,7 @@
 
   {if $order.details.gift_message}
     <section class="odys-order-card">
-      <h2 class="odys-order-h2">Message cadeau</h2>
+      <h2 class="odys-order-h2">{l s='Message cadeau' d='Shop.Theme.Odys'}</h2>
       <p class="odys-order-note">{$order.details.gift_message nofilter}</p>
     </section>
   {/if}
@@ -109,7 +109,7 @@
   {block name='order_messages'}
     {if $order.messages}
       <section class="odys-order-card">
-        <h2 class="odys-order-h2">Échanges</h2>
+        <h2 class="odys-order-h2">{l s='Échanges' d='Shop.Theme.Odys'}</h2>
         {foreach from=$order.messages item=message}
           <div class="odys-order-msg">
             <div class="odys-order-msg-meta">{$message.name} · {$message.message_date}</div>
@@ -137,9 +137,9 @@
      connecte, et la moderation passe avant la publication. *}
   {if $order.products}
     <section class="odys-order-card odys-order-avis">
-      <h2 class="odys-order-h2">Votre colis est arrivé ?</h2>
-      <p>Dites-nous ce que vous en pensez — votre avis aide les prochains à
-        choisir. Il est relu avant d'être publié.</p>
+      <h2 class="odys-order-h2">{l s='Votre colis est arrivé ?' d='Shop.Theme.Odys'}</h2>
+      <p>{l s='Dites-nous ce que vous en pensez — votre avis aide les prochains à
+        choisir. Il est relu avant d\'être publié.' d='Shop.Theme.Odys'}</p>
       <ul class="odys-avis-liens" role="list">
         {foreach from=$order.products item=product}
           <li><a href="{$product.url|escape:'html':'UTF-8'}#avis">Donner mon avis sur
@@ -150,8 +150,8 @@
   {/if}
 
   <section class="odys-order-help">
-    <h2 class="odys-order-h2">Une question sur cette commande ?</h2>
-    <p>Indiquez la référence <strong>{$order.details.reference}</strong>, nous retrouvons le colis tout de suite.</p>
+    <h2 class="odys-order-h2">{l s='Une question sur cette commande ?' d='Shop.Theme.Odys'}</h2>
+    <p>{l s='Indiquez la référence' d='Shop.Theme.Odys'} <strong>{$order.details.reference}</strong>{l s=', nous retrouvons le colis tout de suite.' d='Shop.Theme.Odys'}</p>
     {include file='_partials/contact-links.tpl'}
   </section>
 </div>

@@ -26,34 +26,34 @@
           <a href="{$odysUrlParfums}#fam-fresh">
             <span class="nv-note-img"><img src="{$urls.theme_assets}img/note-frais.webp" alt=""
               width="320" height="320" loading="lazy" decoding="async"/></span>
-            <span class="nv-note-lbl">Frais</span>
+            <span class="nv-note-lbl">{l s='Frais' d='Shop.Theme.Odys'}</span>
           </a>
         </li>
         <li class="nv-note">
           <a href="{$odysUrlParfums}#fam-oriental">
             <span class="nv-note-img"><img src="{$urls.theme_assets}img/note-oriental.webp" alt=""
               width="320" height="320" loading="lazy" decoding="async"/></span>
-            <span class="nv-note-lbl">Oriental</span>
+            <span class="nv-note-lbl">{l s='Oriental' d='Shop.Theme.Odys'}</span>
           </a>
         </li>
         <li class="nv-note">
           <a href="{$odysUrlParfums}#fam-sweet">
             <span class="nv-note-img"><img src="{$urls.theme_assets}img/note-sucre.webp" alt=""
               width="320" height="320" loading="lazy" decoding="async"/></span>
-            <span class="nv-note-lbl">Sucré</span>
+            <span class="nv-note-lbl">{l s='Sucré' d='Shop.Theme.Odys'}</span>
           </a>
         </li>
         <li class="nv-note">
           <a href="{$odysUrlParfums}#fam-oud">
             <span class="nv-note-img"><img src="{$urls.theme_assets}img/note-oud.webp" alt=""
               width="320" height="320" loading="lazy" decoding="async"/></span>
-            <span class="nv-note-lbl">Oud</span>
+            <span class="nv-note-lbl">{l s='Oud' d='Shop.Theme.Odys'}</span>
           </a>
         </li>
       </ul>
 
       <a href="{$odysUrlParfums}" class="nv-btn nv-btn-pill" data-nv-quiz-open>
-        Commencer le quiz <span class="arw" aria-hidden="true">&rarr;</span></a>
+        {l s='Commencer le quiz' d='Shop.Theme.Odys'} <span class="arw" aria-hidden="true">&rarr;</span></a>
     </div>
   </div>
 </section>

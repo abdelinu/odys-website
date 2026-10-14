@@ -9,19 +9,19 @@
   <div class="nv-pyr">
     <div class="nv-pyr-fig">
       <div class="nv-layer">
-        <p class="nv-layer-lbl"><b>Tête</b><span>Fraîcheur · Énergie</span></p>
+        <p class="nv-layer-lbl"><b>{l s='Tête' d='Shop.Theme.Odys'}</b><span>{l s='Fraîcheur · Énergie' d='Shop.Theme.Odys'}</span></p>
         <div class="nv-bands"><div class="nv-band nv-band-1">
           <img src="{$urls.theme_assets}img/pyr-tete.webp" alt="" width="600" height="220" loading="lazy" decoding="async"/>
         </div></div>
       </div>
       <div class="nv-layer">
-        <p class="nv-layer-lbl"><b>Cœur</b><span>Caractère · Émotion</span></p>
+        <p class="nv-layer-lbl"><b>Cœur</b><span>{l s='Caractère · Émotion' d='Shop.Theme.Odys'}</span></p>
         <div class="nv-bands"><div class="nv-band nv-band-2">
           <img src="{$urls.theme_assets}img/pyr-coeur.webp" alt="" width="600" height="220" loading="lazy" decoding="async"/>
         </div></div>
       </div>
       <div class="nv-layer">
-        <p class="nv-layer-lbl"><b>Fond</b><span>Profondeur · Signature</span></p>
+        <p class="nv-layer-lbl"><b>{l s='Fond' d='Shop.Theme.Odys'}</b><span>{l s='Profondeur · Signature' d='Shop.Theme.Odys'}</span></p>
         <div class="nv-bands"><div class="nv-band nv-band-3">
           <img src="{$urls.theme_assets}img/pyr-fond.webp" alt="" width="600" height="220" loading="lazy" decoding="async"/>
         </div></div>
@@ -29,11 +29,11 @@
     </div>
 
     <div class="nv-pyr-txt">
-      <p class="nv-eyebrow">Expérience olfactive</p>
-      <h2 class="nv-h2" id="nv-pyr-title">Une pyramide de senteurs</h2>
-      <p class="nv-lede">Chaque fragrance est une histoire, un voyage en trois temps :
-        fraîcheur, cœur et profondeur.</p>
-      <a href="{$odysUrlParfums}" class="nv-btn">Explorer les notes
+      <p class="nv-eyebrow">{l s='Expérience olfactive' d='Shop.Theme.Odys'}</p>
+      <h2 class="nv-h2" id="nv-pyr-title">{l s='Une pyramide de senteurs' d='Shop.Theme.Odys'}</h2>
+      <p class="nv-lede">{l s='Chaque fragrance est une histoire, un voyage en trois temps :
+        fraîcheur, cœur et profondeur.' d='Shop.Theme.Odys'}</p>
+      <a href="{$odysUrlParfums}" class="nv-btn">{l s='Explorer les notes' d='Shop.Theme.Odys'}
         <span class="arw" aria-hidden="true">&rarr;</span></a>
     </div>
   </div>
@@ -43,17 +43,14 @@
       <img src="{$urls.theme_assets}img/nuit-riad.webp" alt="" width="900" height="900"
            loading="lazy" decoding="async"/>
     </figure>
-    <p class="nv-eyebrow">Sur mesure</p>
-    <h2 class="nv-h2 nv-h2-sm">Composez votre ODYS</h2>
-    <p class="nv-sub">Un parfum, mille possibilités.</p>
-    <a href="{$odysUrlParfums}" class="nv-btn nv-btn-pill" data-nv-quiz-open>Commencer</a>
+    <p class="nv-eyebrow">{l s='Sur mesure' d='Shop.Theme.Odys'}</p>
+    <h2 class="nv-h2 nv-h2-sm">{l s='Composez votre ODYS' d='Shop.Theme.Odys'}</h2>
+    <p class="nv-sub">{l s='Un parfum, mille possibilités.' d='Shop.Theme.Odys'}</p>
+    <a href="{$odysUrlParfums}" class="nv-btn nv-btn-pill" data-nv-quiz-open>{l s='Commencer' d='Shop.Theme.Odys'}</a>
     <ul class="nv-crit" role="list">
-      <li><svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-        <path d="M16 5c0 6-7 7-7 13a7 7 0 0 0 14 0c0-6-7-7-7-13z"/></svg>Famille</li>
-      <li><svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-        <rect x="6" y="8" width="20" height="18" rx="1.5"/><path d="M6 13h20M11 5v6M21 5v6"/></svg>Occasion</li>
-      <li><svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-        <path d="M8 26v-6M14 26V16M20 26V12M26 26V6"/></svg>Intensité</li>
+      <li>{l s='Famille' d='Shop.Theme.Odys'}</li>
+      <li>{l s='Occasion' d='Shop.Theme.Odys'}</li>
+      <li>{l s='Intensité' d='Shop.Theme.Odys'}</li>
     </ul>
   </div>
 </section>

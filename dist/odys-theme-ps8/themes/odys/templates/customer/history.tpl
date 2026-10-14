@@ -12,9 +12,9 @@
 {block name='content'}
 <div class="odys-order">
   <div class="odys-order-top">
-    <a class="odys-order-back" href="{$urls.pages.my_account}">← Mon compte</a>
-    <div class="odys-order-eyebrow">Espace client</div>
-    <h1 class="odys-order-ref odys-order-ref--page">Mes commandes</h1>
+    <a class="odys-order-back" href="{$urls.pages.my_account}">{l s='← Mon compte' d='Shop.Theme.Odys'}</a>
+    <div class="odys-order-eyebrow">{l s='Espace client' d='Shop.Theme.Odys'}</div>
+    <h1 class="odys-order-ref odys-order-ref--page">{l s='Mes commandes' d='Shop.Theme.Odys'}</h1>
   </div>
 
   {if $orders}
@@ -41,13 +41,13 @@
       {/foreach}
     </ul>
     <p class="odys-hist-foot">
-      Pas de compte à portée de main ? <a href="{$urls.pages.guest_tracking}">Suivez une commande avec sa référence</a>.
+      {l s='Pas de compte à portée de main ?' d='Shop.Theme.Odys'} <a href="{$urls.pages.guest_tracking}">{l s='Suivez une commande avec sa référence' d='Shop.Theme.Odys'}</a>.
     </p>
   {else}
     <div class="odys-hist-empty">
-      <p class="odys-hist-empty-title">Aucune commande pour le moment</p>
-      <p class="odys-order-note">Votre première commande vous rapporte un point par 100 DH.</p>
-      <a href="{$odysUrlParfums}" class="btn-p">Découvrir la collection →</a>
+      <p class="odys-hist-empty-title">{l s='Aucune commande pour le moment' d='Shop.Theme.Odys'}</p>
+      <p class="odys-order-note">{l s='Votre première commande vous rapporte un point par 100 DH.' d='Shop.Theme.Odys'}</p>
+      <a href="{$odysUrlParfums}" class="btn-p">{l s='Découvrir la collection →' d='Shop.Theme.Odys'}</a>
     </div>
   {/if}
 </div>

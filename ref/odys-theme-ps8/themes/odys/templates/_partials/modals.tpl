@@ -23,20 +23,20 @@
 {* ══ POINTS TOAST ══ *}
 <div class="pts-toast" id="ptsToast" role="status" aria-live="polite">
   <span class="pts-toast-star">⭐</span>
-  <span id="ptsToastMsg">+2 points fidélité gagnés !</span>
+  <span id="ptsToastMsg">{l s='+2 points fidélité gagnés !' d='Shop.Theme.Odys'}</span>
 </div>
 
 {* ══ OLFACTORY NOTES PANEL ══ *}
 <div class="notes-overlay" id="notesOv"></div>
-<div class="notes-panel" id="notesPanel" role="dialog" aria-modal="true" aria-label="Recherche par note olfactive">
+<div class="notes-panel" id="notesPanel" role="dialog" aria-modal="true" aria-label="{l s='Recherche par note olfactive' d='Shop.Theme.Odys'}">
   <div class="np-drag" aria-hidden="true"></div>
   <div class="np-hd">
     <div class="np-hd-pill">
-      <span>Parfums avec la note</span>
+      <span>{l s='Parfums avec la note' d='Shop.Theme.Odys'}</span>
       <span class="np-note-name" id="npNoteName">—</span>
       <span class="np-type" id="npNoteType"></span>
     </div>
-    <button class="np-close" data-action="close-notes" aria-label="Fermer">✕</button>
+    <button class="np-close" data-action="close-notes" aria-label="{l s='Fermer' d='Shop.Theme.Odys'}">✕</button>
   </div>
   <div class="np-body">
     <div class="np-count" id="npCount"></div>

@@ -9,11 +9,11 @@
 {block name='content'}
 <div class="odys-guest">
   <div class="odys-guest-head">
-    <div class="odys-order-eyebrow">Suivi de commande</div>
-    <h1 class="odys-guest-h1">Où est mon colis ?</h1>
+    <div class="odys-order-eyebrow">{l s='Suivi de commande' d='Shop.Theme.Odys'}</div>
+    <h1 class="odys-guest-h1">{l s='Où est mon colis ?' d='Shop.Theme.Odys'}</h1>
     <p class="odys-guest-lede">
-      La référence figure sur l'email de confirmation — neuf lettres, par exemple
-      <span class="odys-guest-sample">XKBKNABJK</span>.
+      {l s='La référence figure sur l\'email de confirmation — neuf lettres, par exemple' d='Shop.Theme.Odys'}
+      <span class="odys-guest-sample">{l s='XKBKNABJK' d='Shop.Theme.Odys'}</span>.
     </p>
   </div>
 
@@ -22,23 +22,23 @@
      Tools::getValue(), which takes POST just as happily *}
   <form class="odys-guest-form" action="{$urls.pages.guest_tracking}" method="post">
     <div class="cf">
-      <label for="guest-ref">Référence de commande *</label>
+      <label for="guest-ref">{l s='Référence de commande *' d='Shop.Theme.Odys'}</label>
       <input type="text" id="guest-ref" name="order_reference" required
              autocomplete="off" spellcheck="false"
-             style="text-transform:uppercase" placeholder="XKBKNABJK"/>
+             style="text-transform:uppercase" placeholder="{l s='XKBKNABJK' d='Shop.Theme.Odys'}"/>
     </div>
     <div class="cf">
-      <label for="guest-email">Email utilisé pour la commande *</label>
+      <label for="guest-email">{l s='Email utilisé pour la commande *' d='Shop.Theme.Odys'}</label>
       <input type="email" id="guest-email" name="email" required
-             autocomplete="email" placeholder="votre@email.ma"/>
+             autocomplete="email" placeholder="{l s='votre@email.ma' d='Shop.Theme.Odys'}"/>
     </div>
     <button type="submit" class="btn-p odys-guest-submit">
-      Suivre ma commande →
+      {l s='Suivre ma commande →' d='Shop.Theme.Odys'}
     </button>
   </form>
 
   <div class="odys-guest-alt">
-    <p>Vous avez un compte ? <a href="{$urls.pages.history}">Vos commandes y sont déjà listées</a>.</p>
+    <p>{l s='Vous avez un compte ?' d='Shop.Theme.Odys'} <a href="{$urls.pages.history}">{l s='Vos commandes y sont déjà listées' d='Shop.Theme.Odys'}</a>.</p>
     {include file='_partials/contact-links.tpl'}
   </div>
 </div>

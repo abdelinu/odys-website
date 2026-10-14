@@ -1,0 +1,1422 @@
+{
+  "_lisez_moi": [
+    "Les mots du theme ODYS en anglais et en arabe.",
+    "",
+    "La cle est la phrase francaise telle qu'elle est ecrite dans le gabarit,",
+    "a l'octet pres : c'est elle que PrestaShop rend quand aucune traduction",
+    "n'existe. Le site francais ne depend donc d'aucune ligne de ce fichier.",
+    "",
+    "L'arabe est en arabe standard moderne, lisible au Maroc. Les noms de la",
+    "maison ne se traduisent pas : ODYS reste ODYS, l'oud reste l'oud.",
+    "",
+    "Pose en base par maj-langues.php, qui ne remplace jamais une traduction",
+    "deja ecrite en Back Office."
+  ],
+  "domaine": "ShopThemeOdys",
+  "mots": {
+    "Navigation principale": {
+      "en": "Main navigation",
+      "ar": "التنقل الرئيسي"
+    },
+    "Collection": {
+      "en": "Collection",
+      "ar": "المجموعة"
+    },
+    "Homme": {
+      "en": "Men",
+      "ar": "للرجال"
+    },
+    "Femme": {
+      "en": "Women",
+      "ar": "للنساء"
+    },
+    "Unisexe": {
+      "en": "Unisex",
+      "ar": "للجنسين"
+    },
+    "Tous les parfums": {
+      "en": "All fragrances",
+      "ar": "كل العطور"
+    },
+    "Oud &amp; Boukhour": {
+      "en": "Oud &amp; Boukhour",
+      "ar": "العود والبخور"
+    },
+    "Coffrets": {
+      "en": "Gift sets",
+      "ar": "علب الهدايا"
+    },
+    "Diffuseurs": {
+      "en": "Diffusers",
+      "ar": "موزّعات العطر"
+    },
+    "À propos": {
+      "en": "About",
+      "ar": "من نحن"
+    },
+    "Actions": {
+      "en": "Actions",
+      "ar": "إجراءات"
+    },
+    "Rechercher des parfums": {
+      "en": "Search fragrances",
+      "ar": "البحث عن العطور"
+    },
+    "Ma liste de souhaits": {
+      "en": "My wishlist",
+      "ar": "قائمة رغباتي"
+    },
+    "Ouvrir le menu de navigation": {
+      "en": "Open the navigation menu",
+      "ar": "فتح قائمة التنقل"
+    },
+    "Menu de navigation": {
+      "en": "Navigation menu",
+      "ar": "قائمة التنقل"
+    },
+    "Fermer le menu": {
+      "en": "Close the menu",
+      "ar": "إغلاق القائمة"
+    },
+    "Accueil": {
+      "en": "Home",
+      "ar": "الصفحة الرئيسية"
+    },
+    "Toute la collection": {
+      "en": "The whole collection",
+      "ar": "كل المجموعة"
+    },
+    "Contact": {
+      "en": "Contact",
+      "ar": "اتصل بنا"
+    },
+    "Fidélité": {
+      "en": "Loyalty",
+      "ar": "برنامج الولاء"
+    },
+    "Connexion": {
+      "en": "Sign in",
+      "ar": "تسجيل الدخول"
+    },
+    "Paiement à la livraison": {
+      "en": "Cash on delivery",
+      "ar": "الدفع عند الاستلام"
+    },
+    "Annonces ODYS": {
+      "en": "ODYS announcements",
+      "ar": "إعلانات أوديس"
+    },
+    "Mon panier": {
+      "en": "My cart",
+      "ar": "سلّتي"
+    },
+    "Fermer le panier": {
+      "en": "Close the cart",
+      "ar": "إغلاق السلّة"
+    },
+    "Progression vers la livraison offerte": {
+      "en": "Progress towards free delivery",
+      "ar": "التقدّم نحو التوصيل المجاني"
+    },
+    "Retirer": {
+      "en": "Remove",
+      "ar": "حذف"
+    },
+    "Votre panier est vide.": {
+      "en": "Your cart is empty.",
+      "ar": "سلّتك فارغة."
+    },
+    "Voir la collection": {
+      "en": "See the collection",
+      "ar": "تصفّح المجموعة"
+    },
+    "Commander": {
+      "en": "Checkout",
+      "ar": "إتمام الطلب"
+    },
+    "Voir le panier": {
+      "en": "View cart",
+      "ar": "عرض السلّة"
+    },
+    "Paiement à la livraison · Livraison 24–48h · Retours sous 14 jours": {
+      "en": "Cash on delivery · Delivery in 24–48h · Returns within 14 days",
+      "ar": "الدفع عند الاستلام · التوصيل في 24–48 ساعة · الإرجاع خلال 14 يومًا"
+    },
+    "Écrire à ODYS sur WhatsApp": {
+      "en": "Message ODYS on WhatsApp",
+      "ar": "راسل أوديس عبر واتساب"
+    },
+    "Appeler ODYS": {
+      "en": "Call ODYS",
+      "ar": "اتصل بأوديس"
+    },
+    "ODYS Parfum — Accueil": {
+      "en": "ODYS Parfum — home",
+      "ar": "أوديس بارفان — الصفحة الرئيسية"
+    },
+    "ODYS Parfums sur Instagram": {
+      "en": "ODYS Parfums on Instagram",
+      "ar": "أوديس بارفان على إنستغرام"
+    },
+    "ODYS Parfums sur Facebook": {
+      "en": "ODYS Parfums on Facebook",
+      "ar": "أوديس بارفان على فيسبوك"
+    },
+    "ODYS Parfums sur TikTok": {
+      "en": "ODYS Parfums on TikTok",
+      "ar": "أوديس بارفان على تيك توك"
+    },
+    "Frais &amp; Aquatiques": {
+      "en": "Fresh &amp; Aquatic",
+      "ar": "منعشة ومائية"
+    },
+    "Orientaux &amp; Épicés": {
+      "en": "Oriental &amp; Spicy",
+      "ar": "شرقية وحارّة"
+    },
+    "Maison": {
+      "en": "The house",
+      "ar": "الدار"
+    },
+    "Notre histoire": {
+      "en": "Our story",
+      "ar": "قصّتنا"
+    },
+    "Savoir-faire": {
+      "en": "Craftsmanship",
+      "ar": "حرفتنا"
+    },
+    "Retours": {
+      "en": "Returns",
+      "ar": "الإرجاع"
+    },
+    "Plan du site": {
+      "en": "Sitemap",
+      "ar": "خريطة الموقع"
+    },
+    "Mon compte": {
+      "en": "My account",
+      "ar": "حسابي"
+    },
+    "Espace fidélité": {
+      "en": "Loyalty area",
+      "ar": "فضاء الولاء"
+    },
+    "Mes commandes": {
+      "en": "My orders",
+      "ar": "طلباتي"
+    },
+    "Ma wishlist": {
+      "en": "My wishlist",
+      "ar": "قائمة رغباتي"
+    },
+    "Déconnexion": {
+      "en": "Sign out",
+      "ar": "تسجيل الخروج"
+    },
+    "Se connecter": {
+      "en": "Sign in",
+      "ar": "تسجيل الدخول"
+    },
+    "Créer un compte": {
+      "en": "Create an account",
+      "ar": "إنشاء حساب"
+    },
+    "Suivre ma commande": {
+      "en": "Track my order",
+      "ar": "تتبّع طلبي"
+    },
+    "Programme fidélité": {
+      "en": "Loyalty programme",
+      "ar": "برنامج الولاء"
+    },
+    "Paiement sécurisé": {
+      "en": "Secure payment",
+      "ar": "دفع آمن"
+    },
+    "Virement": {
+      "en": "Bank transfer",
+      "ar": "تحويل بنكي"
+    },
+    "Mentions légales": {
+      "en": "Legal notice",
+      "ar": "المعلومات القانونية"
+    },
+    "Confidentialité": {
+      "en": "Privacy",
+      "ar": "الخصوصية"
+    },
+    "Leurs mots": {
+      "en": "Their words",
+      "ar": "بكلماتهم"
+    },
+    "Frais": {
+      "en": "Fresh",
+      "ar": "منعش"
+    },
+    "Oriental": {
+      "en": "Oriental",
+      "ar": "شرقي"
+    },
+    "Sucré": {
+      "en": "Sweet",
+      "ar": "حلو"
+    },
+    "Oud": {
+      "en": "Oud",
+      "ar": "عود"
+    },
+    "Commencer le quiz": {
+      "en": "Start the quiz",
+      "ar": "ابدأ الاختبار"
+    },
+    "Maison de Senteur · Casablanca": {
+      "en": "House of Scent · Casablanca",
+      "ar": "دار العطر · الدار البيضاء"
+    },
+    "Explorer ODYS": {
+      "en": "Explore ODYS",
+      "ar": "اكتشف أوديس"
+    },
+    "Scroll": {
+      "en": "Scroll",
+      "ar": "مرّر"
+    },
+    "Tête": {
+      "en": "Top notes",
+      "ar": "المقدّمة"
+    },
+    "Fraîcheur · Énergie": {
+      "en": "Freshness · Energy",
+      "ar": "انتعاش · طاقة"
+    },
+    "Caractère · Émotion": {
+      "en": "Character · Emotion",
+      "ar": "شخصية · إحساس"
+    },
+    "Fond": {
+      "en": "Base notes",
+      "ar": "القاعدة"
+    },
+    "Profondeur · Signature": {
+      "en": "Depth · Signature",
+      "ar": "عمق · بصمة"
+    },
+    "Expérience olfactive": {
+      "en": "Olfactory experience",
+      "ar": "تجربة عطرية"
+    },
+    "Une pyramide de senteurs": {
+      "en": "A pyramid of scents",
+      "ar": "هرم العطر"
+    },
+    "Chaque fragrance est une histoire, un voyage en trois temps :\n        fraîcheur, cœur et profondeur.": {
+      "en": "Every fragrance is a story, a journey in three movements: freshness, heart and depth.",
+      "ar": "كل عطر حكاية ورحلة في ثلاث مراحل: الانتعاش، القلب، والعمق."
+    },
+    "Explorer les notes": {
+      "en": "Explore the notes",
+      "ar": "اكتشف النفحات"
+    },
+    "Sur mesure": {
+      "en": "Made to measure",
+      "ar": "حسب الطلب"
+    },
+    "Composez votre ODYS": {
+      "en": "Compose your ODYS",
+      "ar": "اصنع أوديس الخاص بك"
+    },
+    "Un parfum, mille possibilités.": {
+      "en": "One fragrance, a thousand possibilities.",
+      "ar": "عطر واحد وألف احتمال."
+    },
+    "Commencer": {
+      "en": "Start",
+      "ar": "ابدأ"
+    },
+    "Collection signature": {
+      "en": "Signature collection",
+      "ar": "المجموعة المميّزة"
+    },
+    "Une sélection raffinée de nos créations les plus\n        emblématiques, inspirées par la richesse du Maroc.": {
+      "en": "A refined selection of our most emblematic creations, inspired by the richness of Morocco.",
+      "ar": "اختيار راقٍ من أبرز إبداعاتنا، مستوحى من غنى المغرب."
+    },
+    "Voir toute la collection": {
+      "en": "See the whole collection",
+      "ar": "تصفّح المجموعة كاملة"
+    },
+    "Nos engagements": {
+      "en": "Our commitments",
+      "ar": "التزاماتنا"
+    },
+    "Livraison offerte dès 300 DH": {
+      "en": "Free delivery from 300 DH",
+      "ar": "التوصيل مجاني ابتداءً من 300 درهم"
+    },
+    "24–48 h partout au Maroc": {
+      "en": "24–48 h anywhere in Morocco",
+      "ar": "24–48 ساعة في كل أنحاء المغرب"
+    },
+    "CMI, Visa et virement acceptés": {
+      "en": "CMI, Visa and bank transfer accepted",
+      "ar": "نقبل CMI وفيزا والتحويل البنكي"
+    },
+    "Service client": {
+      "en": "Customer service",
+      "ar": "خدمة الزبناء"
+    },
+    "À votre écoute sur WhatsApp": {
+      "en": "Here for you on WhatsApp",
+      "ar": "رهن إشارتكم عبر واتساب"
+    },
+    "Suivi de la commande": {
+      "en": "Order tracking",
+      "ar": "تتبّع الطلب"
+    },
+    "Transporteur": {
+      "en": "Carrier",
+      "ar": "شركة التوصيل"
+    },
+    "Numéro de suivi": {
+      "en": "Tracking number",
+      "ar": "رقم التتبّع"
+    },
+    "Suivre le colis chez le transporteur →": {
+      "en": "Track the parcel with the carrier →",
+      "ar": "تتبّع الطرد لدى شركة التوصيل →"
+    },
+    "Notre Cœur de Marque · Identité ODYS": {
+      "en": "Our heart · ODYS identity",
+      "ar": "جوهرنا · هوية أوديس"
+    },
+    "Notre héritage.": {
+      "en": "Our heritage.",
+      "ar": "إرثنا."
+    },
+    "Découvrir la collection": {
+      "en": "Discover the collection",
+      "ar": "اكتشف المجموعة"
+    },
+    "Prix transparent": {
+      "en": "Transparent price",
+      "ar": "ثمن شفّاف"
+    },
+    "Coût réel + 18% marge": {
+      "en": "Real cost + 18% margin",
+      "ar": "التكلفة الحقيقية + 18٪ هامش"
+    },
+    "Origine certifiée": {
+      "en": "Certified origin",
+      "ar": "منشأ موثّق"
+    },
+    "Inde · Thaïlande": {
+      "en": "India · Thailand",
+      "ar": "الهند · تايلاند"
+    },
+    "Au gramme": {
+      "en": "By the gram",
+      "ar": "بالغرام"
+    },
+    "Commande sur mesure": {
+      "en": "Made-to-order",
+      "ar": "طلب حسب الرغبة"
+    },
+    "Héritage Marocain · Collection Oud": {
+      "en": "Moroccan heritage · Oud collection",
+      "ar": "إرث مغربي · مجموعة العود"
+    },
+    "Oud &amp; Boukhour Artisanal": {
+      "en": "Artisanal Oud &amp; Boukhour",
+      "ar": "العود والبخور الحرفي"
+    },
+    "Vendu au gramme": {
+      "en": "Sold by the gram",
+      "ar": "يُباع بالغرام"
+    },
+    "COD disponible": {
+      "en": "Cash on delivery available",
+      "ar": "الدفع عند الاستلام متاح"
+    },
+    "Non inclus dans les points fidélité": {
+      "en": "Not eligible for loyalty points",
+      "ar": "غير مشمول بنقاط الولاء"
+    },
+    "Garanties Oud &amp; Boukhour": {
+      "en": "Oud &amp; Boukhour guarantees",
+      "ar": "ضمانات العود والبخور"
+    },
+    "Quantité exacte": {
+      "en": "Exact quantity",
+      "ar": "كمية مضبوطة"
+    },
+    "Origines certifiées": {
+      "en": "Certified origins",
+      "ar": "منشأ موثّق"
+    },
+    "Livraison 24–48h": {
+      "en": "Delivery in 24–48h",
+      "ar": "التوصيل في 24–48 ساعة"
+    },
+    "Emballage hermétique": {
+      "en": "Airtight packaging",
+      "ar": "تغليف محكم"
+    },
+    "Hors fidélité": {
+      "en": "Outside the loyalty scheme",
+      "ar": "خارج برنامج الولاء"
+    },
+    "Pas de points": {
+      "en": "No points",
+      "ar": "بدون نقاط"
+    },
+    "Politique de retour — Oud &amp; Boukhour": {
+      "en": "Return policy — Oud &amp; Boukhour",
+      "ar": "سياسة الإرجاع — العود والبخور"
+    },
+    "Les produits Oud et Boukhour": {
+      "en": "Oud and Boukhour products",
+      "ar": "منتجات العود والبخور"
+    },
+    "ne sont pas éligibles au retour": {
+      "en": "cannot be returned",
+      "ar": "لا يمكن إرجاعها"
+    },
+    "3 questions · 30 secondes": {
+      "en": "3 questions · 30 seconds",
+      "ar": "3 أسئلة · 30 ثانية"
+    },
+    "Trouvez votre ODYS": {
+      "en": "Find your ODYS",
+      "ar": "اعثر على أوديس الذي يناسبك"
+    },
+    "Fermer le quiz": {
+      "en": "Close the quiz",
+      "ar": "إغلاق الاختبار"
+    },
+    "1 · Quelle famille vous attire ?": {
+      "en": "1 · Which family appeals to you?",
+      "ar": "1 · أي عائلة عطرية تجذبك؟"
+    },
+    "Citrus, aquatique, boisé léger": {
+      "en": "Citrus, aquatic, light woods",
+      "ar": "حمضيات، مائي، خشبي خفيف"
+    },
+    "Épicé, ambré, chaud": {
+      "en": "Spicy, amber, warm",
+      "ar": "حار، عنبري، دافئ"
+    },
+    "Vanille, caramel, poudré": {
+      "en": "Vanilla, caramel, powdery",
+      "ar": "فانيليا، كراميل، بودري"
+    },
+    "Bois précieux, fumé, profond": {
+      "en": "Precious woods, smoky, deep",
+      "ar": "أخشاب ثمينة، مدخّن، عميق"
+    },
+    "2 · Pour quelle occasion ?": {
+      "en": "2 · For which occasion?",
+      "ar": "2 · لأي مناسبة؟"
+    },
+    "Quotidien": {
+      "en": "Every day",
+      "ar": "كل يوم"
+    },
+    "Bureau, sorties": {
+      "en": "Work, outings",
+      "ar": "العمل والخروج"
+    },
+    "Soirée": {
+      "en": "Evening",
+      "ar": "السهرة"
+    },
+    "Dîner, événement": {
+      "en": "Dinner, event",
+      "ar": "عشاء أو حفل"
+    },
+    "Cadeau": {
+      "en": "Gift",
+      "ar": "هدية"
+    },
+    "Pour offrir": {
+      "en": "To offer",
+      "ar": "لتقديمها هدية"
+    },
+    "3 · Quelle intensité ?": {
+      "en": "3 · Which intensity?",
+      "ar": "3 · أي قوة؟"
+    },
+    "Discret": {
+      "en": "Discreet",
+      "ar": "هادئ"
+    },
+    "Proche de la peau": {
+      "en": "Close to the skin",
+      "ar": "قريب من البشرة"
+    },
+    "Équilibré": {
+      "en": "Balanced",
+      "ar": "متوازن"
+    },
+    "Affirmé": {
+      "en": "Assertive",
+      "ar": "قوي"
+    },
+    "Fort sillage": {
+      "en": "Strong sillage",
+      "ar": "أثر قوي"
+    },
+    "Voir ma sélection": {
+      "en": "See my selection",
+      "ar": "عرض اختياري"
+    },
+    "Nouveau": {
+      "en": "New",
+      "ar": "جديد"
+    },
+    "Édition": {
+      "en": "Edition",
+      "ar": "إصدار"
+    },
+    "Inspiré de": {
+      "en": "Inspired by",
+      "ar": "مستوحى من"
+    },
+    "Épuisé &mdash; voir la fiche": {
+      "en": "Sold out &mdash; see the page",
+      "ar": "نفدت الكمية &mdash; عرض الصفحة"
+    },
+    "Choisir le grammage": {
+      "en": "Choose the weight",
+      "ar": "اختر الوزن"
+    },
+    "Ajouter au panier": {
+      "en": "Add to cart",
+      "ar": "أضف إلى السلّة"
+    },
+    "Collection ODYS": {
+      "en": "ODYS collection",
+      "ar": "مجموعة أوديس"
+    },
+    "Sections de la collection": {
+      "en": "Sections of the collection",
+      "ar": "أقسام المجموعة"
+    },
+    "Famille": {
+      "en": "Family",
+      "ar": "العائلة"
+    },
+    "Tout": {
+      "en": "All",
+      "ar": "الكل"
+    },
+    "Aucun parfum de cette famille dans cette section.": {
+      "en": "No fragrance from this family in this section.",
+      "ar": "لا يوجد عطر من هذه العائلة في هذا القسم."
+    },
+    "Aucun parfum dans cette collection pour le moment.": {
+      "en": "No fragrance in this collection yet.",
+      "ar": "لا يوجد أي عطر في هذه المجموعة حاليًا."
+    },
+    "Pagination": {
+      "en": "Pagination",
+      "ar": "ترقيم الصفحات"
+    },
+    "Merci, votre commande est confirmée": {
+      "en": "Thank you, your order is confirmed",
+      "ar": "شكرًا، تم تأكيد طلبك"
+    },
+    "Votre référence": {
+      "en": "Your reference",
+      "ar": "رقم طلبك"
+    },
+    "suivre ma commande": {
+      "en": "track my order",
+      "ar": "تتبّع طلبي"
+    },
+    "À préparer pour la livraison": {
+      "en": "To prepare for delivery",
+      "ar": "قيد التحضير للتوصيل"
+    },
+    "Adresse": {
+      "en": "Address",
+      "ar": "العنوان"
+    },
+    "Votre commande": {
+      "en": "Your order",
+      "ar": "طلبك"
+    },
+    "Télécharger la facture": {
+      "en": "Download the invoice",
+      "ar": "تحميل الفاتورة"
+    },
+    "Continuer mes achats": {
+      "en": "Continue shopping",
+      "ar": "متابعة التسوّق"
+    },
+    "Une question sur cette commande ?": {
+      "en": "A question about this order?",
+      "ar": "عندك سؤال حول هذا الطلب؟"
+    },
+    "Indiquez la référence": {
+      "en": "Give the reference",
+      "ar": "اذكر رقم الطلب"
+    },
+    ", nous retrouvons le colis tout de suite.": {
+      "en": ", and we will find the parcel right away.",
+      "ar": "، وسنجد الطرد في الحين."
+    },
+    "Informations ODYS": {
+      "en": "ODYS information",
+      "ar": "معلومات أوديس"
+    },
+    "Une question ?": {
+      "en": "A question?",
+      "ar": "عندك سؤال؟"
+    },
+    "Notre service client répond sur WhatsApp, du lundi au samedi, 9h–18h.": {
+      "en": "Our customer service answers on WhatsApp, Monday to Saturday, 9am–6pm.",
+      "ar": "خدمة الزبناء تجيب عبر واتساب، من الاثنين إلى السبت، من 9 صباحًا إلى 6 مساءً."
+    },
+    "Écrire sur WhatsApp": {
+      "en": "Message us on WhatsApp",
+      "ar": "راسلنا عبر واتساب"
+    },
+    "Nous écrire": {
+      "en": "Write to us",
+      "ar": "اكتب لنا"
+    },
+    "Contactez-nous": {
+      "en": "Contact us",
+      "ar": "اتصل بنا"
+    },
+    "Suivi de commande": {
+      "en": "Order tracking",
+      "ar": "تتبّع الطلب"
+    },
+    "Où est mon colis ?": {
+      "en": "Where is my parcel?",
+      "ar": "أين طردي؟"
+    },
+    "XKBKNABJK": {
+      "en": "XKBKNABJK",
+      "ar": "XKBKNABJK"
+    },
+    "Référence de commande *": {
+      "en": "Order reference *",
+      "ar": "رقم الطلب *"
+    },
+    "Email utilisé pour la commande *": {
+      "en": "Email used for the order *",
+      "ar": "البريد الإلكتروني المستعمل في الطلب *"
+    },
+    "votre@email.ma": {
+      "en": "your@email.ma",
+      "ar": "your@email.ma"
+    },
+    "Suivre ma commande →": {
+      "en": "Track my order →",
+      "ar": "تتبّع طلبي →"
+    },
+    "Vous avez un compte ?": {
+      "en": "Do you have an account?",
+      "ar": "عندك حساب؟"
+    },
+    "Vos commandes y sont déjà listées": {
+      "en": "Your orders are already listed there",
+      "ar": "طلباتك مدرجة فيه مسبقًا"
+    },
+    "Gardez votre historique": {
+      "en": "Keep your history",
+      "ar": "احتفظ بسجلّك"
+    },
+    "Choisissez un mot de passe et cette commande — et les suivantes —\n          resteront dans votre espace client, avec vos points ODYS.": {
+      "en": "Choose a password and this order — and the next ones — will stay in your account, along with your ODYS points.",
+      "ar": "اختر كلمة سر ويبقى هذا الطلب — والطلبات القادمة — في حسابك، مع نقاط أوديس."
+    },
+    "← Mon compte": {
+      "en": "← My account",
+      "ar": "← حسابي"
+    },
+    "Espace client": {
+      "en": "Customer area",
+      "ar": "فضاء الزبناء"
+    },
+    "Pas de compte à portée de main ?": {
+      "en": "No account to hand?",
+      "ar": "ما عندكش حساب؟"
+    },
+    "Suivez une commande avec sa référence": {
+      "en": "Track an order with its reference",
+      "ar": "تتبّع طلبًا برقمه"
+    },
+    "Aucune commande pour le moment": {
+      "en": "No order yet",
+      "ar": "لا يوجد أي طلب حاليًا"
+    },
+    "Votre première commande vous rapporte un point par 100 DH.": {
+      "en": "Your first order earns you one point per 100 DH.",
+      "ar": "طلبك الأول يمنحك نقطة عن كل 100 درهم."
+    },
+    "Découvrir la collection →": {
+      "en": "Discover the collection →",
+      "ar": "اكتشف المجموعة →"
+    },
+    "Espace personnel": {
+      "en": "Personal area",
+      "ar": "الفضاء الشخصي"
+    },
+    "Vos points fidélité ODYS": {
+      "en": "Your ODYS loyalty points",
+      "ar": "نقاط الولاء ديالك في أوديس"
+    },
+    "points accumulés · 1 pt = 100 DH dépensés": {
+      "en": "points earned · 1 pt = 100 DH spent",
+      "ar": "نقطة مجمّعة · 1 نقطة = 100 درهم"
+    },
+    "Prochaine récompense": {
+      "en": "Next reward",
+      "ar": "المكافأة القادمة"
+    },
+    "Un parfum à 10 pts &middot; deux à 15 &middot; un coffret à 20": {
+      "en": "A fragrance at 10 pts &middot; two at 15 &middot; a gift set at 20",
+      "ar": "عطر عند 10 نقاط &middot; عطران عند 15 &middot; علبة هدية عند 20"
+    },
+    "Échanger mes points →": {
+      "en": "Redeem my points →",
+      "ar": "استبدال نقاطي →"
+    },
+    "Mes points ODYS": {
+      "en": "My ODYS points",
+      "ar": "نقاط أوديس ديالي"
+    },
+    "Solde, échange, historique": {
+      "en": "Balance, redemption, history",
+      "ar": "الرصيد، الاستبدال، السجلّ"
+    },
+    "Suivre, retourner": {
+      "en": "Track, return",
+      "ar": "التتبّع والإرجاع"
+    },
+    "Mes adresses": {
+      "en": "My addresses",
+      "ar": "عناويني"
+    },
+    "Gérer la livraison": {
+      "en": "Manage delivery",
+      "ar": "تدبير التوصيل"
+    },
+    "Mes informations": {
+      "en": "My details",
+      "ar": "معلوماتي"
+    },
+    "Profil, mot de passe": {
+      "en": "Profile, password",
+      "ar": "الملف وكلمة السر"
+    },
+    "Mes envies": {
+      "en": "My wishes",
+      "ar": "رغباتي"
+    },
+    "Parfums mis de côté": {
+      "en": "Fragrances set aside",
+      "ar": "عطور وضعتها جانبًا"
+    },
+    "Se déconnecter": {
+      "en": "Sign out",
+      "ar": "تسجيل الخروج"
+    },
+    "Fermer la session": {
+      "en": "Close the session",
+      "ar": "إنهاء الجلسة"
+    },
+    "← Mes commandes": {
+      "en": "← My orders",
+      "ar": "← طلباتي"
+    },
+    "Commander à nouveau": {
+      "en": "Order again",
+      "ar": "أعد الطلب"
+    },
+    "Paiement": {
+      "en": "Payment",
+      "ar": "الأداء"
+    },
+    "Message cadeau": {
+      "en": "Gift message",
+      "ar": "رسالة الهدية"
+    },
+    "Échanges": {
+      "en": "Messages",
+      "ar": "المراسلات"
+    },
+    "Votre colis est arrivé ?": {
+      "en": "Has your parcel arrived?",
+      "ar": "وصل طردك؟"
+    },
+    "Aucun résultat": {
+      "en": "No result",
+      "ar": "لا نتيجة"
+    },
+    "Erreur 404": {
+      "en": "Error 404",
+      "ar": "خطأ 404"
+    },
+    "Rechercher un parfum": {
+      "en": "Search for a fragrance",
+      "ar": "ابحث عن عطر"
+    },
+    "Parfum, note olfactive, inspiration…": {
+      "en": "Fragrance, note, inspiration…",
+      "ar": "عطر، نفحة، مصدر إلهام…"
+    },
+    "Rechercher": {
+      "en": "Search",
+      "ar": "بحث"
+    },
+    "Pages principales": {
+      "en": "Main pages",
+      "ar": "الصفحات الرئيسية"
+    },
+    "Pour homme": {
+      "en": "For men",
+      "ar": "للرجال"
+    },
+    "Pour femme": {
+      "en": "For women",
+      "ar": "للنساء"
+    },
+    "Aller au contenu principal": {
+      "en": "Skip to main content",
+      "ar": "انتقل إلى المحتوى الرئيسي"
+    },
+    "Contacter ODYS Parfums sur WhatsApp": {
+      "en": "Contact ODYS Parfums on WhatsApp",
+      "ar": "راسل أوديس بارفان عبر واتساب"
+    },
+    "Commencez ici": {
+      "en": "Start here",
+      "ar": "ابدأ من هنا"
+    },
+    "La boutique": {
+      "en": "The shop",
+      "ar": "المتجر"
+    },
+    "Voir tout": {
+      "en": "See all",
+      "ar": "عرض الكل"
+    },
+    "Rayons de la boutique": {
+      "en": "Shop departments",
+      "ar": "أقسام المتجر"
+    },
+    "Pour découvrir": {
+      "en": "To discover",
+      "ar": "للاكتشاف"
+    },
+    "Nos coffrets": {
+      "en": "Our gift sets",
+      "ar": "علب الهدايا"
+    },
+    "Sélections de la boutique": {
+      "en": "Shop selections",
+      "ar": "اختيارات المتجر"
+    },
+    "Pourquoi ODYS": {
+      "en": "Why ODYS",
+      "ar": "لماذا أوديس"
+    },
+    "Cour marocaine aux colonnes de zellige et de stuc sculpté": {
+      "en": "Moroccan courtyard with zellige columns and carved stucco",
+      "ar": "فناء مغربي بأعمدة الزليج والجبس المنقوش"
+    },
+    "Production à Casablanca, matières sélectionnées, contrôle à chaque lot.": {
+      "en": "Made in Casablanca, selected materials, checked batch by batch.",
+      "ar": "صناعة بالدار البيضاء، مواد منتقاة، ومراقبة لكل دفعة."
+    },
+    "Mabkhara fumante posée sur un tapis oriental": {
+      "en": "Smoking mabkhara on an oriental rug",
+      "ar": "مبخرة تتصاعد منها الأدخنة فوق زربية شرقية"
+    },
+    "Oud vendu au gramme": {
+      "en": "Oud sold by the gram",
+      "ar": "العود يُباع بالغرام"
+    },
+    "Colis en carton kraft fermé, dans une lumière chaude": {
+      "en": "Closed kraft parcel in a warm light",
+      "ar": "طرد من الورق المقوّى في ضوء دافئ"
+    },
+    "Livraison 24–48 h": {
+      "en": "Delivery in 24–48 h",
+      "ar": "التوصيل في 24–48 ساعة"
+    },
+    "20 DH à Casablanca, 30 DH partout au Maroc, offerte dès 300 DH.": {
+      "en": "20 DH in Casablanca, 30 DH anywhere in Morocco, free from 300 DH.",
+      "ar": "20 درهمًا بالدار البيضاء، 30 درهمًا في كل المغرب، ومجانًا ابتداءً من 300 درهم."
+    },
+    "Coffret blanc ouvert posé sur une table claire": {
+      "en": "Open white gift box on a light table",
+      "ar": "علبة بيضاء مفتوحة على طاولة فاتحة"
+    },
+    "Réglez en espèces à la réception. CMI, Visa et virement également acceptés.": {
+      "en": "Pay in cash on delivery. CMI, Visa and bank transfer also accepted.",
+      "ar": "الأداء نقدًا عند الاستلام. نقبل أيضًا CMI وفيزا والتحويل البنكي."
+    },
+    "Mon Panier": {
+      "en": "My cart",
+      "ar": "سلّتي"
+    },
+    "Votre panier est vide": {
+      "en": "Your cart is empty",
+      "ar": "سلّتك فارغة"
+    },
+    "Produits complémentaires": {
+      "en": "Complementary products",
+      "ar": "منتجات مكمّلة"
+    },
+    "Total": {
+      "en": "Total",
+      "ar": "المجموع"
+    },
+    "Commander →": {
+      "en": "Checkout →",
+      "ar": "إتمام الطلب →"
+    },
+    "💚 COD": {
+      "en": "💚 Cash on delivery",
+      "ar": "💚 الدفع عند الاستلام"
+    },
+    "Créer un compte · +2 pts ⭐": {
+      "en": "Create an account · +2 pts ⭐",
+      "ar": "إنشاء حساب · +2 نقطة ⭐"
+    },
+    "+2 points fidélité gagnés !": {
+      "en": "+2 loyalty points earned!",
+      "ar": "ربحت نقطتين من نقاط الولاء!"
+    },
+    "Recherche par note olfactive": {
+      "en": "Search by olfactory note",
+      "ar": "البحث حسب النفحة"
+    },
+    "Parfums avec la note": {
+      "en": "Fragrances with the note",
+      "ar": "عطور تحتوي على نفحة"
+    },
+    "Fermer": {
+      "en": "Close",
+      "ar": "إغلاق"
+    },
+    "Galerie photos du produit": {
+      "en": "Product photo gallery",
+      "ar": "معرض صور المنتج"
+    },
+    "Vignettes de la galerie": {
+      "en": "Gallery thumbnails",
+      "ar": "صور مصغّرة للمعرض"
+    },
+    "Note :": {
+      "en": "Rating:",
+      "ar": "التقييم:"
+    },
+    "sur 5 —": {
+      "en": "out of 5 —",
+      "ar": "من 5 —"
+    },
+    "Commandez maintenant pour garantir votre livraison": {
+      "en": "Order now to secure your delivery",
+      "ar": "اطلب الآن لضمان التوصيل"
+    },
+    "Choisissez votre grammage": {
+      "en": "Choose your weight",
+      "ar": "اختر الوزن"
+    },
+    "Grammage": {
+      "en": "Weight",
+      "ar": "الوزن"
+    },
+    "Format du parfum": {
+      "en": "Fragrance size",
+      "ar": "حجم العطر"
+    },
+    "Ce coffret contient": {
+      "en": "This gift set contains",
+      "ar": "تحتوي هذه العلبة على"
+    },
+    "Diminuer la quantité": {
+      "en": "Decrease the quantity",
+      "ar": "إنقاص الكمية"
+    },
+    "Augmenter la quantité": {
+      "en": "Increase the quantity",
+      "ar": "زيادة الكمية"
+    },
+    "Épuisé": {
+      "en": "Sold out",
+      "ar": "نفدت الكمية"
+    },
+    "Ce parfum revient bientôt. Écrivez-nous pour être prévenu.": {
+      "en": "This fragrance is coming back soon. Write to us to be told.",
+      "ar": "هذا العطر سيعود قريبًا. راسلنا لنخبرك."
+    },
+    "Livraison offerte": {
+      "en": "Free delivery",
+      "ar": "التوصيل مجاني"
+    },
+    "Nos services": {
+      "en": "Our services",
+      "ar": "خدماتنا"
+    },
+    "Informations produit": {
+      "en": "Product information",
+      "ar": "معلومات المنتج"
+    },
+    "Description": {
+      "en": "Description",
+      "ar": "الوصف"
+    },
+    "Description du produit": {
+      "en": "Product description",
+      "ar": "وصف المنتج"
+    },
+    "Comment utiliser": {
+      "en": "How to use",
+      "ar": "طريقة الاستعمال"
+    },
+    "Vaporisez sur les points de chaleur (poignet, cou, nuque). 2–3 pulvérisations pour un sillage optimal.": {
+      "en": "Spray on the warm points (wrist, neck, nape). 2–3 sprays for a lasting trail.",
+      "ar": "رشّه على نقاط الحرارة (المعصم، العنق، خلف الرقبة). رشّتان أو ثلاث تكفي لأثر يدوم."
+    },
+    "Livraison &amp; Retours": {
+      "en": "Delivery &amp; Returns",
+      "ar": "التوصيل والإرجاع"
+    },
+    "Informations livraison et retours": {
+      "en": "Delivery and returns information",
+      "ar": "معلومات التوصيل والإرجاع"
+    },
+    "Livraison 24–48h. 20 DH Casa · 30 DH Maroc · Gratuite dès 300 DH. COD disponible. Retours 14 jours (non ouvert).": {
+      "en": "Delivery in 24–48h. 20 DH Casablanca · 30 DH Morocco · Free from 300 DH. Cash on delivery available. Returns within 14 days.",
+      "ar": "التوصيل في 24–48 ساعة. 20 درهمًا بالدار البيضاء · 30 درهمًا في المغرب · مجانًا ابتداءً من 300 درهم. الدفع عند الاستلام متاح. الإرجاع خلال 14 يومًا."
+    },
+    "Vous aimerez aussi": {
+      "en": "You may also like",
+      "ar": "قد يعجبك أيضًا"
+    },
+    "Navigation suggestions": {
+      "en": "Suggestions navigation",
+      "ar": "تصفّح الاقتراحات"
+    },
+    "Parfum précédent": {
+      "en": "Previous fragrance",
+      "ar": "العطر السابق"
+    },
+    "Parfum suivant": {
+      "en": "Next fragrance",
+      "ar": "العطر التالي"
+    },
+    "Ajouter": {
+      "en": "Add",
+      "ar": "أضف"
+    },
+    "← Continuer mes achats": {
+      "en": "← Continue shopping",
+      "ar": "← متابعة التسوّق"
+    },
+    "Supprimer": {
+      "en": "Delete",
+      "ar": "حذف"
+    },
+    "Code promo": {
+      "en": "Promo code",
+      "ar": "رمز التخفيض"
+    },
+    "Entrez votre code": {
+      "en": "Enter your code",
+      "ar": "أدخل الرمز"
+    },
+    "Appliquer": {
+      "en": "Apply",
+      "ar": "تطبيق"
+    },
+    "Récapitulatif": {
+      "en": "Summary",
+      "ar": "ملخّص"
+    },
+    "Sous-total": {
+      "en": "Subtotal",
+      "ar": "المجموع الفرعي"
+    },
+    "Réduction": {
+      "en": "Discount",
+      "ar": "التخفيض"
+    },
+    "🔒 SSL": {
+      "en": "🔒 SSL",
+      "ar": "🔒 SSL"
+    },
+    "Plus que": {
+      "en": "Only",
+      "ar": "باقي"
+    },
+    "pour la livraison gratuite 🚚": {
+      "en": "for free delivery 🚚",
+      "ar": "ويصبح التوصيل مجانيًا 🚚"
+    },
+    "Email ou téléphone *": {
+      "en": "Email or phone *",
+      "ar": "البريد الإلكتروني أو الهاتف *"
+    },
+    "votre@email.ma ou 0612345678": {
+      "en": "your@email.ma or 0612345678",
+      "ar": "your@email.ma أو 0612345678"
+    },
+    "Mot de passe *": {
+      "en": "Password *",
+      "ar": "كلمة السر *"
+    },
+    "Se connecter →": {
+      "en": "Sign in →",
+      "ar": "تسجيل الدخول →"
+    },
+    "Mot de passe oublié ?": {
+      "en": "Forgotten your password?",
+      "ar": "نسيت كلمة السر؟"
+    },
+    "Espace Client": {
+      "en": "Customer area",
+      "ar": "فضاء الزبناء"
+    },
+    "Pas encore de compte ?": {
+      "en": "No account yet?",
+      "ar": "ما عندكش حساب بعد؟"
+    },
+    "Programme Fidélité ODYS": {
+      "en": "ODYS loyalty programme",
+      "ar": "برنامج الولاء ديال أوديس"
+    },
+    "10 pts → un parfum offert · 20 pts → un coffret": {
+      "en": "10 pts → a fragrance offered · 20 pts → a gift set",
+      "ar": "10 نقاط ← عطر هدية · 20 نقطة ← علبة هدية"
+    },
+    "Mot de passe oublié": {
+      "en": "Forgotten password",
+      "ar": "كلمة السر المنسية"
+    },
+    "Adresse e-mail *": {
+      "en": "Email address *",
+      "ar": "البريد الإلكتروني *"
+    },
+    "Envoyer le lien →": {
+      "en": "Send the link →",
+      "ar": "إرسال الرابط →"
+    },
+    "Rien ne vous parvient&nbsp;? Écrivez-nous, nous rouvrons votre compte\n      avec vous.": {
+      "en": "Nothing arrives?&nbsp;Write to us and we will reopen your account with you.",
+      "ar": "ما وصلك والو؟&nbsp;راسلنا ونعيد فتح حسابك معك."
+    },
+    "← Retour à la connexion": {
+      "en": "← Back to sign in",
+      "ar": "← العودة إلى تسجيل الدخول"
+    },
+    "Le lien est valable un temps limité. Pensez à regarder vos indésirables.": {
+      "en": "The link is valid for a limited time. Remember to look in your spam folder.",
+      "ar": "الرابط صالح لمدة محدودة. تفقّد أيضًا رسائل الإزعاج."
+    },
+    "Toujours rien après quelques minutes&nbsp;? Écrivez-nous.": {
+      "en": "Still nothing after a few minutes?&nbsp;Write to us.",
+      "ar": "مازال ما وصلك شي حاجة بعد دقائق؟&nbsp;راسلنا."
+    },
+    "Nouveau mot de passe": {
+      "en": "New password",
+      "ar": "كلمة سر جديدة"
+    },
+    "Compte&nbsp;:": {
+      "en": "Account:&nbsp;",
+      "ar": "الحساب:&nbsp;"
+    },
+    "Nouveau mot de passe *": {
+      "en": "New password *",
+      "ar": "كلمة السر الجديدة *"
+    },
+    "Confirmation *": {
+      "en": "Confirmation *",
+      "ar": "التأكيد *"
+    },
+    "Changer le mot de passe →": {
+      "en": "Change the password →",
+      "ar": "تغيير كلمة السر →"
+    },
+    "Page introuvable": {
+      "en": "Page not found",
+      "ar": "الصفحة غير موجودة"
+    },
+    "← Accueil": {
+      "en": "← Home",
+      "ar": "← الصفحة الرئيسية"
+    },
+    "Support Client": {
+      "en": "Customer support",
+      "ar": "دعم الزبناء"
+    },
+    "Réponse sous 2h en semaine · WhatsApp 7j/7 de 9h à 21h": {
+      "en": "Answer within 2h on weekdays · WhatsApp every day, 9am to 9pm",
+      "ar": "الجواب في ظرف ساعتين أيام الأسبوع · واتساب كل الأيام من 9 صباحًا إلى 9 ليلًا"
+    },
+    "Réponse immédiate · 7j/7": {
+      "en": "Immediate answer · every day",
+      "ar": "جواب فوري · كل الأيام"
+    },
+    "Email": {
+      "en": "Email",
+      "ar": "البريد الإلكتروني"
+    },
+    "Réponse sous 2h": {
+      "en": "Answer within 2h",
+      "ar": "الجواب في ظرف ساعتين"
+    },
+    "📍 ODYS Parfums — Casablanca, Maroc": {
+      "en": "📍 ODYS Parfums — Casablanca, Morocco",
+      "ar": "📍 أوديس بارفان — الدار البيضاء، المغرب"
+    },
+    "Lun–Sam · 9h–18h · WhatsApp 7j/7 · 9h–21h": {
+      "en": "Mon–Sat · 9am–6pm · WhatsApp every day · 9am–9pm",
+      "ar": "الاثنين–السبت · 9 ص–6 م · واتساب كل الأيام · 9 ص–9 م"
+    },
+    "Parfum, note olfactive, inspiration...": {
+      "en": "Fragrance, note, inspiration...",
+      "ar": "عطر، نفحة، مصدر إلهام..."
+    },
+    "Votre recherche": {
+      "en": "Your search",
+      "ar": "بحثك"
+    },
+    "Voir tous les parfums →": {
+      "en": "See all fragrances →",
+      "ar": "عرض كل العطور →"
+    },
+    "WhatsApp": {
+      "en": "WhatsApp",
+      "ar": "واتساب"
+    },
+    "ODYS": {
+      "en": "ODYS",
+      "ar": "ODYS"
+    },
+    "Parfum": {
+      "en": "Parfum",
+      "ar": "Parfum"
+    },
+    "Extrait": {
+      "en": "Extract",
+      "ar": "خلاصة"
+    },
+    "de parfum": {
+      "en": "of perfume",
+      "ar": "عطرية"
+    },
+    "CMI": {
+      "en": "CMI",
+      "ar": "CMI"
+    },
+    "Visa / Mastercard": {
+      "en": "Visa / Mastercard",
+      "ar": "Visa / Mastercard"
+    },
+    "CGV": {
+      "en": "Terms and conditions",
+      "ar": "الشروط العامة"
+    },
+    "Photo du produit": {
+      "en": "Product photo",
+      "ar": "صورة المنتج"
+    },
+    "Fermer la photo": {
+      "en": "Close the photo",
+      "ar": "إغلاق الصورة"
+    },
+    "Photo précédente": {
+      "en": "Previous photo",
+      "ar": "الصورة السابقة"
+    },
+    "Photo suivante": {
+      "en": "Next photo",
+      "ar": "الصورة التالية"
+    },
+    "ODYS Parfum — Retour à l'accueil": {
+      "en": "ODYS Parfum — back to the home page",
+      "ar": "أوديس بارفان — العودة إلى الصفحة الرئيسية"
+    },
+    "ODYS Parfums crée des compositions originales d'inspiration.\n      Les marques citées à titre de référence olfactive appartiennent à leurs\n      propriétaires respectifs et n'ont aucun lien avec ODYS Parfums.": {
+      "en": "ODYS Parfums creates original compositions of inspiration. The brands named as olfactory references belong to their respective owners and have no connection with ODYS Parfums.",
+      "ar": "تبتكر أوديس بارفان تركيبات أصلية مستوحاة. العلامات المذكورة كمرجع عطري تعود لأصحابها ولا علاقة لها بأوديس بارفان."
+    },
+    "Ce qu'en disent nos clients": {
+      "en": "What our customers say",
+      "ar": "ما يقوله زبناؤنا"
+    },
+    "L'essence d'ODYS": {
+      "en": "The essence of ODYS",
+      "ar": "جوهر أوديس"
+    },
+    "Une maison de parfum née de la rencontre entre l'élégance\n      contemporaine et l'âme du Maroc. Chaque composition est pensée comme une\n      signature — sobre, tenace, et taillée pour durer.": {
+      "en": "A perfume house born of the meeting between contemporary elegance and the soul of Morocco. Every composition is conceived as a signature — restrained, tenacious, and built to last.",
+      "ar": "دار عطور وُلدت من لقاء الأناقة المعاصرة بروح المغرب. كل تركيبة تُصمَّم كبصمة — هادئة، ثابتة، ومصنوعة لتدوم."
+    },
+    "Visuels de la page d'accueil": {
+      "en": "Home page visuals",
+      "ar": "صور الصفحة الرئيسية"
+    },
+    "Des fragrances d'exception": {
+      "en": "Exceptional fragrances",
+      "ar": "عطور استثنائية"
+    },
+    "5 g d'oud ou un coffret à 15 points": {
+      "en": "5 g of oud or a gift set at 15 points",
+      "ar": "5 غرام من العود أو علبة هدية عند 15 نقطة"
+    },
+    "Cette commande n'est plus en cours de livraison.\n          Une question&nbsp;? Écrivez-nous, nous reprenons le dossier avec vous.": {
+      "en": "This order is no longer out for delivery. A question? Write to us and we will take it up with you.",
+      "ar": "هذا الطلب لم يعد في طور التوصيل. عندك سؤال؟ راسلنا ونتابع الملف معك."
+    },
+    "L'Oud.": {
+      "en": "Oud.",
+      "ar": "العود."
+    },
+    "Oud naturel au gramme. Origines certifiées — Hindi Assam,\n        Royal Hindi, Thai Select. Prix transparent : vous payez notre coût\n        d'achat + 18% marge fixe. Rien de caché.": {
+      "en": "Natural oud by the gram. Certified origins — Hindi Assam, Royal Hindi, Thai Select. Transparent price: you pay our purchase cost + a fixed 18% margin. Nothing hidden.",
+      "ar": "عود طبيعي بالغرام. منشأ موثّق — هندي آسام، هندي رويال، تاي سيليكت. ثمن شفّاف: تؤدي ثمن شرائنا + هامش ثابت 18٪. بدون أي خفايا."
+    },
+    "L'or liquide de l'Orient — sélectionné à la source, vendu au gramme.\n    Choisissez exactement la quantité qu'il vous faut.": {
+      "en": "The liquid gold of the Orient — selected at the source, sold by the gram. Choose exactly the quantity you need.",
+      "ar": "ذهب الشرق السائل — مُنتقى من المصدر، يُباع بالغرام. اختر الكمية التي تحتاجها بالضبط."
+    },
+    "en raison de leur nature périssable et des exigences d'hygiène. Une fois\n      expédié, l'article ne peut pas être retourné. En cas de produit défectueux,\n      contactez-nous immédiatement via WhatsApp avec photo à l'appui.": {
+      "en": "because of their perishable nature and hygiene requirements. Once shipped, the item cannot be returned. If a product is faulty, contact us immediately on WhatsApp with a photo.",
+      "ar": "بسبب طبيعتها القابلة للتلف ومتطلبات النظافة. بمجرد الشحن لا يمكن إرجاع المنتج. في حالة وجود عيب، راسلنا فورًا عبر واتساب مع صورة."
+    },
+    "Présent sans s'imposer": {
+      "en": "Present without imposing",
+      "ar": "حاضر دون مبالغة"
+    },
+    "Fil d'Ariane": {
+      "en": "Breadcrumb",
+      "ar": "مسار التصفّح"
+    },
+    "Rien n'est à régler maintenant. Vous paierez à la livraison.": {
+      "en": "Nothing to pay now. You will pay on delivery.",
+      "ar": "لا شيء يُدفع الآن. ستؤدي عند الاستلام."
+    },
+    "Dites-nous ce que vous en pensez — votre avis aide les prochains à\n        choisir. Il est relu avant d'être publié.": {
+      "en": "Tell us what you think — your review helps the next customer choose. It is read before being published.",
+      "ar": "شاركنا رأيك — تقييمك يساعد غيرك على الاختيار. تتم مراجعته قبل النشر."
+    },
+    "L'inspiration des plus grandes maisons de parfumerie mondiale — élaborée au Maroc, au prix juste.": {
+      "en": "The inspiration of the great perfume houses of the world — made in Morocco, at a fair price.",
+      "ar": "وحي كبريات دور العطور العالمية — مصنوع في المغرب، بثمن عادل."
+    },
+    "Les notes de la fragrance dont ce parfum s'inspire.\n        La composition ODYS cherche à en retrouver l'accord.": {
+      "en": "The notes of the fragrance this perfume draws on. The ODYS composition seeks to find that accord again.",
+      "ar": "نفحات العطر الذي استُلهم منه هذا التركيب. تسعى تركيبة أوديس إلى استعادة هذا التناغم."
+    }
+  }
+}

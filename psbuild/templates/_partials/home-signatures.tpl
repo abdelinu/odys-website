@@ -41,11 +41,11 @@
 
   <div class="nv-sig-in">
     <div class="nv-sig-txt">
-      <p class="nv-eyebrow">Collection signature</p>
-      <h2 class="nv-h2" id="nv-sig-title">Des fragrances d'exception</h2>
-      <p class="nv-lede">Une sélection raffinée de nos créations les plus
-        emblématiques, inspirées par la richesse du Maroc.</p>
-      <a href="{$odysUrlParfums}" class="nv-btn nv-btn-pill">Voir toute la collection
+      <p class="nv-eyebrow">{l s='Collection signature' d='Shop.Theme.Odys'}</p>
+      <h2 class="nv-h2" id="nv-sig-title">{l s='Des fragrances d\'exception' d='Shop.Theme.Odys'}</h2>
+      <p class="nv-lede">{l s='Une sélection raffinée de nos créations les plus
+        emblématiques, inspirées par la richesse du Maroc.' d='Shop.Theme.Odys'}</p>
+      <a href="{$odysUrlParfums}" class="nv-btn nv-btn-pill">{l s='Voir toute la collection' d='Shop.Theme.Odys'}
         <span class="arw" aria-hidden="true">&rarr;</span></a>
     </div>
 

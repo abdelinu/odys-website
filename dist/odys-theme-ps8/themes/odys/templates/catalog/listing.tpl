@@ -18,9 +18,9 @@
   {include file='_partials/oud-intro.tpl'}
 {/if}
 
-<nav aria-label="Fil d'Ariane">
+<nav aria-label="{l s='Fil d\'Ariane' d='Shop.Theme.Odys'}">
   <ol class="bc">
-    <li><a href="{$urls.base_url}">Accueil</a></li>
+    <li><a href="{$urls.base_url}">{l s='Accueil' d='Shop.Theme.Odys'}</a></li>
     <li class="sep" aria-hidden="true">›</li>
     <li aria-current="page"><b>{$odysListTitle|escape:'html':'UTF-8'}</b></li>
   </ol>
@@ -30,7 +30,7 @@
   <div>
     <div class="sec-hd"{if $isOud} hidden{/if}>
       <div class="sec-hd-left">
-        <p>Collection ODYS</p>
+        <p>{l s='Collection ODYS' d='Shop.Theme.Odys'}</p>
         <h1>{$odysListTitle|escape:'html':'UTF-8'}</h1>
       </div>
 
@@ -91,7 +91,7 @@
     {if ($odysDansParfums || ($odysFams|@count > 1 && $odysAssezDeProduits)) && !$isOud}
     <div class="coll-bar">
       {if $odysDansParfums}
-        <nav class="odys-subcats" aria-label="Sections de la collection">
+        <nav class="odys-subcats" aria-label="{l s='Sections de la collection' d='Shop.Theme.Odys'}">
           {foreach from=$odysSecIds item=odysSecId name=sec}
             {if $odysSecId}
               <a href="{$link->getCategoryLink($odysSecId)}"
@@ -104,8 +104,8 @@
       {if $odysFams|@count > 1 && $odysAssezDeProduits}
         {assign var='odysFamNoms' value=['fresh'=>'Frais','oriental'=>'Oriental','sweet'=>'Sucré','oud'=>'Oud']}
         <div class="fam-filters" role="group" aria-labelledby="fam-lbl">
-          <span class="fam-lbl" id="fam-lbl">Famille</span>
-          <button class="ff on" type="button" data-action="filter-fam" data-fam="all" aria-pressed="true">Tout</button>
+          <span class="fam-lbl" id="fam-lbl">{l s='Famille' d='Shop.Theme.Odys'}</span>
+          <button class="ff on" type="button" data-action="filter-fam" data-fam="all" aria-pressed="true">{l s='Tout' d='Shop.Theme.Odys'}</button>
           {foreach from=$odysFamNoms key=odysFamCle item=odysFamNom}
             {if $odysFamCle|in_array:$odysFams}
               <button class="ff" type="button" data-action="filter-fam"
@@ -137,14 +137,14 @@
          aucune, la grille tombait à zéro pixel sans un mot, et le visiteur
          voyait une boutique vide. role="status" le fait annoncer. *}
       <p class="pg-empty" id="collEmpty" role="status" hidden>
-        Aucun parfum de cette famille dans cette section.
+        {l s='Aucun parfum de cette famille dans cette section.' d='Shop.Theme.Odys'}
       </p>
       {foreach from=$listing.products item=product}
         {include file='catalog/_partials/miniatures/product.tpl' product=$product}
       {foreachelse}
         <p style="grid-column:1/-1;text-align:center;padding:80px 20px;
                   font-family:var(--font-display);font-size:16px;color:var(--odys-muted)">
-          Aucun parfum dans cette collection pour le moment.
+          {l s='Aucun parfum dans cette collection pour le moment.' d='Shop.Theme.Odys'}
         </p>
       {/foreach}
     </div>
@@ -153,7 +153,7 @@
        should_be_displayed. Reading the wrong key printed an "Undefined array
        key" warning into every category page. *}
     {if isset($listing.pagination.should_be_displayed) && $listing.pagination.should_be_displayed}
-      <nav class="pagination" aria-label="Pagination"
+      <nav class="pagination" aria-label="{l s='Pagination' d='Shop.Theme.Odys'}"
            style="display:flex;justify-content:center;gap:8px;margin-top:var(--spacing-lg)">
         {foreach from=$listing.pagination.pages item=page}
           <a href="{$page.url}" class="pg-btn{if $page.current} on{/if}"

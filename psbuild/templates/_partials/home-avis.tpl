@@ -15,8 +15,8 @@
   <div>
     <div class="sec-hd">
       <div class="sec-hd-left">
-        <p>Leurs mots</p>
-        <h2 id="home-avis-title">Ce qu'en disent nos clients</h2>
+        <p>{l s='Leurs mots' d='Shop.Theme.Odys'}</p>
+        <h2 id="home-avis-title">{l s='Ce qu\'en disent nos clients' d='Shop.Theme.Odys'}</h2>
       </div>
     </div>
 

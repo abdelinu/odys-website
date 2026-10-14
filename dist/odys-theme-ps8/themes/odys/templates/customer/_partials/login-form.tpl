@@ -9,18 +9,18 @@
   <div class="cf-err">{$message}</div>
 {/foreach}
   {/foreach}
-  <div class="cf" style="margin-bottom:14px"><label for="field-email">Email ou téléphone *</label><input type="text" id="field-email" name="email" required maxlength="100" autocomplete="username" placeholder="votre@email.ma ou 0612345678"/></div>
-  <div class="cf" style="margin-bottom:20px"><label for="field-password">Mot de passe *</label><input type="password" id="field-password" name="password" required maxlength="100" autocomplete="current-password" placeholder="••••••••"/></div>
+  <div class="cf" style="margin-bottom:14px"><label for="field-email">{l s='Email ou téléphone *' d='Shop.Theme.Odys'}</label><input type="text" id="field-email" name="email" required maxlength="100" autocomplete="username" placeholder="{l s='votre@email.ma ou 0612345678' d='Shop.Theme.Odys'}"/></div>
+  <div class="cf" style="margin-bottom:20px"><label for="field-password">{l s='Mot de passe *' d='Shop.Theme.Odys'}</label><input type="password" id="field-password" name="password" required maxlength="100" autocomplete="current-password" placeholder="••••••••"/></div>
   <input type="hidden" name="token" value="{$token}"/>
   <input type="hidden" name="back"  value="{if isset($back)}{$back|escape:'html':'UTF-8'}{/if}"/>
-  <button type="submit" id="submit-login" name="submitLogin" value="1" class="btn-p" style="width:100%;justify-content:center;padding:14px">Se connecter →</button>
+  <button type="submit" id="submit-login" name="submitLogin" value="1" class="btn-p" style="width:100%;justify-content:center;padding:14px">{l s='Se connecter →' d='Shop.Theme.Odys'}</button>
 
   {* Ces deux blocs vivent ici et non dans authentication.tpl parce que le
      tunnel de commande n'affiche pas authentication.tpl : son etape
      « Informations personnelles » rend ce partial, qu'elle herite par
      {extends}. Un client qui a oublie son mot de passe au moment de payer
      n'avait aucune issue : il abandonnait son panier. *}
-  <div class="lf-oubli"><a href="{$urls.pages.password}">Mot de passe oublié ?</a></div>
+  <div class="lf-oubli"><a href="{$urls.pages.password}">{l s='Mot de passe oublié ?' d='Shop.Theme.Odys'}</a></div>
 
   {* Meme precaution que sur la page d'inscription : si le module social
      n'est pas installe, le hook ne rend rien et le bloc entier disparait,

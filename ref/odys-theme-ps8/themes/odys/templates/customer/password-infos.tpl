@@ -14,26 +14,26 @@
       <path fill="currentColor" style="color:var(--rose-deep)" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"/>
     </svg>
   </div>
-  <h1 style="font-family:var(--serif);font-size:26px;font-weight:500;margin-bottom:14px">C'est envoyé.</h1>
+  <h1 style="font-family:var(--serif);font-size:26px;font-weight:500;margin-bottom:14px">{l s='C\'est envoyé.' d='Shop.Theme.Odys'}</h1>
   {foreach from=$successes item=message}
     <p style="font-size:13px;line-height:1.8;color:var(--mid);margin-bottom:8px">{$message}</p>
   {/foreach}
   <p style="font-size:12px;line-height:1.8;color:var(--mid);margin-top:16px">
-    Le lien est valable un temps limité. Pensez à regarder vos indésirables.
+    {l s='Le lien est valable un temps limité. Pensez à regarder vos indésirables.' d='Shop.Theme.Odys'}
   </p>
   {* « C'est envoye » est une promesse. Si le courrier ne part pas — mail()
      sans SMTP echoue sans un mot — le client attend devant une page qui
      lui a dit que tout allait bien. On lui laisse une porte. *}
   <div style="margin-top:24px">
     <p style="font-size:12px;line-height:1.8;color:var(--mid);margin-bottom:10px">
-      Toujours rien après quelques minutes&nbsp;? Écrivez-nous.
+      {l s='Toujours rien après quelques minutes&nbsp;? Écrivez-nous.' d='Shop.Theme.Odys'}
     </p>
     {include file='_partials/contact-links.tpl' style='inline'
              subject="Bonjour ODYS, je n'ai pas recu le lien de mot de passe."}
   </div>
 
   <div style="margin-top:26px;font-size:12px">
-    <a href="{$urls.pages.authentication}" style="color:var(--rose-deep)">← Retour à la connexion</a>
+    <a href="{$urls.pages.authentication}" style="color:var(--rose-deep)">{l s='← Retour à la connexion' d='Shop.Theme.Odys'}</a>
   </div>
 </div>
 {/block}

@@ -70,7 +70,12 @@ caturl() {
 
 psh() { docker compose exec -T shop bash -lc "$1" 2>&1; }
 
-SHOP=http://localhost:8080
+# Depuis que la boutique a trois langues, PrestaShop prefixe toutes ses
+# adresses par la langue : /nous-contacter est devenu /fr/nous-contacter.
+# BOUT est la racine (fichiers, themes, points d'entree), SHOP est la
+# boutique francaise, celle que ces controles lisaient avant.
+BOUT=http://localhost:8080
+SHOP=$BOUT/fr
 
 # Smarty keeps compiled templates; without this a stale page hides every change.
 
@@ -288,7 +293,7 @@ sql "DELETE FROM ps_odys_crm_lead WHERE visitor='verifyrun'" >/dev/null
 
 code=$(curl -s -o /tmp/capture.json -m 30 -w "%{http_code}" -X POST -H 'Content-Type: application/json' \
   -d '{"source":"quiz","visitor":"verifyrun","subject":"Famille oriental"}' \
-  "$SHOP/index.php?fc=module&module=odys_crm&controller=capture")
+  "$BOUT/index.php?fc=module&module=odys_crm&controller=capture")
 
 echo "HTTP $code  $(head -c 120 /tmp/capture.json)"
 
@@ -301,7 +306,7 @@ row=$(sql "SELECT CONCAT(COUNT(*),'/',COALESCE(MAX(hits),0)) FROM ps_odys_crm_le
 step "A second event merges instead of duplicating"
 
 curl -s -o /dev/null -m 30 -X POST -H 'Content-Type: application/json' \
-  -d '{"source":"whatsapp","visitor":"verifyrun"}' "$SHOP/index.php?fc=module&module=odys_crm&controller=capture"
+  -d '{"source":"whatsapp","visitor":"verifyrun"}' "$BOUT/index.php?fc=module&module=odys_crm&controller=capture"
 
 row=$(sql "SELECT CONCAT(COUNT(*),'/',COALESCE(MAX(hits),0)) FROM ps_odys_crm_lead WHERE visitor='verifyrun'")
 
@@ -310,7 +315,7 @@ row=$(sql "SELECT CONCAT(COUNT(*),'/',COALESCE(MAX(hits),0)) FROM ps_odys_crm_le
 step "Honeypot"
 
 curl -s -o /dev/null -m 30 -X POST -H 'Content-Type: application/json' \
-  -d '{"source":"newsletter","email":"spam@bot.tld","website":"x"}' "$SHOP/index.php?fc=module&module=odys_crm&controller=capture"
+  -d '{"source":"newsletter","email":"spam@bot.tld","website":"x"}' "$BOUT/index.php?fc=module&module=odys_crm&controller=capture"
 
 spam=$(sql "SELECT COUNT(*) FROM ps_odys_crm_lead WHERE email='spam@bot.tld'")
 
@@ -326,7 +331,7 @@ cat_left=$(sql "SELECT COUNT(*) FROM ps_category_lang WHERE link_rewrite='flacon
 
 [ "${cat_left:-1}" = "0" ] && ok "category deleted" || no "category still exists (${cat_left:-?})"
 
-appjs=$(curl -s -m 30 "$SHOP/themes/odys/assets/js/app.js")
+appjs=$(curl -s -m 30 "$BOUT/themes/odys/assets/js/app.js")
 
 if echo "$appjs" | grep -qE "FLACONS_DB|flPickFrag"; then no "app.js still ships the page JS"; else ok "app.js carries no flacons code"; fi
 
@@ -402,7 +407,12 @@ for path in $(echo "$home" | grep -o 'href="http://localhost:8080/[^"#]*"' | sed
 
   code=$(curl -s -o /dev/null -m 20 -w "%{http_code}" "$path")
 
-  if [ "$code" != "200" ]; then no "$path -> $code"; dead=$((dead+1)); fi
+  # Un 301 vers la meme page prefixee par la langue n est pas un lien mort :
+  # depuis que la boutique a trois langues, la racine mene a /fr/.
+  case "$code" in
+    200|301|302) ;;
+    *) no "$path -> $code"; dead=$((dead+1));;
+  esac
 
 done
 
@@ -428,7 +438,7 @@ for page in "/panier?action=show" "/connexion" "/nous-contacter" "/10-parfums"; 
 
 done
 
-css=$(curl -s -m 30 "$SHOP/themes/odys/assets/css/theme.css")
+css=$(curl -s -m 30 "$BOUT/themes/odys/assets/css/theme.css")
 
 echo "$css" | grep -q "checkout-step" && ok "checkout is styled by the theme" || no "no checkout rules in theme.css"
 
@@ -452,7 +462,7 @@ echo "$home" | grep -q "<title>ODYS Parfums | ODYS Parfums" && no "brand repeate
 
 step "Capture endpoint: method, size and validation"
 
-CAPTURE="$SHOP/index.php?fc=module&module=odys_crm&controller=capture"
+CAPTURE="$BOUT/index.php?fc=module&module=odys_crm&controller=capture"
 
 # the counters are per IP per hour and every check below spends some, so the
 
@@ -552,7 +562,7 @@ echo "$home" | grep -q 'id="drawer"' && no "the dead cart drawer is back" || ok 
 
 echo "$home" | grep -q 'id="odysToast"' && ok "add-to-cart confirmation present" || no "no add-to-cart feedback"
 
-css=$(curl -s -m 30 "$SHOP/themes/odys/assets/css/theme.css")
+css=$(curl -s -m 30 "$BOUT/themes/odys/assets/css/theme.css")
 
 echo "$css" | grep -q "body.menu-open" && ok "page locks behind the open menu" || no "no scroll lock for the menu"
 
@@ -720,7 +730,7 @@ if [ -n "$a" ] && [ -n "$b" ] && [ "$a" -lt "$b" ]; then ok "le reglage est pose
 
 # menaient nulle part — 8 points d'entree de module et /fournisseurs.
 
-sm=$(curl -s -m 40 "$SHOP/1_fr_0_sitemap.xml")
+sm=$(curl -s -m 40 "$BOUT/1_fr_0_sitemap.xml")
 
 if [ -n "$sm" ]; then
 
@@ -1228,11 +1238,11 @@ echo "$home" | grep -qE '<a href="[^"]+" class="nv-btn"' \
   && ok "le bouton du hero est du vrai texte, et il mene quelque part" \
   || no "le bouton du hero manque ou n a pas de destination"
 
-film=$(curl -s -o /dev/null -m 60 -w "%{http_code} %{size_download}" "$SHOP/themes/odys/assets/img/hero/odys-essence.mp4")
+film=$(curl -s -o /dev/null -m 60 -w "%{http_code} %{size_download}" "$BOUT/themes/odys/assets/img/hero/odys-essence.mp4")
 
 case "$film" in "200 "*) ok "the film is served ($(echo "$film" | awk '{printf "%.1f MB", $2/1048576}'))";; *) no "the film returns $film";; esac
 
-poster=$(curl -s -o /dev/null -m 40 -w "%{http_code}" "$SHOP/themes/odys/assets/img/hero/odys-essence-poster.webp")
+poster=$(curl -s -o /dev/null -m 40 -w "%{http_code}" "$BOUT/themes/odys/assets/img/hero/odys-essence-poster.webp")
 
 [ "$poster" = "200" ] && ok "the poster is served" || no "the poster returns $poster"
 
@@ -1242,13 +1252,13 @@ case "$home" in *'fetchpriority="high"'*) ok "l'image du hero est priorisee au c
 
 # and the copy must not depend on JavaScript to be readable
 
-css=$(curl -s -m 40 "$SHOP/themes/odys/assets/css/theme.css")
+css=$(curl -s -m 40 "$BOUT/themes/odys/assets/css/theme.css")
 
 case "$css" in *'.odys-js .odys-film-hero .nv-hero-txt'*) ok "the words are hidden only while JS can bring them back";; *) no "the hero copy would stay invisible without JS";; esac
 
 case "$css" in *'prefers-reduced-motion:reduce'*) ok "reduced motion is honoured";; *) no "no reduced-motion rule";; esac
 
-js=$(curl -s -m 40 "$SHOP/themes/odys/assets/js/app.js")
+js=$(curl -s -m 40 "$BOUT/themes/odys/assets/js/app.js")
 
 case "$js" in *'prefers-reduced-motion: reduce'*) ok "the film does not play for reduced motion";; *) no "the film plays regardless of the motion preference";; esac
 
@@ -1375,14 +1385,14 @@ JAR=$(mktemp)
 
 # command-line argument, so it stays out of `ps`
 
-curl -s -c "$JAR" -m 60 -L "$SHOP/$BOF/" -o /tmp/bo-login.html
+curl -s -c "$JAR" -m 60 -L "$BOUT/$BOF/" -o /tmp/bo-login.html
 
 lt=$(grep -o 'name="token" value="[^"]*"' /tmp/bo-login.html | head -1 | sed 's/.*value="//;s/"//')
 
 dash=$(curl -s -b "$JAR" -c "$JAR" -m 90 -o /dev/null -w "%{redirect_url}" \
   -d "controller=AdminLogin" -d "submitLogin=1" -d "token=$lt" \
   --data-urlencode "email=$ADMIN_MAIL" --data-urlencode "passwd=$ADMIN_PASSWD" \
-  "$SHOP/$BOF/index.php?controller=AdminLogin&token=$lt")
+  "$BOUT/$BOF/index.php?controller=AdminLogin&token=$lt")
 
 case "$dash" in *AdminDashboard*) ok "an employee can sign in";; *) no "back office login failed";; esac
 
@@ -1401,7 +1411,7 @@ if [ -n "$mods" ]; then ok "the dashboard renders its menu"; else no "no dashboa
 for m in odys_crm odys_loyalty; do
 
   c=$(curl -s -b "$JAR" -c "$JAR" -m 90 -L -o /tmp/bo-$m.html -w "%{http_code}" \
-      "$SHOP/$BOF/index.php?controller=AdminModules&configure=$m&token=$mods")
+      "$BOUT/$BOF/index.php?controller=AdminModules&configure=$m&token=$mods")
 
   [ "$c" = "200" ] && ok "configure $m -> 200" || no "configure $m -> $c"
 
@@ -1602,7 +1612,7 @@ echo "$tpl" | grep -q "ODYS_GRAM_STEPS" && ok "the page reads the setting" || no
 
 case "$oud" in *'data-grams="5"'*) ok "with nothing set, the shipped ladder renders";; *) no "the default ladder is missing";; esac
 
-js=$(curl -s -m 40 "$SHOP/themes/odys/assets/js/app.js")
+js=$(curl -s -m 40 "$BOUT/themes/odys/assets/js/app.js")
 
 echo "$js" | grep -q "cards.dataset.min" && ok "the stepper honours the shop's minimum" || no "the minimum is hard-coded in the script"
 
@@ -1712,7 +1722,7 @@ case "$copy" in *"$code"*) ok "le message annonce le même code que le visuel";;
 
 step "Les champs de formulaire se voient"
 
-css=$(curl -s -m 40 "$SHOP/themes/odys/assets/css/theme.css")
+css=$(curl -s -m 40 "$BOUT/themes/odys/assets/css/theme.css")
 
 # un champ doit avoir un fond, pas seulement un filet à 22 %
 
@@ -2526,7 +2536,7 @@ ok "les accents d'ambiance restent dans le contenu de page"
 
 # la photographie de l'ingredient, si elle existe, doit etre servie
 
-img="$SHOP/themes/odys/assets/img/ambiance-fleur-oranger.webp"
+img="$BOUT/themes/odys/assets/img/ambiance-fleur-oranger.webp"
 
 code=$(curl -s -m 30 -o /dev/null -w "%{http_code}" "$img")
 
@@ -2536,7 +2546,7 @@ code=$(curl -s -m 30 -o /dev/null -w "%{http_code}" "$img")
 
 for rule in $(echo "$css" | grep -o "ambiance-[a-z-]*\.webp" | sort -u); do
 
-  c=$(curl -s -m 30 -o /dev/null -w "%{http_code}" "$SHOP/themes/odys/assets/img/$rule")
+  c=$(curl -s -m 30 -o /dev/null -w "%{http_code}" "$BOUT/themes/odys/assets/img/$rule")
 
   [ "$c" = "200" ] || no "le CSS demande $rule qui repond $c"
 
@@ -2962,14 +2972,14 @@ echo "$prod" | grep -q 'og:title" content="ODYS Parfums | ODYS Parfums"' \
 
 step "SEO : sitemap et robots"
 
-code=$(curl -s -m 40 -o /dev/null -w "%{http_code}" "$SHOP/1_index_sitemap.xml")
+code=$(curl -s -m 40 -o /dev/null -w "%{http_code}" "$BOUT/1_index_sitemap.xml")
 
 [ "$code" = "200" ] && ok "le sitemap repond 200" || no "le sitemap repond $code"
 
-curl -s -m 40 "$SHOP/robots.txt" | grep -qi "^Sitemap:" \
+curl -s -m 40 "$BOUT/robots.txt" | grep -qi "^Sitemap:" \
   && ok "robots.txt indique le sitemap" || no "robots.txt ne mentionne aucun sitemap"
 
-sm=$(curl -s -m 60 "$SHOP/1_fr_0_sitemap.xml")
+sm=$(curl -s -m 60 "$BOUT/1_fr_0_sitemap.xml")
 
 printf '%s' "$sm" | grep -q "page-introuvable" \
   && no "la page 404 est listee dans le sitemap" || ok "la 404 n'est pas listee"
@@ -3289,7 +3299,7 @@ grep -q "nv-hero.odys-film-hero::before{display:none}" "$css"   && ok "l ancien 
 
 # le poster, lui, doit rester : c est ce qu on voit a la place du film
 
-poster=$(curl -s -m 30 -o /dev/null -w "%{http_code}" "$SHOP/themes/odys/assets/img/hero/odys-essence-poster.webp")
+poster=$(curl -s -m 30 -o /dev/null -w "%{http_code}" "$BOUT/themes/odys/assets/img/hero/odys-essence-poster.webp")
 
 [ "$poster" = "200" ] && ok "l image d attente est servie" || no "l image d attente repond $poster"
 
@@ -3317,7 +3327,7 @@ f=$(psh "ls /var/www/html/themes/odys/assets/cache/*.css 2>/dev/null | head -1" 
 
 if [ -n "$f" ]; then
 
-  hdr=$(curl -s -I -m 20 "$SHOP/themes/odys/assets/cache/$(basename "$f")" | grep -i "cache-control")
+  hdr=$(curl -s -I -m 20 "$BOUT/themes/odys/assets/cache/$(basename "$f")" | grep -i "cache-control")
 
   case "$hdr" in
 
@@ -3339,7 +3349,7 @@ step "Le CSS combine est parsable"
 
 if [ -n "${f:-}" ]; then
 
-  curl -s -m 30 -o bundle-check.css "$SHOP/themes/odys/assets/cache/$(basename "$f")"
+  curl -s -m 30 -o bundle-check.css "$BOUT/themes/odys/assets/cache/$(basename "$f")"
 
   bal=$(python -c "
 
@@ -3806,6 +3816,123 @@ echo "$cssn" | grep -q 'body.index #header:not(.stuck) .odys-nav .ham span{backg
 echo "$cssn" | grep -q 'linear-gradient(180deg,rgba(24,14,8,.78),rgba(24,14,8,0))!important' \
   && ok "le voile de la barre est celui du hero, mesure a 5,0:1 sur le menu" \
   || no "le voile de la barre a change sans etre remesure"
+
+step "La boutique parle trois langues"
+
+# Francais, anglais, arabe. Les deux dernieres sont posees par
+# dist/deploy/maj-langues.php ; les mots du theme voyagent avec le theme,
+# en XLIFF, parce qu'un domaine sans fichier n'est jamais relu en base.
+for lg in fr en ar; do
+  code=$(curl -s -o /dev/null -w "%{http_code}" -m 40 "$BOUT/$lg/")
+  [ "$code" = "200" ] \
+    && ok "la boutique repond en $lg" \
+    || no "la boutique repond $code en $lg"
+done
+
+# L'arabe se lit de droite a gauche : le gabarit doit le dire au navigateur.
+curl -s -m 40 "$BOUT/ar/" | grep -q '<html lang="ar" dir="rtl">' \
+  && ok "l arabe est servi de droite a gauche" \
+  || no "la page arabe ne declare pas son sens de lecture"
+
+# Et les mots doivent vraiment changer.
+men=$(curl -s -m 40 "$BOUT/en/" | grep -c 'Gift sets')
+mar=$(curl -s -m 40 "$BOUT/ar/" | grep -c 'العود والبخور')
+[ "${men:-0}" -ge 1 ] && ok "le menu anglais est en anglais" \
+  || no "le menu anglais sert encore le francais"
+[ "${mar:-0}" -ge 1 ] && ok "le menu arabe est en arabe" \
+  || no "le menu arabe sert encore le francais"
+# Le francais, lui, ne doit pas avoir bouge : la cle EST la phrase francaise.
+curl -s -m 40 "$BOUT/fr/" | grep -q 'Tous les parfums' \
+  && ok "le francais est inchange" \
+  || no "le francais a bouge en passant par les traductions"
+
+# Le choix de la langue, dans la barre.
+curl -s -m 40 "$BOUT/fr/" | grep -q 'odys-lang-cur' \
+  && ok "la barre porte le choix de la langue" \
+  || no "on ne peut pas changer de langue depuis la barre"
+
+# PrestaShop sait fabriquer une feuille en miroir. Elle retourne aussi les
+# pourcentages des degrades : le voile du hero en ressortait incoherent.
+[ -f ../dist/odys-theme-ps8/themes/odys/assets/css/theme_rtl.css ] \
+  && no "une feuille RTL automatique est revenue : elle casse le voile du hero" \
+  || ok "pas de feuille RTL automatique, l inversion est ecrite a la main"
+tr -d '\r\n' < "$cssf" | grep -qF '[dir="rtl"] .odys-film-hero .nv-hero-in{direction:ltr}' \
+  && ok "en arabe le texte du hero reste du cote mesure de la photo" \
+  || no "le texte du hero passerait sur le flacon, hors du voile"
+
+# Les fichiers de traduction, livres avec le theme.
+for loc in en-US ar-SA; do
+  f="../dist/odys-theme-ps8/themes/odys/translations/$loc/ShopThemeOdys.$loc.xlf"
+  [ -f "$f" ] && ok "le theme livre son catalogue $loc" \
+    || no "le catalogue $loc manque : la langue retomberait sur le francais"
+done
+
+# Et le script qui pose les langues doit s analyser.
+MSYS_NO_PATHCONV=1 docker compose cp ../dist/deploy/maj-langues.php shop:/tmp/verif-lang.php >/dev/null 2>&1
+anal=$(psh "php -l /tmp/verif-lang.php" | tr -d '\r')
+case "$anal" in
+  *"No syntax errors"*) ok "maj-langues.php est du PHP valide";;
+  *) no "maj-langues.php ne s analyse pas"; echo "    $(echo "$anal" | head -1)";;
+esac
+psh "rm -f /tmp/verif-lang.php" >/dev/null 2>&1
+
+step "Le panier s ouvre sur le cote"
+
+# Ajouter un parfum ne faisait rien de visible : un chiffre bougeait dans la
+# barre. Le tiroir de la maquette existait mais n etait inclus nulle part —
+# son contenu venait d un tableau JavaScript, pas de PrestaShop.
+acc3=$(curl -s -m 40 "$SHOP/")
+printf '%s' "$acc3" | grep -q 'id="odysTiroir"' \
+  && ok "le tiroir du panier est dans la page" \
+  || no "ajouter au panier ne montre toujours rien"
+
+# Rendu par le serveur : sans script, il s ouvre quand meme et commander marche.
+printf '%s' "$acc3" | grep -q 'ot-commander' \
+  && ok "le tiroir porte son bouton de commande" \
+  || no "le tiroir n a pas de sortie vers la commande"
+printf '%s' "$acc3" | grep -q 'id="odysTiroirTotal"' \
+  && ok "le montant est sur le bouton" \
+  || no "le montant n est plus sur le bouton"
+printf '%s' "$acc3" | grep -q 'odysTiroirLivFill' \
+  && ok "la barre de livraison offerte est posee" \
+  || no "plus rien ne dit ce qui manque pour la livraison offerte"
+
+# Le seuil se mesure sur les produits : compter la livraison dedans ferait
+# dire « encore 4 DH » a un panier qui n y est pas.
+grep -q 'cart.subtotals.products.amount' ../dist/odys-theme-ps8/themes/odys/templates/_partials/cart-drawer.tpl \
+  && ok "le seuil se mesure sur les produits, livraison exclue" \
+  || no "la livraison compte pour atteindre la livraison offerte"
+
+# Le tiroir de la maquette n est plus dans la page : ses fonctions cherchaient
+# #drawer a chaque ajout et echouaient, ce qui avalait la suite du pont.
+jsf2=../dist/odys-theme-ps8/themes/odys/assets/js/app.js
+grep -q "if (!d || !o) { return; }" "$jsf2" \
+  && ok "l ancien tiroir ne fait plus echouer l ajout" \
+  || no "openCart tombe encore sur un tiroir absent"
+grep -q "window.odysTiroirApresAjout(resp)" "$jsf2" \
+  && ok "le tiroir montre ce que PrestaShop a confirme" \
+  || no "le tiroir s ouvrirait sur autre chose que la reponse du serveur"
+
+step "Une seule commande pour la langue"
+
+# Trois liens cote a cote tenaient sur un ordinateur, pas sur un telephone.
+printf '%s' "$acc3" | grep -q 'odys-lang-cur' \
+  && ok "la langue se choisit d un seul bouton" \
+  || no "le choix de la langue n est plus assemble"
+printf '%s' "$acc3" | grep -q '<details class="odys-lang">' \
+  && ok "il s ouvre sans script, au clavier comme a la main" \
+  || no "le choix de la langue depend d un script"
+
+# Et la langue d arrivee est celle du navigateur.
+det=$(sql "SELECT value FROM ps_configuration WHERE name='PS_DETECT_LANG'")
+[ "${det:-0}" = "1" ] \
+  && ok "la boutique s ouvre dans la langue du navigateur" \
+  || no "la detection de langue est eteinte"
+ar_auto=$(curl -s -o /dev/null -w "%{redirect_url}" -m 30 -H "Accept-Language: ar-MA,ar;q=0.9" "$BOUT/")
+case "$ar_auto" in
+  *"/ar/"*) ok "un navigateur en arabe arrive sur la boutique arabe";;
+  *) no "un navigateur en arabe n est pas reconnu ($ar_auto)";;
+esac
 
 step "Le lot de mise a jour s analyse"
 

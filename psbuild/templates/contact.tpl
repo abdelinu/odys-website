@@ -14,6 +14,6 @@
 
 {block name='page_header_container'}
   <header class="page-header">
-    <h1>Contactez-nous</h1>
+    <h1>{l s='Contactez-nous' d='Shop.Theme.Odys'}</h1>
   </header>
 {/block}

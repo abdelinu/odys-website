@@ -1,0 +1,1428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr-FR" target-language="ar-SA"
+        datatype="plaintext" original="themes/odys">
+    <body>
+      <trans-unit id="1" resname="Navigation principale">
+        <source>Navigation principale</source>
+        <target>التنقل الرئيسي</target>
+      </trans-unit>
+      <trans-unit id="2" resname="Collection">
+        <source>Collection</source>
+        <target>المجموعة</target>
+      </trans-unit>
+      <trans-unit id="3" resname="Homme">
+        <source>Homme</source>
+        <target>للرجال</target>
+      </trans-unit>
+      <trans-unit id="4" resname="Femme">
+        <source>Femme</source>
+        <target>للنساء</target>
+      </trans-unit>
+      <trans-unit id="5" resname="Unisexe">
+        <source>Unisexe</source>
+        <target>للجنسين</target>
+      </trans-unit>
+      <trans-unit id="6" resname="Tous les parfums">
+        <source>Tous les parfums</source>
+        <target>كل العطور</target>
+      </trans-unit>
+      <trans-unit id="7" resname="Oud &amp;amp; Boukhour">
+        <source>Oud &amp;amp; Boukhour</source>
+        <target>العود والبخور</target>
+      </trans-unit>
+      <trans-unit id="8" resname="Coffrets">
+        <source>Coffrets</source>
+        <target>علب الهدايا</target>
+      </trans-unit>
+      <trans-unit id="9" resname="Diffuseurs">
+        <source>Diffuseurs</source>
+        <target>موزّعات العطر</target>
+      </trans-unit>
+      <trans-unit id="10" resname="À propos">
+        <source>À propos</source>
+        <target>من نحن</target>
+      </trans-unit>
+      <trans-unit id="11" resname="Actions">
+        <source>Actions</source>
+        <target>إجراءات</target>
+      </trans-unit>
+      <trans-unit id="12" resname="Rechercher des parfums">
+        <source>Rechercher des parfums</source>
+        <target>البحث عن العطور</target>
+      </trans-unit>
+      <trans-unit id="13" resname="Ma liste de souhaits">
+        <source>Ma liste de souhaits</source>
+        <target>قائمة رغباتي</target>
+      </trans-unit>
+      <trans-unit id="14" resname="Ouvrir le menu de navigation">
+        <source>Ouvrir le menu de navigation</source>
+        <target>فتح قائمة التنقل</target>
+      </trans-unit>
+      <trans-unit id="15" resname="Menu de navigation">
+        <source>Menu de navigation</source>
+        <target>قائمة التنقل</target>
+      </trans-unit>
+      <trans-unit id="16" resname="Fermer le menu">
+        <source>Fermer le menu</source>
+        <target>إغلاق القائمة</target>
+      </trans-unit>
+      <trans-unit id="17" resname="Accueil">
+        <source>Accueil</source>
+        <target>الصفحة الرئيسية</target>
+      </trans-unit>
+      <trans-unit id="18" resname="Toute la collection">
+        <source>Toute la collection</source>
+        <target>كل المجموعة</target>
+      </trans-unit>
+      <trans-unit id="19" resname="Contact">
+        <source>Contact</source>
+        <target>اتصل بنا</target>
+      </trans-unit>
+      <trans-unit id="20" resname="Fidélité">
+        <source>Fidélité</source>
+        <target>برنامج الولاء</target>
+      </trans-unit>
+      <trans-unit id="21" resname="Connexion">
+        <source>Connexion</source>
+        <target>تسجيل الدخول</target>
+      </trans-unit>
+      <trans-unit id="22" resname="Paiement à la livraison">
+        <source>Paiement à la livraison</source>
+        <target>الدفع عند الاستلام</target>
+      </trans-unit>
+      <trans-unit id="23" resname="Annonces ODYS">
+        <source>Annonces ODYS</source>
+        <target>إعلانات أوديس</target>
+      </trans-unit>
+      <trans-unit id="24" resname="Mon panier">
+        <source>Mon panier</source>
+        <target>سلّتي</target>
+      </trans-unit>
+      <trans-unit id="25" resname="Fermer le panier">
+        <source>Fermer le panier</source>
+        <target>إغلاق السلّة</target>
+      </trans-unit>
+      <trans-unit id="26" resname="Progression vers la livraison offerte">
+        <source>Progression vers la livraison offerte</source>
+        <target>التقدّم نحو التوصيل المجاني</target>
+      </trans-unit>
+      <trans-unit id="27" resname="Retirer">
+        <source>Retirer</source>
+        <target>حذف</target>
+      </trans-unit>
+      <trans-unit id="28" resname="Votre panier est vide.">
+        <source>Votre panier est vide.</source>
+        <target>سلّتك فارغة.</target>
+      </trans-unit>
+      <trans-unit id="29" resname="Voir la collection">
+        <source>Voir la collection</source>
+        <target>تصفّح المجموعة</target>
+      </trans-unit>
+      <trans-unit id="30" resname="Commander">
+        <source>Commander</source>
+        <target>إتمام الطلب</target>
+      </trans-unit>
+      <trans-unit id="31" resname="Voir le panier">
+        <source>Voir le panier</source>
+        <target>عرض السلّة</target>
+      </trans-unit>
+      <trans-unit id="32" resname="Paiement à la livraison · Livraison 24–48h · Retours sous 14 jours">
+        <source>Paiement à la livraison · Livraison 24–48h · Retours sous 14 jours</source>
+        <target>الدفع عند الاستلام · التوصيل في 24–48 ساعة · الإرجاع خلال 14 يومًا</target>
+      </trans-unit>
+      <trans-unit id="33" resname="Écrire à ODYS sur WhatsApp">
+        <source>Écrire à ODYS sur WhatsApp</source>
+        <target>راسل أوديس عبر واتساب</target>
+      </trans-unit>
+      <trans-unit id="34" resname="Appeler ODYS">
+        <source>Appeler ODYS</source>
+        <target>اتصل بأوديس</target>
+      </trans-unit>
+      <trans-unit id="35" resname="ODYS Parfum — Accueil">
+        <source>ODYS Parfum — Accueil</source>
+        <target>أوديس بارفان — الصفحة الرئيسية</target>
+      </trans-unit>
+      <trans-unit id="36" resname="ODYS Parfums sur Instagram">
+        <source>ODYS Parfums sur Instagram</source>
+        <target>أوديس بارفان على إنستغرام</target>
+      </trans-unit>
+      <trans-unit id="37" resname="ODYS Parfums sur Facebook">
+        <source>ODYS Parfums sur Facebook</source>
+        <target>أوديس بارفان على فيسبوك</target>
+      </trans-unit>
+      <trans-unit id="38" resname="ODYS Parfums sur TikTok">
+        <source>ODYS Parfums sur TikTok</source>
+        <target>أوديس بارفان على تيك توك</target>
+      </trans-unit>
+      <trans-unit id="39" resname="Frais &amp;amp; Aquatiques">
+        <source>Frais &amp;amp; Aquatiques</source>
+        <target>منعشة ومائية</target>
+      </trans-unit>
+      <trans-unit id="40" resname="Orientaux &amp;amp; Épicés">
+        <source>Orientaux &amp;amp; Épicés</source>
+        <target>شرقية وحارّة</target>
+      </trans-unit>
+      <trans-unit id="41" resname="Maison">
+        <source>Maison</source>
+        <target>الدار</target>
+      </trans-unit>
+      <trans-unit id="42" resname="Notre histoire">
+        <source>Notre histoire</source>
+        <target>قصّتنا</target>
+      </trans-unit>
+      <trans-unit id="43" resname="Savoir-faire">
+        <source>Savoir-faire</source>
+        <target>حرفتنا</target>
+      </trans-unit>
+      <trans-unit id="44" resname="Retours">
+        <source>Retours</source>
+        <target>الإرجاع</target>
+      </trans-unit>
+      <trans-unit id="45" resname="Plan du site">
+        <source>Plan du site</source>
+        <target>خريطة الموقع</target>
+      </trans-unit>
+      <trans-unit id="46" resname="Mon compte">
+        <source>Mon compte</source>
+        <target>حسابي</target>
+      </trans-unit>
+      <trans-unit id="47" resname="Espace fidélité">
+        <source>Espace fidélité</source>
+        <target>فضاء الولاء</target>
+      </trans-unit>
+      <trans-unit id="48" resname="Mes commandes">
+        <source>Mes commandes</source>
+        <target>طلباتي</target>
+      </trans-unit>
+      <trans-unit id="49" resname="Ma wishlist">
+        <source>Ma wishlist</source>
+        <target>قائمة رغباتي</target>
+      </trans-unit>
+      <trans-unit id="50" resname="Déconnexion">
+        <source>Déconnexion</source>
+        <target>تسجيل الخروج</target>
+      </trans-unit>
+      <trans-unit id="51" resname="Se connecter">
+        <source>Se connecter</source>
+        <target>تسجيل الدخول</target>
+      </trans-unit>
+      <trans-unit id="52" resname="Créer un compte">
+        <source>Créer un compte</source>
+        <target>إنشاء حساب</target>
+      </trans-unit>
+      <trans-unit id="53" resname="Suivre ma commande">
+        <source>Suivre ma commande</source>
+        <target>تتبّع طلبي</target>
+      </trans-unit>
+      <trans-unit id="54" resname="Programme fidélité">
+        <source>Programme fidélité</source>
+        <target>برنامج الولاء</target>
+      </trans-unit>
+      <trans-unit id="55" resname="Paiement sécurisé">
+        <source>Paiement sécurisé</source>
+        <target>دفع آمن</target>
+      </trans-unit>
+      <trans-unit id="56" resname="Virement">
+        <source>Virement</source>
+        <target>تحويل بنكي</target>
+      </trans-unit>
+      <trans-unit id="57" resname="Mentions légales">
+        <source>Mentions légales</source>
+        <target>المعلومات القانونية</target>
+      </trans-unit>
+      <trans-unit id="58" resname="Confidentialité">
+        <source>Confidentialité</source>
+        <target>الخصوصية</target>
+      </trans-unit>
+      <trans-unit id="59" resname="Leurs mots">
+        <source>Leurs mots</source>
+        <target>بكلماتهم</target>
+      </trans-unit>
+      <trans-unit id="60" resname="Frais">
+        <source>Frais</source>
+        <target>منعش</target>
+      </trans-unit>
+      <trans-unit id="61" resname="Oriental">
+        <source>Oriental</source>
+        <target>شرقي</target>
+      </trans-unit>
+      <trans-unit id="62" resname="Sucré">
+        <source>Sucré</source>
+        <target>حلو</target>
+      </trans-unit>
+      <trans-unit id="63" resname="Oud">
+        <source>Oud</source>
+        <target>عود</target>
+      </trans-unit>
+      <trans-unit id="64" resname="Commencer le quiz">
+        <source>Commencer le quiz</source>
+        <target>ابدأ الاختبار</target>
+      </trans-unit>
+      <trans-unit id="65" resname="Maison de Senteur · Casablanca">
+        <source>Maison de Senteur · Casablanca</source>
+        <target>دار العطر · الدار البيضاء</target>
+      </trans-unit>
+      <trans-unit id="66" resname="Explorer ODYS">
+        <source>Explorer ODYS</source>
+        <target>اكتشف أوديس</target>
+      </trans-unit>
+      <trans-unit id="67" resname="Scroll">
+        <source>Scroll</source>
+        <target>مرّر</target>
+      </trans-unit>
+      <trans-unit id="68" resname="Tête">
+        <source>Tête</source>
+        <target>المقدّمة</target>
+      </trans-unit>
+      <trans-unit id="69" resname="Fraîcheur · Énergie">
+        <source>Fraîcheur · Énergie</source>
+        <target>انتعاش · طاقة</target>
+      </trans-unit>
+      <trans-unit id="70" resname="Caractère · Émotion">
+        <source>Caractère · Émotion</source>
+        <target>شخصية · إحساس</target>
+      </trans-unit>
+      <trans-unit id="71" resname="Fond">
+        <source>Fond</source>
+        <target>القاعدة</target>
+      </trans-unit>
+      <trans-unit id="72" resname="Profondeur · Signature">
+        <source>Profondeur · Signature</source>
+        <target>عمق · بصمة</target>
+      </trans-unit>
+      <trans-unit id="73" resname="Expérience olfactive">
+        <source>Expérience olfactive</source>
+        <target>تجربة عطرية</target>
+      </trans-unit>
+      <trans-unit id="74" resname="Une pyramide de senteurs">
+        <source>Une pyramide de senteurs</source>
+        <target>هرم العطر</target>
+      </trans-unit>
+      <trans-unit id="75" resname="Chaque fragrance est une histoire, un voyage en trois temps :&#10;        fraîcheur, cœur et profondeur.">
+        <source>Chaque fragrance est une histoire, un voyage en trois temps :
+        fraîcheur, cœur et profondeur.</source>
+        <target>كل عطر حكاية ورحلة في ثلاث مراحل: الانتعاش، القلب، والعمق.</target>
+      </trans-unit>
+      <trans-unit id="76" resname="Explorer les notes">
+        <source>Explorer les notes</source>
+        <target>اكتشف النفحات</target>
+      </trans-unit>
+      <trans-unit id="77" resname="Sur mesure">
+        <source>Sur mesure</source>
+        <target>حسب الطلب</target>
+      </trans-unit>
+      <trans-unit id="78" resname="Composez votre ODYS">
+        <source>Composez votre ODYS</source>
+        <target>اصنع أوديس الخاص بك</target>
+      </trans-unit>
+      <trans-unit id="79" resname="Un parfum, mille possibilités.">
+        <source>Un parfum, mille possibilités.</source>
+        <target>عطر واحد وألف احتمال.</target>
+      </trans-unit>
+      <trans-unit id="80" resname="Commencer">
+        <source>Commencer</source>
+        <target>ابدأ</target>
+      </trans-unit>
+      <trans-unit id="81" resname="Collection signature">
+        <source>Collection signature</source>
+        <target>المجموعة المميّزة</target>
+      </trans-unit>
+      <trans-unit id="82" resname="Une sélection raffinée de nos créations les plus&#10;        emblématiques, inspirées par la richesse du Maroc.">
+        <source>Une sélection raffinée de nos créations les plus
+        emblématiques, inspirées par la richesse du Maroc.</source>
+        <target>اختيار راقٍ من أبرز إبداعاتنا، مستوحى من غنى المغرب.</target>
+      </trans-unit>
+      <trans-unit id="83" resname="Voir toute la collection">
+        <source>Voir toute la collection</source>
+        <target>تصفّح المجموعة كاملة</target>
+      </trans-unit>
+      <trans-unit id="84" resname="Nos engagements">
+        <source>Nos engagements</source>
+        <target>التزاماتنا</target>
+      </trans-unit>
+      <trans-unit id="85" resname="Livraison offerte dès 300 DH">
+        <source>Livraison offerte dès 300 DH</source>
+        <target>التوصيل مجاني ابتداءً من 300 درهم</target>
+      </trans-unit>
+      <trans-unit id="86" resname="24–48 h partout au Maroc">
+        <source>24–48 h partout au Maroc</source>
+        <target>24–48 ساعة في كل أنحاء المغرب</target>
+      </trans-unit>
+      <trans-unit id="87" resname="CMI, Visa et virement acceptés">
+        <source>CMI, Visa et virement acceptés</source>
+        <target>نقبل CMI وفيزا والتحويل البنكي</target>
+      </trans-unit>
+      <trans-unit id="88" resname="Service client">
+        <source>Service client</source>
+        <target>خدمة الزبناء</target>
+      </trans-unit>
+      <trans-unit id="89" resname="À votre écoute sur WhatsApp">
+        <source>À votre écoute sur WhatsApp</source>
+        <target>رهن إشارتكم عبر واتساب</target>
+      </trans-unit>
+      <trans-unit id="90" resname="Suivi de la commande">
+        <source>Suivi de la commande</source>
+        <target>تتبّع الطلب</target>
+      </trans-unit>
+      <trans-unit id="91" resname="Transporteur">
+        <source>Transporteur</source>
+        <target>شركة التوصيل</target>
+      </trans-unit>
+      <trans-unit id="92" resname="Numéro de suivi">
+        <source>Numéro de suivi</source>
+        <target>رقم التتبّع</target>
+      </trans-unit>
+      <trans-unit id="93" resname="Suivre le colis chez le transporteur →">
+        <source>Suivre le colis chez le transporteur →</source>
+        <target>تتبّع الطرد لدى شركة التوصيل →</target>
+      </trans-unit>
+      <trans-unit id="94" resname="Notre Cœur de Marque · Identité ODYS">
+        <source>Notre Cœur de Marque · Identité ODYS</source>
+        <target>جوهرنا · هوية أوديس</target>
+      </trans-unit>
+      <trans-unit id="95" resname="Notre héritage.">
+        <source>Notre héritage.</source>
+        <target>إرثنا.</target>
+      </trans-unit>
+      <trans-unit id="96" resname="Découvrir la collection">
+        <source>Découvrir la collection</source>
+        <target>اكتشف المجموعة</target>
+      </trans-unit>
+      <trans-unit id="97" resname="Prix transparent">
+        <source>Prix transparent</source>
+        <target>ثمن شفّاف</target>
+      </trans-unit>
+      <trans-unit id="98" resname="Coût réel + 18% marge">
+        <source>Coût réel + 18% marge</source>
+        <target>التكلفة الحقيقية + 18٪ هامش</target>
+      </trans-unit>
+      <trans-unit id="99" resname="Origine certifiée">
+        <source>Origine certifiée</source>
+        <target>منشأ موثّق</target>
+      </trans-unit>
+      <trans-unit id="100" resname="Inde · Thaïlande">
+        <source>Inde · Thaïlande</source>
+        <target>الهند · تايلاند</target>
+      </trans-unit>
+      <trans-unit id="101" resname="Au gramme">
+        <source>Au gramme</source>
+        <target>بالغرام</target>
+      </trans-unit>
+      <trans-unit id="102" resname="Commande sur mesure">
+        <source>Commande sur mesure</source>
+        <target>طلب حسب الرغبة</target>
+      </trans-unit>
+      <trans-unit id="103" resname="Héritage Marocain · Collection Oud">
+        <source>Héritage Marocain · Collection Oud</source>
+        <target>إرث مغربي · مجموعة العود</target>
+      </trans-unit>
+      <trans-unit id="104" resname="Oud &amp;amp; Boukhour Artisanal">
+        <source>Oud &amp;amp; Boukhour Artisanal</source>
+        <target>العود والبخور الحرفي</target>
+      </trans-unit>
+      <trans-unit id="105" resname="Vendu au gramme">
+        <source>Vendu au gramme</source>
+        <target>يُباع بالغرام</target>
+      </trans-unit>
+      <trans-unit id="106" resname="COD disponible">
+        <source>COD disponible</source>
+        <target>الدفع عند الاستلام متاح</target>
+      </trans-unit>
+      <trans-unit id="107" resname="Non inclus dans les points fidélité">
+        <source>Non inclus dans les points fidélité</source>
+        <target>غير مشمول بنقاط الولاء</target>
+      </trans-unit>
+      <trans-unit id="108" resname="Garanties Oud &amp;amp; Boukhour">
+        <source>Garanties Oud &amp;amp; Boukhour</source>
+        <target>ضمانات العود والبخور</target>
+      </trans-unit>
+      <trans-unit id="109" resname="Quantité exacte">
+        <source>Quantité exacte</source>
+        <target>كمية مضبوطة</target>
+      </trans-unit>
+      <trans-unit id="110" resname="Origines certifiées">
+        <source>Origines certifiées</source>
+        <target>منشأ موثّق</target>
+      </trans-unit>
+      <trans-unit id="111" resname="Livraison 24–48h">
+        <source>Livraison 24–48h</source>
+        <target>التوصيل في 24–48 ساعة</target>
+      </trans-unit>
+      <trans-unit id="112" resname="Emballage hermétique">
+        <source>Emballage hermétique</source>
+        <target>تغليف محكم</target>
+      </trans-unit>
+      <trans-unit id="113" resname="Hors fidélité">
+        <source>Hors fidélité</source>
+        <target>خارج برنامج الولاء</target>
+      </trans-unit>
+      <trans-unit id="114" resname="Pas de points">
+        <source>Pas de points</source>
+        <target>بدون نقاط</target>
+      </trans-unit>
+      <trans-unit id="115" resname="Politique de retour — Oud &amp;amp; Boukhour">
+        <source>Politique de retour — Oud &amp;amp; Boukhour</source>
+        <target>سياسة الإرجاع — العود والبخور</target>
+      </trans-unit>
+      <trans-unit id="116" resname="Les produits Oud et Boukhour">
+        <source>Les produits Oud et Boukhour</source>
+        <target>منتجات العود والبخور</target>
+      </trans-unit>
+      <trans-unit id="117" resname="ne sont pas éligibles au retour">
+        <source>ne sont pas éligibles au retour</source>
+        <target>لا يمكن إرجاعها</target>
+      </trans-unit>
+      <trans-unit id="118" resname="3 questions · 30 secondes">
+        <source>3 questions · 30 secondes</source>
+        <target>3 أسئلة · 30 ثانية</target>
+      </trans-unit>
+      <trans-unit id="119" resname="Trouvez votre ODYS">
+        <source>Trouvez votre ODYS</source>
+        <target>اعثر على أوديس الذي يناسبك</target>
+      </trans-unit>
+      <trans-unit id="120" resname="Fermer le quiz">
+        <source>Fermer le quiz</source>
+        <target>إغلاق الاختبار</target>
+      </trans-unit>
+      <trans-unit id="121" resname="1 · Quelle famille vous attire ?">
+        <source>1 · Quelle famille vous attire ?</source>
+        <target>1 · أي عائلة عطرية تجذبك؟</target>
+      </trans-unit>
+      <trans-unit id="122" resname="Citrus, aquatique, boisé léger">
+        <source>Citrus, aquatique, boisé léger</source>
+        <target>حمضيات، مائي، خشبي خفيف</target>
+      </trans-unit>
+      <trans-unit id="123" resname="Épicé, ambré, chaud">
+        <source>Épicé, ambré, chaud</source>
+        <target>حار، عنبري، دافئ</target>
+      </trans-unit>
+      <trans-unit id="124" resname="Vanille, caramel, poudré">
+        <source>Vanille, caramel, poudré</source>
+        <target>فانيليا، كراميل، بودري</target>
+      </trans-unit>
+      <trans-unit id="125" resname="Bois précieux, fumé, profond">
+        <source>Bois précieux, fumé, profond</source>
+        <target>أخشاب ثمينة، مدخّن، عميق</target>
+      </trans-unit>
+      <trans-unit id="126" resname="2 · Pour quelle occasion ?">
+        <source>2 · Pour quelle occasion ?</source>
+        <target>2 · لأي مناسبة؟</target>
+      </trans-unit>
+      <trans-unit id="127" resname="Quotidien">
+        <source>Quotidien</source>
+        <target>كل يوم</target>
+      </trans-unit>
+      <trans-unit id="128" resname="Bureau, sorties">
+        <source>Bureau, sorties</source>
+        <target>العمل والخروج</target>
+      </trans-unit>
+      <trans-unit id="129" resname="Soirée">
+        <source>Soirée</source>
+        <target>السهرة</target>
+      </trans-unit>
+      <trans-unit id="130" resname="Dîner, événement">
+        <source>Dîner, événement</source>
+        <target>عشاء أو حفل</target>
+      </trans-unit>
+      <trans-unit id="131" resname="Cadeau">
+        <source>Cadeau</source>
+        <target>هدية</target>
+      </trans-unit>
+      <trans-unit id="132" resname="Pour offrir">
+        <source>Pour offrir</source>
+        <target>لتقديمها هدية</target>
+      </trans-unit>
+      <trans-unit id="133" resname="3 · Quelle intensité ?">
+        <source>3 · Quelle intensité ?</source>
+        <target>3 · أي قوة؟</target>
+      </trans-unit>
+      <trans-unit id="134" resname="Discret">
+        <source>Discret</source>
+        <target>هادئ</target>
+      </trans-unit>
+      <trans-unit id="135" resname="Proche de la peau">
+        <source>Proche de la peau</source>
+        <target>قريب من البشرة</target>
+      </trans-unit>
+      <trans-unit id="136" resname="Équilibré">
+        <source>Équilibré</source>
+        <target>متوازن</target>
+      </trans-unit>
+      <trans-unit id="137" resname="Affirmé">
+        <source>Affirmé</source>
+        <target>قوي</target>
+      </trans-unit>
+      <trans-unit id="138" resname="Fort sillage">
+        <source>Fort sillage</source>
+        <target>أثر قوي</target>
+      </trans-unit>
+      <trans-unit id="139" resname="Voir ma sélection">
+        <source>Voir ma sélection</source>
+        <target>عرض اختياري</target>
+      </trans-unit>
+      <trans-unit id="140" resname="Nouveau">
+        <source>Nouveau</source>
+        <target>جديد</target>
+      </trans-unit>
+      <trans-unit id="141" resname="Édition">
+        <source>Édition</source>
+        <target>إصدار</target>
+      </trans-unit>
+      <trans-unit id="142" resname="Inspiré de">
+        <source>Inspiré de</source>
+        <target>مستوحى من</target>
+      </trans-unit>
+      <trans-unit id="143" resname="Épuisé &amp;mdash; voir la fiche">
+        <source>Épuisé &amp;mdash; voir la fiche</source>
+        <target>نفدت الكمية &amp;mdash; عرض الصفحة</target>
+      </trans-unit>
+      <trans-unit id="144" resname="Choisir le grammage">
+        <source>Choisir le grammage</source>
+        <target>اختر الوزن</target>
+      </trans-unit>
+      <trans-unit id="145" resname="Ajouter au panier">
+        <source>Ajouter au panier</source>
+        <target>أضف إلى السلّة</target>
+      </trans-unit>
+      <trans-unit id="146" resname="Collection ODYS">
+        <source>Collection ODYS</source>
+        <target>مجموعة أوديس</target>
+      </trans-unit>
+      <trans-unit id="147" resname="Sections de la collection">
+        <source>Sections de la collection</source>
+        <target>أقسام المجموعة</target>
+      </trans-unit>
+      <trans-unit id="148" resname="Famille">
+        <source>Famille</source>
+        <target>العائلة</target>
+      </trans-unit>
+      <trans-unit id="149" resname="Tout">
+        <source>Tout</source>
+        <target>الكل</target>
+      </trans-unit>
+      <trans-unit id="150" resname="Aucun parfum de cette famille dans cette section.">
+        <source>Aucun parfum de cette famille dans cette section.</source>
+        <target>لا يوجد عطر من هذه العائلة في هذا القسم.</target>
+      </trans-unit>
+      <trans-unit id="151" resname="Aucun parfum dans cette collection pour le moment.">
+        <source>Aucun parfum dans cette collection pour le moment.</source>
+        <target>لا يوجد أي عطر في هذه المجموعة حاليًا.</target>
+      </trans-unit>
+      <trans-unit id="152" resname="Pagination">
+        <source>Pagination</source>
+        <target>ترقيم الصفحات</target>
+      </trans-unit>
+      <trans-unit id="153" resname="Merci, votre commande est confirmée">
+        <source>Merci, votre commande est confirmée</source>
+        <target>شكرًا، تم تأكيد طلبك</target>
+      </trans-unit>
+      <trans-unit id="154" resname="Votre référence">
+        <source>Votre référence</source>
+        <target>رقم طلبك</target>
+      </trans-unit>
+      <trans-unit id="155" resname="suivre ma commande">
+        <source>suivre ma commande</source>
+        <target>تتبّع طلبي</target>
+      </trans-unit>
+      <trans-unit id="156" resname="À préparer pour la livraison">
+        <source>À préparer pour la livraison</source>
+        <target>قيد التحضير للتوصيل</target>
+      </trans-unit>
+      <trans-unit id="157" resname="Adresse">
+        <source>Adresse</source>
+        <target>العنوان</target>
+      </trans-unit>
+      <trans-unit id="158" resname="Votre commande">
+        <source>Votre commande</source>
+        <target>طلبك</target>
+      </trans-unit>
+      <trans-unit id="159" resname="Télécharger la facture">
+        <source>Télécharger la facture</source>
+        <target>تحميل الفاتورة</target>
+      </trans-unit>
+      <trans-unit id="160" resname="Continuer mes achats">
+        <source>Continuer mes achats</source>
+        <target>متابعة التسوّق</target>
+      </trans-unit>
+      <trans-unit id="161" resname="Une question sur cette commande ?">
+        <source>Une question sur cette commande ?</source>
+        <target>عندك سؤال حول هذا الطلب؟</target>
+      </trans-unit>
+      <trans-unit id="162" resname="Indiquez la référence">
+        <source>Indiquez la référence</source>
+        <target>اذكر رقم الطلب</target>
+      </trans-unit>
+      <trans-unit id="163" resname=", nous retrouvons le colis tout de suite.">
+        <source>, nous retrouvons le colis tout de suite.</source>
+        <target>، وسنجد الطرد في الحين.</target>
+      </trans-unit>
+      <trans-unit id="164" resname="Informations ODYS">
+        <source>Informations ODYS</source>
+        <target>معلومات أوديس</target>
+      </trans-unit>
+      <trans-unit id="165" resname="Une question ?">
+        <source>Une question ?</source>
+        <target>عندك سؤال؟</target>
+      </trans-unit>
+      <trans-unit id="166" resname="Notre service client répond sur WhatsApp, du lundi au samedi, 9h–18h.">
+        <source>Notre service client répond sur WhatsApp, du lundi au samedi, 9h–18h.</source>
+        <target>خدمة الزبناء تجيب عبر واتساب، من الاثنين إلى السبت، من 9 صباحًا إلى 6 مساءً.</target>
+      </trans-unit>
+      <trans-unit id="167" resname="Écrire sur WhatsApp">
+        <source>Écrire sur WhatsApp</source>
+        <target>راسلنا عبر واتساب</target>
+      </trans-unit>
+      <trans-unit id="168" resname="Nous écrire">
+        <source>Nous écrire</source>
+        <target>اكتب لنا</target>
+      </trans-unit>
+      <trans-unit id="169" resname="Contactez-nous">
+        <source>Contactez-nous</source>
+        <target>اتصل بنا</target>
+      </trans-unit>
+      <trans-unit id="170" resname="Suivi de commande">
+        <source>Suivi de commande</source>
+        <target>تتبّع الطلب</target>
+      </trans-unit>
+      <trans-unit id="171" resname="Où est mon colis ?">
+        <source>Où est mon colis ?</source>
+        <target>أين طردي؟</target>
+      </trans-unit>
+      <trans-unit id="172" resname="XKBKNABJK">
+        <source>XKBKNABJK</source>
+        <target>XKBKNABJK</target>
+      </trans-unit>
+      <trans-unit id="173" resname="Référence de commande *">
+        <source>Référence de commande *</source>
+        <target>رقم الطلب *</target>
+      </trans-unit>
+      <trans-unit id="174" resname="Email utilisé pour la commande *">
+        <source>Email utilisé pour la commande *</source>
+        <target>البريد الإلكتروني المستعمل في الطلب *</target>
+      </trans-unit>
+      <trans-unit id="175" resname="votre@email.ma">
+        <source>votre@email.ma</source>
+        <target>your@email.ma</target>
+      </trans-unit>
+      <trans-unit id="176" resname="Suivre ma commande →">
+        <source>Suivre ma commande →</source>
+        <target>تتبّع طلبي →</target>
+      </trans-unit>
+      <trans-unit id="177" resname="Vous avez un compte ?">
+        <source>Vous avez un compte ?</source>
+        <target>عندك حساب؟</target>
+      </trans-unit>
+      <trans-unit id="178" resname="Vos commandes y sont déjà listées">
+        <source>Vos commandes y sont déjà listées</source>
+        <target>طلباتك مدرجة فيه مسبقًا</target>
+      </trans-unit>
+      <trans-unit id="179" resname="Gardez votre historique">
+        <source>Gardez votre historique</source>
+        <target>احتفظ بسجلّك</target>
+      </trans-unit>
+      <trans-unit id="180" resname="Choisissez un mot de passe et cette commande — et les suivantes —&#10;          resteront dans votre espace client, avec vos points ODYS.">
+        <source>Choisissez un mot de passe et cette commande — et les suivantes —
+          resteront dans votre espace client, avec vos points ODYS.</source>
+        <target>اختر كلمة سر ويبقى هذا الطلب — والطلبات القادمة — في حسابك، مع نقاط أوديس.</target>
+      </trans-unit>
+      <trans-unit id="181" resname="← Mon compte">
+        <source>← Mon compte</source>
+        <target>← حسابي</target>
+      </trans-unit>
+      <trans-unit id="182" resname="Espace client">
+        <source>Espace client</source>
+        <target>فضاء الزبناء</target>
+      </trans-unit>
+      <trans-unit id="183" resname="Pas de compte à portée de main ?">
+        <source>Pas de compte à portée de main ?</source>
+        <target>ما عندكش حساب؟</target>
+      </trans-unit>
+      <trans-unit id="184" resname="Suivez une commande avec sa référence">
+        <source>Suivez une commande avec sa référence</source>
+        <target>تتبّع طلبًا برقمه</target>
+      </trans-unit>
+      <trans-unit id="185" resname="Aucune commande pour le moment">
+        <source>Aucune commande pour le moment</source>
+        <target>لا يوجد أي طلب حاليًا</target>
+      </trans-unit>
+      <trans-unit id="186" resname="Votre première commande vous rapporte un point par 100 DH.">
+        <source>Votre première commande vous rapporte un point par 100 DH.</source>
+        <target>طلبك الأول يمنحك نقطة عن كل 100 درهم.</target>
+      </trans-unit>
+      <trans-unit id="187" resname="Découvrir la collection →">
+        <source>Découvrir la collection →</source>
+        <target>اكتشف المجموعة →</target>
+      </trans-unit>
+      <trans-unit id="188" resname="Espace personnel">
+        <source>Espace personnel</source>
+        <target>الفضاء الشخصي</target>
+      </trans-unit>
+      <trans-unit id="189" resname="Vos points fidélité ODYS">
+        <source>Vos points fidélité ODYS</source>
+        <target>نقاط الولاء ديالك في أوديس</target>
+      </trans-unit>
+      <trans-unit id="190" resname="points accumulés · 1 pt = 100 DH dépensés">
+        <source>points accumulés · 1 pt = 100 DH dépensés</source>
+        <target>نقطة مجمّعة · 1 نقطة = 100 درهم</target>
+      </trans-unit>
+      <trans-unit id="191" resname="Prochaine récompense">
+        <source>Prochaine récompense</source>
+        <target>المكافأة القادمة</target>
+      </trans-unit>
+      <trans-unit id="192" resname="Un parfum à 10 pts &amp;middot; deux à 15 &amp;middot; un coffret à 20">
+        <source>Un parfum à 10 pts &amp;middot; deux à 15 &amp;middot; un coffret à 20</source>
+        <target>عطر عند 10 نقاط &amp;middot; عطران عند 15 &amp;middot; علبة هدية عند 20</target>
+      </trans-unit>
+      <trans-unit id="193" resname="Échanger mes points →">
+        <source>Échanger mes points →</source>
+        <target>استبدال نقاطي →</target>
+      </trans-unit>
+      <trans-unit id="194" resname="Mes points ODYS">
+        <source>Mes points ODYS</source>
+        <target>نقاط أوديس ديالي</target>
+      </trans-unit>
+      <trans-unit id="195" resname="Solde, échange, historique">
+        <source>Solde, échange, historique</source>
+        <target>الرصيد، الاستبدال، السجلّ</target>
+      </trans-unit>
+      <trans-unit id="196" resname="Suivre, retourner">
+        <source>Suivre, retourner</source>
+        <target>التتبّع والإرجاع</target>
+      </trans-unit>
+      <trans-unit id="197" resname="Mes adresses">
+        <source>Mes adresses</source>
+        <target>عناويني</target>
+      </trans-unit>
+      <trans-unit id="198" resname="Gérer la livraison">
+        <source>Gérer la livraison</source>
+        <target>تدبير التوصيل</target>
+      </trans-unit>
+      <trans-unit id="199" resname="Mes informations">
+        <source>Mes informations</source>
+        <target>معلوماتي</target>
+      </trans-unit>
+      <trans-unit id="200" resname="Profil, mot de passe">
+        <source>Profil, mot de passe</source>
+        <target>الملف وكلمة السر</target>
+      </trans-unit>
+      <trans-unit id="201" resname="Mes envies">
+        <source>Mes envies</source>
+        <target>رغباتي</target>
+      </trans-unit>
+      <trans-unit id="202" resname="Parfums mis de côté">
+        <source>Parfums mis de côté</source>
+        <target>عطور وضعتها جانبًا</target>
+      </trans-unit>
+      <trans-unit id="203" resname="Se déconnecter">
+        <source>Se déconnecter</source>
+        <target>تسجيل الخروج</target>
+      </trans-unit>
+      <trans-unit id="204" resname="Fermer la session">
+        <source>Fermer la session</source>
+        <target>إنهاء الجلسة</target>
+      </trans-unit>
+      <trans-unit id="205" resname="← Mes commandes">
+        <source>← Mes commandes</source>
+        <target>← طلباتي</target>
+      </trans-unit>
+      <trans-unit id="206" resname="Commander à nouveau">
+        <source>Commander à nouveau</source>
+        <target>أعد الطلب</target>
+      </trans-unit>
+      <trans-unit id="207" resname="Paiement">
+        <source>Paiement</source>
+        <target>الأداء</target>
+      </trans-unit>
+      <trans-unit id="208" resname="Message cadeau">
+        <source>Message cadeau</source>
+        <target>رسالة الهدية</target>
+      </trans-unit>
+      <trans-unit id="209" resname="Échanges">
+        <source>Échanges</source>
+        <target>المراسلات</target>
+      </trans-unit>
+      <trans-unit id="210" resname="Votre colis est arrivé ?">
+        <source>Votre colis est arrivé ?</source>
+        <target>وصل طردك؟</target>
+      </trans-unit>
+      <trans-unit id="211" resname="Aucun résultat">
+        <source>Aucun résultat</source>
+        <target>لا نتيجة</target>
+      </trans-unit>
+      <trans-unit id="212" resname="Erreur 404">
+        <source>Erreur 404</source>
+        <target>خطأ 404</target>
+      </trans-unit>
+      <trans-unit id="213" resname="Rechercher un parfum">
+        <source>Rechercher un parfum</source>
+        <target>ابحث عن عطر</target>
+      </trans-unit>
+      <trans-unit id="214" resname="Parfum, note olfactive, inspiration…">
+        <source>Parfum, note olfactive, inspiration…</source>
+        <target>عطر، نفحة، مصدر إلهام…</target>
+      </trans-unit>
+      <trans-unit id="215" resname="Rechercher">
+        <source>Rechercher</source>
+        <target>بحث</target>
+      </trans-unit>
+      <trans-unit id="216" resname="Pages principales">
+        <source>Pages principales</source>
+        <target>الصفحات الرئيسية</target>
+      </trans-unit>
+      <trans-unit id="217" resname="Pour homme">
+        <source>Pour homme</source>
+        <target>للرجال</target>
+      </trans-unit>
+      <trans-unit id="218" resname="Pour femme">
+        <source>Pour femme</source>
+        <target>للنساء</target>
+      </trans-unit>
+      <trans-unit id="219" resname="Aller au contenu principal">
+        <source>Aller au contenu principal</source>
+        <target>انتقل إلى المحتوى الرئيسي</target>
+      </trans-unit>
+      <trans-unit id="220" resname="Contacter ODYS Parfums sur WhatsApp">
+        <source>Contacter ODYS Parfums sur WhatsApp</source>
+        <target>راسل أوديس بارفان عبر واتساب</target>
+      </trans-unit>
+      <trans-unit id="221" resname="Commencez ici">
+        <source>Commencez ici</source>
+        <target>ابدأ من هنا</target>
+      </trans-unit>
+      <trans-unit id="222" resname="La boutique">
+        <source>La boutique</source>
+        <target>المتجر</target>
+      </trans-unit>
+      <trans-unit id="223" resname="Voir tout">
+        <source>Voir tout</source>
+        <target>عرض الكل</target>
+      </trans-unit>
+      <trans-unit id="224" resname="Rayons de la boutique">
+        <source>Rayons de la boutique</source>
+        <target>أقسام المتجر</target>
+      </trans-unit>
+      <trans-unit id="225" resname="Pour découvrir">
+        <source>Pour découvrir</source>
+        <target>للاكتشاف</target>
+      </trans-unit>
+      <trans-unit id="226" resname="Nos coffrets">
+        <source>Nos coffrets</source>
+        <target>علب الهدايا</target>
+      </trans-unit>
+      <trans-unit id="227" resname="Sélections de la boutique">
+        <source>Sélections de la boutique</source>
+        <target>اختيارات المتجر</target>
+      </trans-unit>
+      <trans-unit id="228" resname="Pourquoi ODYS">
+        <source>Pourquoi ODYS</source>
+        <target>لماذا أوديس</target>
+      </trans-unit>
+      <trans-unit id="229" resname="Cour marocaine aux colonnes de zellige et de stuc sculpté">
+        <source>Cour marocaine aux colonnes de zellige et de stuc sculpté</source>
+        <target>فناء مغربي بأعمدة الزليج والجبس المنقوش</target>
+      </trans-unit>
+      <trans-unit id="230" resname="Production à Casablanca, matières sélectionnées, contrôle à chaque lot.">
+        <source>Production à Casablanca, matières sélectionnées, contrôle à chaque lot.</source>
+        <target>صناعة بالدار البيضاء، مواد منتقاة، ومراقبة لكل دفعة.</target>
+      </trans-unit>
+      <trans-unit id="231" resname="Mabkhara fumante posée sur un tapis oriental">
+        <source>Mabkhara fumante posée sur un tapis oriental</source>
+        <target>مبخرة تتصاعد منها الأدخنة فوق زربية شرقية</target>
+      </trans-unit>
+      <trans-unit id="232" resname="Oud vendu au gramme">
+        <source>Oud vendu au gramme</source>
+        <target>العود يُباع بالغرام</target>
+      </trans-unit>
+      <trans-unit id="233" resname="Colis en carton kraft fermé, dans une lumière chaude">
+        <source>Colis en carton kraft fermé, dans une lumière chaude</source>
+        <target>طرد من الورق المقوّى في ضوء دافئ</target>
+      </trans-unit>
+      <trans-unit id="234" resname="Livraison 24–48 h">
+        <source>Livraison 24–48 h</source>
+        <target>التوصيل في 24–48 ساعة</target>
+      </trans-unit>
+      <trans-unit id="235" resname="20 DH à Casablanca, 30 DH partout au Maroc, offerte dès 300 DH.">
+        <source>20 DH à Casablanca, 30 DH partout au Maroc, offerte dès 300 DH.</source>
+        <target>20 درهمًا بالدار البيضاء، 30 درهمًا في كل المغرب، ومجانًا ابتداءً من 300 درهم.</target>
+      </trans-unit>
+      <trans-unit id="236" resname="Coffret blanc ouvert posé sur une table claire">
+        <source>Coffret blanc ouvert posé sur une table claire</source>
+        <target>علبة بيضاء مفتوحة على طاولة فاتحة</target>
+      </trans-unit>
+      <trans-unit id="237" resname="Réglez en espèces à la réception. CMI, Visa et virement également acceptés.">
+        <source>Réglez en espèces à la réception. CMI, Visa et virement également acceptés.</source>
+        <target>الأداء نقدًا عند الاستلام. نقبل أيضًا CMI وفيزا والتحويل البنكي.</target>
+      </trans-unit>
+      <trans-unit id="238" resname="Mon Panier">
+        <source>Mon Panier</source>
+        <target>سلّتي</target>
+      </trans-unit>
+      <trans-unit id="239" resname="Votre panier est vide">
+        <source>Votre panier est vide</source>
+        <target>سلّتك فارغة</target>
+      </trans-unit>
+      <trans-unit id="240" resname="Produits complémentaires">
+        <source>Produits complémentaires</source>
+        <target>منتجات مكمّلة</target>
+      </trans-unit>
+      <trans-unit id="241" resname="Total">
+        <source>Total</source>
+        <target>المجموع</target>
+      </trans-unit>
+      <trans-unit id="242" resname="Commander →">
+        <source>Commander →</source>
+        <target>إتمام الطلب →</target>
+      </trans-unit>
+      <trans-unit id="243" resname="💚 COD">
+        <source>💚 COD</source>
+        <target>💚 الدفع عند الاستلام</target>
+      </trans-unit>
+      <trans-unit id="244" resname="Créer un compte · +2 pts ⭐">
+        <source>Créer un compte · +2 pts ⭐</source>
+        <target>إنشاء حساب · +2 نقطة ⭐</target>
+      </trans-unit>
+      <trans-unit id="245" resname="+2 points fidélité gagnés !">
+        <source>+2 points fidélité gagnés !</source>
+        <target>ربحت نقطتين من نقاط الولاء!</target>
+      </trans-unit>
+      <trans-unit id="246" resname="Recherche par note olfactive">
+        <source>Recherche par note olfactive</source>
+        <target>البحث حسب النفحة</target>
+      </trans-unit>
+      <trans-unit id="247" resname="Parfums avec la note">
+        <source>Parfums avec la note</source>
+        <target>عطور تحتوي على نفحة</target>
+      </trans-unit>
+      <trans-unit id="248" resname="Fermer">
+        <source>Fermer</source>
+        <target>إغلاق</target>
+      </trans-unit>
+      <trans-unit id="249" resname="Galerie photos du produit">
+        <source>Galerie photos du produit</source>
+        <target>معرض صور المنتج</target>
+      </trans-unit>
+      <trans-unit id="250" resname="Vignettes de la galerie">
+        <source>Vignettes de la galerie</source>
+        <target>صور مصغّرة للمعرض</target>
+      </trans-unit>
+      <trans-unit id="251" resname="Note :">
+        <source>Note :</source>
+        <target>التقييم:</target>
+      </trans-unit>
+      <trans-unit id="252" resname="sur 5 —">
+        <source>sur 5 —</source>
+        <target>من 5 —</target>
+      </trans-unit>
+      <trans-unit id="253" resname="Commandez maintenant pour garantir votre livraison">
+        <source>Commandez maintenant pour garantir votre livraison</source>
+        <target>اطلب الآن لضمان التوصيل</target>
+      </trans-unit>
+      <trans-unit id="254" resname="Choisissez votre grammage">
+        <source>Choisissez votre grammage</source>
+        <target>اختر الوزن</target>
+      </trans-unit>
+      <trans-unit id="255" resname="Grammage">
+        <source>Grammage</source>
+        <target>الوزن</target>
+      </trans-unit>
+      <trans-unit id="256" resname="Format du parfum">
+        <source>Format du parfum</source>
+        <target>حجم العطر</target>
+      </trans-unit>
+      <trans-unit id="257" resname="Ce coffret contient">
+        <source>Ce coffret contient</source>
+        <target>تحتوي هذه العلبة على</target>
+      </trans-unit>
+      <trans-unit id="258" resname="Diminuer la quantité">
+        <source>Diminuer la quantité</source>
+        <target>إنقاص الكمية</target>
+      </trans-unit>
+      <trans-unit id="259" resname="Augmenter la quantité">
+        <source>Augmenter la quantité</source>
+        <target>زيادة الكمية</target>
+      </trans-unit>
+      <trans-unit id="260" resname="Épuisé">
+        <source>Épuisé</source>
+        <target>نفدت الكمية</target>
+      </trans-unit>
+      <trans-unit id="261" resname="Ce parfum revient bientôt. Écrivez-nous pour être prévenu.">
+        <source>Ce parfum revient bientôt. Écrivez-nous pour être prévenu.</source>
+        <target>هذا العطر سيعود قريبًا. راسلنا لنخبرك.</target>
+      </trans-unit>
+      <trans-unit id="262" resname="Livraison offerte">
+        <source>Livraison offerte</source>
+        <target>التوصيل مجاني</target>
+      </trans-unit>
+      <trans-unit id="263" resname="Nos services">
+        <source>Nos services</source>
+        <target>خدماتنا</target>
+      </trans-unit>
+      <trans-unit id="264" resname="Informations produit">
+        <source>Informations produit</source>
+        <target>معلومات المنتج</target>
+      </trans-unit>
+      <trans-unit id="265" resname="Description">
+        <source>Description</source>
+        <target>الوصف</target>
+      </trans-unit>
+      <trans-unit id="266" resname="Description du produit">
+        <source>Description du produit</source>
+        <target>وصف المنتج</target>
+      </trans-unit>
+      <trans-unit id="267" resname="Comment utiliser">
+        <source>Comment utiliser</source>
+        <target>طريقة الاستعمال</target>
+      </trans-unit>
+      <trans-unit id="268" resname="Vaporisez sur les points de chaleur (poignet, cou, nuque). 2–3 pulvérisations pour un sillage optimal.">
+        <source>Vaporisez sur les points de chaleur (poignet, cou, nuque). 2–3 pulvérisations pour un sillage optimal.</source>
+        <target>رشّه على نقاط الحرارة (المعصم، العنق، خلف الرقبة). رشّتان أو ثلاث تكفي لأثر يدوم.</target>
+      </trans-unit>
+      <trans-unit id="269" resname="Livraison &amp;amp; Retours">
+        <source>Livraison &amp;amp; Retours</source>
+        <target>التوصيل والإرجاع</target>
+      </trans-unit>
+      <trans-unit id="270" resname="Informations livraison et retours">
+        <source>Informations livraison et retours</source>
+        <target>معلومات التوصيل والإرجاع</target>
+      </trans-unit>
+      <trans-unit id="271" resname="Livraison 24–48h. 20 DH Casa · 30 DH Maroc · Gratuite dès 300 DH. COD disponible. Retours 14 jours (non ouvert).">
+        <source>Livraison 24–48h. 20 DH Casa · 30 DH Maroc · Gratuite dès 300 DH. COD disponible. Retours 14 jours (non ouvert).</source>
+        <target>التوصيل في 24–48 ساعة. 20 درهمًا بالدار البيضاء · 30 درهمًا في المغرب · مجانًا ابتداءً من 300 درهم. الدفع عند الاستلام متاح. الإرجاع خلال 14 يومًا.</target>
+      </trans-unit>
+      <trans-unit id="272" resname="Vous aimerez aussi">
+        <source>Vous aimerez aussi</source>
+        <target>قد يعجبك أيضًا</target>
+      </trans-unit>
+      <trans-unit id="273" resname="Navigation suggestions">
+        <source>Navigation suggestions</source>
+        <target>تصفّح الاقتراحات</target>
+      </trans-unit>
+      <trans-unit id="274" resname="Parfum précédent">
+        <source>Parfum précédent</source>
+        <target>العطر السابق</target>
+      </trans-unit>
+      <trans-unit id="275" resname="Parfum suivant">
+        <source>Parfum suivant</source>
+        <target>العطر التالي</target>
+      </trans-unit>
+      <trans-unit id="276" resname="Ajouter">
+        <source>Ajouter</source>
+        <target>أضف</target>
+      </trans-unit>
+      <trans-unit id="277" resname="← Continuer mes achats">
+        <source>← Continuer mes achats</source>
+        <target>← متابعة التسوّق</target>
+      </trans-unit>
+      <trans-unit id="278" resname="Supprimer">
+        <source>Supprimer</source>
+        <target>حذف</target>
+      </trans-unit>
+      <trans-unit id="279" resname="Code promo">
+        <source>Code promo</source>
+        <target>رمز التخفيض</target>
+      </trans-unit>
+      <trans-unit id="280" resname="Entrez votre code">
+        <source>Entrez votre code</source>
+        <target>أدخل الرمز</target>
+      </trans-unit>
+      <trans-unit id="281" resname="Appliquer">
+        <source>Appliquer</source>
+        <target>تطبيق</target>
+      </trans-unit>
+      <trans-unit id="282" resname="Récapitulatif">
+        <source>Récapitulatif</source>
+        <target>ملخّص</target>
+      </trans-unit>
+      <trans-unit id="283" resname="Sous-total">
+        <source>Sous-total</source>
+        <target>المجموع الفرعي</target>
+      </trans-unit>
+      <trans-unit id="284" resname="Réduction">
+        <source>Réduction</source>
+        <target>التخفيض</target>
+      </trans-unit>
+      <trans-unit id="285" resname="🔒 SSL">
+        <source>🔒 SSL</source>
+        <target>🔒 SSL</target>
+      </trans-unit>
+      <trans-unit id="286" resname="Plus que">
+        <source>Plus que</source>
+        <target>باقي</target>
+      </trans-unit>
+      <trans-unit id="287" resname="pour la livraison gratuite 🚚">
+        <source>pour la livraison gratuite 🚚</source>
+        <target>ويصبح التوصيل مجانيًا 🚚</target>
+      </trans-unit>
+      <trans-unit id="288" resname="Email ou téléphone *">
+        <source>Email ou téléphone *</source>
+        <target>البريد الإلكتروني أو الهاتف *</target>
+      </trans-unit>
+      <trans-unit id="289" resname="votre@email.ma ou 0612345678">
+        <source>votre@email.ma ou 0612345678</source>
+        <target>your@email.ma أو 0612345678</target>
+      </trans-unit>
+      <trans-unit id="290" resname="Mot de passe *">
+        <source>Mot de passe *</source>
+        <target>كلمة السر *</target>
+      </trans-unit>
+      <trans-unit id="291" resname="Se connecter →">
+        <source>Se connecter →</source>
+        <target>تسجيل الدخول →</target>
+      </trans-unit>
+      <trans-unit id="292" resname="Mot de passe oublié ?">
+        <source>Mot de passe oublié ?</source>
+        <target>نسيت كلمة السر؟</target>
+      </trans-unit>
+      <trans-unit id="293" resname="Espace Client">
+        <source>Espace Client</source>
+        <target>فضاء الزبناء</target>
+      </trans-unit>
+      <trans-unit id="294" resname="Pas encore de compte ?">
+        <source>Pas encore de compte ?</source>
+        <target>ما عندكش حساب بعد؟</target>
+      </trans-unit>
+      <trans-unit id="295" resname="Programme Fidélité ODYS">
+        <source>Programme Fidélité ODYS</source>
+        <target>برنامج الولاء ديال أوديس</target>
+      </trans-unit>
+      <trans-unit id="296" resname="10 pts → un parfum offert · 20 pts → un coffret">
+        <source>10 pts → un parfum offert · 20 pts → un coffret</source>
+        <target>10 نقاط ← عطر هدية · 20 نقطة ← علبة هدية</target>
+      </trans-unit>
+      <trans-unit id="297" resname="Mot de passe oublié">
+        <source>Mot de passe oublié</source>
+        <target>كلمة السر المنسية</target>
+      </trans-unit>
+      <trans-unit id="298" resname="Adresse e-mail *">
+        <source>Adresse e-mail *</source>
+        <target>البريد الإلكتروني *</target>
+      </trans-unit>
+      <trans-unit id="299" resname="Envoyer le lien →">
+        <source>Envoyer le lien →</source>
+        <target>إرسال الرابط →</target>
+      </trans-unit>
+      <trans-unit id="300" resname="Rien ne vous parvient&amp;nbsp;? Écrivez-nous, nous rouvrons votre compte&#10;      avec vous.">
+        <source>Rien ne vous parvient&amp;nbsp;? Écrivez-nous, nous rouvrons votre compte
+      avec vous.</source>
+        <target>ما وصلك والو؟&amp;nbsp;راسلنا ونعيد فتح حسابك معك.</target>
+      </trans-unit>
+      <trans-unit id="301" resname="← Retour à la connexion">
+        <source>← Retour à la connexion</source>
+        <target>← العودة إلى تسجيل الدخول</target>
+      </trans-unit>
+      <trans-unit id="302" resname="Le lien est valable un temps limité. Pensez à regarder vos indésirables.">
+        <source>Le lien est valable un temps limité. Pensez à regarder vos indésirables.</source>
+        <target>الرابط صالح لمدة محدودة. تفقّد أيضًا رسائل الإزعاج.</target>
+      </trans-unit>
+      <trans-unit id="303" resname="Toujours rien après quelques minutes&amp;nbsp;? Écrivez-nous.">
+        <source>Toujours rien après quelques minutes&amp;nbsp;? Écrivez-nous.</source>
+        <target>مازال ما وصلك شي حاجة بعد دقائق؟&amp;nbsp;راسلنا.</target>
+      </trans-unit>
+      <trans-unit id="304" resname="Nouveau mot de passe">
+        <source>Nouveau mot de passe</source>
+        <target>كلمة سر جديدة</target>
+      </trans-unit>
+      <trans-unit id="305" resname="Compte&amp;nbsp;:">
+        <source>Compte&amp;nbsp;:</source>
+        <target>الحساب:&amp;nbsp;</target>
+      </trans-unit>
+      <trans-unit id="306" resname="Nouveau mot de passe *">
+        <source>Nouveau mot de passe *</source>
+        <target>كلمة السر الجديدة *</target>
+      </trans-unit>
+      <trans-unit id="307" resname="Confirmation *">
+        <source>Confirmation *</source>
+        <target>التأكيد *</target>
+      </trans-unit>
+      <trans-unit id="308" resname="Changer le mot de passe →">
+        <source>Changer le mot de passe →</source>
+        <target>تغيير كلمة السر →</target>
+      </trans-unit>
+      <trans-unit id="309" resname="Page introuvable">
+        <source>Page introuvable</source>
+        <target>الصفحة غير موجودة</target>
+      </trans-unit>
+      <trans-unit id="310" resname="← Accueil">
+        <source>← Accueil</source>
+        <target>← الصفحة الرئيسية</target>
+      </trans-unit>
+      <trans-unit id="311" resname="Support Client">
+        <source>Support Client</source>
+        <target>دعم الزبناء</target>
+      </trans-unit>
+      <trans-unit id="312" resname="Réponse sous 2h en semaine · WhatsApp 7j/7 de 9h à 21h">
+        <source>Réponse sous 2h en semaine · WhatsApp 7j/7 de 9h à 21h</source>
+        <target>الجواب في ظرف ساعتين أيام الأسبوع · واتساب كل الأيام من 9 صباحًا إلى 9 ليلًا</target>
+      </trans-unit>
+      <trans-unit id="313" resname="Réponse immédiate · 7j/7">
+        <source>Réponse immédiate · 7j/7</source>
+        <target>جواب فوري · كل الأيام</target>
+      </trans-unit>
+      <trans-unit id="314" resname="Email">
+        <source>Email</source>
+        <target>البريد الإلكتروني</target>
+      </trans-unit>
+      <trans-unit id="315" resname="Réponse sous 2h">
+        <source>Réponse sous 2h</source>
+        <target>الجواب في ظرف ساعتين</target>
+      </trans-unit>
+      <trans-unit id="316" resname="📍 ODYS Parfums — Casablanca, Maroc">
+        <source>📍 ODYS Parfums — Casablanca, Maroc</source>
+        <target>📍 أوديس بارفان — الدار البيضاء، المغرب</target>
+      </trans-unit>
+      <trans-unit id="317" resname="Lun–Sam · 9h–18h · WhatsApp 7j/7 · 9h–21h">
+        <source>Lun–Sam · 9h–18h · WhatsApp 7j/7 · 9h–21h</source>
+        <target>الاثنين–السبت · 9 ص–6 م · واتساب كل الأيام · 9 ص–9 م</target>
+      </trans-unit>
+      <trans-unit id="318" resname="Parfum, note olfactive, inspiration...">
+        <source>Parfum, note olfactive, inspiration...</source>
+        <target>عطر، نفحة، مصدر إلهام...</target>
+      </trans-unit>
+      <trans-unit id="319" resname="Votre recherche">
+        <source>Votre recherche</source>
+        <target>بحثك</target>
+      </trans-unit>
+      <trans-unit id="320" resname="Voir tous les parfums →">
+        <source>Voir tous les parfums →</source>
+        <target>عرض كل العطور →</target>
+      </trans-unit>
+      <trans-unit id="321" resname="WhatsApp">
+        <source>WhatsApp</source>
+        <target>واتساب</target>
+      </trans-unit>
+      <trans-unit id="322" resname="ODYS">
+        <source>ODYS</source>
+        <target>ODYS</target>
+      </trans-unit>
+      <trans-unit id="323" resname="Parfum">
+        <source>Parfum</source>
+        <target>Parfum</target>
+      </trans-unit>
+      <trans-unit id="324" resname="Extrait">
+        <source>Extrait</source>
+        <target>خلاصة</target>
+      </trans-unit>
+      <trans-unit id="325" resname="de parfum">
+        <source>de parfum</source>
+        <target>عطرية</target>
+      </trans-unit>
+      <trans-unit id="326" resname="CMI">
+        <source>CMI</source>
+        <target>CMI</target>
+      </trans-unit>
+      <trans-unit id="327" resname="Visa / Mastercard">
+        <source>Visa / Mastercard</source>
+        <target>Visa / Mastercard</target>
+      </trans-unit>
+      <trans-unit id="328" resname="CGV">
+        <source>CGV</source>
+        <target>الشروط العامة</target>
+      </trans-unit>
+      <trans-unit id="329" resname="Photo du produit">
+        <source>Photo du produit</source>
+        <target>صورة المنتج</target>
+      </trans-unit>
+      <trans-unit id="330" resname="Fermer la photo">
+        <source>Fermer la photo</source>
+        <target>إغلاق الصورة</target>
+      </trans-unit>
+      <trans-unit id="331" resname="Photo précédente">
+        <source>Photo précédente</source>
+        <target>الصورة السابقة</target>
+      </trans-unit>
+      <trans-unit id="332" resname="Photo suivante">
+        <source>Photo suivante</source>
+        <target>الصورة التالية</target>
+      </trans-unit>
+      <trans-unit id="333" resname="ODYS Parfum — Retour à l'accueil">
+        <source>ODYS Parfum — Retour à l'accueil</source>
+        <target>أوديس بارفان — العودة إلى الصفحة الرئيسية</target>
+      </trans-unit>
+      <trans-unit id="334" resname="ODYS Parfums crée des compositions originales d'inspiration.&#10;      Les marques citées à titre de référence olfactive appartiennent à leurs&#10;      propriétaires respectifs et n'ont aucun lien avec ODYS Parfums.">
+        <source>ODYS Parfums crée des compositions originales d'inspiration.
+      Les marques citées à titre de référence olfactive appartiennent à leurs
+      propriétaires respectifs et n'ont aucun lien avec ODYS Parfums.</source>
+        <target>تبتكر أوديس بارفان تركيبات أصلية مستوحاة. العلامات المذكورة كمرجع عطري تعود لأصحابها ولا علاقة لها بأوديس بارفان.</target>
+      </trans-unit>
+      <trans-unit id="335" resname="Ce qu'en disent nos clients">
+        <source>Ce qu'en disent nos clients</source>
+        <target>ما يقوله زبناؤنا</target>
+      </trans-unit>
+      <trans-unit id="336" resname="L'essence d'ODYS">
+        <source>L'essence d'ODYS</source>
+        <target>جوهر أوديس</target>
+      </trans-unit>
+      <trans-unit id="337" resname="Une maison de parfum née de la rencontre entre l'élégance&#10;      contemporaine et l'âme du Maroc. Chaque composition est pensée comme une&#10;      signature — sobre, tenace, et taillée pour durer.">
+        <source>Une maison de parfum née de la rencontre entre l'élégance
+      contemporaine et l'âme du Maroc. Chaque composition est pensée comme une
+      signature — sobre, tenace, et taillée pour durer.</source>
+        <target>دار عطور وُلدت من لقاء الأناقة المعاصرة بروح المغرب. كل تركيبة تُصمَّم كبصمة — هادئة، ثابتة، ومصنوعة لتدوم.</target>
+      </trans-unit>
+      <trans-unit id="338" resname="Visuels de la page d'accueil">
+        <source>Visuels de la page d'accueil</source>
+        <target>صور الصفحة الرئيسية</target>
+      </trans-unit>
+      <trans-unit id="339" resname="Des fragrances d'exception">
+        <source>Des fragrances d'exception</source>
+        <target>عطور استثنائية</target>
+      </trans-unit>
+      <trans-unit id="340" resname="5 g d'oud ou un coffret à 15 points">
+        <source>5 g d'oud ou un coffret à 15 points</source>
+        <target>5 غرام من العود أو علبة هدية عند 15 نقطة</target>
+      </trans-unit>
+      <trans-unit id="341" resname="Cette commande n'est plus en cours de livraison.&#10;          Une question&amp;nbsp;? Écrivez-nous, nous reprenons le dossier avec vous.">
+        <source>Cette commande n'est plus en cours de livraison.
+          Une question&amp;nbsp;? Écrivez-nous, nous reprenons le dossier avec vous.</source>
+        <target>هذا الطلب لم يعد في طور التوصيل. عندك سؤال؟ راسلنا ونتابع الملف معك.</target>
+      </trans-unit>
+      <trans-unit id="342" resname="L'Oud.">
+        <source>L'Oud.</source>
+        <target>العود.</target>
+      </trans-unit>
+      <trans-unit id="343" resname="Oud naturel au gramme. Origines certifiées — Hindi Assam,&#10;        Royal Hindi, Thai Select. Prix transparent : vous payez notre coût&#10;        d'achat + 18% marge fixe. Rien de caché.">
+        <source>Oud naturel au gramme. Origines certifiées — Hindi Assam,
+        Royal Hindi, Thai Select. Prix transparent : vous payez notre coût
+        d'achat + 18% marge fixe. Rien de caché.</source>
+        <target>عود طبيعي بالغرام. منشأ موثّق — هندي آسام، هندي رويال، تاي سيليكت. ثمن شفّاف: تؤدي ثمن شرائنا + هامش ثابت 18٪. بدون أي خفايا.</target>
+      </trans-unit>
+      <trans-unit id="344" resname="L'or liquide de l'Orient — sélectionné à la source, vendu au gramme.&#10;    Choisissez exactement la quantité qu'il vous faut.">
+        <source>L'or liquide de l'Orient — sélectionné à la source, vendu au gramme.
+    Choisissez exactement la quantité qu'il vous faut.</source>
+        <target>ذهب الشرق السائل — مُنتقى من المصدر، يُباع بالغرام. اختر الكمية التي تحتاجها بالضبط.</target>
+      </trans-unit>
+      <trans-unit id="345" resname="en raison de leur nature périssable et des exigences d'hygiène. Une fois&#10;      expédié, l'article ne peut pas être retourné. En cas de produit défectueux,&#10;      contactez-nous immédiatement via WhatsApp avec photo à l'appui.">
+        <source>en raison de leur nature périssable et des exigences d'hygiène. Une fois
+      expédié, l'article ne peut pas être retourné. En cas de produit défectueux,
+      contactez-nous immédiatement via WhatsApp avec photo à l'appui.</source>
+        <target>بسبب طبيعتها القابلة للتلف ومتطلبات النظافة. بمجرد الشحن لا يمكن إرجاع المنتج. في حالة وجود عيب، راسلنا فورًا عبر واتساب مع صورة.</target>
+      </trans-unit>
+      <trans-unit id="346" resname="Présent sans s'imposer">
+        <source>Présent sans s'imposer</source>
+        <target>حاضر دون مبالغة</target>
+      </trans-unit>
+      <trans-unit id="347" resname="Fil d'Ariane">
+        <source>Fil d'Ariane</source>
+        <target>مسار التصفّح</target>
+      </trans-unit>
+      <trans-unit id="348" resname="Rien n'est à régler maintenant. Vous paierez à la livraison.">
+        <source>Rien n'est à régler maintenant. Vous paierez à la livraison.</source>
+        <target>لا شيء يُدفع الآن. ستؤدي عند الاستلام.</target>
+      </trans-unit>
+      <trans-unit id="349" resname="Dites-nous ce que vous en pensez — votre avis aide les prochains à&#10;        choisir. Il est relu avant d'être publié.">
+        <source>Dites-nous ce que vous en pensez — votre avis aide les prochains à
+        choisir. Il est relu avant d'être publié.</source>
+        <target>شاركنا رأيك — تقييمك يساعد غيرك على الاختيار. تتم مراجعته قبل النشر.</target>
+      </trans-unit>
+      <trans-unit id="350" resname="L'inspiration des plus grandes maisons de parfumerie mondiale — élaborée au Maroc, au prix juste.">
+        <source>L'inspiration des plus grandes maisons de parfumerie mondiale — élaborée au Maroc, au prix juste.</source>
+        <target>وحي كبريات دور العطور العالمية — مصنوع في المغرب، بثمن عادل.</target>
+      </trans-unit>
+      <trans-unit id="351" resname="Les notes de la fragrance dont ce parfum s'inspire.&#10;        La composition ODYS cherche à en retrouver l'accord.">
+        <source>Les notes de la fragrance dont ce parfum s'inspire.
+        La composition ODYS cherche à en retrouver l'accord.</source>
+        <target>نفحات العطر الذي استُلهم منه هذا التركيب. تسعى تركيبة أوديس إلى استعادة هذا التناغم.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

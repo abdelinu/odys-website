@@ -72,9 +72,9 @@
 {block name='content'}
 
 {* Breadcrumb — EAA: nav + aria-label *}
-<nav aria-label="Fil d'Ariane">
+<nav aria-label="{l s='Fil d\'Ariane' d='Shop.Theme.Odys'}">
   <ol class="bc" style="display:flex;align-items:center;gap:0;list-style:none;padding:0">
-    <li><a href="{$urls.base_url}">Accueil</a></li>
+    <li><a href="{$urls.base_url}">{l s='Accueil' d='Shop.Theme.Odys'}</a></li>
     <li aria-hidden="true" class="sep">›</li>
     {* $product.category_url is an array on PS 8, so printing it put the word
        "Array" in the href and a PHP warning in the middle of the breadcrumb.
@@ -96,7 +96,7 @@
 <div class="prod-wrap">
 
   {* ── GALLERY ── *}
-  <div class="gal" role="region" aria-label="Galerie photos du produit">
+  <div class="gal" role="region" aria-label="{l s='Galerie photos du produit' d='Shop.Theme.Odys'}">
     <div class="gal-main">
       {* Ce coin répétait « Élaboré au Maroc », déjà écrit deux fois plus bas
          (sous le nom, et dans les garanties). Il est réservé aux offres.
@@ -119,7 +119,7 @@
            width="800" height="800"/>
       </button>
     </div>
-    <ul class="thumbs" id="galThumbs" role="list" aria-label="Vignettes de la galerie">
+    <ul class="thumbs" id="galThumbs" role="list" aria-label="{l s='Vignettes de la galerie' d='Shop.Theme.Odys'}">
       {foreach from=$product.images item=image}
         <li class="{if $image@first}on{/if}" role="listitem">
           <button class="thumb-btn"
@@ -182,7 +182,7 @@
     {assign var='odysInsp' value=$odysDesc|regex_replace:'/^Inspiré de\s+(.+?)\.\s.*$/su':'$1'}
     {if $odysInsp != $odysDesc}
     <div class="ins-line">
-      <span style="font-family:var(--alt);font-size:10px;font-style:italic;color:var(--mid)">Inspiré de</span>
+      <span style="font-family:var(--alt);font-size:10px;font-style:italic;color:var(--mid)">{l s='Inspiré de' d='Shop.Theme.Odys'}</span>
       <span style="font-size:12px;font-weight:700">{$odysInsp|escape:'html':'UTF-8'}</span>
     </div>
     {/if}
@@ -193,9 +193,9 @@
     {if isset($product.nb_comments) && $product.nb_comments > 0}
     <div class="rating">
       <span class="stars" aria-hidden="true">★★★★★</span>
-      <span class="sr-only">Note : </span>
+      <span class="sr-only">{l s='Note :' d='Shop.Theme.Odys'} </span>
       <span style="font-size:12px;font-weight:700">4.9</span>
-      <span class="sr-only"> sur 5 —</span>
+      <span class="sr-only"> {l s='sur 5 —' d='Shop.Theme.Odys'}</span>
       <span class="rat-t">· {$product.nb_comments|default:0} avis</span>
     </div>
     {/if}
@@ -205,7 +205,7 @@
       <div class="sa-icon" aria-hidden="true">⚠</div>
       <div class="sa-txt">
         <strong>Stock limité · {$product.quantity} unités restantes</strong>
-        <small>Commandez maintenant pour garantir votre livraison</small>
+        <small>{l s='Commandez maintenant pour garantir votre livraison' d='Shop.Theme.Odys'}</small>
       </div>
     </div>
     {/if}
@@ -214,11 +214,11 @@
     {* Sold by weight (Oud & Boukhour): the cards set the quantity in grams,
        and the shop's own minimum is 5 g. *}
     <div class="vol-sel" role="group" aria-labelledby="gram-sel-label">
-      <div class="vol-lbl" id="gram-sel-label">Choisissez votre grammage</div>
+      <div class="vol-lbl" id="gram-sel-label">{l s='Choisissez votre grammage' d='Shop.Theme.Odys'}</div>
       {* resolved once, so the markup and the script cannot disagree *}
       {assign var='odysGramMin' value=Configuration::get('ODYS_GRAM_MIN')|intval}
       {if !$odysGramMin}{assign var='odysGramMin' value=5}{/if}
-      <div class="vol-cards" id="gramCards" role="radiogroup" aria-label="Grammage"
+      <div class="vol-cards" id="gramCards" role="radiogroup" aria-label="{l s='Grammage' d='Shop.Theme.Odys'}"
            data-min="{$odysGramMin}">
         {* the ladder and the minimum are set in Back Office → Apparence →
            Thème ODYS; the price per gram is the product's own price *}
@@ -246,7 +246,7 @@
     {if $combinations}
     <div class="vol-sel" role="group" aria-labelledby="vol-sel-label">
       <div class="vol-lbl" id="vol-sel-label">{if $combinations}Choisissez votre format{else}Format{/if}</div>
-      <div class="vol-cards" id="volCards" role="radiogroup" aria-label="Format du parfum">
+      <div class="vol-cards" id="volCards" role="radiogroup" aria-label="{l s='Format du parfum' d='Shop.Theme.Odys'}">
         {* Les formats vendables du produit. PrestaShop appelle cela des
            declinaisons : une par volume, chacune avec son prix et son
            stock, et c'est la fiche produit -> Declinaisons qui decide
@@ -289,7 +289,7 @@
                     data-action="pick-vol">
               <div class="vc-ml">{$odysVol|escape:'html':'UTF-8'}</div>
               <div class="vc-price">{$odysPrix|intval} DH</div>
-              {if !$odysDispo}<div class="vc-oos">Épuisé</div>{/if}
+              {if !$odysDispo}<div class="vc-oos">{l s='Épuisé' d='Shop.Theme.Odys'}</div>{/if}
             </button>
           {/foreach}
         {else}
@@ -336,7 +336,7 @@
        les flacons du coffret quand il se vend. *}
     {if isset($packItems) && $packItems}
       <section class="pk-box" aria-labelledby="pk-title">
-        <h2 class="pk-hd" id="pk-title">Ce coffret contient</h2>
+        <h2 class="pk-hd" id="pk-title">{l s='Ce coffret contient' d='Shop.Theme.Odys'}</h2>
         <ul class="pk-list">
           {foreach from=$packItems item=odysPk}
             <li class="pk-item">
@@ -399,8 +399,8 @@
        page A propos — « composition originale d'inspiration » — et la
        mention au bas de la description, qui le redit. Le titre le reconnait,
        en une ligne, sans dejuger le produit. *}
-    <div class="olf-pyr" role="region" aria-label="Pyramide de l'inspiration">
-      <div class="olf-hd" id="olf-hd-label">Pyramide de l'inspiration</div>
+    <div class="olf-pyr" role="region" aria-label="{l s='Pyramide de l\'inspiration' d='Shop.Theme.Odys'}">
+      <div class="olf-hd" id="olf-hd-label">{l s='Pyramide de l\'inspiration' d='Shop.Theme.Odys'}</div>
       <p class="olf-src">Les notes de la fragrance dont ce parfum s'inspire.
         La composition ODYS cherche a en retrouver l'accord.</p>
       {if $odysTete}
@@ -451,7 +451,7 @@
     <div class="cta-row">
       <div class="qty" role="group" aria-label="{if isset($product.unity) && $product.unity}Grammes{else}Quantité{/if}">
         <button data-action="chg-qty" data-delta="-1"
-                aria-label="Diminuer la quantité">−</button>
+                aria-label="{l s='Diminuer la quantité' d='Shop.Theme.Odys'}">−</button>
         {* typing the number is quicker than pressing + eleven times, and on a
            phone inputmode=numeric brings up the number pad rather than a
            keyboard. The buttons still work for small adjustments. *}
@@ -460,7 +460,7 @@
                value="{if isset($product.unity) && $product.unity}5{else}1{/if}"
                aria-label="{if isset($product.unity) && $product.unity}Grammes{else}Quantité{/if}"/>
         <button data-action="chg-qty" data-delta="1"
-                aria-label="Augmenter la quantité">+</button>
+                aria-label="{l s='Augmenter la quantité' d='Shop.Theme.Odys'}">+</button>
       </div>
       {* Le coeur se tient entre la quantite et l'achat, a portee du pouce.
          Il ne porte plus son libelle : l'icone suffit la ou la ligne est
@@ -482,7 +482,7 @@
       </button>
       {else}
       <button class="btn-cart btn-cart-oos" type="button" disabled aria-disabled="true">
-        <span class="blbl">Épuisé</span>
+        <span class="blbl">{l s='Épuisé' d='Shop.Theme.Odys'}</span>
       </button>
       {/if}
     </div>
@@ -490,7 +490,7 @@
     {if !$odysAchetable}
       {* Epuise n'est pas « parti pour toujours » : on laisse une porte,
          la meme que partout ailleurs sur le site. *}
-      <p class="oos-note">Ce parfum revient bientôt. Écrivez-nous pour être prévenu.</p>
+      <p class="oos-note">{l s='Ce parfum revient bientôt. Écrivez-nous pour être prévenu.' d='Shop.Theme.Odys'}</p>
       {include file='_partials/contact-links.tpl' style='inline'
                subject="Bonjour ODYS, prévenez-moi du retour de `$product.name`."}
     {/if}
@@ -501,7 +501,7 @@
     {if $odysShipMin > 0}
       <p class="odys-ship-note">
         {if $odysShipFrom > 0 && $product.price_amount >= $odysShipFrom}
-          <strong>Livraison offerte</strong> — au-delà de {$odysShipFrom|intval} DH.
+          <strong>{l s='Livraison offerte' d='Shop.Theme.Odys'}</strong> — au-delà de {$odysShipFrom|intval} DH.
         {else}
           Livraison {$odysShipMin|intval}{if $odysShipMax > $odysShipMin}–{$odysShipMax|intval}{/if} DH
           {if $odysShipFrom > 0}· <strong>offerte dès {$odysShipFrom|intval} DH</strong>{/if}
@@ -522,7 +522,7 @@
               data-id-product="{$product.id_product}"
               data-id-product-attribute="{$product.id_product_attribute|intval}"
               aria-label="Offrir {$product.name|escape:'html':'UTF-8'} — ajouter au panier avec un message">
-        <span aria-hidden="true">✦</span> Offrir à quelqu'un
+        <span aria-hidden="true">✦</span> {l s='Offrir à quelqu\'un' d='Shop.Theme.Odys'}
       </button>
     {/if}
 
@@ -531,7 +531,7 @@
       subject="Bonjour ODYS, je souhaite des informations sur `$product.name`."}
 
     {* Services — discreet line icons, the same family as the header *}
-    <ul class="svc-grid" aria-label="Nos services" role="list">
+    <ul class="svc-grid" aria-label="{l s='Nos services' d='Shop.Theme.Odys'}" role="list">
       <li class="svc" role="listitem"><span class="svc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 7v5c0 4.4 3.2 7.6 8 9 4.8-1.4 8-4.6 8-9V7l-8-4Z"/><path d="m9.4 11.8 1.9 1.9 3.5-3.6"/></svg></span>{assign var='odysSvc1' value=Configuration::get('ODYS_SVC_1')}{if $odysSvc1}{$odysSvc1|escape:'html':'UTF-8'}{else}Élaboré au Maroc{/if}</li>
       <li class="svc" role="listitem"><span class="svc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M7 15h3"/></svg></span>{assign var='odysSvc2' value=Configuration::get('ODYS_SVC_2')}{if $odysSvc2}{$odysSvc2|escape:'html':'UTF-8'}{else}Paiement à la livraison{/if}</li>
       <li class="svc" role="listitem"><span class="svc-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 7h10v9H3z"/><path d="M13 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg></span>{assign var='odysSvc3' value=Configuration::get('ODYS_SVC_3')}{if $odysSvc3}{$odysSvc3|escape:'html':'UTF-8'}{else}Livraison 24–48h{/if}</li>
@@ -539,27 +539,27 @@
     </ul>
 
     {* Accordion — EAA: button[aria-expanded] *}
-    <div class="acc" role="region" aria-label="Informations produit">
+    <div class="acc" role="region" aria-label="{l s='Informations produit' d='Shop.Theme.Odys'}">
       <div class="acc-i">
         <button class="acc-h" data-action="toggle-acc" aria-expanded="false" aria-controls="acc-desc">
-          <span>Description</span><span class="acc-ic" aria-hidden="true">+</span>
+          <span>{l s='Description' d='Shop.Theme.Odys'}</span><span class="acc-ic" aria-hidden="true">+</span>
         </button>
-        <div class="acc-b" id="acc-desc" role="region" aria-label="Description du produit">{$product.description nofilter}</div>
+        <div class="acc-b" id="acc-desc" role="region" aria-label="{l s='Description du produit' d='Shop.Theme.Odys'}">{$product.description nofilter}</div>
       </div>
       <div class="acc-i">
         <button class="acc-h" data-action="toggle-acc" aria-expanded="false" aria-controls="acc-use">
-          <span>Comment utiliser</span><span class="acc-ic" aria-hidden="true">+</span>
+          <span>{l s='Comment utiliser' d='Shop.Theme.Odys'}</span><span class="acc-ic" aria-hidden="true">+</span>
         </button>
-        <div class="acc-b" id="acc-use" role="region" aria-label="Instructions d'utilisation">
-          <p>Vaporisez sur les points de chaleur (poignet, cou, nuque). 2–3 pulvérisations pour un sillage optimal.</p>
+        <div class="acc-b" id="acc-use" role="region" aria-label="{l s='Instructions d\'utilisation' d='Shop.Theme.Odys'}">
+          <p>{l s='Vaporisez sur les points de chaleur (poignet, cou, nuque). 2–3 pulvérisations pour un sillage optimal.' d='Shop.Theme.Odys'}</p>
         </div>
       </div>
       <div class="acc-i">
         <button class="acc-h" data-action="toggle-acc" aria-expanded="false" aria-controls="acc-ship">
-          <span>Livraison &amp; Retours</span><span class="acc-ic" aria-hidden="true">+</span>
+          <span>{l s='Livraison &amp; Retours' d='Shop.Theme.Odys'}</span><span class="acc-ic" aria-hidden="true">+</span>
         </button>
-        <div class="acc-b" id="acc-ship" role="region" aria-label="Informations livraison et retours">
-          <p>Livraison 24–48h. 20 DH Casa · 30 DH Maroc · Gratuite dès 300 DH. COD disponible. Retours 14 jours (non ouvert).</p>
+        <div class="acc-b" id="acc-ship" role="region" aria-label="{l s='Informations livraison et retours' d='Shop.Theme.Odys'}">
+          <p>{l s='Livraison 24–48h. 20 DH Casa · 30 DH Maroc · Gratuite dès 300 DH. COD disponible. Retours 14 jours (non ouvert).' d='Shop.Theme.Odys'}</p>
         </div>
       </div>
     </div>
@@ -571,13 +571,13 @@
 </div>
 
 {if $accessories}
-<section class="sec" style="padding-top:0" aria-label="Produits complémentaires">
+<section class="sec" style="padding-top:0" aria-label="{l s='Produits complémentaires' d='Shop.Theme.Odys'}">
   <div class="sugg-section">
     <div class="sugg-hd">
-      <h2 class="sugg-title">Vous aimerez aussi</h2>
-      <div class="sugg-nav" role="group" aria-label="Navigation suggestions">
-        <button class="sugg-arr" id="suggPrev" data-action="sugg-prev" aria-label="Parfum précédent">‹</button>
-        <button class="sugg-arr" id="suggNext" data-action="sugg-next" aria-label="Parfum suivant">›</button>
+      <h2 class="sugg-title">{l s='Vous aimerez aussi' d='Shop.Theme.Odys'}</h2>
+      <div class="sugg-nav" role="group" aria-label="{l s='Navigation suggestions' d='Shop.Theme.Odys'}">
+        <button class="sugg-arr" id="suggPrev" data-action="sugg-prev" aria-label="{l s='Parfum précédent' d='Shop.Theme.Odys'}">‹</button>
+        <button class="sugg-arr" id="suggNext" data-action="sugg-next" aria-label="{l s='Parfum suivant' d='Shop.Theme.Odys'}">›</button>
       </div>
     </div>
     <div class="sugg-track-wrap"><div class="sugg-track" id="suggTrack" role="list">
@@ -603,7 +603,7 @@
                       data-id-product="{$acc.id_product}"
                       data-name="{$acc.name|escape:'html':'UTF-8'}"
                       data-price="{$acc.price_amount|intval}"
-                      aria-label="Ajouter {$acc.name|escape:'html':'UTF-8'} au panier">Ajouter</button>
+                      aria-label="Ajouter {$acc.name|escape:'html':'UTF-8'} au panier">{l s='Ajouter' d='Shop.Theme.Odys'}</button>
             </div>
           </div>
         </div>
@@ -629,18 +629,18 @@
    fournit l'arriere-plan, le piege a focus, la fermeture par Echap et le
    retour du focus sur le bouton d'origine. zoom.js n'ecrit que la
    navigation entre photos et le passage a la taille reelle. *}
-<dialog id="zoomDlg" class="zoom-dlg" aria-label="Photo du produit">
+<dialog id="zoomDlg" class="zoom-dlg" aria-label="{l s='Photo du produit' d='Shop.Theme.Odys'}">
   <button type="button" class="zoom-x" data-action="zoom-close"
-          aria-label="Fermer la photo">&times;</button>
+          aria-label="{l s='Fermer la photo' d='Shop.Theme.Odys'}">&times;</button>
   <div class="zoom-wrap" id="zoomWrap">
     <img id="zoomImg" alt=""/>
   </div>
   <div class="zoom-bar">
     <button type="button" class="zoom-nav" id="zoomPrev" data-action="zoom-prev"
-            aria-label="Photo precedente" hidden>&#8249;</button>
+            aria-label="{l s='Photo précédente' d='Shop.Theme.Odys'}" hidden>&#8249;</button>
     <span class="zoom-count" id="zoomCount" aria-live="polite" hidden></span>
     <button type="button" class="zoom-nav" id="zoomNext" data-action="zoom-next"
-            aria-label="Photo suivante" hidden>&#8250;</button>
+            aria-label="{l s='Photo suivante' d='Shop.Theme.Odys'}" hidden>&#8250;</button>
   </div>
 </dialog>
 {/block}

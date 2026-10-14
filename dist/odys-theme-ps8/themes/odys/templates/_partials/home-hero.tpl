@@ -80,6 +80,17 @@
   {if !$odysSub}{assign var='odysSub' value='Une essence de liberté et de féminité'}{/if}
   {if !$odysLede}{assign var='odysLede' value="Des essences rares, un savoir-faire intemporel. Découvrez l'univers ODYS."}{/if}
   {if !$odysCta}{assign var='odysCta' value='Découvrir la collection'}{/if}
+  {* Une destination ecrite a la main en Back Office est un chemin nu :
+     « /parfums/20-l-icone.html ». Depuis que la boutique a trois langues,
+     PrestaShop prefixe ses adresses — ce chemin-la menait donc hors langue,
+     le serveur repondait par une redirection, et le visiteur arabe
+     atterrissait en francais. On lui remet sa langue devant. *}
+  {if $odysCtaUrl && $odysCtaUrl|substr:0:1 === '/' && $odysCtaUrl|substr:0:3 !== '/'|cat:$language.iso_code|cat:'/'}
+    {assign var='odysCtaUrl' value="/`$language.iso_code`$odysCtaUrl"}
+  {/if}
+  {if $odysLinkUrl && $odysLinkUrl|substr:0:1 === '/' && $odysLinkUrl|substr:0:3 !== '/'|cat:$language.iso_code|cat:'/'}
+    {assign var='odysLinkUrl' value="/`$language.iso_code`$odysLinkUrl"}
+  {/if}
   {if !$odysCtaUrl}{assign var='odysCtaUrl' value=$odysUrlParfums}{/if}
   {if !$odysLink}{assign var='odysLink' value='Oud & Boukhour'}{/if}
   {if !$odysLinkUrl}{assign var='odysLinkUrl' value=$odysUrlOud}{/if}
@@ -126,7 +137,7 @@
   </div>
 
   {if $odysSlides|@count > 1}
-    <div class="oh-dots" role="tablist" aria-label="Visuels de la page d'accueil">
+    <div class="oh-dots" role="tablist" aria-label="{l s='Visuels de la page d\'accueil' d='Shop.Theme.Odys'}">
       {foreach from=$odysSlides item=odysSlide name=dt}
         <button type="button" class="oh-dot{if $smarty.foreach.dt.first} is-on{/if}"
                 role="tab" data-odys-dot="{$smarty.foreach.dt.index}"
@@ -171,7 +182,7 @@
     {/foreach}
   </div>
 
-  <p class="sr-only">De l'oud à l'essence : une goutte précieuse rejoint le
-    parfum ODYS.</p>
-  <span class="nv-scroll" aria-hidden="true">Scroll<i></i></span>
+  <p class="sr-only">{l s='De l\'oud à l\'essence : une goutte précieuse rejoint le
+    parfum ODYS.' d='Shop.Theme.Odys'}</p>
+  <span class="nv-scroll" aria-hidden="true">{l s='Scroll' d='Shop.Theme.Odys'}<i></i></span>
 </section>

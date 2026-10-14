@@ -34,9 +34,9 @@
     {if $product.has_discount}
       <span class="pcb pcb-promo">{if $product.discount_percentage}{$product.discount_percentage|escape:'html':'UTF-8'}{else}Offre{/if}</span>
     {elseif $product.new}
-      <span class="pcb pcb-new">Nouveau</span>
+      <span class="pcb pcb-new">{l s='Nouveau' d='Shop.Theme.Odys'}</span>
     {elseif $product.on_sale}
-      <span class="pcb pcb-sale">Édition</span>
+      <span class="pcb pcb-sale">{l s='Édition' d='Shop.Theme.Odys'}</span>
     {/if}
 
     <button class="pc-wish" type="button" data-action="toggle-wish"
@@ -57,7 +57,7 @@
 
     {if $product.description_short}
       <div class="pc-pill">
-        <span class="pp-by">Inspiré de</span>
+        <span class="pp-by">{l s='Inspiré de' d='Shop.Theme.Odys'}</span>
         <span class="pp-b">{$product.description_short|strip_tags|truncate:46:'…'}</span>
       </div>
     {/if}
@@ -80,18 +80,18 @@
       {* Epuise : la carte le dit au lieu de proposer un bouton dont le
          clic sera refuse. Elle mene a la fiche, ou le client trouve la
          date de retour et de quoi nous ecrire. *}
-      <a class="pc-add pc-add-oos" href="{$product.url}">Épuisé &mdash; voir la fiche</a>
+      <a class="pc-add pc-add-oos" href="{$product.url}">{l s='Épuisé &mdash; voir la fiche' d='Shop.Theme.Odys'}</a>
     {elseif isset($product.unity) && $product.unity}
       {* Sold by weight: the grammage is chosen on the product page, and
          the shop refuses anything under the 5 g minimum anyway. *}
-      <a class="pc-add" href="{$product.url}">Choisir le grammage</a>
+      <a class="pc-add" href="{$product.url}">{l s='Choisir le grammage' d='Shop.Theme.Odys'}</a>
     {else}
     <button class="pc-add" type="button" data-action="add-to-cart"
             data-id-product="{$product.id_product}"
             data-id-product-attribute="{$product.id_product_attribute|default:0}"
             data-name="{$product.name|escape:'html':'UTF-8'}"
             data-price="{$product.price_amount|intval}">
-      Ajouter au panier
+      {l s='Ajouter au panier' d='Shop.Theme.Odys'}
     </button>
     {/if}
   </div>

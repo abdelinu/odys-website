@@ -60,7 +60,7 @@
 
 {else}
 
-<section class="odys-track{if $odysFailed} odys-track--stopped{/if}" aria-label="Suivi de la commande">
+<section class="odys-track{if $odysFailed} odys-track--stopped{/if}" aria-label="{l s='Suivi de la commande' d='Shop.Theme.Odys'}">
 
   {if $odysFailed}
     <div class="odys-track-stop" role="status">
@@ -69,8 +69,8 @@
         <div class="odys-track-stop-label">{$odysFailedLabel}</div>
         <div class="odys-track-stop-date">{$odysFailedDate}</div>
         <p class="odys-track-stop-help">
-          Cette commande n'est plus en cours de livraison.
-          Une question&nbsp;? Écrivez-nous, nous reprenons le dossier avec vous.
+          {l s='Cette commande n\'est plus en cours de livraison.
+          Une question&nbsp;? Écrivez-nous, nous reprenons le dossier avec vous.' d='Shop.Theme.Odys'}
         </p>
       </div>
     </div>
@@ -82,7 +82,7 @@
       </div>
       {if $order.carrier.name}
         <div class="odys-track-carrier">
-          <span>Transporteur</span>
+          <span>{l s='Transporteur' d='Shop.Theme.Odys'}</span>
           <strong>{$order.carrier.name}</strong>
         </div>
       {/if}
@@ -119,14 +119,14 @@
   {foreach from=$order.shipping item=line}
     {if $line.tracking && $line.tracking != '-'}
       <div class="odys-track-number">
-        <span>Numéro de suivi</span>
+        <span>{l s='Numéro de suivi' d='Shop.Theme.Odys'}</span>
         <strong>{$line.tracking nofilter}</strong>
       </div>
     {/if}
   {/foreach}
   {if $order.follow_up}
     <a class="odys-track-followup" href="{$order.follow_up}" target="_blank" rel="noopener">
-      Suivre le colis chez le transporteur →
+      {l s='Suivre le colis chez le transporteur →' d='Shop.Theme.Odys'}
     </a>
   {/if}
 </section>

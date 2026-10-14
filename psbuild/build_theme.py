@@ -730,7 +730,9 @@ must(n == 1, "onglets: le clic sur un onglet atteint filterOnglet")
 # d'ici, une fois PrestaShop d'accord. Pose en dernier, apres toutes les
 # retouches du gestionnaire, pour s'ancrer sur sa forme finale.
 old_toast = "          ODYS.addToCart('ps-' + idProduct, name, price, btn);"
-new_toast = (old_toast + LF
+new_toast = ("          /* Le tiroir montre ce que PrestaShop vient de confirmer. */" + LF
+             + "          if (window.odysTiroirApresAjout) { window.odysTiroirApresAjout(resp); }" + LF
+             + old_toast + LF
              + "          /* Le bandeau du bas, maintenant que PrestaShop a confirme. */" + LF
              + "          if (window.odysToast) {" + LF
              + "            window.odysToast(String(name || 'Article').trim().slice(0, 48) + ' \u2014 ajout\u00e9 au panier');" + LF
@@ -892,6 +894,43 @@ must(SHIM_MODAL not in js, "avis: le pont vers les fenetres n'est pose qu'une fo
 js = js + SHIM_MODAL
 ok("avis: les fenetres du module officiel s'ouvrent sans Bootstrap")
 
+# Le tiroir de la maquette n'est plus dans la page : son contenu venait
+# d'un tableau JavaScript. Ses deux fonctions cherchent pourtant encore
+# #drawer a chaque ajout, et echouaient sur null — l'erreur etait rattrapee
+# par le pont, qui abandonnait la suite : le bandeau « ajoute au panier »
+# ne s'affichait jamais. Une garde a l'endroit ou tout le monde passe.
+_vieux_ouvre = ("function openCart() { document.getElementById('drawer').classList.add('on'); "
+                "document.getElementById('ov').classList.add('on'); renderCart(); }")
+_neuf_ouvre = ("function openCart() {" + LF
+               + "  /* le tiroir de la maquette n'est plus pose dans la page :"
+               + " celui qui montre le panier de PrestaShop vit dans"
+               + " tiroir_panier.js */" + LF
+               + "  var d = document.getElementById('drawer');" + LF
+               + "  var o = document.getElementById('ov');" + LF
+               + "  if (!d || !o) { return; }" + LF
+               + "  d.classList.add('on'); o.classList.add('on'); renderCart();" + LF
+               + "}")
+js, _n = js.replace(_vieux_ouvre, _neuf_ouvre), js.count(_vieux_ouvre)
+must(_n == 1, "panier: openCart ne tombe plus sur un tiroir absent")
+
+_vieux_ferme = ("function closeCart() { document.getElementById('drawer').classList.remove('on'); "
+                "document.getElementById('ov').classList.remove('on'); }")
+_neuf_ferme = ("function closeCart() {" + LF
+               + "  var d = document.getElementById('drawer');" + LF
+               + "  var o = document.getElementById('ov');" + LF
+               + "  if (d) { d.classList.remove('on'); }" + LF
+               + "  if (o) { o.classList.remove('on'); }" + LF
+               + "}")
+js, _n = js.replace(_vieux_ferme, _neuf_ferme), js.count(_vieux_ferme)
+must(_n == 1, "panier: closeCart ne tombe plus sur un tiroir absent")
+
+# Le tiroir du panier. Il vit dans son propre fichier parce qu'il parle a
+# PrestaShop, pas a la maquette : psbuild/tiroir_panier.js.
+_tiroir = (HERE / 'tiroir_panier.js').read_text(encoding='utf-8')
+must(_tiroir not in js, 'tiroir: le module du panier n est ajoute qu une fois')
+js = js + LF + _tiroir
+ok('tiroir: le panier s ouvre sur le cote avec le contenu du serveur')
+
 js_path.write_text(js, encoding="utf-8")
 ok(f"progressive-enhancement module appended ({len(js):,} bytes)")
 
@@ -1030,7 +1069,7 @@ if prod_tpl.exists():
                     data-price="{$combo.price_amount|intval}"
                     data-id-combination="{$combo.id_combination}"
                     data-action="pick-vol">
-              {if $combo@first}<div class="vc-badge" aria-hidden="true">⭐ Populaire</div>{/if}
+              {if $combo@first}<div class="vc-badge" aria-hidden="true">{l s='⭐ Populaire' d='Shop.Theme.Odys'}</div>{/if}
               <div class="vc-ml">{$combo.attributes.volume|default:'50ml'|replace:'ml':''}<span>ml</span></div>
               <div class="vc-price">{$combo.price|intval} DH</div>
             </button>
@@ -1079,7 +1118,7 @@ if prod_tpl.exists():
                     data-action="pick-vol">
               <div class="vc-ml">{$odysVol|escape:'html':'UTF-8'}</div>
               <div class="vc-price">{$odysPrix|intval} DH</div>
-              {if !$odysDispo}<div class="vc-oos">Épuisé</div>{/if}
+              {if !$odysDispo}<div class="vc-oos">{l s='Épuisé' d='Shop.Theme.Odys'}</div>{/if}
             </button>
           {/foreach}
         {else}
@@ -1269,18 +1308,18 @@ if prod_tpl.exists():
    fournit l'arriere-plan, le piege a focus, la fermeture par Echap et le
    retour du focus sur le bouton d'origine. zoom.js n'ecrit que la
    navigation entre photos et le passage a la taille reelle. *}
-<dialog id="zoomDlg" class="zoom-dlg" aria-label="Photo du produit">
+<dialog id="zoomDlg" class="zoom-dlg" aria-label="{l s='Photo du produit' d='Shop.Theme.Odys'}">
   <button type="button" class="zoom-x" data-action="zoom-close"
-          aria-label="Fermer la photo">&times;</button>
+          aria-label="{l s='Fermer la photo' d='Shop.Theme.Odys'}">&times;</button>
   <div class="zoom-wrap" id="zoomWrap">
     <img id="zoomImg" alt=""/>
   </div>
   <div class="zoom-bar">
     <button type="button" class="zoom-nav" id="zoomPrev" data-action="zoom-prev"
-            aria-label="Photo precedente" hidden>&#8249;</button>
+            aria-label="{l s='Photo précédente' d='Shop.Theme.Odys'}" hidden>&#8249;</button>
     <span class="zoom-count" id="zoomCount" aria-live="polite" hidden></span>
     <button type="button" class="zoom-nav" id="zoomNext" data-action="zoom-next"
-            aria-label="Photo suivante" hidden>&#8250;</button>
+            aria-label="{l s='Photo suivante' d='Shop.Theme.Odys'}" hidden>&#8250;</button>
   </div>
 </dialog>
 """
@@ -1302,13 +1341,13 @@ if prod_tpl.exists():
 """
 
     OLD_INS = """    <div class="ins-line">
-      <span style="font-family:var(--alt);font-size:10px;font-style:italic;color:var(--mid)">Inspiré de</span>
+      <span style="font-family:var(--alt);font-size:10px;font-style:italic;color:var(--mid)">{l s='Inspiré de' d='Shop.Theme.Odys'}</span>
       <span style="font-size:12px;font-weight:700">{$product.description_short|strip_tags|truncate:60}</span>
     </div>
 """
     NEW_INS = EXTRAIT + """    {if $odysInsp != $odysDesc}
     <div class="ins-line">
-      <span style="font-family:var(--alt);font-size:10px;font-style:italic;color:var(--mid)">Inspiré de</span>
+      <span style="font-family:var(--alt);font-size:10px;font-style:italic;color:var(--mid)">{l s='Inspiré de' d='Shop.Theme.Odys'}</span>
       <span style="font-size:12px;font-weight:700">{$odysInsp|escape:'html':'UTF-8'}</span>
     </div>
     {/if}
@@ -1321,7 +1360,7 @@ if prod_tpl.exists():
     mt = mini.read_text(encoding="utf-8")
     OLD_PILL = """    {if $product.description_short}
       <div class="pc-pill">
-        <span class="pp-by">Inspiré de</span>
+        <span class="pp-by">{l s='Inspiré de' d='Shop.Theme.Odys'}</span>
         <span class="pp-b">{$product.description_short|strip_tags|truncate:46:'…'}</span>
       </div>
     {/if}
@@ -1332,7 +1371,7 @@ if prod_tpl.exists():
     {assign var='odysInsp' value=$odysDesc|regex_replace:'/^Inspiré de\\s+(.+?)\\.\\s.*$/su':'$1'}
     {if $odysInsp != $odysDesc}
       <div class="pc-pill">
-        <span class="pp-by">Inspiré de</span>
+        <span class="pp-by">{l s='Inspiré de' d='Shop.Theme.Odys'}</span>
         <span class="pp-b">{$odysInsp|truncate:46:'…'|escape:'html':'UTF-8'}</span>
       </div>
     {else}
@@ -1425,8 +1464,8 @@ if prod_tpl.exists():
        page A propos — « composition originale d'inspiration » — et la
        mention au bas de la description, qui le redit. Le titre le reconnait,
        en une ligne, sans dejuger le produit. *}
-    <div class="olf-pyr" role="region" aria-label="Pyramide de l'inspiration">
-      <div class="olf-hd" id="olf-hd-label">Pyramide de l'inspiration</div>
+    <div class="olf-pyr" role="region" aria-label="{l s='Pyramide de l\\'inspiration' d='Shop.Theme.Odys'}">
+      <div class="olf-hd" id="olf-hd-label">{l s='Pyramide de l\\'inspiration' d='Shop.Theme.Odys'}</div>
       <p class="olf-src">Les notes de la fragrance dont ce parfum s'inspire.
         La composition ODYS cherche a en retrouver l'accord.</p>
 """
@@ -1633,6 +1672,13 @@ cache_dir.mkdir(parents=True, exist_ok=True)
 """, encoding="utf-8")
 ok("assets/cache/.htaccess written (a deploy is seen without a hard refresh)")
 
+# Les mots du theme en anglais et en arabe, livres avec le theme.
+# Voir psbuild/traductions_xlf.py : un domaine qui n'a pas de fichier
+# n'est jamais relu en base, et les trois langues servaient le francais.
+from traductions_xlf import ecrire as _ecrire_traductions
+_faits = _ecrire_traductions(HERE / 'traductions.json', DIST / 'themes' / 'odys')
+ok('traductions du theme : ' + ', '.join('%s %d mots' % f for f in _faits))
+
 # Le fichier de mise a jour vit dans dist/, que ce script efface au
 # demarrage. L'oublier laissait une livraison perimee sur le disque et
 # faisait echouer la suite de verification loin de la cause reelle.
@@ -1646,5 +1692,12 @@ if _maj.exists():
         ok('deploy: ' + _ligne)
     else:
         must(False, 'deploy: make_maj_telephone.py a echoue' + _r.stderr[-400:])
+
+# Le script des trois langues part dans le meme dossier de livraison que le
+# lot : il s'ouvre une fois, apres lui, puis se supprime.
+_lang_dst = WS / 'dist' / 'deploy' / 'maj-langues.php'
+_lang_dst.parent.mkdir(parents=True, exist_ok=True)
+shutil.copy2(HERE / 'maj_langues.php', _lang_dst)
+ok('deploy: maj-langues.php (%d octets)' % _lang_dst.stat().st_size)
 
 print(f"\n  written: {DIST}")

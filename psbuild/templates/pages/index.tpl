@@ -25,10 +25,10 @@
     <div>
       <div class="sec-hd">
         <div class="sec-hd-left">
-          <p>Commencez ici</p>
-          <h2 id="home-featured-title">La boutique</h2>
+          <p>{l s='Commencez ici' d='Shop.Theme.Odys'}</p>
+          <h2 id="home-featured-title">{l s='La boutique' d='Shop.Theme.Odys'}</h2>
         </div>
-        <a href="{$odysUrlParfums}" class="sec-see-all">Voir tout</a>
+        <a href="{$odysUrlParfums}" class="sec-see-all">{l s='Voir tout' d='Shop.Theme.Odys'}</a>
       </div>
 
       {* Les familles presentes dans la selection, rien de plus : une puce
@@ -41,9 +41,9 @@
          Sans script, aucun bouton ne repond et la grille reste entiere :
          on voit toute la boutique, ce qui est le bon repli. *}
       {if isset($odysOnglets) && $odysOnglets|@count > 1}
-        <div class="og-onglets" role="group" aria-label="Rayons de la boutique">
+        <div class="og-onglets" role="group" aria-label="{l s='Rayons de la boutique' d='Shop.Theme.Odys'}">
           <button class="og on" type="button" data-action="filter-onglet"
-                  data-onglet="all" aria-pressed="true">Tout</button>
+                  data-onglet="all" aria-pressed="true">{l s='Tout' d='Shop.Theme.Odys'}</button>
           {foreach from=$odysOnglets key=odysOngCle item=odysOngNom}
             <button class="og" type="button" data-action="filter-onglet"
                     data-onglet="{$odysOngCle|escape:'html':'UTF-8'}"
@@ -74,8 +74,8 @@
       {if $odysFamsAcc|@count > 1}
         {assign var='odysFamNomsAcc' value=['fresh'=>'Frais','oriental'=>'Oriental','sweet'=>'Sucré','oud'=>'Oud']}
         <div class="fam-filters" role="group" aria-labelledby="fam-lbl-acc">
-          <span class="fam-lbl" id="fam-lbl-acc">Famille</span>
-          <button class="ff on" type="button" data-action="filter-fam" data-fam="all" aria-pressed="true">Tout</button>
+          <span class="fam-lbl" id="fam-lbl-acc">{l s='Famille' d='Shop.Theme.Odys'}</span>
+          <button class="ff on" type="button" data-action="filter-fam" data-fam="all" aria-pressed="true">{l s='Tout' d='Shop.Theme.Odys'}</button>
           {foreach from=$odysFamNomsAcc key=odysFamCleA item=odysFamNomA}
             {if $odysFamCleA|in_array:$odysFamsAcc}
               <button class="ff" type="button" data-action="filter-fam"
@@ -94,8 +94,8 @@
       {* Deux filtres qui se croisent peuvent ne rien laisser : « Diffuseurs »
          et « Sucré », par exemple. Sans ce mot la grille tombait a zero
          pixel et la boutique paraissait vide. *}
-      <p class="pg-vide" id="accVide" hidden>Rien dans ce rayon pour cette
-        famille. Changez l'un ou l'autre.</p>
+      <p class="pg-vide" id="accVide" hidden>{l s='Rien dans ce rayon pour cette
+        famille. Changez l\'un ou l\'autre.' d='Shop.Theme.Odys'}</p>
     </div>
   </section>
   {/if}
@@ -115,10 +115,10 @@
     <div>
       <div class="sec-hd">
         <div class="sec-hd-left">
-          <p>Pour découvrir</p>
-          <h2 id="home-coffrets-title">Nos coffrets</h2>
+          <p>{l s='Pour découvrir' d='Shop.Theme.Odys'}</p>
+          <h2 id="home-coffrets-title">{l s='Nos coffrets' d='Shop.Theme.Odys'}</h2>
         </div>
-        <a href="{$odysUrlCoffrets}" class="sec-see-all">Voir tout</a>
+        <a href="{$odysUrlCoffrets}" class="sec-see-all">{l s='Voir tout' d='Shop.Theme.Odys'}</a>
       </div>
 
       <div class="pg" id="coffretsGrid">
@@ -144,7 +144,7 @@
      full-width band. *}
   {capture name='odysHomeModules'}{hook h='displayHome'}{/capture}
   {if trim($smarty.capture.odysHomeModules) !== ''}
-  <section class="home-modules reveal" aria-label="Sélections de la boutique">
+  <section class="home-modules reveal" aria-label="{l s='Sélections de la boutique' d='Shop.Theme.Odys'}">
     <div>
       {$smarty.capture.odysHomeModules nofilter}
     </div>
@@ -157,8 +157,8 @@
     <div>
       <div class="sec-hd">
         <div class="sec-hd-left">
-          <p>Pourquoi ODYS</p>
-          <h2 id="home-why-title">L'inspiration du luxe, le prix juste</h2>
+          <p>{l s='Pourquoi ODYS' d='Shop.Theme.Odys'}</p>
+          <h2 id="home-why-title">{l s='L\'inspiration du luxe, le prix juste' d='Shop.Theme.Odys'}</h2>
         </div>
       </div>
 
@@ -170,72 +170,72 @@
           <figure class="why-media">
             <img src="{$urls.theme_assets}img/why-concentration.webp" width="960" height="720"
                  loading="lazy" decoding="async"
-                 alt="Flacon ODYS Parfum 01 L'Icône et son coffret crème, sur marbre"/>
+                 alt="{l s='Flacon ODYS Parfum 01 L\'Icône et son coffret crème, sur marbre' d='Shop.Theme.Odys'}"/>
           </figure>
           <div class="why-body">
             <span class="why-num" aria-hidden="true">01</span>
-            <h3>Concentration exceptionnelle</h3>
-            <p>18–20 % de concentré, l'équivalent d'un Eau de Parfum. Tenue mesurée 7 à 9 heures.</p>
+            <h3>{l s='Concentration exceptionnelle' d='Shop.Theme.Odys'}</h3>
+            <p>{l s='18–20 % de concentré, l\'équivalent d\'un Eau de Parfum. Tenue mesurée 7 à 9 heures.' d='Shop.Theme.Odys'}</p>
           </div>
         </li>
         <li class="why-card">
           <figure class="why-media">
             <img src="{$urls.theme_assets}img/why-maroc.webp" width="960" height="720"
                  loading="lazy" decoding="async"
-                 alt="Cour marocaine aux colonnes de zellige et de stuc sculpté"/>
+                 alt="{l s='Cour marocaine aux colonnes de zellige et de stuc sculpté' d='Shop.Theme.Odys'}"/>
           </figure>
           <div class="why-body">
             <span class="why-num" aria-hidden="true">02</span>
-            <h3>Élaboré au Maroc</h3>
-            <p>Production à Casablanca, matières sélectionnées, contrôle à chaque lot.</p>
+            <h3>{l s='Élaboré au Maroc' d='Shop.Theme.Odys'}</h3>
+            <p>{l s='Production à Casablanca, matières sélectionnées, contrôle à chaque lot.' d='Shop.Theme.Odys'}</p>
           </div>
         </li>
         <li class="why-card">
           <figure class="why-media">
             <img src="{$urls.theme_assets}img/why-oud.webp" width="960" height="720"
                  loading="lazy" decoding="async"
-                 alt="Mabkhara fumante posée sur un tapis oriental"/>
+                 alt="{l s='Mabkhara fumante posée sur un tapis oriental' d='Shop.Theme.Odys'}"/>
           </figure>
           <div class="why-body">
             <span class="why-num" aria-hidden="true">03</span>
-            <h3>Oud vendu au gramme</h3>
-            <p>Notre coût d'achat plus une marge fixe. Le prix suit les récoltes, sans opacité.</p>
+            <h3>{l s='Oud vendu au gramme' d='Shop.Theme.Odys'}</h3>
+            <p>{l s='Notre coût d\'achat plus une marge fixe. Le prix suit les récoltes, sans opacité.' d='Shop.Theme.Odys'}</p>
           </div>
         </li>
         <li class="why-card">
           <figure class="why-media">
             <img src="{$urls.theme_assets}img/why-livraison.webp" width="960" height="720"
                  loading="lazy" decoding="async"
-                 alt="Colis en carton kraft fermé, dans une lumière chaude"/>
+                 alt="{l s='Colis en carton kraft fermé, dans une lumière chaude' d='Shop.Theme.Odys'}"/>
           </figure>
           <div class="why-body">
             <span class="why-num" aria-hidden="true">04</span>
-            <h3>Livraison 24–48 h</h3>
-            <p>20 DH à Casablanca, 30 DH partout au Maroc, offerte dès 300 DH.</p>
+            <h3>{l s='Livraison 24–48 h' d='Shop.Theme.Odys'}</h3>
+            <p>{l s='20 DH à Casablanca, 30 DH partout au Maroc, offerte dès 300 DH.' d='Shop.Theme.Odys'}</p>
           </div>
         </li>
         <li class="why-card">
           <figure class="why-media">
             <img src="{$urls.theme_assets}img/why-paiement.webp" width="960" height="720"
                  loading="lazy" decoding="async"
-                 alt="Coffret blanc ouvert posé sur une table claire"/>
+                 alt="{l s='Coffret blanc ouvert posé sur une table claire' d='Shop.Theme.Odys'}"/>
           </figure>
           <div class="why-body">
             <span class="why-num" aria-hidden="true">05</span>
-            <h3>Paiement à la livraison</h3>
-            <p>Réglez en espèces à la réception. CMI, Visa et virement également acceptés.</p>
+            <h3>{l s='Paiement à la livraison' d='Shop.Theme.Odys'}</h3>
+            <p>{l s='Réglez en espèces à la réception. CMI, Visa et virement également acceptés.' d='Shop.Theme.Odys'}</p>
           </div>
         </li>
         <li class="why-card">
           <figure class="why-media">
             <img src="{$urls.theme_assets}img/why-fidelite.webp" width="960" height="720"
                  loading="lazy" decoding="async"
-                 alt="Flacon d'huile d'oud ambrée au bouchon doré"/>
+                 alt="{l s='Flacon d\'huile d\'oud ambrée au bouchon doré' d='Shop.Theme.Odys'}"/>
           </figure>
           <div class="why-body">
             <span class="why-num" aria-hidden="true">06</span>
-            <h3>Programme fidélité</h3>
-            <p>100 DH dépensés = 1 point. À 15 points, 5 g d'oud ou un coffret offert.</p>
+            <h3>{l s='Programme fidélité' d='Shop.Theme.Odys'}</h3>
+            <p>{l s='100 DH dépensés = 1 point. À 15 points, 5 g d\'oud ou un coffret offert.' d='Shop.Theme.Odys'}</p>
           </div>
         </li>
       </ol>

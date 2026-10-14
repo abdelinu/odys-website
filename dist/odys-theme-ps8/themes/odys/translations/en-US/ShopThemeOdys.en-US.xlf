@@ -1,0 +1,1428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr-FR" target-language="en-US"
+        datatype="plaintext" original="themes/odys">
+    <body>
+      <trans-unit id="1" resname="Navigation principale">
+        <source>Navigation principale</source>
+        <target>Main navigation</target>
+      </trans-unit>
+      <trans-unit id="2" resname="Collection">
+        <source>Collection</source>
+        <target>Collection</target>
+      </trans-unit>
+      <trans-unit id="3" resname="Homme">
+        <source>Homme</source>
+        <target>Men</target>
+      </trans-unit>
+      <trans-unit id="4" resname="Femme">
+        <source>Femme</source>
+        <target>Women</target>
+      </trans-unit>
+      <trans-unit id="5" resname="Unisexe">
+        <source>Unisexe</source>
+        <target>Unisex</target>
+      </trans-unit>
+      <trans-unit id="6" resname="Tous les parfums">
+        <source>Tous les parfums</source>
+        <target>All fragrances</target>
+      </trans-unit>
+      <trans-unit id="7" resname="Oud &amp;amp; Boukhour">
+        <source>Oud &amp;amp; Boukhour</source>
+        <target>Oud &amp;amp; Boukhour</target>
+      </trans-unit>
+      <trans-unit id="8" resname="Coffrets">
+        <source>Coffrets</source>
+        <target>Gift sets</target>
+      </trans-unit>
+      <trans-unit id="9" resname="Diffuseurs">
+        <source>Diffuseurs</source>
+        <target>Diffusers</target>
+      </trans-unit>
+      <trans-unit id="10" resname="À propos">
+        <source>À propos</source>
+        <target>About</target>
+      </trans-unit>
+      <trans-unit id="11" resname="Actions">
+        <source>Actions</source>
+        <target>Actions</target>
+      </trans-unit>
+      <trans-unit id="12" resname="Rechercher des parfums">
+        <source>Rechercher des parfums</source>
+        <target>Search fragrances</target>
+      </trans-unit>
+      <trans-unit id="13" resname="Ma liste de souhaits">
+        <source>Ma liste de souhaits</source>
+        <target>My wishlist</target>
+      </trans-unit>
+      <trans-unit id="14" resname="Ouvrir le menu de navigation">
+        <source>Ouvrir le menu de navigation</source>
+        <target>Open the navigation menu</target>
+      </trans-unit>
+      <trans-unit id="15" resname="Menu de navigation">
+        <source>Menu de navigation</source>
+        <target>Navigation menu</target>
+      </trans-unit>
+      <trans-unit id="16" resname="Fermer le menu">
+        <source>Fermer le menu</source>
+        <target>Close the menu</target>
+      </trans-unit>
+      <trans-unit id="17" resname="Accueil">
+        <source>Accueil</source>
+        <target>Home</target>
+      </trans-unit>
+      <trans-unit id="18" resname="Toute la collection">
+        <source>Toute la collection</source>
+        <target>The whole collection</target>
+      </trans-unit>
+      <trans-unit id="19" resname="Contact">
+        <source>Contact</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="20" resname="Fidélité">
+        <source>Fidélité</source>
+        <target>Loyalty</target>
+      </trans-unit>
+      <trans-unit id="21" resname="Connexion">
+        <source>Connexion</source>
+        <target>Sign in</target>
+      </trans-unit>
+      <trans-unit id="22" resname="Paiement à la livraison">
+        <source>Paiement à la livraison</source>
+        <target>Cash on delivery</target>
+      </trans-unit>
+      <trans-unit id="23" resname="Annonces ODYS">
+        <source>Annonces ODYS</source>
+        <target>ODYS announcements</target>
+      </trans-unit>
+      <trans-unit id="24" resname="Mon panier">
+        <source>Mon panier</source>
+        <target>My cart</target>
+      </trans-unit>
+      <trans-unit id="25" resname="Fermer le panier">
+        <source>Fermer le panier</source>
+        <target>Close the cart</target>
+      </trans-unit>
+      <trans-unit id="26" resname="Progression vers la livraison offerte">
+        <source>Progression vers la livraison offerte</source>
+        <target>Progress towards free delivery</target>
+      </trans-unit>
+      <trans-unit id="27" resname="Retirer">
+        <source>Retirer</source>
+        <target>Remove</target>
+      </trans-unit>
+      <trans-unit id="28" resname="Votre panier est vide.">
+        <source>Votre panier est vide.</source>
+        <target>Your cart is empty.</target>
+      </trans-unit>
+      <trans-unit id="29" resname="Voir la collection">
+        <source>Voir la collection</source>
+        <target>See the collection</target>
+      </trans-unit>
+      <trans-unit id="30" resname="Commander">
+        <source>Commander</source>
+        <target>Checkout</target>
+      </trans-unit>
+      <trans-unit id="31" resname="Voir le panier">
+        <source>Voir le panier</source>
+        <target>View cart</target>
+      </trans-unit>
+      <trans-unit id="32" resname="Paiement à la livraison · Livraison 24–48h · Retours sous 14 jours">
+        <source>Paiement à la livraison · Livraison 24–48h · Retours sous 14 jours</source>
+        <target>Cash on delivery · Delivery in 24–48h · Returns within 14 days</target>
+      </trans-unit>
+      <trans-unit id="33" resname="Écrire à ODYS sur WhatsApp">
+        <source>Écrire à ODYS sur WhatsApp</source>
+        <target>Message ODYS on WhatsApp</target>
+      </trans-unit>
+      <trans-unit id="34" resname="Appeler ODYS">
+        <source>Appeler ODYS</source>
+        <target>Call ODYS</target>
+      </trans-unit>
+      <trans-unit id="35" resname="ODYS Parfum — Accueil">
+        <source>ODYS Parfum — Accueil</source>
+        <target>ODYS Parfum — home</target>
+      </trans-unit>
+      <trans-unit id="36" resname="ODYS Parfums sur Instagram">
+        <source>ODYS Parfums sur Instagram</source>
+        <target>ODYS Parfums on Instagram</target>
+      </trans-unit>
+      <trans-unit id="37" resname="ODYS Parfums sur Facebook">
+        <source>ODYS Parfums sur Facebook</source>
+        <target>ODYS Parfums on Facebook</target>
+      </trans-unit>
+      <trans-unit id="38" resname="ODYS Parfums sur TikTok">
+        <source>ODYS Parfums sur TikTok</source>
+        <target>ODYS Parfums on TikTok</target>
+      </trans-unit>
+      <trans-unit id="39" resname="Frais &amp;amp; Aquatiques">
+        <source>Frais &amp;amp; Aquatiques</source>
+        <target>Fresh &amp;amp; Aquatic</target>
+      </trans-unit>
+      <trans-unit id="40" resname="Orientaux &amp;amp; Épicés">
+        <source>Orientaux &amp;amp; Épicés</source>
+        <target>Oriental &amp;amp; Spicy</target>
+      </trans-unit>
+      <trans-unit id="41" resname="Maison">
+        <source>Maison</source>
+        <target>The house</target>
+      </trans-unit>
+      <trans-unit id="42" resname="Notre histoire">
+        <source>Notre histoire</source>
+        <target>Our story</target>
+      </trans-unit>
+      <trans-unit id="43" resname="Savoir-faire">
+        <source>Savoir-faire</source>
+        <target>Craftsmanship</target>
+      </trans-unit>
+      <trans-unit id="44" resname="Retours">
+        <source>Retours</source>
+        <target>Returns</target>
+      </trans-unit>
+      <trans-unit id="45" resname="Plan du site">
+        <source>Plan du site</source>
+        <target>Sitemap</target>
+      </trans-unit>
+      <trans-unit id="46" resname="Mon compte">
+        <source>Mon compte</source>
+        <target>My account</target>
+      </trans-unit>
+      <trans-unit id="47" resname="Espace fidélité">
+        <source>Espace fidélité</source>
+        <target>Loyalty area</target>
+      </trans-unit>
+      <trans-unit id="48" resname="Mes commandes">
+        <source>Mes commandes</source>
+        <target>My orders</target>
+      </trans-unit>
+      <trans-unit id="49" resname="Ma wishlist">
+        <source>Ma wishlist</source>
+        <target>My wishlist</target>
+      </trans-unit>
+      <trans-unit id="50" resname="Déconnexion">
+        <source>Déconnexion</source>
+        <target>Sign out</target>
+      </trans-unit>
+      <trans-unit id="51" resname="Se connecter">
+        <source>Se connecter</source>
+        <target>Sign in</target>
+      </trans-unit>
+      <trans-unit id="52" resname="Créer un compte">
+        <source>Créer un compte</source>
+        <target>Create an account</target>
+      </trans-unit>
+      <trans-unit id="53" resname="Suivre ma commande">
+        <source>Suivre ma commande</source>
+        <target>Track my order</target>
+      </trans-unit>
+      <trans-unit id="54" resname="Programme fidélité">
+        <source>Programme fidélité</source>
+        <target>Loyalty programme</target>
+      </trans-unit>
+      <trans-unit id="55" resname="Paiement sécurisé">
+        <source>Paiement sécurisé</source>
+        <target>Secure payment</target>
+      </trans-unit>
+      <trans-unit id="56" resname="Virement">
+        <source>Virement</source>
+        <target>Bank transfer</target>
+      </trans-unit>
+      <trans-unit id="57" resname="Mentions légales">
+        <source>Mentions légales</source>
+        <target>Legal notice</target>
+      </trans-unit>
+      <trans-unit id="58" resname="Confidentialité">
+        <source>Confidentialité</source>
+        <target>Privacy</target>
+      </trans-unit>
+      <trans-unit id="59" resname="Leurs mots">
+        <source>Leurs mots</source>
+        <target>Their words</target>
+      </trans-unit>
+      <trans-unit id="60" resname="Frais">
+        <source>Frais</source>
+        <target>Fresh</target>
+      </trans-unit>
+      <trans-unit id="61" resname="Oriental">
+        <source>Oriental</source>
+        <target>Oriental</target>
+      </trans-unit>
+      <trans-unit id="62" resname="Sucré">
+        <source>Sucré</source>
+        <target>Sweet</target>
+      </trans-unit>
+      <trans-unit id="63" resname="Oud">
+        <source>Oud</source>
+        <target>Oud</target>
+      </trans-unit>
+      <trans-unit id="64" resname="Commencer le quiz">
+        <source>Commencer le quiz</source>
+        <target>Start the quiz</target>
+      </trans-unit>
+      <trans-unit id="65" resname="Maison de Senteur · Casablanca">
+        <source>Maison de Senteur · Casablanca</source>
+        <target>House of Scent · Casablanca</target>
+      </trans-unit>
+      <trans-unit id="66" resname="Explorer ODYS">
+        <source>Explorer ODYS</source>
+        <target>Explore ODYS</target>
+      </trans-unit>
+      <trans-unit id="67" resname="Scroll">
+        <source>Scroll</source>
+        <target>Scroll</target>
+      </trans-unit>
+      <trans-unit id="68" resname="Tête">
+        <source>Tête</source>
+        <target>Top notes</target>
+      </trans-unit>
+      <trans-unit id="69" resname="Fraîcheur · Énergie">
+        <source>Fraîcheur · Énergie</source>
+        <target>Freshness · Energy</target>
+      </trans-unit>
+      <trans-unit id="70" resname="Caractère · Émotion">
+        <source>Caractère · Émotion</source>
+        <target>Character · Emotion</target>
+      </trans-unit>
+      <trans-unit id="71" resname="Fond">
+        <source>Fond</source>
+        <target>Base notes</target>
+      </trans-unit>
+      <trans-unit id="72" resname="Profondeur · Signature">
+        <source>Profondeur · Signature</source>
+        <target>Depth · Signature</target>
+      </trans-unit>
+      <trans-unit id="73" resname="Expérience olfactive">
+        <source>Expérience olfactive</source>
+        <target>Olfactory experience</target>
+      </trans-unit>
+      <trans-unit id="74" resname="Une pyramide de senteurs">
+        <source>Une pyramide de senteurs</source>
+        <target>A pyramid of scents</target>
+      </trans-unit>
+      <trans-unit id="75" resname="Chaque fragrance est une histoire, un voyage en trois temps :&#10;        fraîcheur, cœur et profondeur.">
+        <source>Chaque fragrance est une histoire, un voyage en trois temps :
+        fraîcheur, cœur et profondeur.</source>
+        <target>Every fragrance is a story, a journey in three movements: freshness, heart and depth.</target>
+      </trans-unit>
+      <trans-unit id="76" resname="Explorer les notes">
+        <source>Explorer les notes</source>
+        <target>Explore the notes</target>
+      </trans-unit>
+      <trans-unit id="77" resname="Sur mesure">
+        <source>Sur mesure</source>
+        <target>Made to measure</target>
+      </trans-unit>
+      <trans-unit id="78" resname="Composez votre ODYS">
+        <source>Composez votre ODYS</source>
+        <target>Compose your ODYS</target>
+      </trans-unit>
+      <trans-unit id="79" resname="Un parfum, mille possibilités.">
+        <source>Un parfum, mille possibilités.</source>
+        <target>One fragrance, a thousand possibilities.</target>
+      </trans-unit>
+      <trans-unit id="80" resname="Commencer">
+        <source>Commencer</source>
+        <target>Start</target>
+      </trans-unit>
+      <trans-unit id="81" resname="Collection signature">
+        <source>Collection signature</source>
+        <target>Signature collection</target>
+      </trans-unit>
+      <trans-unit id="82" resname="Une sélection raffinée de nos créations les plus&#10;        emblématiques, inspirées par la richesse du Maroc.">
+        <source>Une sélection raffinée de nos créations les plus
+        emblématiques, inspirées par la richesse du Maroc.</source>
+        <target>A refined selection of our most emblematic creations, inspired by the richness of Morocco.</target>
+      </trans-unit>
+      <trans-unit id="83" resname="Voir toute la collection">
+        <source>Voir toute la collection</source>
+        <target>See the whole collection</target>
+      </trans-unit>
+      <trans-unit id="84" resname="Nos engagements">
+        <source>Nos engagements</source>
+        <target>Our commitments</target>
+      </trans-unit>
+      <trans-unit id="85" resname="Livraison offerte dès 300 DH">
+        <source>Livraison offerte dès 300 DH</source>
+        <target>Free delivery from 300 DH</target>
+      </trans-unit>
+      <trans-unit id="86" resname="24–48 h partout au Maroc">
+        <source>24–48 h partout au Maroc</source>
+        <target>24–48 h anywhere in Morocco</target>
+      </trans-unit>
+      <trans-unit id="87" resname="CMI, Visa et virement acceptés">
+        <source>CMI, Visa et virement acceptés</source>
+        <target>CMI, Visa and bank transfer accepted</target>
+      </trans-unit>
+      <trans-unit id="88" resname="Service client">
+        <source>Service client</source>
+        <target>Customer service</target>
+      </trans-unit>
+      <trans-unit id="89" resname="À votre écoute sur WhatsApp">
+        <source>À votre écoute sur WhatsApp</source>
+        <target>Here for you on WhatsApp</target>
+      </trans-unit>
+      <trans-unit id="90" resname="Suivi de la commande">
+        <source>Suivi de la commande</source>
+        <target>Order tracking</target>
+      </trans-unit>
+      <trans-unit id="91" resname="Transporteur">
+        <source>Transporteur</source>
+        <target>Carrier</target>
+      </trans-unit>
+      <trans-unit id="92" resname="Numéro de suivi">
+        <source>Numéro de suivi</source>
+        <target>Tracking number</target>
+      </trans-unit>
+      <trans-unit id="93" resname="Suivre le colis chez le transporteur →">
+        <source>Suivre le colis chez le transporteur →</source>
+        <target>Track the parcel with the carrier →</target>
+      </trans-unit>
+      <trans-unit id="94" resname="Notre Cœur de Marque · Identité ODYS">
+        <source>Notre Cœur de Marque · Identité ODYS</source>
+        <target>Our heart · ODYS identity</target>
+      </trans-unit>
+      <trans-unit id="95" resname="Notre héritage.">
+        <source>Notre héritage.</source>
+        <target>Our heritage.</target>
+      </trans-unit>
+      <trans-unit id="96" resname="Découvrir la collection">
+        <source>Découvrir la collection</source>
+        <target>Discover the collection</target>
+      </trans-unit>
+      <trans-unit id="97" resname="Prix transparent">
+        <source>Prix transparent</source>
+        <target>Transparent price</target>
+      </trans-unit>
+      <trans-unit id="98" resname="Coût réel + 18% marge">
+        <source>Coût réel + 18% marge</source>
+        <target>Real cost + 18% margin</target>
+      </trans-unit>
+      <trans-unit id="99" resname="Origine certifiée">
+        <source>Origine certifiée</source>
+        <target>Certified origin</target>
+      </trans-unit>
+      <trans-unit id="100" resname="Inde · Thaïlande">
+        <source>Inde · Thaïlande</source>
+        <target>India · Thailand</target>
+      </trans-unit>
+      <trans-unit id="101" resname="Au gramme">
+        <source>Au gramme</source>
+        <target>By the gram</target>
+      </trans-unit>
+      <trans-unit id="102" resname="Commande sur mesure">
+        <source>Commande sur mesure</source>
+        <target>Made-to-order</target>
+      </trans-unit>
+      <trans-unit id="103" resname="Héritage Marocain · Collection Oud">
+        <source>Héritage Marocain · Collection Oud</source>
+        <target>Moroccan heritage · Oud collection</target>
+      </trans-unit>
+      <trans-unit id="104" resname="Oud &amp;amp; Boukhour Artisanal">
+        <source>Oud &amp;amp; Boukhour Artisanal</source>
+        <target>Artisanal Oud &amp;amp; Boukhour</target>
+      </trans-unit>
+      <trans-unit id="105" resname="Vendu au gramme">
+        <source>Vendu au gramme</source>
+        <target>Sold by the gram</target>
+      </trans-unit>
+      <trans-unit id="106" resname="COD disponible">
+        <source>COD disponible</source>
+        <target>Cash on delivery available</target>
+      </trans-unit>
+      <trans-unit id="107" resname="Non inclus dans les points fidélité">
+        <source>Non inclus dans les points fidélité</source>
+        <target>Not eligible for loyalty points</target>
+      </trans-unit>
+      <trans-unit id="108" resname="Garanties Oud &amp;amp; Boukhour">
+        <source>Garanties Oud &amp;amp; Boukhour</source>
+        <target>Oud &amp;amp; Boukhour guarantees</target>
+      </trans-unit>
+      <trans-unit id="109" resname="Quantité exacte">
+        <source>Quantité exacte</source>
+        <target>Exact quantity</target>
+      </trans-unit>
+      <trans-unit id="110" resname="Origines certifiées">
+        <source>Origines certifiées</source>
+        <target>Certified origins</target>
+      </trans-unit>
+      <trans-unit id="111" resname="Livraison 24–48h">
+        <source>Livraison 24–48h</source>
+        <target>Delivery in 24–48h</target>
+      </trans-unit>
+      <trans-unit id="112" resname="Emballage hermétique">
+        <source>Emballage hermétique</source>
+        <target>Airtight packaging</target>
+      </trans-unit>
+      <trans-unit id="113" resname="Hors fidélité">
+        <source>Hors fidélité</source>
+        <target>Outside the loyalty scheme</target>
+      </trans-unit>
+      <trans-unit id="114" resname="Pas de points">
+        <source>Pas de points</source>
+        <target>No points</target>
+      </trans-unit>
+      <trans-unit id="115" resname="Politique de retour — Oud &amp;amp; Boukhour">
+        <source>Politique de retour — Oud &amp;amp; Boukhour</source>
+        <target>Return policy — Oud &amp;amp; Boukhour</target>
+      </trans-unit>
+      <trans-unit id="116" resname="Les produits Oud et Boukhour">
+        <source>Les produits Oud et Boukhour</source>
+        <target>Oud and Boukhour products</target>
+      </trans-unit>
+      <trans-unit id="117" resname="ne sont pas éligibles au retour">
+        <source>ne sont pas éligibles au retour</source>
+        <target>cannot be returned</target>
+      </trans-unit>
+      <trans-unit id="118" resname="3 questions · 30 secondes">
+        <source>3 questions · 30 secondes</source>
+        <target>3 questions · 30 seconds</target>
+      </trans-unit>
+      <trans-unit id="119" resname="Trouvez votre ODYS">
+        <source>Trouvez votre ODYS</source>
+        <target>Find your ODYS</target>
+      </trans-unit>
+      <trans-unit id="120" resname="Fermer le quiz">
+        <source>Fermer le quiz</source>
+        <target>Close the quiz</target>
+      </trans-unit>
+      <trans-unit id="121" resname="1 · Quelle famille vous attire ?">
+        <source>1 · Quelle famille vous attire ?</source>
+        <target>1 · Which family appeals to you?</target>
+      </trans-unit>
+      <trans-unit id="122" resname="Citrus, aquatique, boisé léger">
+        <source>Citrus, aquatique, boisé léger</source>
+        <target>Citrus, aquatic, light woods</target>
+      </trans-unit>
+      <trans-unit id="123" resname="Épicé, ambré, chaud">
+        <source>Épicé, ambré, chaud</source>
+        <target>Spicy, amber, warm</target>
+      </trans-unit>
+      <trans-unit id="124" resname="Vanille, caramel, poudré">
+        <source>Vanille, caramel, poudré</source>
+        <target>Vanilla, caramel, powdery</target>
+      </trans-unit>
+      <trans-unit id="125" resname="Bois précieux, fumé, profond">
+        <source>Bois précieux, fumé, profond</source>
+        <target>Precious woods, smoky, deep</target>
+      </trans-unit>
+      <trans-unit id="126" resname="2 · Pour quelle occasion ?">
+        <source>2 · Pour quelle occasion ?</source>
+        <target>2 · For which occasion?</target>
+      </trans-unit>
+      <trans-unit id="127" resname="Quotidien">
+        <source>Quotidien</source>
+        <target>Every day</target>
+      </trans-unit>
+      <trans-unit id="128" resname="Bureau, sorties">
+        <source>Bureau, sorties</source>
+        <target>Work, outings</target>
+      </trans-unit>
+      <trans-unit id="129" resname="Soirée">
+        <source>Soirée</source>
+        <target>Evening</target>
+      </trans-unit>
+      <trans-unit id="130" resname="Dîner, événement">
+        <source>Dîner, événement</source>
+        <target>Dinner, event</target>
+      </trans-unit>
+      <trans-unit id="131" resname="Cadeau">
+        <source>Cadeau</source>
+        <target>Gift</target>
+      </trans-unit>
+      <trans-unit id="132" resname="Pour offrir">
+        <source>Pour offrir</source>
+        <target>To offer</target>
+      </trans-unit>
+      <trans-unit id="133" resname="3 · Quelle intensité ?">
+        <source>3 · Quelle intensité ?</source>
+        <target>3 · Which intensity?</target>
+      </trans-unit>
+      <trans-unit id="134" resname="Discret">
+        <source>Discret</source>
+        <target>Discreet</target>
+      </trans-unit>
+      <trans-unit id="135" resname="Proche de la peau">
+        <source>Proche de la peau</source>
+        <target>Close to the skin</target>
+      </trans-unit>
+      <trans-unit id="136" resname="Équilibré">
+        <source>Équilibré</source>
+        <target>Balanced</target>
+      </trans-unit>
+      <trans-unit id="137" resname="Affirmé">
+        <source>Affirmé</source>
+        <target>Assertive</target>
+      </trans-unit>
+      <trans-unit id="138" resname="Fort sillage">
+        <source>Fort sillage</source>
+        <target>Strong sillage</target>
+      </trans-unit>
+      <trans-unit id="139" resname="Voir ma sélection">
+        <source>Voir ma sélection</source>
+        <target>See my selection</target>
+      </trans-unit>
+      <trans-unit id="140" resname="Nouveau">
+        <source>Nouveau</source>
+        <target>New</target>
+      </trans-unit>
+      <trans-unit id="141" resname="Édition">
+        <source>Édition</source>
+        <target>Edition</target>
+      </trans-unit>
+      <trans-unit id="142" resname="Inspiré de">
+        <source>Inspiré de</source>
+        <target>Inspired by</target>
+      </trans-unit>
+      <trans-unit id="143" resname="Épuisé &amp;mdash; voir la fiche">
+        <source>Épuisé &amp;mdash; voir la fiche</source>
+        <target>Sold out &amp;mdash; see the page</target>
+      </trans-unit>
+      <trans-unit id="144" resname="Choisir le grammage">
+        <source>Choisir le grammage</source>
+        <target>Choose the weight</target>
+      </trans-unit>
+      <trans-unit id="145" resname="Ajouter au panier">
+        <source>Ajouter au panier</source>
+        <target>Add to cart</target>
+      </trans-unit>
+      <trans-unit id="146" resname="Collection ODYS">
+        <source>Collection ODYS</source>
+        <target>ODYS collection</target>
+      </trans-unit>
+      <trans-unit id="147" resname="Sections de la collection">
+        <source>Sections de la collection</source>
+        <target>Sections of the collection</target>
+      </trans-unit>
+      <trans-unit id="148" resname="Famille">
+        <source>Famille</source>
+        <target>Family</target>
+      </trans-unit>
+      <trans-unit id="149" resname="Tout">
+        <source>Tout</source>
+        <target>All</target>
+      </trans-unit>
+      <trans-unit id="150" resname="Aucun parfum de cette famille dans cette section.">
+        <source>Aucun parfum de cette famille dans cette section.</source>
+        <target>No fragrance from this family in this section.</target>
+      </trans-unit>
+      <trans-unit id="151" resname="Aucun parfum dans cette collection pour le moment.">
+        <source>Aucun parfum dans cette collection pour le moment.</source>
+        <target>No fragrance in this collection yet.</target>
+      </trans-unit>
+      <trans-unit id="152" resname="Pagination">
+        <source>Pagination</source>
+        <target>Pagination</target>
+      </trans-unit>
+      <trans-unit id="153" resname="Merci, votre commande est confirmée">
+        <source>Merci, votre commande est confirmée</source>
+        <target>Thank you, your order is confirmed</target>
+      </trans-unit>
+      <trans-unit id="154" resname="Votre référence">
+        <source>Votre référence</source>
+        <target>Your reference</target>
+      </trans-unit>
+      <trans-unit id="155" resname="suivre ma commande">
+        <source>suivre ma commande</source>
+        <target>track my order</target>
+      </trans-unit>
+      <trans-unit id="156" resname="À préparer pour la livraison">
+        <source>À préparer pour la livraison</source>
+        <target>To prepare for delivery</target>
+      </trans-unit>
+      <trans-unit id="157" resname="Adresse">
+        <source>Adresse</source>
+        <target>Address</target>
+      </trans-unit>
+      <trans-unit id="158" resname="Votre commande">
+        <source>Votre commande</source>
+        <target>Your order</target>
+      </trans-unit>
+      <trans-unit id="159" resname="Télécharger la facture">
+        <source>Télécharger la facture</source>
+        <target>Download the invoice</target>
+      </trans-unit>
+      <trans-unit id="160" resname="Continuer mes achats">
+        <source>Continuer mes achats</source>
+        <target>Continue shopping</target>
+      </trans-unit>
+      <trans-unit id="161" resname="Une question sur cette commande ?">
+        <source>Une question sur cette commande ?</source>
+        <target>A question about this order?</target>
+      </trans-unit>
+      <trans-unit id="162" resname="Indiquez la référence">
+        <source>Indiquez la référence</source>
+        <target>Give the reference</target>
+      </trans-unit>
+      <trans-unit id="163" resname=", nous retrouvons le colis tout de suite.">
+        <source>, nous retrouvons le colis tout de suite.</source>
+        <target>, and we will find the parcel right away.</target>
+      </trans-unit>
+      <trans-unit id="164" resname="Informations ODYS">
+        <source>Informations ODYS</source>
+        <target>ODYS information</target>
+      </trans-unit>
+      <trans-unit id="165" resname="Une question ?">
+        <source>Une question ?</source>
+        <target>A question?</target>
+      </trans-unit>
+      <trans-unit id="166" resname="Notre service client répond sur WhatsApp, du lundi au samedi, 9h–18h.">
+        <source>Notre service client répond sur WhatsApp, du lundi au samedi, 9h–18h.</source>
+        <target>Our customer service answers on WhatsApp, Monday to Saturday, 9am–6pm.</target>
+      </trans-unit>
+      <trans-unit id="167" resname="Écrire sur WhatsApp">
+        <source>Écrire sur WhatsApp</source>
+        <target>Message us on WhatsApp</target>
+      </trans-unit>
+      <trans-unit id="168" resname="Nous écrire">
+        <source>Nous écrire</source>
+        <target>Write to us</target>
+      </trans-unit>
+      <trans-unit id="169" resname="Contactez-nous">
+        <source>Contactez-nous</source>
+        <target>Contact us</target>
+      </trans-unit>
+      <trans-unit id="170" resname="Suivi de commande">
+        <source>Suivi de commande</source>
+        <target>Order tracking</target>
+      </trans-unit>
+      <trans-unit id="171" resname="Où est mon colis ?">
+        <source>Où est mon colis ?</source>
+        <target>Where is my parcel?</target>
+      </trans-unit>
+      <trans-unit id="172" resname="XKBKNABJK">
+        <source>XKBKNABJK</source>
+        <target>XKBKNABJK</target>
+      </trans-unit>
+      <trans-unit id="173" resname="Référence de commande *">
+        <source>Référence de commande *</source>
+        <target>Order reference *</target>
+      </trans-unit>
+      <trans-unit id="174" resname="Email utilisé pour la commande *">
+        <source>Email utilisé pour la commande *</source>
+        <target>Email used for the order *</target>
+      </trans-unit>
+      <trans-unit id="175" resname="votre@email.ma">
+        <source>votre@email.ma</source>
+        <target>your@email.ma</target>
+      </trans-unit>
+      <trans-unit id="176" resname="Suivre ma commande →">
+        <source>Suivre ma commande →</source>
+        <target>Track my order →</target>
+      </trans-unit>
+      <trans-unit id="177" resname="Vous avez un compte ?">
+        <source>Vous avez un compte ?</source>
+        <target>Do you have an account?</target>
+      </trans-unit>
+      <trans-unit id="178" resname="Vos commandes y sont déjà listées">
+        <source>Vos commandes y sont déjà listées</source>
+        <target>Your orders are already listed there</target>
+      </trans-unit>
+      <trans-unit id="179" resname="Gardez votre historique">
+        <source>Gardez votre historique</source>
+        <target>Keep your history</target>
+      </trans-unit>
+      <trans-unit id="180" resname="Choisissez un mot de passe et cette commande — et les suivantes —&#10;          resteront dans votre espace client, avec vos points ODYS.">
+        <source>Choisissez un mot de passe et cette commande — et les suivantes —
+          resteront dans votre espace client, avec vos points ODYS.</source>
+        <target>Choose a password and this order — and the next ones — will stay in your account, along with your ODYS points.</target>
+      </trans-unit>
+      <trans-unit id="181" resname="← Mon compte">
+        <source>← Mon compte</source>
+        <target>← My account</target>
+      </trans-unit>
+      <trans-unit id="182" resname="Espace client">
+        <source>Espace client</source>
+        <target>Customer area</target>
+      </trans-unit>
+      <trans-unit id="183" resname="Pas de compte à portée de main ?">
+        <source>Pas de compte à portée de main ?</source>
+        <target>No account to hand?</target>
+      </trans-unit>
+      <trans-unit id="184" resname="Suivez une commande avec sa référence">
+        <source>Suivez une commande avec sa référence</source>
+        <target>Track an order with its reference</target>
+      </trans-unit>
+      <trans-unit id="185" resname="Aucune commande pour le moment">
+        <source>Aucune commande pour le moment</source>
+        <target>No order yet</target>
+      </trans-unit>
+      <trans-unit id="186" resname="Votre première commande vous rapporte un point par 100 DH.">
+        <source>Votre première commande vous rapporte un point par 100 DH.</source>
+        <target>Your first order earns you one point per 100 DH.</target>
+      </trans-unit>
+      <trans-unit id="187" resname="Découvrir la collection →">
+        <source>Découvrir la collection →</source>
+        <target>Discover the collection →</target>
+      </trans-unit>
+      <trans-unit id="188" resname="Espace personnel">
+        <source>Espace personnel</source>
+        <target>Personal area</target>
+      </trans-unit>
+      <trans-unit id="189" resname="Vos points fidélité ODYS">
+        <source>Vos points fidélité ODYS</source>
+        <target>Your ODYS loyalty points</target>
+      </trans-unit>
+      <trans-unit id="190" resname="points accumulés · 1 pt = 100 DH dépensés">
+        <source>points accumulés · 1 pt = 100 DH dépensés</source>
+        <target>points earned · 1 pt = 100 DH spent</target>
+      </trans-unit>
+      <trans-unit id="191" resname="Prochaine récompense">
+        <source>Prochaine récompense</source>
+        <target>Next reward</target>
+      </trans-unit>
+      <trans-unit id="192" resname="Un parfum à 10 pts &amp;middot; deux à 15 &amp;middot; un coffret à 20">
+        <source>Un parfum à 10 pts &amp;middot; deux à 15 &amp;middot; un coffret à 20</source>
+        <target>A fragrance at 10 pts &amp;middot; two at 15 &amp;middot; a gift set at 20</target>
+      </trans-unit>
+      <trans-unit id="193" resname="Échanger mes points →">
+        <source>Échanger mes points →</source>
+        <target>Redeem my points →</target>
+      </trans-unit>
+      <trans-unit id="194" resname="Mes points ODYS">
+        <source>Mes points ODYS</source>
+        <target>My ODYS points</target>
+      </trans-unit>
+      <trans-unit id="195" resname="Solde, échange, historique">
+        <source>Solde, échange, historique</source>
+        <target>Balance, redemption, history</target>
+      </trans-unit>
+      <trans-unit id="196" resname="Suivre, retourner">
+        <source>Suivre, retourner</source>
+        <target>Track, return</target>
+      </trans-unit>
+      <trans-unit id="197" resname="Mes adresses">
+        <source>Mes adresses</source>
+        <target>My addresses</target>
+      </trans-unit>
+      <trans-unit id="198" resname="Gérer la livraison">
+        <source>Gérer la livraison</source>
+        <target>Manage delivery</target>
+      </trans-unit>
+      <trans-unit id="199" resname="Mes informations">
+        <source>Mes informations</source>
+        <target>My details</target>
+      </trans-unit>
+      <trans-unit id="200" resname="Profil, mot de passe">
+        <source>Profil, mot de passe</source>
+        <target>Profile, password</target>
+      </trans-unit>
+      <trans-unit id="201" resname="Mes envies">
+        <source>Mes envies</source>
+        <target>My wishes</target>
+      </trans-unit>
+      <trans-unit id="202" resname="Parfums mis de côté">
+        <source>Parfums mis de côté</source>
+        <target>Fragrances set aside</target>
+      </trans-unit>
+      <trans-unit id="203" resname="Se déconnecter">
+        <source>Se déconnecter</source>
+        <target>Sign out</target>
+      </trans-unit>
+      <trans-unit id="204" resname="Fermer la session">
+        <source>Fermer la session</source>
+        <target>Close the session</target>
+      </trans-unit>
+      <trans-unit id="205" resname="← Mes commandes">
+        <source>← Mes commandes</source>
+        <target>← My orders</target>
+      </trans-unit>
+      <trans-unit id="206" resname="Commander à nouveau">
+        <source>Commander à nouveau</source>
+        <target>Order again</target>
+      </trans-unit>
+      <trans-unit id="207" resname="Paiement">
+        <source>Paiement</source>
+        <target>Payment</target>
+      </trans-unit>
+      <trans-unit id="208" resname="Message cadeau">
+        <source>Message cadeau</source>
+        <target>Gift message</target>
+      </trans-unit>
+      <trans-unit id="209" resname="Échanges">
+        <source>Échanges</source>
+        <target>Messages</target>
+      </trans-unit>
+      <trans-unit id="210" resname="Votre colis est arrivé ?">
+        <source>Votre colis est arrivé ?</source>
+        <target>Has your parcel arrived?</target>
+      </trans-unit>
+      <trans-unit id="211" resname="Aucun résultat">
+        <source>Aucun résultat</source>
+        <target>No result</target>
+      </trans-unit>
+      <trans-unit id="212" resname="Erreur 404">
+        <source>Erreur 404</source>
+        <target>Error 404</target>
+      </trans-unit>
+      <trans-unit id="213" resname="Rechercher un parfum">
+        <source>Rechercher un parfum</source>
+        <target>Search for a fragrance</target>
+      </trans-unit>
+      <trans-unit id="214" resname="Parfum, note olfactive, inspiration…">
+        <source>Parfum, note olfactive, inspiration…</source>
+        <target>Fragrance, note, inspiration…</target>
+      </trans-unit>
+      <trans-unit id="215" resname="Rechercher">
+        <source>Rechercher</source>
+        <target>Search</target>
+      </trans-unit>
+      <trans-unit id="216" resname="Pages principales">
+        <source>Pages principales</source>
+        <target>Main pages</target>
+      </trans-unit>
+      <trans-unit id="217" resname="Pour homme">
+        <source>Pour homme</source>
+        <target>For men</target>
+      </trans-unit>
+      <trans-unit id="218" resname="Pour femme">
+        <source>Pour femme</source>
+        <target>For women</target>
+      </trans-unit>
+      <trans-unit id="219" resname="Aller au contenu principal">
+        <source>Aller au contenu principal</source>
+        <target>Skip to main content</target>
+      </trans-unit>
+      <trans-unit id="220" resname="Contacter ODYS Parfums sur WhatsApp">
+        <source>Contacter ODYS Parfums sur WhatsApp</source>
+        <target>Contact ODYS Parfums on WhatsApp</target>
+      </trans-unit>
+      <trans-unit id="221" resname="Commencez ici">
+        <source>Commencez ici</source>
+        <target>Start here</target>
+      </trans-unit>
+      <trans-unit id="222" resname="La boutique">
+        <source>La boutique</source>
+        <target>The shop</target>
+      </trans-unit>
+      <trans-unit id="223" resname="Voir tout">
+        <source>Voir tout</source>
+        <target>See all</target>
+      </trans-unit>
+      <trans-unit id="224" resname="Rayons de la boutique">
+        <source>Rayons de la boutique</source>
+        <target>Shop departments</target>
+      </trans-unit>
+      <trans-unit id="225" resname="Pour découvrir">
+        <source>Pour découvrir</source>
+        <target>To discover</target>
+      </trans-unit>
+      <trans-unit id="226" resname="Nos coffrets">
+        <source>Nos coffrets</source>
+        <target>Our gift sets</target>
+      </trans-unit>
+      <trans-unit id="227" resname="Sélections de la boutique">
+        <source>Sélections de la boutique</source>
+        <target>Shop selections</target>
+      </trans-unit>
+      <trans-unit id="228" resname="Pourquoi ODYS">
+        <source>Pourquoi ODYS</source>
+        <target>Why ODYS</target>
+      </trans-unit>
+      <trans-unit id="229" resname="Cour marocaine aux colonnes de zellige et de stuc sculpté">
+        <source>Cour marocaine aux colonnes de zellige et de stuc sculpté</source>
+        <target>Moroccan courtyard with zellige columns and carved stucco</target>
+      </trans-unit>
+      <trans-unit id="230" resname="Production à Casablanca, matières sélectionnées, contrôle à chaque lot.">
+        <source>Production à Casablanca, matières sélectionnées, contrôle à chaque lot.</source>
+        <target>Made in Casablanca, selected materials, checked batch by batch.</target>
+      </trans-unit>
+      <trans-unit id="231" resname="Mabkhara fumante posée sur un tapis oriental">
+        <source>Mabkhara fumante posée sur un tapis oriental</source>
+        <target>Smoking mabkhara on an oriental rug</target>
+      </trans-unit>
+      <trans-unit id="232" resname="Oud vendu au gramme">
+        <source>Oud vendu au gramme</source>
+        <target>Oud sold by the gram</target>
+      </trans-unit>
+      <trans-unit id="233" resname="Colis en carton kraft fermé, dans une lumière chaude">
+        <source>Colis en carton kraft fermé, dans une lumière chaude</source>
+        <target>Closed kraft parcel in a warm light</target>
+      </trans-unit>
+      <trans-unit id="234" resname="Livraison 24–48 h">
+        <source>Livraison 24–48 h</source>
+        <target>Delivery in 24–48 h</target>
+      </trans-unit>
+      <trans-unit id="235" resname="20 DH à Casablanca, 30 DH partout au Maroc, offerte dès 300 DH.">
+        <source>20 DH à Casablanca, 30 DH partout au Maroc, offerte dès 300 DH.</source>
+        <target>20 DH in Casablanca, 30 DH anywhere in Morocco, free from 300 DH.</target>
+      </trans-unit>
+      <trans-unit id="236" resname="Coffret blanc ouvert posé sur une table claire">
+        <source>Coffret blanc ouvert posé sur une table claire</source>
+        <target>Open white gift box on a light table</target>
+      </trans-unit>
+      <trans-unit id="237" resname="Réglez en espèces à la réception. CMI, Visa et virement également acceptés.">
+        <source>Réglez en espèces à la réception. CMI, Visa et virement également acceptés.</source>
+        <target>Pay in cash on delivery. CMI, Visa and bank transfer also accepted.</target>
+      </trans-unit>
+      <trans-unit id="238" resname="Mon Panier">
+        <source>Mon Panier</source>
+        <target>My cart</target>
+      </trans-unit>
+      <trans-unit id="239" resname="Votre panier est vide">
+        <source>Votre panier est vide</source>
+        <target>Your cart is empty</target>
+      </trans-unit>
+      <trans-unit id="240" resname="Produits complémentaires">
+        <source>Produits complémentaires</source>
+        <target>Complementary products</target>
+      </trans-unit>
+      <trans-unit id="241" resname="Total">
+        <source>Total</source>
+        <target>Total</target>
+      </trans-unit>
+      <trans-unit id="242" resname="Commander →">
+        <source>Commander →</source>
+        <target>Checkout →</target>
+      </trans-unit>
+      <trans-unit id="243" resname="💚 COD">
+        <source>💚 COD</source>
+        <target>💚 Cash on delivery</target>
+      </trans-unit>
+      <trans-unit id="244" resname="Créer un compte · +2 pts ⭐">
+        <source>Créer un compte · +2 pts ⭐</source>
+        <target>Create an account · +2 pts ⭐</target>
+      </trans-unit>
+      <trans-unit id="245" resname="+2 points fidélité gagnés !">
+        <source>+2 points fidélité gagnés !</source>
+        <target>+2 loyalty points earned!</target>
+      </trans-unit>
+      <trans-unit id="246" resname="Recherche par note olfactive">
+        <source>Recherche par note olfactive</source>
+        <target>Search by olfactory note</target>
+      </trans-unit>
+      <trans-unit id="247" resname="Parfums avec la note">
+        <source>Parfums avec la note</source>
+        <target>Fragrances with the note</target>
+      </trans-unit>
+      <trans-unit id="248" resname="Fermer">
+        <source>Fermer</source>
+        <target>Close</target>
+      </trans-unit>
+      <trans-unit id="249" resname="Galerie photos du produit">
+        <source>Galerie photos du produit</source>
+        <target>Product photo gallery</target>
+      </trans-unit>
+      <trans-unit id="250" resname="Vignettes de la galerie">
+        <source>Vignettes de la galerie</source>
+        <target>Gallery thumbnails</target>
+      </trans-unit>
+      <trans-unit id="251" resname="Note :">
+        <source>Note :</source>
+        <target>Rating:</target>
+      </trans-unit>
+      <trans-unit id="252" resname="sur 5 —">
+        <source>sur 5 —</source>
+        <target>out of 5 —</target>
+      </trans-unit>
+      <trans-unit id="253" resname="Commandez maintenant pour garantir votre livraison">
+        <source>Commandez maintenant pour garantir votre livraison</source>
+        <target>Order now to secure your delivery</target>
+      </trans-unit>
+      <trans-unit id="254" resname="Choisissez votre grammage">
+        <source>Choisissez votre grammage</source>
+        <target>Choose your weight</target>
+      </trans-unit>
+      <trans-unit id="255" resname="Grammage">
+        <source>Grammage</source>
+        <target>Weight</target>
+      </trans-unit>
+      <trans-unit id="256" resname="Format du parfum">
+        <source>Format du parfum</source>
+        <target>Fragrance size</target>
+      </trans-unit>
+      <trans-unit id="257" resname="Ce coffret contient">
+        <source>Ce coffret contient</source>
+        <target>This gift set contains</target>
+      </trans-unit>
+      <trans-unit id="258" resname="Diminuer la quantité">
+        <source>Diminuer la quantité</source>
+        <target>Decrease the quantity</target>
+      </trans-unit>
+      <trans-unit id="259" resname="Augmenter la quantité">
+        <source>Augmenter la quantité</source>
+        <target>Increase the quantity</target>
+      </trans-unit>
+      <trans-unit id="260" resname="Épuisé">
+        <source>Épuisé</source>
+        <target>Sold out</target>
+      </trans-unit>
+      <trans-unit id="261" resname="Ce parfum revient bientôt. Écrivez-nous pour être prévenu.">
+        <source>Ce parfum revient bientôt. Écrivez-nous pour être prévenu.</source>
+        <target>This fragrance is coming back soon. Write to us to be told.</target>
+      </trans-unit>
+      <trans-unit id="262" resname="Livraison offerte">
+        <source>Livraison offerte</source>
+        <target>Free delivery</target>
+      </trans-unit>
+      <trans-unit id="263" resname="Nos services">
+        <source>Nos services</source>
+        <target>Our services</target>
+      </trans-unit>
+      <trans-unit id="264" resname="Informations produit">
+        <source>Informations produit</source>
+        <target>Product information</target>
+      </trans-unit>
+      <trans-unit id="265" resname="Description">
+        <source>Description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="266" resname="Description du produit">
+        <source>Description du produit</source>
+        <target>Product description</target>
+      </trans-unit>
+      <trans-unit id="267" resname="Comment utiliser">
+        <source>Comment utiliser</source>
+        <target>How to use</target>
+      </trans-unit>
+      <trans-unit id="268" resname="Vaporisez sur les points de chaleur (poignet, cou, nuque). 2–3 pulvérisations pour un sillage optimal.">
+        <source>Vaporisez sur les points de chaleur (poignet, cou, nuque). 2–3 pulvérisations pour un sillage optimal.</source>
+        <target>Spray on the warm points (wrist, neck, nape). 2–3 sprays for a lasting trail.</target>
+      </trans-unit>
+      <trans-unit id="269" resname="Livraison &amp;amp; Retours">
+        <source>Livraison &amp;amp; Retours</source>
+        <target>Delivery &amp;amp; Returns</target>
+      </trans-unit>
+      <trans-unit id="270" resname="Informations livraison et retours">
+        <source>Informations livraison et retours</source>
+        <target>Delivery and returns information</target>
+      </trans-unit>
+      <trans-unit id="271" resname="Livraison 24–48h. 20 DH Casa · 30 DH Maroc · Gratuite dès 300 DH. COD disponible. Retours 14 jours (non ouvert).">
+        <source>Livraison 24–48h. 20 DH Casa · 30 DH Maroc · Gratuite dès 300 DH. COD disponible. Retours 14 jours (non ouvert).</source>
+        <target>Delivery in 24–48h. 20 DH Casablanca · 30 DH Morocco · Free from 300 DH. Cash on delivery available. Returns within 14 days.</target>
+      </trans-unit>
+      <trans-unit id="272" resname="Vous aimerez aussi">
+        <source>Vous aimerez aussi</source>
+        <target>You may also like</target>
+      </trans-unit>
+      <trans-unit id="273" resname="Navigation suggestions">
+        <source>Navigation suggestions</source>
+        <target>Suggestions navigation</target>
+      </trans-unit>
+      <trans-unit id="274" resname="Parfum précédent">
+        <source>Parfum précédent</source>
+        <target>Previous fragrance</target>
+      </trans-unit>
+      <trans-unit id="275" resname="Parfum suivant">
+        <source>Parfum suivant</source>
+        <target>Next fragrance</target>
+      </trans-unit>
+      <trans-unit id="276" resname="Ajouter">
+        <source>Ajouter</source>
+        <target>Add</target>
+      </trans-unit>
+      <trans-unit id="277" resname="← Continuer mes achats">
+        <source>← Continuer mes achats</source>
+        <target>← Continue shopping</target>
+      </trans-unit>
+      <trans-unit id="278" resname="Supprimer">
+        <source>Supprimer</source>
+        <target>Delete</target>
+      </trans-unit>
+      <trans-unit id="279" resname="Code promo">
+        <source>Code promo</source>
+        <target>Promo code</target>
+      </trans-unit>
+      <trans-unit id="280" resname="Entrez votre code">
+        <source>Entrez votre code</source>
+        <target>Enter your code</target>
+      </trans-unit>
+      <trans-unit id="281" resname="Appliquer">
+        <source>Appliquer</source>
+        <target>Apply</target>
+      </trans-unit>
+      <trans-unit id="282" resname="Récapitulatif">
+        <source>Récapitulatif</source>
+        <target>Summary</target>
+      </trans-unit>
+      <trans-unit id="283" resname="Sous-total">
+        <source>Sous-total</source>
+        <target>Subtotal</target>
+      </trans-unit>
+      <trans-unit id="284" resname="Réduction">
+        <source>Réduction</source>
+        <target>Discount</target>
+      </trans-unit>
+      <trans-unit id="285" resname="🔒 SSL">
+        <source>🔒 SSL</source>
+        <target>🔒 SSL</target>
+      </trans-unit>
+      <trans-unit id="286" resname="Plus que">
+        <source>Plus que</source>
+        <target>Only</target>
+      </trans-unit>
+      <trans-unit id="287" resname="pour la livraison gratuite 🚚">
+        <source>pour la livraison gratuite 🚚</source>
+        <target>for free delivery 🚚</target>
+      </trans-unit>
+      <trans-unit id="288" resname="Email ou téléphone *">
+        <source>Email ou téléphone *</source>
+        <target>Email or phone *</target>
+      </trans-unit>
+      <trans-unit id="289" resname="votre@email.ma ou 0612345678">
+        <source>votre@email.ma ou 0612345678</source>
+        <target>your@email.ma or 0612345678</target>
+      </trans-unit>
+      <trans-unit id="290" resname="Mot de passe *">
+        <source>Mot de passe *</source>
+        <target>Password *</target>
+      </trans-unit>
+      <trans-unit id="291" resname="Se connecter →">
+        <source>Se connecter →</source>
+        <target>Sign in →</target>
+      </trans-unit>
+      <trans-unit id="292" resname="Mot de passe oublié ?">
+        <source>Mot de passe oublié ?</source>
+        <target>Forgotten your password?</target>
+      </trans-unit>
+      <trans-unit id="293" resname="Espace Client">
+        <source>Espace Client</source>
+        <target>Customer area</target>
+      </trans-unit>
+      <trans-unit id="294" resname="Pas encore de compte ?">
+        <source>Pas encore de compte ?</source>
+        <target>No account yet?</target>
+      </trans-unit>
+      <trans-unit id="295" resname="Programme Fidélité ODYS">
+        <source>Programme Fidélité ODYS</source>
+        <target>ODYS loyalty programme</target>
+      </trans-unit>
+      <trans-unit id="296" resname="10 pts → un parfum offert · 20 pts → un coffret">
+        <source>10 pts → un parfum offert · 20 pts → un coffret</source>
+        <target>10 pts → a fragrance offered · 20 pts → a gift set</target>
+      </trans-unit>
+      <trans-unit id="297" resname="Mot de passe oublié">
+        <source>Mot de passe oublié</source>
+        <target>Forgotten password</target>
+      </trans-unit>
+      <trans-unit id="298" resname="Adresse e-mail *">
+        <source>Adresse e-mail *</source>
+        <target>Email address *</target>
+      </trans-unit>
+      <trans-unit id="299" resname="Envoyer le lien →">
+        <source>Envoyer le lien →</source>
+        <target>Send the link →</target>
+      </trans-unit>
+      <trans-unit id="300" resname="Rien ne vous parvient&amp;nbsp;? Écrivez-nous, nous rouvrons votre compte&#10;      avec vous.">
+        <source>Rien ne vous parvient&amp;nbsp;? Écrivez-nous, nous rouvrons votre compte
+      avec vous.</source>
+        <target>Nothing arrives?&amp;nbsp;Write to us and we will reopen your account with you.</target>
+      </trans-unit>
+      <trans-unit id="301" resname="← Retour à la connexion">
+        <source>← Retour à la connexion</source>
+        <target>← Back to sign in</target>
+      </trans-unit>
+      <trans-unit id="302" resname="Le lien est valable un temps limité. Pensez à regarder vos indésirables.">
+        <source>Le lien est valable un temps limité. Pensez à regarder vos indésirables.</source>
+        <target>The link is valid for a limited time. Remember to look in your spam folder.</target>
+      </trans-unit>
+      <trans-unit id="303" resname="Toujours rien après quelques minutes&amp;nbsp;? Écrivez-nous.">
+        <source>Toujours rien après quelques minutes&amp;nbsp;? Écrivez-nous.</source>
+        <target>Still nothing after a few minutes?&amp;nbsp;Write to us.</target>
+      </trans-unit>
+      <trans-unit id="304" resname="Nouveau mot de passe">
+        <source>Nouveau mot de passe</source>
+        <target>New password</target>
+      </trans-unit>
+      <trans-unit id="305" resname="Compte&amp;nbsp;:">
+        <source>Compte&amp;nbsp;:</source>
+        <target>Account:&amp;nbsp;</target>
+      </trans-unit>
+      <trans-unit id="306" resname="Nouveau mot de passe *">
+        <source>Nouveau mot de passe *</source>
+        <target>New password *</target>
+      </trans-unit>
+      <trans-unit id="307" resname="Confirmation *">
+        <source>Confirmation *</source>
+        <target>Confirmation *</target>
+      </trans-unit>
+      <trans-unit id="308" resname="Changer le mot de passe →">
+        <source>Changer le mot de passe →</source>
+        <target>Change the password →</target>
+      </trans-unit>
+      <trans-unit id="309" resname="Page introuvable">
+        <source>Page introuvable</source>
+        <target>Page not found</target>
+      </trans-unit>
+      <trans-unit id="310" resname="← Accueil">
+        <source>← Accueil</source>
+        <target>← Home</target>
+      </trans-unit>
+      <trans-unit id="311" resname="Support Client">
+        <source>Support Client</source>
+        <target>Customer support</target>
+      </trans-unit>
+      <trans-unit id="312" resname="Réponse sous 2h en semaine · WhatsApp 7j/7 de 9h à 21h">
+        <source>Réponse sous 2h en semaine · WhatsApp 7j/7 de 9h à 21h</source>
+        <target>Answer within 2h on weekdays · WhatsApp every day, 9am to 9pm</target>
+      </trans-unit>
+      <trans-unit id="313" resname="Réponse immédiate · 7j/7">
+        <source>Réponse immédiate · 7j/7</source>
+        <target>Immediate answer · every day</target>
+      </trans-unit>
+      <trans-unit id="314" resname="Email">
+        <source>Email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="315" resname="Réponse sous 2h">
+        <source>Réponse sous 2h</source>
+        <target>Answer within 2h</target>
+      </trans-unit>
+      <trans-unit id="316" resname="📍 ODYS Parfums — Casablanca, Maroc">
+        <source>📍 ODYS Parfums — Casablanca, Maroc</source>
+        <target>📍 ODYS Parfums — Casablanca, Morocco</target>
+      </trans-unit>
+      <trans-unit id="317" resname="Lun–Sam · 9h–18h · WhatsApp 7j/7 · 9h–21h">
+        <source>Lun–Sam · 9h–18h · WhatsApp 7j/7 · 9h–21h</source>
+        <target>Mon–Sat · 9am–6pm · WhatsApp every day · 9am–9pm</target>
+      </trans-unit>
+      <trans-unit id="318" resname="Parfum, note olfactive, inspiration...">
+        <source>Parfum, note olfactive, inspiration...</source>
+        <target>Fragrance, note, inspiration...</target>
+      </trans-unit>
+      <trans-unit id="319" resname="Votre recherche">
+        <source>Votre recherche</source>
+        <target>Your search</target>
+      </trans-unit>
+      <trans-unit id="320" resname="Voir tous les parfums →">
+        <source>Voir tous les parfums →</source>
+        <target>See all fragrances →</target>
+      </trans-unit>
+      <trans-unit id="321" resname="WhatsApp">
+        <source>WhatsApp</source>
+        <target>WhatsApp</target>
+      </trans-unit>
+      <trans-unit id="322" resname="ODYS">
+        <source>ODYS</source>
+        <target>ODYS</target>
+      </trans-unit>
+      <trans-unit id="323" resname="Parfum">
+        <source>Parfum</source>
+        <target>Parfum</target>
+      </trans-unit>
+      <trans-unit id="324" resname="Extrait">
+        <source>Extrait</source>
+        <target>Extract</target>
+      </trans-unit>
+      <trans-unit id="325" resname="de parfum">
+        <source>de parfum</source>
+        <target>of perfume</target>
+      </trans-unit>
+      <trans-unit id="326" resname="CMI">
+        <source>CMI</source>
+        <target>CMI</target>
+      </trans-unit>
+      <trans-unit id="327" resname="Visa / Mastercard">
+        <source>Visa / Mastercard</source>
+        <target>Visa / Mastercard</target>
+      </trans-unit>
+      <trans-unit id="328" resname="CGV">
+        <source>CGV</source>
+        <target>Terms and conditions</target>
+      </trans-unit>
+      <trans-unit id="329" resname="Photo du produit">
+        <source>Photo du produit</source>
+        <target>Product photo</target>
+      </trans-unit>
+      <trans-unit id="330" resname="Fermer la photo">
+        <source>Fermer la photo</source>
+        <target>Close the photo</target>
+      </trans-unit>
+      <trans-unit id="331" resname="Photo précédente">
+        <source>Photo précédente</source>
+        <target>Previous photo</target>
+      </trans-unit>
+      <trans-unit id="332" resname="Photo suivante">
+        <source>Photo suivante</source>
+        <target>Next photo</target>
+      </trans-unit>
+      <trans-unit id="333" resname="ODYS Parfum — Retour à l'accueil">
+        <source>ODYS Parfum — Retour à l'accueil</source>
+        <target>ODYS Parfum — back to the home page</target>
+      </trans-unit>
+      <trans-unit id="334" resname="ODYS Parfums crée des compositions originales d'inspiration.&#10;      Les marques citées à titre de référence olfactive appartiennent à leurs&#10;      propriétaires respectifs et n'ont aucun lien avec ODYS Parfums.">
+        <source>ODYS Parfums crée des compositions originales d'inspiration.
+      Les marques citées à titre de référence olfactive appartiennent à leurs
+      propriétaires respectifs et n'ont aucun lien avec ODYS Parfums.</source>
+        <target>ODYS Parfums creates original compositions of inspiration. The brands named as olfactory references belong to their respective owners and have no connection with ODYS Parfums.</target>
+      </trans-unit>
+      <trans-unit id="335" resname="Ce qu'en disent nos clients">
+        <source>Ce qu'en disent nos clients</source>
+        <target>What our customers say</target>
+      </trans-unit>
+      <trans-unit id="336" resname="L'essence d'ODYS">
+        <source>L'essence d'ODYS</source>
+        <target>The essence of ODYS</target>
+      </trans-unit>
+      <trans-unit id="337" resname="Une maison de parfum née de la rencontre entre l'élégance&#10;      contemporaine et l'âme du Maroc. Chaque composition est pensée comme une&#10;      signature — sobre, tenace, et taillée pour durer.">
+        <source>Une maison de parfum née de la rencontre entre l'élégance
+      contemporaine et l'âme du Maroc. Chaque composition est pensée comme une
+      signature — sobre, tenace, et taillée pour durer.</source>
+        <target>A perfume house born of the meeting between contemporary elegance and the soul of Morocco. Every composition is conceived as a signature — restrained, tenacious, and built to last.</target>
+      </trans-unit>
+      <trans-unit id="338" resname="Visuels de la page d'accueil">
+        <source>Visuels de la page d'accueil</source>
+        <target>Home page visuals</target>
+      </trans-unit>
+      <trans-unit id="339" resname="Des fragrances d'exception">
+        <source>Des fragrances d'exception</source>
+        <target>Exceptional fragrances</target>
+      </trans-unit>
+      <trans-unit id="340" resname="5 g d'oud ou un coffret à 15 points">
+        <source>5 g d'oud ou un coffret à 15 points</source>
+        <target>5 g of oud or a gift set at 15 points</target>
+      </trans-unit>
+      <trans-unit id="341" resname="Cette commande n'est plus en cours de livraison.&#10;          Une question&amp;nbsp;? Écrivez-nous, nous reprenons le dossier avec vous.">
+        <source>Cette commande n'est plus en cours de livraison.
+          Une question&amp;nbsp;? Écrivez-nous, nous reprenons le dossier avec vous.</source>
+        <target>This order is no longer out for delivery. A question? Write to us and we will take it up with you.</target>
+      </trans-unit>
+      <trans-unit id="342" resname="L'Oud.">
+        <source>L'Oud.</source>
+        <target>Oud.</target>
+      </trans-unit>
+      <trans-unit id="343" resname="Oud naturel au gramme. Origines certifiées — Hindi Assam,&#10;        Royal Hindi, Thai Select. Prix transparent : vous payez notre coût&#10;        d'achat + 18% marge fixe. Rien de caché.">
+        <source>Oud naturel au gramme. Origines certifiées — Hindi Assam,
+        Royal Hindi, Thai Select. Prix transparent : vous payez notre coût
+        d'achat + 18% marge fixe. Rien de caché.</source>
+        <target>Natural oud by the gram. Certified origins — Hindi Assam, Royal Hindi, Thai Select. Transparent price: you pay our purchase cost + a fixed 18% margin. Nothing hidden.</target>
+      </trans-unit>
+      <trans-unit id="344" resname="L'or liquide de l'Orient — sélectionné à la source, vendu au gramme.&#10;    Choisissez exactement la quantité qu'il vous faut.">
+        <source>L'or liquide de l'Orient — sélectionné à la source, vendu au gramme.
+    Choisissez exactement la quantité qu'il vous faut.</source>
+        <target>The liquid gold of the Orient — selected at the source, sold by the gram. Choose exactly the quantity you need.</target>
+      </trans-unit>
+      <trans-unit id="345" resname="en raison de leur nature périssable et des exigences d'hygiène. Une fois&#10;      expédié, l'article ne peut pas être retourné. En cas de produit défectueux,&#10;      contactez-nous immédiatement via WhatsApp avec photo à l'appui.">
+        <source>en raison de leur nature périssable et des exigences d'hygiène. Une fois
+      expédié, l'article ne peut pas être retourné. En cas de produit défectueux,
+      contactez-nous immédiatement via WhatsApp avec photo à l'appui.</source>
+        <target>because of their perishable nature and hygiene requirements. Once shipped, the item cannot be returned. If a product is faulty, contact us immediately on WhatsApp with a photo.</target>
+      </trans-unit>
+      <trans-unit id="346" resname="Présent sans s'imposer">
+        <source>Présent sans s'imposer</source>
+        <target>Present without imposing</target>
+      </trans-unit>
+      <trans-unit id="347" resname="Fil d'Ariane">
+        <source>Fil d'Ariane</source>
+        <target>Breadcrumb</target>
+      </trans-unit>
+      <trans-unit id="348" resname="Rien n'est à régler maintenant. Vous paierez à la livraison.">
+        <source>Rien n'est à régler maintenant. Vous paierez à la livraison.</source>
+        <target>Nothing to pay now. You will pay on delivery.</target>
+      </trans-unit>
+      <trans-unit id="349" resname="Dites-nous ce que vous en pensez — votre avis aide les prochains à&#10;        choisir. Il est relu avant d'être publié.">
+        <source>Dites-nous ce que vous en pensez — votre avis aide les prochains à
+        choisir. Il est relu avant d'être publié.</source>
+        <target>Tell us what you think — your review helps the next customer choose. It is read before being published.</target>
+      </trans-unit>
+      <trans-unit id="350" resname="L'inspiration des plus grandes maisons de parfumerie mondiale — élaborée au Maroc, au prix juste.">
+        <source>L'inspiration des plus grandes maisons de parfumerie mondiale — élaborée au Maroc, au prix juste.</source>
+        <target>The inspiration of the great perfume houses of the world — made in Morocco, at a fair price.</target>
+      </trans-unit>
+      <trans-unit id="351" resname="Les notes de la fragrance dont ce parfum s'inspire.&#10;        La composition ODYS cherche à en retrouver l'accord.">
+        <source>Les notes de la fragrance dont ce parfum s'inspire.
+        La composition ODYS cherche à en retrouver l'accord.</source>
+        <target>The notes of the fragrance this perfume draws on. The ODYS composition seeks to find that accord again.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

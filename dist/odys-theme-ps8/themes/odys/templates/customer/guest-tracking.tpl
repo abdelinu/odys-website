@@ -11,10 +11,10 @@
   {if !$registered_customer_exists}
     <div class="odys-order">
       <section class="odys-order-card">
-        <h2 class="odys-order-h2">Gardez votre historique</h2>
+        <h2 class="odys-order-h2">{l s='Gardez votre historique' d='Shop.Theme.Odys'}</h2>
         <p class="odys-order-note">
-          Choisissez un mot de passe et cette commande — et les suivantes —
-          resteront dans votre espace client, avec vos points ODYS.
+          {l s='Choisissez un mot de passe et cette commande — et les suivantes —
+          resteront dans votre espace client, avec vos points ODYS.' d='Shop.Theme.Odys'}
         </p>
         {include file='customer/_partials/account-transformation-form.tpl'}
       </section>

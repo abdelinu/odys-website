@@ -4862,3 +4862,193 @@ body.odys-modal-ouvert{overflow:hidden}
   text-transform:uppercase;color:var(--odys-gold-text);text-decoration:none;
   border-bottom:1px solid rgba(154,123,67,.4)}
 .odys-avis-liens a:hover{color:var(--odys-text);border-bottom-color:currentColor}
+
+/* ── Le choix de la langue ──────────────────────────────────────────── */
+/* Un seul bouton, qui porte la langue en cours et s'ouvre sur les trois.
+   Trois liens cote a cote tenaient dans la barre d'un ordinateur, pas dans
+   celle d'un telephone, et ils disaient trois fois la meme chose a qui ne
+   voulait pas changer de langue.
+
+   <details> : ni script, ni Bootstrap, et le clavier l'ouvre. */
+.odys-lang{position:relative}
+.odys-lang-cur{display:inline-flex;align-items:center;gap:5px;
+  min-width:44px;min-height:44px;padding:0 8px;cursor:pointer;
+  font-family:var(--font-body);font-size:10px;font-weight:500;
+  letter-spacing:var(--tracking-wide);color:var(--odys-muted);
+  list-style:none;transition:color var(--transition-quick)}
+.odys-lang-cur::-webkit-details-marker{display:none}
+.odys-lang-cur:hover,.odys-lang[open] .odys-lang-cur{color:var(--odys-gold)}
+.odys-lang-chev{width:7px;height:7px;border-right:1px solid currentColor;
+  border-bottom:1px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);
+  transition:transform var(--transition-quick)}
+.odys-lang[open] .odys-lang-chev{transform:rotate(-135deg) translate(-2px,-2px)}
+.odys-lang-list{position:absolute;top:calc(100% + 4px);inset-inline-end:0;
+  z-index:60;min-width:150px;margin:0;padding:6px 0;list-style:none;
+  background:var(--odys-cream,#F4EFE5);border:1px solid var(--odys-border);
+  border-radius:var(--radius);box-shadow:0 18px 40px rgba(49,43,39,.16)}
+.odys-lang-list a{display:block;padding:11px 16px;min-height:44px;
+  font-family:var(--font-body);font-size:12px;color:var(--odys-text);
+  text-decoration:none;white-space:nowrap;
+  transition:color var(--transition-quick),background var(--transition-quick)}
+.odys-lang-list a:hover{background:rgba(197,164,106,.14);color:var(--odys-gold-text)}
+.odys-lang-list a.on{color:var(--odys-gold-text);font-weight:500}
+/* Sur la barre claire comme sur la photographie de l'accueil, le bouton
+   suit la couleur du reste de la barre ; le panneau, lui, reste creme. */
+body.index #header:not(.stuck) .odys-lang-cur{color:var(--odys-on-dark)!important}
+
+/* ── L'arabe, de droite a gauche ────────────────────────────────────── */
+/* PrestaShop sait fabriquer une feuille en miroir de celle-ci. Essai fait,
+   resultat refuse : son miroir retourne aussi les pourcentages des
+   degrades, et le voile du hero — mesure palier par palier pour tenir
+   5,0:1 sur le titre — en ressortait avec son premier palier a 100 % et
+   les autres inchanges. Un degrade incoherent, donc un titre dore sur un
+   ciel clair.
+
+   dir="rtl" sur <html> suffit a retourner l'ordre des boites flex et
+   grille, l'alignement du texte et les proprietes logiques. Ne restent que
+   les endroits ou le miroir n'est PAS ce qu'on veut. Ils sont ici, chacun
+   avec sa raison. */
+
+/* Le hero est une photographie composee : le flacon est a droite du cadre,
+   et le voile a ete mesure sur sa moitie gauche. Retourner le texte le
+   poserait sur le flacon, sur la partie claire, a 2:1. Le bloc de texte
+   reste donc physiquement a gauche — c'est la composition de l'image qui
+   commande, pas le sens de lecture — et l'arabe s'y ecrit de droite a
+   gauche, aligne a droite dans son bloc. */
+[dir="rtl"] .odys-film-hero .nv-hero-in{direction:ltr}
+[dir="rtl"] .odys-film-hero .nv-hero-txt{direction:rtl;text-align:right}
+/* La fleche du bouton montre la suite de la lecture : a gauche en arabe. */
+[dir="rtl"] .nv-btn .arw{transform:scaleX(-1)}
+[dir="rtl"] .nv-btn:hover .arw{transform:scaleX(-1) translateX(4px)}
+
+/* Le bandeau defilant est une animation, pas du texte en ligne : son sens
+   de defilement se choisit, et il doit suivre la lecture. */
+[dir="rtl"] .sbn-track{animation-direction:reverse}
+
+/* Les pastilles et les onglets de l'accueil defilent lateralement : le
+   depart doit etre le bord de lecture. */
+[dir="rtl"] .og-onglets,[dir="rtl"] .fam-filters{direction:rtl}
+
+/* ── Le panier qui s'ouvre sur le cote ──────────────────────────────── */
+/* Ajouter un parfum ne faisait rien de visible : un chiffre bougeait dans
+   la barre, et c'est tout. Le tiroir de la maquette existait, avec ses
+   styles et son script, mais son contenu venait d'un tableau JavaScript —
+   un faux panier a cote du vrai — et il n'etait donc inclus nulle part.
+   Celui-ci montre le panier de PrestaShop. */
+.odys-tiroir-fond{position:fixed;inset:0;z-index:1190;background:rgba(24,14,8,.5);
+  opacity:0;transition:opacity .3s ease}
+.odys-tiroir-fond.on{opacity:1}
+body.odys-tiroir-ouvert{overflow:hidden}
+.odys-tiroir{position:fixed;z-index:1200;top:0;bottom:0;inset-inline-end:0;
+  width:min(420px,92vw);display:flex;flex-direction:column;
+  background:var(--odys-cream,#F4EFE5);
+  box-shadow:-24px 0 60px rgba(49,43,39,.22);
+  transform:translateX(100%);transition:transform .3s ease}
+[dir="rtl"] .odys-tiroir{transform:translateX(-100%)}
+.odys-tiroir.on{transform:none}
+.ot-hd{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:20px 22px 14px;border-bottom:1px solid var(--odys-line)}
+.ot-titre{margin:0;font-family:var(--font-display);font-weight:400;
+  font-size:22px;letter-spacing:.02em;color:var(--odys-text)}
+.ot-fermer{background:none;border:0;font-size:26px;line-height:1;cursor:pointer;
+  min-width:44px;min-height:44px;color:var(--odys-muted)}
+.ot-fermer:hover{color:var(--odys-text)}
+
+/* La livraison offerte : ce qui manque, pas un pourcentage. */
+.ot-liv{padding:14px 22px;border-bottom:1px solid var(--odys-line)}
+.ot-liv-mot{margin:0 0 8px;font:500 11px/1.5 var(--font-body);
+  letter-spacing:var(--tracking-wide);text-transform:uppercase;
+  color:var(--odys-gold-text)}
+.ot-liv-bar{height:3px;border-radius:2px;background:rgba(49,43,39,.12);
+  overflow:hidden}
+.ot-liv-fill{display:block;height:100%;background:var(--odys-gold);
+  transition:width .4s ease}
+
+.ot-corps{flex:1 1 auto;overflow-y:auto;padding:4px 22px}
+.ot-liste{list-style:none;margin:0;padding:0}
+.ot-ligne{display:flex;gap:14px;padding:18px 0;
+  border-bottom:1px solid var(--odys-line)}
+.ot-img{flex:none;width:60px;height:60px;object-fit:cover;border-radius:2px}
+.ot-txt{flex:1 1 auto;min-width:0}
+.ot-nom{margin:0;font-family:var(--font-display);font-size:16px;
+  color:var(--odys-text)}
+.ot-decl{margin:2px 0 0;font:300 12px/1.5 var(--font-body);color:var(--odys-muted)}
+.ot-prix{margin:4px 0 8px;font:500 13px/1.4 var(--font-body);color:var(--odys-text)}
+.ot-qte{display:flex;align-items:center;gap:4px}
+.ot-moins,.ot-plus{display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border:1px solid var(--odys-border);border-radius:2px;
+  color:var(--odys-text);text-decoration:none;font-size:15px;line-height:1}
+.ot-moins:hover,.ot-plus:hover{border-color:var(--odys-gold);color:var(--odys-gold-text)}
+.ot-nb{min-width:34px;text-align:center;font:500 13px/1 var(--font-body)}
+.ot-oter{margin-inline-start:auto;font:400 11px/1 var(--font-body);
+  letter-spacing:var(--tracking-wide);text-transform:uppercase;
+  color:var(--odys-muted);text-decoration:none;padding:10px 0;min-height:44px;
+  display:inline-flex;align-items:center}
+.ot-oter:hover{color:var(--odys-text);text-decoration:underline}
+.ot-vide{padding:40px 0;text-align:center}
+.ot-vide p{margin:0 0 18px;font:300 15px/1.6 var(--font-body);color:var(--odys-muted)}
+
+.ot-pied{flex:none;padding:16px 22px 22px;border-top:1px solid var(--odys-line);
+  background:var(--odys-cream,#F4EFE5)}
+/* Le montant est sur le bouton : on sait ce qu'on engage en cliquant. */
+.ot-commander{display:flex;align-items:center;justify-content:center;gap:12px;
+  min-height:52px;padding:0 20px;border-radius:var(--radius);
+  background:var(--odys-vert);color:var(--odys-on-dark);text-decoration:none;
+  font:500 11px/1 var(--font-body);letter-spacing:var(--tracking-wide);
+  text-transform:uppercase;transition:background var(--transition-quick)}
+.ot-commander:hover{background:var(--odys-gold);color:var(--odys-vert)}
+.ot-total{font-weight:600}
+.ot-voir{display:block;text-align:center;margin:12px 0 0;padding:10px 0;
+  min-height:44px;font:400 10px/2.4 var(--font-body);
+  letter-spacing:var(--tracking-wide);text-transform:uppercase;
+  color:var(--odys-muted);text-decoration:none}
+.ot-voir:hover{color:var(--odys-text)}
+.ot-rass{margin:10px 0 0;text-align:center;font:300 11px/1.6 var(--font-body);
+  color:var(--odys-muted)}
+@media (prefers-reduced-motion: reduce){
+  .odys-tiroir,.odys-tiroir-fond,.ot-liv-fill{transition:none}
+}
+/* Pendant que le serveur recalcule, le tiroir se fige plutot que d'afficher
+   des quantites qui ne sont pas encore les siennes. */
+.odys-tiroir.ot-attend .ot-liste{opacity:.55;pointer-events:none}
+/* Le bouton WhatsApp flotte a 7000 : il passait par-dessus le tiroir et se
+   posait sur la ligne « paiement a la livraison ». Tant que le panier est
+   ouvert, il s'efface — on y revient en le fermant. */
+body.odys-tiroir-ouvert .wa-btn{opacity:0;pointer-events:none;
+  transition:opacity .2s ease}
+
+/* ── Les cartes de la grille : trois defauts de la meme famille ─────── */
+
+/* 1. Les boutons d'achat ne s'alignaient pas d'une carte a l'autre. La
+   carte n'etait pas une colonne : son contenu s'empilait et le bouton
+   tombait la ou le texte s'arretait. Une inspiration sur deux lignes
+   plutot qu'une, et le bouton voisin descendait de vingt pixels.
+   La carte devient une colonne pleine hauteur, et le bouton est pousse
+   en bas — quelle que soit la longueur du nom ou de l'inspiration. */
+.pg .pc{display:flex;flex-direction:column;height:100%}
+.pg .pc .pc-body{display:flex;flex-direction:column;flex:1 1 auto}
+.pg .pc .pc-add{margin-top:auto}
+/* la ligne de prix garde son air avant le bouton, sans l'eloigner */
+.pg .pc .pc-prow{margin-bottom:14px}
+
+/* 2. La pastille « Nouveau » poussait l'image vers le bas au lieu de se
+   poser dessus : elle etait dans le flux. Au-dessus de la photo
+   apparaissait alors une bande du fond de la carte — vert fonce sur les
+   familles orientales — mais seulement sur les produits qui ont une
+   pastille. D'ou des cartes vertes a cote de cartes qui ne le sont pas.
+   La pastille se pose maintenant SUR la photo, dans le coin. */
+.pc-img{position:relative}
+.pc-img > .pcb{position:absolute;top:10px;inset-inline-start:10px;z-index:2;
+  margin:0;display:inline-block;width:auto}
+
+/* 3. Le coeur etait un disque presque noir, translucide, avec un coeur
+   brun dessus : on ne voyait ni l'un ni l'autre, et le disque salissait
+   la photo. Un disque creme, un coeur a l'encre, et l'or quand il est
+   retenu — la meme grammaire que le reste de la carte. */
+.pc-wish,.pc-wish.on{background:rgba(244,239,229,.92)!important;
+  color:var(--odys-text)!important;
+  border:1px solid rgba(49,43,39,.10)!important;
+  box-shadow:0 2px 10px rgba(49,43,39,.10)}
+.pc-wish:hover{background:var(--odys-cream)!important;
+  color:var(--odys-gold-text)!important}
+.pc-wish.on{color:var(--odys-gold-text)!important}
