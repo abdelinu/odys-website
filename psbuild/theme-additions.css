@@ -5052,3 +5052,88 @@ body.odys-tiroir-ouvert .wa-btn{opacity:0;pointer-events:none;
 .pc-wish:hover{background:var(--odys-cream)!important;
   color:var(--odys-gold-text)!important}
 .pc-wish.on{color:var(--odys-gold-text)!important}
+
+/* ── L'arabe a ses propres lettres ───────────────────────────────────── */
+/* Les quatre polices du theme — Playfair Display, Cormorant Garamond,
+   Jost, Bodoni Moda — n'ont AUCUN glyphe arabe. Sur /ar/, le navigateur
+   retombait donc sur une police systeme : plus petite a taille egale,
+   sans caractere, et sans aucun rapport avec la maison.
+
+   Deux familles arabes prennent le relais. Amiri est un naskh de
+   bibliotheque, dessine pour le livre : c'est l'equivalent arabe d'un
+   Garamond, et il tient la place des titres. Tajawal est un sans serif
+   net, lisible a 11 px comme a 30 : il porte le reste.
+
+   Trois corrections de fond accompagnent la police :
+
+   1. L'INTERLETTRAGE DOIT DISPARAITRE. L'arabe est une ecriture liee :
+      letter-spacing: .26em sur un bouton ne l'aere pas, il DECOUPE les
+      lettres d'un mot. C'etait le defaut le plus grave des captures — le
+      menu paraissait casse, pas elegant.
+
+   2. LA TAILLE. A corps egal, l'arabe parait plus petit que le latin :
+      pas de majuscules, pas de hampes aussi hautes. 1,14 em le remet a
+      la meme presence optique.
+
+   3. L'INTERLIGNE. Les points et les signes montent et descendent plus
+      loin : un interligne de 1,4 colle, 1,7 respire. */
+[lang="ar"],[dir="rtl"]{
+  --font-display:'Amiri',"Noto Naskh Arabic",Georgia,serif;
+  --font-editorial:'Amiri',"Noto Naskh Arabic",Georgia,serif;
+  --font-body:'Tajawal',"Noto Kufi Arabic",system-ui,sans-serif;
+  --font-alt:'Tajawal',"Noto Kufi Arabic",system-ui,sans-serif}
+
+[dir="rtl"] body,[dir="rtl"] .nv-lede,[dir="rtl"] .nv-sub,
+[dir="rtl"] p,[dir="rtl"] li,[dir="rtl"] td,[dir="rtl"] label{
+  font-size:1.14em;line-height:1.75}
+
+/* L'interlettrage, partout ou le theme en pose : il coupe les mots. */
+[dir="rtl"] *{letter-spacing:normal!important}
+/* Et les capitales ne veulent rien dire dans une ecriture sans casse. */
+[dir="rtl"] .nv-eyebrow,[dir="rtl"] .nv-btn,[dir="rtl"] .nv-link,
+[dir="rtl"] .pc-add,[dir="rtl"] .ot-commander,[dir="rtl"] .og,
+[dir="rtl"] .ff,[dir="rtl"] .nav-links a,[dir="rtl"] .sec-see-all,
+[dir="rtl"] .pc-code,[dir="rtl"] .pp-by,[dir="rtl"] .ot-voir{
+  text-transform:none}
+
+/* Le hero : un titre arabe a besoin d'air au-dessus et au-dessous de la
+   ligne, et d'un corps plus genereux pour tenir la page. */
+/* Amiri en 400 est un naskh de lecture : juste pour un paragraphe, trop
+   discret pour un titre de banniere a cote d'un Playfair en capitales.
+   En 700 il retrouve la presence du titre francais, sans rien perdre de
+   son dessin. */
+[dir="rtl"] .odys-film-hero h1,[dir="rtl"] .odys-film-hero .nv-h1{
+  font-size:clamp(44px,6.2vw,86px);line-height:1.35;
+  padding-block:.08em;font-weight:700}
+[dir="rtl"] .nv-eyebrow{font-size:12px;font-weight:500;line-height:1.8}
+[dir="rtl"] .odys-film-hero .nv-sub{font-size:17px;line-height:1.9}
+[dir="rtl"] .odys-film-hero .nv-lede{font-size:16px;line-height:1.95}
+[dir="rtl"] .nv-h2{line-height:1.4;padding-block:.06em}
+/* Les petits libelles du theme sont dessines pour des capitales latines
+   de 9 a 11 px : en arabe ils devenaient illisibles. */
+/* La maquette pose ces tailles en !important pour sa barre creme : sans le
+   meme poids, l'arabe restait a 10 px — la moitie de la presence du latin. */
+[dir="rtl"] .nav-links a,[dir="rtl"] .og,[dir="rtl"] .ff,
+[dir="rtl"] .sec-see-all,[dir="rtl"] .pc-add,[dir="rtl"] .nv-btn,
+[dir="rtl"] .nv-link,[dir="rtl"] .ot-commander,[dir="rtl"] .ot-voir,
+[dir="rtl"] .odys-lang-cur,[dir="rtl"] .mob-menu li a,
+[dir="rtl"] .ai,[dir="rtl"] .odys-nav #_desktop_cart .header,
+[dir="rtl"] .odys-nav #_desktop_user_info a{font-size:13px!important}
+[dir="rtl"] .pc-name{font-size:19px;line-height:1.5}
+[dir="rtl"] .pc-code,[dir="rtl"] .pp-by{font-size:11px}
+
+/* Le panneau du choix de la langue est creme, posé sous une barre dont les
+   liens sont en creme pour tenir sur la photographie : les trois langues y
+   etaient ecrites creme sur creme, invisibles. Elles reprennent l'encre. */
+body.index #header:not(.stuck) .odys-nav .odys-lang-list a{
+  color:var(--odys-text)!important}
+body.index #header:not(.stuck) .odys-nav .odys-lang-list a.on,
+body.index #header:not(.stuck) .odys-nav .odys-lang-list a:hover{
+  color:var(--odys-gold-text)!important}
+
+/* La photo du flacon dans la bande signature : elle remplace le dessin SVG,
+   et doit occuper la meme place sans deformer le produit. */
+.nv-bottle-img{display:block;width:100%;height:auto;aspect-ratio:4/5;
+  object-fit:contain;filter:drop-shadow(0 18px 30px rgba(5,6,7,.45));
+  transition:transform var(--transition-luxury)}
+.nv-bottle a:hover .nv-bottle-img{transform:translateY(-6px)}

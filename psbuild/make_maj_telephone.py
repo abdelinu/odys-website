@@ -7359,6 +7359,31 @@ if not _gabarits:
 # theme depuis themes/odys/modules/. On envoie chaque fichier a sa place, et le
 # PHP aux deux, pour qu'une reinstallation du theme ne ressuscite pas une
 # version ancienne.
+# Les traductions du theme : un fichier par domaine et par langue. Elles
+# n'etaient dans aucune liste — le lot deposait donc un theme traduit dont
+# les traductions restaient sur ma machine, et la boutique servait le
+# francais dans les trois langues. Meme faute que pour odys_loyalty, meme
+# remede : on enumere.
+_trad = sorted((DIST / "themes" / "odys" / "translations").rglob("*.xlf"))
+for _t in _trad:
+    _rel = _t.relative_to(DIST).as_posix()
+    FICHIERS.setdefault(_rel, _rel)
+if not _trad:
+    raise SystemExit("aucune traduction dans dist/ : lancez psbuild/build_theme.py d'abord")
+
+# Les gabarits que le theme surcharge pour un module de PrestaShop —
+# ps_languageselector, par exemple, dont le menu Bootstrap d'origine ne
+# s'ouvre pas ici. Ils vivent sous themes/odys/modules/<module>/ et
+# n'etaient pas enumeres non plus : en production, le selecteur de langue
+# retombait sur le gabarit du theme classic, trois puces l'une sous
+# l'autre par-dessus l'entete.
+_surcharges = sorted(
+    f for f in (DIST / "themes" / "odys" / "modules").rglob("*")
+    if f.is_file() and "odys_loyalty" not in f.parts)
+for _s in _surcharges:
+    _rel = _s.relative_to(DIST).as_posix()
+    FICHIERS.setdefault(_rel, _rel)
+
 _mod = sorted((DIST / "themes" / "odys" / "modules" / "odys_loyalty").rglob("*"))
 _mod = [m for m in _mod if m.is_file()]
 for _m in _mod:

@@ -1026,7 +1026,17 @@ class Odys_Loyalty extends Module
             }
             $slotIndex = count($signatures);
             $reference = trim((string) $product->reference);
+            // La vraie photo du flacon. Sans image au catalogue, la cle reste
+            // vide et le gabarit redessine son flacon : une bande trouee
+            // serait pire qu'un dessin.
+            $image = '';
+            $cover = Product::getCover((int) $product->id);
+            if ($cover && !empty($cover['id_image'])) {
+                $image = $this->context->link->getImageLink(
+                    $product->link_rewrite, (int) $cover['id_image'], 'large_default');
+            }
             $signatures[] = [
+                'image' => $image,
                 'num' => $reference !== '' ? $reference : (string) $product->id,
                 'code' => $reference !== '' ? 'ODYS ' . $reference : (string) $product->name,
                 'tone' => $tones[$slotIndex % 3],

@@ -1109,6 +1109,15 @@ first=$(sql "SELECT p.reference FROM ps_product p JOIN ps_configuration c ON c.v
 
 case "$codes" in *"ODYS $first"*) ok "first bottle follows ODYS_SIG_1 (ODYS $first)";; *) no "band shows '$codes', setting says ODYS $first";; esac
 
+# Le dessin SVG est un repli, pas la bande. Trois flacons choisis au
+# catalogue doivent montrer leur vraie photo : c'est tout l'objet du
+# reglage. Un dessin ici veut dire que la photo n'a pas suivi.
+photos=$(echo "$home" | sed -n '/<ul class="nv-bottles"/,/<\/ul>/p' | grep -c 'nv-bottle-img' || true)
+
+dessins=$(echo "$home" | sed -n '/<ul class="nv-bottles"/,/<\/ul>/p' | grep -c 'class="odys-bottle"' || true)
+
+[ "${photos:-0}" = "3" ] && ok "the three bottles are real photographs"   || no "${photos:-0} photo(s) and ${dessins:-0} drawing(s) in the band"
+
 step "Loyalty points: the rules that stop a balance being invented"
 
 tables=$(sql "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name IN ('ps_odys_loyalty','ps_odys_loyalty_history')")
@@ -3933,6 +3942,26 @@ case "$ar_auto" in
   *"/ar/"*) ok "un navigateur en arabe arrive sur la boutique arabe";;
   *) no "un navigateur en arabe n est pas reconnu ($ar_auto)";;
 esac
+
+step "Le lot emporte ce que le theme a ajoute"
+
+# Deux fois de suite, le lot a laisse un correctif fini sur la machine : le
+# module odys_loyalty, puis les traductions et le gabarit du selecteur de
+# langue. En production, le selecteur retombait sur celui du theme classic —
+# trois puces l'une sous l'autre par-dessus l'entete — et les trois langues
+# servaient le francais. On enumere maintenant ; ce controle le verifie.
+lot=../dist/deploy/maj-telephone.php
+for att in "themes/odys/translations/ar-SA/ShopThemeOdys.ar-SA.xlf" \
+           "themes/odys/translations/en-US/ShopThemeOdys.en-US.xlf" \
+           "themes/odys/modules/ps_languageselector/ps_languageselector.tpl"; do
+  grep -qF "'$att'" "$lot" \
+    && ok "le lot emporte $(basename "$att")" \
+    || no "le lot oublie $att : le correctif resterait sur la machine"
+done
+nbx=$(grep -c "themes/odys/translations/.*\.xlf' =>" "$lot")
+[ "${nbx:-0}" -ge 6 ] \
+  && ok "$nbx fichiers de traduction dans le lot" \
+  || no "seulement ${nbx:-0} fichier(s) de traduction : les langues seraient vides"
 
 step "Le lot de mise a jour s analyse"
 

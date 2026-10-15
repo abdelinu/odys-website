@@ -54,7 +54,16 @@
         <li class="nv-bottle nv-tone-{$sig.tone}">
           <a href="{$sig.url}">
             <figure class="nv-bottle-fig">
-              {include file='_partials/odys-bottle.tpl' num=$sig.num name=$sig.name}
+              {* La vraie photo quand le produit en a une. Le flacon dessine
+                 reste pour le cas contraire : une bande vide serait pire
+                 qu'un dessin. *}
+              {if !empty($sig.image)}
+                <img class="nv-bottle-img" src="{$sig.image|escape:'html':'UTF-8'}"
+                     alt="{$sig.name|escape:'html':'UTF-8'}"
+                     width="420" height="525" loading="lazy" decoding="async"/>
+              {else}
+                {include file='_partials/odys-bottle.tpl' num=$sig.num name=$sig.name}
+              {/if}
             </figure>
             <span class="nv-b-code">{$sig.code|escape:'html':'UTF-8'}</span>
             <span class="nv-b-name">{$sig.name|escape:'html':'UTF-8'}</span>
