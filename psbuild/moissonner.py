@@ -14,7 +14,14 @@ RACINE = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else ".")
 CAT = RACINE / "psbuild" / "traductions.json"
 TPL = RACINE / "dist" / "odys-theme-ps8" / "themes" / "odys" / "templates"
 
-MOTIF = re.compile(r"""\{l s='((?:[^'\\]|\\.)*)' d='Shop\.Theme\.Odys'\}""")
+# [^}]*?d= : un {l} peut porter un sprintf=[...] entre sa phrase et son
+# domaine, et un filtre apres. Sans cela, les phrases a parametre
+# n etaient pas moissonnees : traduites nulle part, elles restaient en
+# francais sur /en/ et /ar/ sans que rien ne le signale.
+# [^}]* : un {l} peut porter un filtre — escape:'javascript' pour le
+# dictionnaire que le gabarit pose a l'intention d'app.js. Sans cela
+# ces cles n'etaient pas moissonnees, et ne partaient donc nulle part.
+MOTIF = re.compile(r"""\{l s='((?:[^'\\]|\\.)*)'[^}]*?d='Shop\.Theme\.Odys'[^}]*\}""")
 
 cat = json.loads(CAT.read_text(encoding="utf-8"))
 mots = cat["mots"]

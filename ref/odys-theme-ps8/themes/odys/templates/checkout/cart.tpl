@@ -1,5 +1,5 @@
 {extends file='layouts/layout-full-width.tpl'}
-{block name='head_title'}Mon Panier | ODYS Parfums{/block}
+{block name='head_title'}{l s='Mon Panier | ODYS Parfums' d='Shop.Theme.Odys'}{/block}
 {block name='content'}
 <div style="max-width:900px;margin:0 auto;padding:48px max(20px,32px) 80px">
   <div style="margin-bottom:28px">

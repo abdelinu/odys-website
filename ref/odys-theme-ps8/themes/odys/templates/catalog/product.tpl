@@ -75,7 +75,7 @@
           <button class="thumb-btn"
                   data-action="switch-thumb"
                   data-src="{$image.bySize.large_default.url}"
-                  aria-label="Voir la photo {$image@iteration}"
+                  aria-label="{l s='Voir la photo %rang%' sprintf=['%rang%' => $image@iteration] d='Shop.Theme.Odys'}"
                   aria-pressed="{if $image@first}true{else}false{/if}">
             <img src="{$image.bySize.small_default.url}"
                  loading="lazy"
@@ -168,7 +168,7 @@
           </button>
         {/if}{/foreach}
       </div>
-      <p class="vol-note">{$product.price_amount|intval} DH le gramme &middot; minimum {$odysGramMin} g</p>
+      <p class="vol-note">{l s='%prix% DH le gramme &middot; minimum %poids% g' sprintf=['%prix%' => $product.price_amount|intval, '%poids%' => $odysGramMin] d='Shop.Theme.Odys'}</p>
     </div>
     {else}
     {* Volume selector — EAA: radiogroup.
@@ -291,7 +291,7 @@
           <div class="olf-notes">{foreach from=','|explode:$feature.value item=note}
             <a class="note" href="{$urls.pages.search}?s={$note|trim|escape:'url'}"
                   data-note="{$note|trim}" data-type="tête"
-                  aria-label="Voir les parfums avec la note {$note|trim}">{$note|trim}</a>
+                  aria-label="{l s='Voir les parfums avec la note %note%' sprintf=['%note%' => $note|trim] d='Shop.Theme.Odys'}">{$note|trim}</a>
           {/foreach}</div>
         </div>
         {/if}
@@ -301,7 +301,7 @@
           <div class="olf-notes">{foreach from=','|explode:$feature.value item=note}
             <a class="note" href="{$urls.pages.search}?s={$note|trim|escape:'url'}"
                   data-note="{$note|trim}" data-type="cœur"
-                  aria-label="Voir les parfums avec la note {$note|trim}">{$note|trim}</a>
+                  aria-label="{l s='Voir les parfums avec la note %note%' sprintf=['%note%' => $note|trim] d='Shop.Theme.Odys'}">{$note|trim}</a>
           {/foreach}</div>
         </div>
         {/if}
@@ -311,7 +311,7 @@
           <div class="olf-notes">{foreach from=','|explode:$feature.value item=note}
             <a class="note" href="{$urls.pages.search}?s={$note|trim|escape:'url'}"
                   data-note="{$note|trim}" data-type="fond"
-                  aria-label="Voir les parfums avec la note {$note|trim}">{$note|trim}</a>
+                  aria-label="{l s='Voir les parfums avec la note %note%' sprintf=['%note%' => $note|trim] d='Shop.Theme.Odys'}">{$note|trim}</a>
           {/foreach}</div>
         </div>
         {/if}
@@ -360,7 +360,7 @@
               data-id-product="{$product.id_product}"
               data-id-product-attribute="{$product.combinations[0].id_combination|default:0}"
               aria-label="Ajouter {$product.name|escape:'html':'UTF-8'} au panier">
-        <span class="blbl">Ajouter au Panier · {$odysShort}</span>
+        <span class="blbl">{l s='Ajouter au Panier' d='Shop.Theme.Odys'} · {$odysShort}</span>
         <div class="bspin" aria-hidden="true"></div>
       </button>
       {else}
@@ -387,7 +387,7 @@
           <strong>{l s='Livraison offerte' d='Shop.Theme.Odys'}</strong> — au-delà de {$odysShipFrom|intval} DH.
         {else}
           Livraison {$odysShipMin|intval}{if $odysShipMax > $odysShipMin}–{$odysShipMax|intval}{/if} DH
-          {if $odysShipFrom > 0}· <strong>offerte dès {$odysShipFrom|intval} DH</strong>{/if}
+          {if $odysShipFrom > 0}· <strong>{l s='offerte dès %montant% DH' sprintf=['%montant%' => $odysShipFrom|intval] d='Shop.Theme.Odys'}</strong>{/if}
         {/if}
       </p>
     {/if}
@@ -467,7 +467,7 @@
       {foreach from=$accessories item=acc}
         <div class="sc" role="listitem">
           <div class="sc-img">
-            <a href="{$acc.url}" aria-label="Voir {$acc.name|escape:'html':'UTF-8'}">
+            <a href="{$acc.url}" aria-label="{l s='Voir %nom%' sprintf=['%nom%' => $acc.name|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}">
               <img src="{if $acc.cover}{$acc.cover.bySize.medium_default.url}{else}{$urls.no_picture_image.bySize.medium_default.url}{/if}" loading="lazy"
                    alt="{$acc.name|escape:'html':'UTF-8'}" width="160" height="160"/>
             </a>

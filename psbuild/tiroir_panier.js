@@ -77,7 +77,7 @@
       var vide = document.createElement('li');
       vide.className = 'ot-vide';
       var p = document.createElement('p');
-      p.textContent = 'Votre panier est vide.';
+      p.textContent = MOT('panierVide');
       vide.appendChild(p);
       liste.appendChild(vide);
     }
@@ -124,7 +124,7 @@
        ['ot-nb', String(prod.quantity), null, null],
        ['ot-plus', '+', prod.up_quantity_url,
         'Ajouter un exemplaire de ' + prod.name],
-       ['ot-oter', 'Retirer', prod.remove_from_cart_url,
+       ['ot-oter', MOT('retirer'), prod.remove_from_cart_url,
         'Retirer ' + prod.name + ' du panier']
       ].forEach(function (b) {
         var el = document.createElement(b[2] ? 'a' : 'span');

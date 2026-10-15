@@ -1,5 +1,5 @@
 {extends file='layouts/layout-full-width.tpl'}
-{block name='head_title'}Mon Compte | ODYS Parfums{/block}
+{block name='head_title'}{l s='Mon Compte | ODYS Parfums' d='Shop.Theme.Odys'}{/block}
 
 {*
  * ODYS Parfums — Account dashboard v5.0

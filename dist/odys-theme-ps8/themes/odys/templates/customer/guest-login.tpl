@@ -4,7 +4,7 @@
  * that leads to guest-tracking.tpl.
  *}
 {extends file='layouts/layout-full-width.tpl'}
-{block name='head_title'}Suivre ma commande | ODYS Parfums{/block}
+{block name='head_title'}{l s='Suivre ma commande | ODYS Parfums' d='Shop.Theme.Odys'}{/block}
 
 {block name='content'}
 <div class="odys-guest">

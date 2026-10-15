@@ -72,12 +72,12 @@
             <p class="ot-prix">{$odysLigne.price}</p>
             <div class="ot-qte">
               <a class="ot-moins" href="{$odysLigne.down_quantity_url}"
-                 aria-label="Retirer un exemplaire de {$odysLigne.name|escape:'html':'UTF-8'}">&minus;</a>
+                 aria-label="{l s='Retirer un exemplaire de %nom%' sprintf=['%nom%' => $odysLigne.name|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}">&minus;</a>
               <span class="ot-nb">{$odysLigne.quantity|intval}</span>
               <a class="ot-plus" href="{$odysLigne.up_quantity_url}"
-                 aria-label="Ajouter un exemplaire de {$odysLigne.name|escape:'html':'UTF-8'}">+</a>
+                 aria-label="{l s='Ajouter un exemplaire de %nom%' sprintf=['%nom%' => $odysLigne.name|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}">+</a>
               <a class="ot-oter" href="{$odysLigne.remove_from_cart_url}"
-                 aria-label="Retirer {$odysLigne.name|escape:'html':'UTF-8'} du panier">{l s='Retirer' d='Shop.Theme.Odys'}</a>
+                 aria-label="{l s='Retirer %nom% du panier' sprintf=['%nom%' => $odysLigne.name|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}">{l s='Retirer' d='Shop.Theme.Odys'}</a>
             </div>
           </div>
         </li>

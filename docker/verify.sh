@@ -1083,6 +1083,51 @@ grep -q "background:#121319" "$css" && no "un champ garde le fond noir du theme 
 
 grep -q "olf-top .ol-icon,.olf-top .ol-name{color:var(--odys-cream-soft" "$css" && no "l etage Tete est ecrit en creme sur de l ivoire" || ok "les trois etages de la pyramide se lisent"
 
+step "Les trois langues : plus un mot de francais sur /en/ ni /ar/"
+
+# Le theme ne peut pas traduire ce qu'il ne sait pas avoir ecrit. app.js est
+# servi tel quel — les memes octets pour les trois langues — et un aria-label
+# ecrit en dur dans un gabarit n'a pas de cle. La seule mesure qui ne se
+# laisse pas deborder est la page servie : on la lit.
+#
+# Les mots cherches ne veulent rien dire en anglais ni en arabe, et ne
+# figurent dans aucun nom de parfum. « Parfum » est exclu a dessein : c'est
+# le nom de la maison.
+for lg in en ar; do
+  for chemin in "" "parfums/20-l-icone.html"; do
+    page=$(curl -s -m 30 "$BOUT/$lg/$chemin")
+    [ -z "$page" ] && { no "/$lg/$chemin ne repond pas"; continue; }
+    # le dictionnaire que le gabarit pose a l'intention d'app.js
+    echo "$page" | grep -q "window.odysMots" \
+      || no "/$lg/$chemin : le dictionnaire des phrases d app.js est absent"
+    restes=""
+    for mot in Ajouter Panier Agrandir souhaits Retirer Fermer Quantite Livraison; do
+      # on ne regarde que le texte lu et les libelles annonces, pas les
+      # noms de classe ni les URL
+      trouve=$(echo "$page" \
+        | grep -oE "(>[^<]*|aria-label=\"[^\"]*|alt=\"[^\"]*|title=\"[^\"]*)$mot" \
+        | head -1)
+      [ -n "$trouve" ] && restes="$restes $mot"
+    done
+    if [ -n "$restes" ]; then
+      no "/$lg/$chemin : encore du francais ->$restes"
+    else
+      ok "/$lg/$chemin : aucun mot francais dans le texte lu"
+    fi
+  done
+done
+
+# et le dictionnaire doit vraiment changer de langue, pas seulement exister
+fr=$(curl -s -m 30 "$BOUT/fr/" | grep -o '"panierAjouter": "[^"]*"' | head -1)
+
+en=$(curl -s -m 30 "$BOUT/en/" | grep -o '"panierAjouter": "[^"]*"' | head -1)
+
+if [ -n "$fr" ] && [ -n "$en" ] && [ "$fr" != "$en" ]; then
+  ok "le dictionnaire suit la langue ($fr -> $en)"
+else
+  no "le dictionnaire ne suit pas la langue (fr=$fr en=$en)"
+fi
+
 step "Les prix : le meme montant dans les trois langues"
 
 # $product.price est une CHAINE deja mise en forme par PrestaShop, pas un

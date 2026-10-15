@@ -1,5 +1,5 @@
 {extends file='layouts/layout-full-width.tpl'}
-{block name='head_title'}Nouveau mot de passe | ODYS Parfums{/block}
+{block name='head_title'}{l s='Nouveau mot de passe | ODYS Parfums' d='Shop.Theme.Odys'}{/block}
 {* Meme remarque que password-email.tpl : la grille de classic n'existe pas ici. *}
 {block name='content'}
 <div style="max-width:480px;margin:0 auto;padding:64px max(20px,32px) 80px">

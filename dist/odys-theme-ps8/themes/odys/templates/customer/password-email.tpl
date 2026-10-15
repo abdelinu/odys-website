@@ -1,5 +1,5 @@
 {extends file='layouts/layout-full-width.tpl'}
-{block name='head_title'}Mot de passe oublié | ODYS Parfums{/block}
+{block name='head_title'}{l s='Mot de passe oublié | ODYS Parfums' d='Shop.Theme.Odys'}{/block}
 {*
  * Les gabarits de mot de passe de PrestaShop sont ecrits pour la grille
  * Bootstrap de classic (col-md-3, card card-block, hidden-xs-down) que ce

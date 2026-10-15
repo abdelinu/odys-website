@@ -23,7 +23,7 @@
     <ul class="avis-grid" role="list">
       {foreach from=$odysAvis item=odysAv}
         <li class="avis-card">
-          <p class="avis-note" aria-label="{$odysAv.note|intval} sur 5">
+          <p class="avis-note" aria-label="{l s='%note% sur 5' sprintf=['%note%' => $odysAv.note|intval] d='Shop.Theme.Odys'}">
             <span aria-hidden="true">{section name=e start=1 loop=6}{if $smarty.section.e.index <= $odysAv.note}&#9733;{else}&#9734;{/if}{/section}</span>
           </p>
           {if $odysAv.titre}

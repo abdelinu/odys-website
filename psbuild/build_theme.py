@@ -931,6 +931,83 @@ must(_tiroir not in js, 'tiroir: le module du panier n est ajoute qu une fois')
 js = js + LF + _tiroir
 ok('tiroir: le panier s ouvre sur le cote avec le contenu du serveur')
 
+
+# ─── app.js parle les trois langues ──────────────────
+# Un .js est servi tel quel : aucune de ses phrases ne pouvait etre
+# traduite, et la boutique anglaise disait encore « Ajouter au Panier ».
+# Le gabarit les pose maintenant dans window.odysMots ; ici, chaque
+# phrase ecrite en dur devient une lecture du dictionnaire. Le francais
+# reste en repli dans MOT.FR : rien ne devient muet s il manque.
+_AIDE_MOTS = "\n/* ─── Les phrases traduites ──────────────────────────────────────────\n   Un .js est servi tel quel : les memes octets pour les trois langues.\n   C'est pourquoi la boutique anglaise disait encore « Ajouter au\n   Panier » — la phrase n'etait pas dans un gabarit, elle etait ici.\n\n   Le gabarit les depose donc, deja traduites, dans window.odysMots\n   (voir layouts/layout-full-width.tpl), et on les lit par leur cle.\n   Sans dictionnaire — page servie par un autre gabarit, bloc absent —\n   MOT rend le francais : la boutique parle francais au lieu de se\n   taire. La declaration est hissee, sa place dans le fichier n'a donc\n   pas d'importance. */\nfunction MOT(cle) {\n  var d = window.odysMots;\n  if (d && typeof d[cle] === 'string' && d[cle]) { return d[cle]; }\n  return MOT.FR[cle] || cle;\n}\nMOT.FR = {\n%s\n};\n"
+# Le repli francais de MOT() est lu DANS le gabarit : le dictionnaire du
+# gabarit est la seule source. Une phrase ajoutee la-bas arrive donc ici
+# sans qu on y pense, et ne peut pas rester muette.
+_layout_src = (HERE / 'templates' / 'layouts' / 'layout-full-width.tpl').read_text(encoding='utf-8')
+_dico_deb = _layout_src.index('window.odysMots = {')
+_dico_src = _layout_src[_dico_deb:_layout_src.index('};', _dico_deb)]
+_paires = re.findall(
+    r'"(\w+)": "\{l s=' + chr(39) + r'(.*?)' + chr(39) + r" d='Shop\.Theme\.Odys'",
+    _dico_src)
+must(len(_paires) >= 10, 'mots: le dictionnaire du gabarit est lisible')
+
+# chaque apostrophe doit porter un antislash : {l s='...'} se terminerait
+# dessus, et comme ces lignes sont engendrees, rien ne le dirait avant la
+# page blanche. Le meme echappement convient a une chaine JS a apostrophes,
+# donc la phrase se recopie telle quelle.
+_mauvaises = [c for c, fr in _paires
+              if chr(39) in fr.replace(chr(92) + chr(39), '')]
+must(not _mauvaises,
+     'mots: apostrophe non echappee dans le dictionnaire -> ' + str(_mauvaises))
+
+_aide_mots = ("\n" + _AIDE_MOTS
+              % ",\n".join("  '%s': '%s'" % (c, fr) for c, fr in _paires))
+must(_aide_mots not in js, 'mots: l aide n est posee qu une fois')
+_apres = js.index('*/') + 2
+js = js[:_apres] + _aide_mots + js[_apres:]
+
+_mots_remplaces = 0
+for _vieux, _neuf in [
+    ("'✓ Livraison gratuite incluse'",
+     "'✓ ' + MOT('livraisonIncluse')"),
+    ("'\\u2713 Livraison gratuite incluse'",
+     "'\\u2713 ' + MOT('livraisonIncluse')"),
+    ("'+ ' + remaining + ' DH → Livraison gratuite'",
+     "MOT('livraisonReste').replace('%montant%', remaining)"),
+    ("'+ ' + left + ' DH \\u2192 Livraison gratuite'",
+     "MOT('livraisonReste').replace('%montant%', left)"),
+    ("'Ajouter au Panier · ' + vol",
+     "MOT('panierAjouter') + ' · ' + vol"),
+    ("'Ajouter au Panier \\u00b7 ' + grams",
+     "MOT('panierAjouter') + ' \\u00b7 ' + grams"),
+    ("added ? '♥ Enregistré dans mes envies' : '♡ Ajouter à mes envies'",
+     "added ? '♥ ' + MOT('enviesEnregistre') : '♡ ' + MOT('enviesAjouter')"),
+    ('aria-label="Retirer \'\n      + wishEscape(it.name) + \' de mes envies">Retirer</button></li>\'',
+     'aria-label="\'\n      + wishEscape(MOT(\'enviesRetirer\').replace(\'%nom%\', it.name))\n      + \'">\' + wishEscape(MOT(\'retirer\')) + \'</button></li>\''),
+    ("String(name || 'Article').trim().slice(0, 48) + ' — ajouté au panier'",
+     "MOT('panierAjoute').replace('%nom%',\n              String(name || MOT('article')).trim().slice(0, 48))"),
+    ("'Ce parfum n’a pas pu être ajouté au panier.'",
+     "MOT('panierEchec')"),
+    ("open ? 'Ouvrir le menu de navigation' : 'Fermer le menu de navigation'",
+     "MOT(open ? 'menuOuvrir' : 'menuFermer')"),
+    ("open ? 'Fermer le menu de navigation' : 'Ouvrir le menu de navigation'",
+     "MOT(open ? 'menuFermer' : 'menuOuvrir')"),
+    ("'Retirer un exemplaire de ' + prod.name",
+     "MOT('exemplaireRetirer').replace('%nom%', prod.name)"),
+    ("'Ajouter un exemplaire de ' + prod.name",
+     "MOT('exemplaireAjouter').replace('%nom%', prod.name)"),
+    ("'Retirer ' + prod.name + ' du panier'",
+     "MOT('panierRetirer').replace('%nom%', prod.name)"),
+]:
+    # le libelle du rapport est l indice, pas la phrase : la console
+    # Windows ne sait pas ecrire les caracteres qu elle contient
+    _mots_remplaces += 1
+    must(js.count(_vieux) == 1,
+         'mots: phrase %d sur %d a remplacer' % (_mots_remplaces, 15))
+    js = js.replace(_vieux, _neuf)
+must(_mots_remplaces == 15,
+     'mots: les 15 phrases vivantes d app.js sont traduisibles')
+ok(f'mots: {_mots_remplaces} phrases d app.js lisent le dictionnaire du gabarit')
+
 js_path.write_text(js, encoding="utf-8")
 ok(f"progressive-enhancement module appended ({len(js):,} bytes)")
 
@@ -1578,6 +1655,100 @@ from theme_yml import fix_theme_yml
 yml, yml_notes = fix_theme_yml(yml)
 for note in yml_notes:
     ok(note)
+
+
+# ─── les dernieres phrases francaises des gabarits ────────
+# sortir_chaines.py saute tout fragment qui contient { ou } : une phrase
+# melee a une variable Smarty demande un %parametre% et une relecture a
+# la main. Ces phrases-la n avaient donc jamais eu de cle, et un
+# aria-label francais se lisait a voix haute sur /en/ et /ar/.
+#
+# La passe tourne sur les gabarits BATIS : certaines de ces phrases sont
+# posees par build_theme lui-meme, d autres viennent de ref/ ou de
+# psbuild/. Ici, le texte est celui qui sera servi.
+#
+# Ce qui n est PAS touche : $odysFeat.name == 'Notes de tete', qui n est
+# pas du texte lu mais une comparaison avec le nom de la caracteristique
+# en base. Le traduire couperait la pyramide olfactive.
+_cles_tpl = [
+    ('aria-label="Agrandir la photo de {$product.name|escape:\'html\':\'UTF-8\'}"',
+     'aria-label="{l s=\'Agrandir la photo de %nom%\' sprintf=[\'%nom%\' => $product.name|escape:\'html\':\'UTF-8\'] d=\'Shop.Theme.Odys\'}"'),
+    ('<strong>Stock limité · {$product.quantity} unités restantes</strong>',
+     "<strong>{l s='Stock limité · %nombre% unités restantes' sprintf=['%nombre%' => $product.quantity] d='Shop.Theme.Odys'}</strong>"),
+    ('aria-label="Notes de tête"',
+     'aria-label="{l s=\'Notes de tête\' d=\'Shop.Theme.Odys\'}"'),
+    ('aria-label="Notes de cœur"',
+     'aria-label="{l s=\'Notes de cœur\' d=\'Shop.Theme.Odys\'}"'),
+    ('aria-label="Notes de fond"',
+     'aria-label="{l s=\'Notes de fond\' d=\'Shop.Theme.Odys\'}"'),
+    ('<div class="ol-name">Tête</div>',
+     '<div class="ol-name">{l s=\'Tête\' d=\'Shop.Theme.Odys\'}</div>'),
+    ('<div class="ol-name">Cœur</div>',
+     '<div class="ol-name">{l s=\'Cœur\' d=\'Shop.Theme.Odys\'}</div>'),
+    ('<div class="ol-name">Fond</div>',
+     '<div class="ol-name">{l s=\'Fond\' d=\'Shop.Theme.Odys\'}</div>'),
+    ('aria-label="Voir les parfums avec la note {$odysNote|escape:\'html\':\'UTF-8\'}"',
+     'aria-label="{l s=\'Voir les parfums avec la note %note%\' sprintf=[\'%note%\' => $odysNote|escape:\'html\':\'UTF-8\'] d=\'Shop.Theme.Odys\'}"'),
+    ('aria-label="Ajouter {$product.name|escape:\'html\':\'UTF-8\'} à mes envies"',
+     'aria-label="{l s=\'Ajouter %nom% à mes envies\' sprintf=[\'%nom%\' => $product.name|escape:\'html\':\'UTF-8\'] d=\'Shop.Theme.Odys\'}"'),
+    ('aria-label="Ajouter {$product.name|escape:\'html\':\'UTF-8\'} au panier"',
+     'aria-label="{l s=\'Ajouter %nom% au panier\' sprintf=[\'%nom%\' => $product.name|escape:\'html\':\'UTF-8\'] d=\'Shop.Theme.Odys\'}"'),
+    ('aria-label="Ajouter {$acc.name|escape:\'html\':\'UTF-8\'} au panier"',
+     'aria-label="{l s=\'Ajouter %nom% au panier\' sprintf=[\'%nom%\' => $acc.name|escape:\'html\':\'UTF-8\'] d=\'Shop.Theme.Odys\'}"'),
+    ('aria-label="Offrir {$product.name|escape:\'html\':\'UTF-8\'} — ajouter au panier avec un message"',
+     'aria-label="{l s=\'Offrir %nom% — ajouter au panier avec un message\' sprintf=[\'%nom%\' => $product.name|escape:\'html\':\'UTF-8\'] d=\'Shop.Theme.Odys\'}"'),
+    ('aria-label="Ajouter {$product.name|escape:\'html\':\'UTF-8\'} à ma liste de souhaits"',
+     'aria-label="{l s=\'Ajouter %nom% à ma liste de souhaits\' sprintf=[\'%nom%\' => $product.name|escape:\'html\':\'UTF-8\'] d=\'Shop.Theme.Odys\'}"'),
+    ('aria-label="Retirer un exemplaire de {$odysLigne.name|escape:\'html\':\'UTF-8\'}"',
+     'aria-label="{l s=\'Retirer un exemplaire de %nom%\' sprintf=[\'%nom%\' => $odysLigne.name|escape:\'html\':\'UTF-8\'] d=\'Shop.Theme.Odys\'}"'),
+    ('aria-label="Ajouter un exemplaire de {$odysLigne.name|escape:\'html\':\'UTF-8\'}"',
+     'aria-label="{l s=\'Ajouter un exemplaire de %nom%\' sprintf=[\'%nom%\' => $odysLigne.name|escape:\'html\':\'UTF-8\'] d=\'Shop.Theme.Odys\'}"'),
+    ('aria-label="Retirer {$odysLigne.name|escape:\'html\':\'UTF-8\'} du panier"',
+     'aria-label="{l s=\'Retirer %nom% du panier\' sprintf=[\'%nom%\' => $odysLigne.name|escape:\'html\':\'UTF-8\'] d=\'Shop.Theme.Odys\'}"'),
+    ('aria-label="Quantité pour {$product.name|escape:\'html\':\'UTF-8\'}"',
+     'aria-label="{l s=\'Quantité pour %nom%\' sprintf=[\'%nom%\' => $product.name|escape:\'html\':\'UTF-8\'] d=\'Shop.Theme.Odys\'}"'),
+    ('aria-label="Étape {$odysStep} sur 4 : {$odysSteps[$odysStep-1][\'label\']}"',
+     'aria-label="{l s=\'Étape %rang% sur 4 : %etape%\' sprintf=[\'%rang%\' => $odysStep, \'%etape%\' => $odysSteps[$odysStep-1][\'label\']] d=\'Shop.Theme.Odys\'}"'),
+    ('<div class="odys-track-eyebrow">Étape {$odysStep} sur 4</div>',
+     '<div class="odys-track-eyebrow">{l s=\'Étape %rang% sur 4\' sprintf=[\'%rang%\' => $odysStep] d=\'Shop.Theme.Odys\'}</div>'),
+    ('aria-label="{$odysAv.note|intval} sur 5"',
+     'aria-label="{l s=\'%note% sur 5\' sprintf=[\'%note%\' => $odysAv.note|intval] d=\'Shop.Theme.Odys\'}"'),
+    ('<p class="ft-copy">© {$smarty.now|date_format:\'%Y\'} ODYS Parfums · Casablanca, Maroc · Tous droits réservés</p>',
+     '<p class="ft-copy">{l s=\'© %annee% ODYS Parfums · Casablanca, Maroc · Tous droits réservés\' sprintf=[\'%annee%\' => $smarty.now|date_format:\'%Y\'] d=\'Shop.Theme.Odys\'}</p>'),
+    ("{block name='head_title'}Commande confirmée | ODYS Parfums{/block}",
+     "{block name='head_title'}{l s='Commande confirmée | ODYS Parfums' d='Shop.Theme.Odys'}{/block}"),
+    ("{block name='head_title'}Connexion | ODYS Parfums{/block}",
+     "{block name='head_title'}{l s='Connexion | ODYS Parfums' d='Shop.Theme.Odys'}{/block}"),
+    ("{block name='head_title'}Suivre ma commande | ODYS Parfums{/block}",
+     "{block name='head_title'}{l s='Suivre ma commande | ODYS Parfums' d='Shop.Theme.Odys'}{/block}"),
+    ("{block name='head_title'}Mes Commandes | ODYS Parfums{/block}",
+     "{block name='head_title'}{l s='Mes Commandes | ODYS Parfums' d='Shop.Theme.Odys'}{/block}"),
+    ("{block name='head_title'}Mon Compte | ODYS Parfums{/block}",
+     "{block name='head_title'}{l s='Mon Compte | ODYS Parfums' d='Shop.Theme.Odys'}{/block}"),
+    ("{block name='head_title'}Mot de passe oublié | ODYS Parfums{/block}",
+     "{block name='head_title'}{l s='Mot de passe oublié | ODYS Parfums' d='Shop.Theme.Odys'}{/block}"),
+    ("{block name='head_title'}Mot de passe | ODYS Parfums{/block}",
+     "{block name='head_title'}{l s='Mot de passe | ODYS Parfums' d='Shop.Theme.Odys'}{/block}"),
+    ("{block name='head_title'}Nouveau mot de passe | ODYS Parfums{/block}",
+     "{block name='head_title'}{l s='Nouveau mot de passe | ODYS Parfums' d='Shop.Theme.Odys'}{/block}"),
+    ("{block name='head_title'}Page introuvable | ODYS Parfums{/block}",
+     "{block name='head_title'}{l s='Page introuvable | ODYS Parfums' d='Shop.Theme.Odys'}{/block}"),
+    ("{block name='head_title'}Contact | ODYS Parfums{/block}",
+     "{block name='head_title'}{l s='Contact | ODYS Parfums' d='Shop.Theme.Odys'}{/block}"),
+]
+_poses_tpl = 0
+for _p in sorted((THEME / 'templates').rglob('*.tpl')):
+    _t = _p.read_text(encoding='utf-8')
+    _avant = _t
+    for _vieux, _neuf in _cles_tpl:
+        if _vieux in _t:
+            _poses_tpl += _t.count(_vieux)
+            _t = _t.replace(_vieux, _neuf)
+    if _t != _avant:
+        _p.write_text(_t, encoding='utf-8')
+must(_poses_tpl >= 32,
+     'cles: les phrases a parametre des gabarits portent une cle')
+ok(f'cles: {_poses_tpl} phrases de gabarit ont recu une cle de traduction')
 
 preview = HERE / "preview.png"
 must(preview.exists(), "preview.png present (ThemeValidator requires it)")

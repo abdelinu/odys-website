@@ -1,5 +1,5 @@
 {extends file='layouts/layout-full-width.tpl'}
-{block name='head_title'}Mot de passe | ODYS Parfums{/block}
+{block name='head_title'}{l s='Mot de passe | ODYS Parfums' d='Shop.Theme.Odys'}{/block}
 {*
  * La confirmation. Classic y pose un <svg viewBox="0 0 24 24"> SANS largeur ni
  * hauteur : sans la feuille de classic pour le borner, le navigateur l'etire a

@@ -1,7 +1,7 @@
 {extends file='layouts/layout-full-width.tpl'}
 
-{block name='head_title'}ODYS Parfums | Extrait de Parfum — Maison de Senteur, Casablanca{/block}
-{block name='head_desc'}ODYS Parfums — compositions raffinées élaborées au Maroc. Extrait de parfum, oud naturel au gramme. Livraison 24–48h · Paiement à la livraison · Dès 39 DH.{/block}
+{block name='head_title'}{l s='ODYS Parfums | Extrait de Parfum — Maison de Senteur, Casablanca' d='Shop.Theme.Odys'}{/block}
+{block name='head_desc'}{l s='ODYS Parfums — compositions raffinées élaborées au Maroc. Extrait de parfum, oud naturel au gramme. Livraison 24–48h · Paiement à la livraison · Dès 39 DH.' d='Shop.Theme.Odys'}{/block}
 
 {block name='head_schema'}
 <script type="application/ld+json">{literal}{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://odys.ma/#org","name":"ODYS Parfums","url":"https://odys.ma","foundingDate":"2026","address":{"@type":"PostalAddress","addressLocality":"Casablanca","addressCountry":"MA"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ODYS livre-t-il dans tout le Maroc ?","acceptedAnswer":{"@type":"Answer","text":"Oui. 20 DH à Casablanca, 30 DH partout au Maroc. Gratuite dès 300 DH."}},{"@type":"Question","name":"Le paiement à la livraison est-il disponible ?","acceptedAnswer":{"@type":"Answer","text":"Oui, paiement à la livraison partout au Maroc."}},{"@type":"Question","name":"Comment fonctionne le programme fidélité ?","acceptedAnswer":{"@type":"Answer","text":"100 DH = 1 point. À 15 points : 5g Oud ou coffret offert. Oud exclu."}}]}]}{/literal}</script>

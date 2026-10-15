@@ -10,6 +10,42 @@
    - PS8 AJAX bridge (appended at end)
    ================================================================ */
 
+/* ─── Les phrases traduites ──────────────────────────────────────────
+   Un .js est servi tel quel : les memes octets pour les trois langues.
+   C'est pourquoi la boutique anglaise disait encore « Ajouter au
+   Panier » — la phrase n'etait pas dans un gabarit, elle etait ici.
+
+   Le gabarit les depose donc, deja traduites, dans window.odysMots
+   (voir layouts/layout-full-width.tpl), et on les lit par leur cle.
+   Sans dictionnaire — page servie par un autre gabarit, bloc absent —
+   MOT rend le francais : la boutique parle francais au lieu de se
+   taire. La declaration est hissee, sa place dans le fichier n'a donc
+   pas d'importance. */
+function MOT(cle) {
+  var d = window.odysMots;
+  if (d && typeof d[cle] === 'string' && d[cle]) { return d[cle]; }
+  return MOT.FR[cle] || cle;
+}
+MOT.FR = {
+  'panierAjouter': 'Ajouter au Panier',
+  'livraisonIncluse': 'Livraison gratuite incluse',
+  'livraisonReste': '+ %montant% DH → Livraison gratuite',
+  'enviesAjouter': 'Ajouter à mes envies',
+  'enviesEnregistre': 'Enregistré dans mes envies',
+  'enviesRetirer': 'Retirer %nom% de mes envies',
+  'retirer': 'Retirer',
+  'article': 'Article',
+  'panierAjoute': '%nom% — ajouté au panier',
+  'panierEchec': 'Ce parfum n\'a pas pu être ajouté au panier.',
+  'menuOuvrir': 'Ouvrir le menu de navigation',
+  'menuFermer': 'Fermer le menu de navigation',
+  'exemplaireAjouter': 'Ajouter un exemplaire de %nom%',
+  'exemplaireRetirer': 'Retirer un exemplaire de %nom%',
+  'panierRetirer': 'Retirer %nom% du panier',
+  'panierVide': 'Votre panier est vide.'
+};
+
+
 
 /* ================================================================
    ODYS Parfums — PrestaShop 8 Theme JavaScript
@@ -393,11 +429,11 @@ function pickVol(btn) {
     const freeThresh = 300;
     const remaining = freeThresh - price;
     if (remaining <= 0) {
-      lf.textContent = '✓ Livraison gratuite incluse';
+      lf.textContent = '✓ ' + MOT('livraisonIncluse');
       lf.style.background = 'rgba(45,106,79,.15)';
       lf.style.color = 'var(--green)';
     } else {
-      lf.textContent = '+ ' + remaining + ' DH → Livraison gratuite';
+      lf.textContent = MOT('livraisonReste').replace('%montant%', remaining);
       lf.style.background = '';
       lf.style.color = '';
     }
@@ -407,7 +443,7 @@ function pickVol(btn) {
   const btn_cart = document.getElementById('addBtn');
   if (btn_cart) {
     const lbl = btn_cart.querySelector('.blbl');
-    if (lbl) lbl.textContent = 'Ajouter au Panier · ' + vol;
+    if (lbl) lbl.textContent = MOT('panierAjouter') + ' · ' + vol;
   }
 }
 function selectV(btn, vol, price) {
@@ -533,7 +569,7 @@ function wishToggle(btn, full) {
   btn.classList.toggle('on', added);
   btn.setAttribute('aria-pressed', added ? 'true' : 'false');
   if (full) {
-    btn.textContent = added ? '♥ Enregistré dans mes envies' : '♡ Ajouter à mes envies';
+    btn.textContent = added ? '♥ ' + MOT('enviesEnregistre') : '♡ ' + MOT('enviesAjouter');
   } else {
     btn.textContent = added ? '♥' : '♡';
     btn.style.color = added ? 'var(--rose)' : '';
@@ -582,8 +618,9 @@ function wishRenderPage() {
       + wishEscape(it.name) + '</a></div>'
       + '<div class="odys-order-line-qty">' + wishEscape(it.price) + '</div></div>'
       + '<button type="button" class="odys-wish-drop" data-action="wish-drop" '
-      + 'data-id="' + wishEscape(it.id) + '" aria-label="Retirer '
-      + wishEscape(it.name) + ' de mes envies">Retirer</button></li>';
+      + 'data-id="' + wishEscape(it.id) + '" aria-label="'
+      + wishEscape(MOT('enviesRetirer').replace('%nom%', it.name))
+      + '">' + wishEscape(MOT('retirer')) + '</button></li>';
   }).join('');
 }
 
@@ -2087,7 +2124,8 @@ document.addEventListener('DOMContentLoaded', () => {
           ODYS.addToCart('ps-' + idProduct, name, price, btn);
           /* Le bandeau du bas, maintenant que PrestaShop a confirme. */
           if (window.odysToast) {
-            window.odysToast(String(name || 'Article').trim().slice(0, 48) + ' — ajouté au panier');
+            window.odysToast(MOT('panierAjoute').replace('%nom%',
+              String(name || MOT('article')).trim().slice(0, 48)));
           }
           /* Le refus precedent n a plus lieu d etre : un
              message d erreur qui survit a un ajout reussi
@@ -2102,7 +2140,7 @@ document.addEventListener('DOMContentLoaded', () => {
           var odysRaison = resp && resp.errors ? resp.errors : '';
           if (Array.isArray(odysRaison)) { odysRaison = odysRaison.join(' '); }
           odysRaison = String(odysRaison).replace(/<[^>]*>/g, '').trim();
-          if (!odysRaison) { odysRaison = 'Ce parfum n’a pas pu être ajouté au panier.'; }
+          if (!odysRaison) { odysRaison = MOT('panierEchec'); }
           if (btn) {
             var odysAvant = btn.textContent;
             btn.classList.add('ko');
@@ -2868,7 +2906,7 @@ document.addEventListener('DOMContentLoaded', () => {
       var open = mobMenu.getAttribute('aria-hidden') === 'false';
       mobMenu.setAttribute('aria-hidden', open ? 'true' : 'false');
       hamBtn.setAttribute('aria-expanded', open ? 'false' : 'true');
-      hamBtn.setAttribute('aria-label', open ? 'Ouvrir le menu de navigation' : 'Fermer le menu de navigation');
+      hamBtn.setAttribute('aria-label', MOT(open ? 'menuOuvrir' : 'menuFermer'));
       if (!open) {
         // Trap focus in menu
         var firstLink = mobMenu.querySelector('a');
@@ -3173,11 +3211,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var free = document.getElementById('liveFree');
     if (free) {
       var left = 300 - price;
-      free.textContent = left > 0 ? '+ ' + left + ' DH \u2192 Livraison gratuite'
-                                  : '\u2713 Livraison gratuite incluse';
+      free.textContent = left > 0 ? MOT('livraisonReste').replace('%montant%', left)
+                                  : '\u2713 ' + MOT('livraisonIncluse');
     }
     var label = document.querySelector('#addBtn .blbl');
-    if (label) label.textContent = 'Ajouter au Panier \u00b7 ' + grams + ' g';
+    if (label) label.textContent = MOT('panierAjouter') + ' \u00b7 ' + grams + ' g';
   }
 
   document.addEventListener('click', function (e) {
@@ -3219,7 +3257,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (button) {
       button.setAttribute('aria-expanded', open ? 'true' : 'false');
       button.setAttribute('aria-label',
-        open ? 'Fermer le menu de navigation' : 'Ouvrir le menu de navigation');
+        MOT(open ? 'menuFermer' : 'menuOuvrir'));
     }
     document.body.classList.toggle('menu-open', open);
     if (open) {
@@ -3915,7 +3953,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var vide = document.createElement('li');
       vide.className = 'ot-vide';
       var p = document.createElement('p');
-      p.textContent = 'Votre panier est vide.';
+      p.textContent = MOT('panierVide');
       vide.appendChild(p);
       liste.appendChild(vide);
     }
@@ -3958,12 +3996,12 @@ document.addEventListener('DOMContentLoaded', function () {
       var qte = document.createElement('div');
       qte.className = 'ot-qte';
       [['ot-moins', '−', prod.down_quantity_url,
-        'Retirer un exemplaire de ' + prod.name],
+        MOT('exemplaireRetirer').replace('%nom%', prod.name)],
        ['ot-nb', String(prod.quantity), null, null],
        ['ot-plus', '+', prod.up_quantity_url,
-        'Ajouter un exemplaire de ' + prod.name],
-       ['ot-oter', 'Retirer', prod.remove_from_cart_url,
-        'Retirer ' + prod.name + ' du panier']
+        MOT('exemplaireAjouter').replace('%nom%', prod.name)],
+       ['ot-oter', MOT('retirer'), prod.remove_from_cart_url,
+        MOT('panierRetirer').replace('%nom%', prod.name)]
       ].forEach(function (b) {
         var el = document.createElement(b[2] ? 'a' : 'span');
         el.className = b[0];

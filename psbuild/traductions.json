@@ -283,7 +283,7 @@
       "ar": "مرّر"
     },
     "Tête": {
-      "en": "Top notes",
+      "en": "Top",
       "ar": "المقدّمة"
     },
     "Fraîcheur · Énergie": {
@@ -295,7 +295,7 @@
       "ar": "شخصية · إحساس"
     },
     "Fond": {
-      "en": "Base notes",
+      "en": "Base",
       "ar": "القاعدة"
     },
     "Profondeur · Signature": {
@@ -1661,6 +1661,202 @@
     "Parfums": {
       "en": "Fragrances",
       "ar": "العطور"
+    },
+    "Ajouter au Panier": {
+      "en": "Add to Cart",
+      "ar": "أضف إلى السلّة"
+    },
+    "Livraison gratuite incluse": {
+      "en": "Free delivery included",
+      "ar": "التوصيل المجاني مشمول"
+    },
+    "+ %montant% DH → Livraison gratuite": {
+      "en": "+ %montant% DH → Free delivery",
+      "ar": "+ %montant% درهم للتوصيل المجاني"
+    },
+    "Ajouter à mes envies": {
+      "en": "Add to my wishlist",
+      "ar": "أضف إلى قائمة رغباتي"
+    },
+    "Enregistré dans mes envies": {
+      "en": "Saved to my wishlist",
+      "ar": "محفوظ في قائمة رغباتي"
+    },
+    "Retirer %nom% de mes envies": {
+      "en": "Remove %nom% from my wishlist",
+      "ar": "حذف %nom% من قائمة رغباتي"
+    },
+    "Article": {
+      "en": "Item",
+      "ar": "منتج"
+    },
+    "%nom% — ajouté au panier": {
+      "en": "%nom% — added to cart",
+      "ar": "%nom% — أُضيف إلى السلّة"
+    },
+    "Ce parfum n'a pas pu être ajouté au panier.": {
+      "en": "This fragrance could not be added to the cart.",
+      "ar": "لم يمكن إضافة هذا العطر إلى السلّة."
+    },
+    "Fermer le menu de navigation": {
+      "en": "Close the navigation menu",
+      "ar": "إغلاق قائمة التنقل"
+    },
+    "Ajouter un exemplaire de %nom%": {
+      "en": "Add one more %nom%",
+      "ar": "أضف نسخة أخرى من %nom%"
+    },
+    "Retirer un exemplaire de %nom%": {
+      "en": "Remove one %nom%",
+      "ar": "حذف نسخة من %nom%"
+    },
+    "Retirer %nom% du panier": {
+      "en": "Remove %nom% from the cart",
+      "ar": "حذف %nom% من السلّة"
+    },
+    "Mon Panier | ODYS Parfums": {
+      "en": "My Cart | ODYS Parfums",
+      "ar": "سلّتي | ODYS Parfums"
+    },
+    "ODYS Parfums | Extrait de Parfum — Maison de Senteur, Casablanca": {
+      "en": "ODYS Parfums | Extrait de Parfum — Fragrance House, Casablanca",
+      "ar": "ODYS Parfums | خلاصة العطر — دار عطور، الدار البيضاء"
+    },
+    "ODYS Parfums — compositions raffinées élaborées au Maroc. Extrait de parfum, oud naturel au gramme. Livraison 24–48h · Paiement à la livraison · Dès 39 DH.": {
+      "en": "ODYS Parfums — refined compositions made in Morocco. Extrait de parfum, natural oud by the gram. Delivery in 24–48h · Cash on delivery · From 39 DH.",
+      "ar": "ODYS Parfums — تركيبات راقية مصنوعة بالمغرب. خلاصة عطر، وعود طبيعي بالغرام. التوصيل في 24–48 ساعة · الأداء عند الاستلام · ابتداءً من 39 درهم."
+    },
+    "Voir %nom%": {
+      "en": "View %nom%",
+      "ar": "عرض %nom%"
+    },
+    "Voir la photo %rang%": {
+      "en": "View photo %rang%",
+      "ar": "عرض الصورة %rang%"
+    },
+    "%prix% DH le gramme &middot; minimum %poids% g": {
+      "en": "%prix% DH per gram &middot; minimum %poids% g",
+      "ar": "%prix% درهم للغرام &middot; الحد الأدنى %poids% غ"
+    },
+    "offerte dès %montant% DH": {
+      "en": "free from %montant% DH",
+      "ar": "مجانًا ابتداءً من %montant% درهم"
+    },
+    "Quantité %nombre% × %prix%": {
+      "en": "Quantity %nombre% × %prix%",
+      "ar": "الكمية %nombre% × %prix%"
+    },
+    "Résultats pour « %mot% »": {
+      "en": "Results for “%mot%”",
+      "ar": "نتائج البحث عن « %mot% »"
+    },
+    "Aucun résultat pour « %mot% »": {
+      "en": "No results for “%mot%”",
+      "ar": "لا توجد نتائج لـ « %mot% »"
+    },
+    "© %annee% ODYS Parfums · Casablanca, Maroc · Tous droits réservés": {
+      "en": "© %annee% ODYS Parfums · Casablanca, Morocco · All rights reserved",
+      "ar": "© %annee% ODYS Parfums · الدار البيضاء، المغرب · جميع الحقوق محفوظة"
+    },
+    "%note% sur 5": {
+      "en": "%note% out of 5",
+      "ar": "%note% من 5"
+    },
+    "Étape %rang% sur 4 : %etape%": {
+      "en": "Step %rang% of 4: %etape%",
+      "ar": "المرحلة %rang% من 4: %etape%"
+    },
+    "Étape %rang% sur 4": {
+      "en": "Step %rang% of 4",
+      "ar": "المرحلة %rang% من 4"
+    },
+    "Stock limité · %nombre% unités restantes": {
+      "en": "Limited stock · %nombre% left",
+      "ar": "الكمية محدودة · تبقّى %nombre%"
+    },
+    "Notes de tête": {
+      "en": "Top notes",
+      "ar": "نفحات المقدّمة"
+    },
+    "Voir les parfums avec la note %note%": {
+      "en": "View fragrances with the note %note%",
+      "ar": "عرض العطور التي تحتوي على %note%"
+    },
+    "Notes de cœur": {
+      "en": "Heart notes",
+      "ar": "نفحات القلب"
+    },
+    "Notes de fond": {
+      "en": "Base notes",
+      "ar": "نفحات القاعدة"
+    },
+    "Commande confirmée | ODYS Parfums": {
+      "en": "Order confirmed | ODYS Parfums",
+      "ar": "تم تأكيد الطلب | ODYS Parfums"
+    },
+    "Connexion | ODYS Parfums": {
+      "en": "Sign in | ODYS Parfums",
+      "ar": "تسجيل الدخول | ODYS Parfums"
+    },
+    "Suivre ma commande | ODYS Parfums": {
+      "en": "Track my order | ODYS Parfums",
+      "ar": "تتبّع طلبي | ODYS Parfums"
+    },
+    "Mes Commandes | ODYS Parfums": {
+      "en": "My Orders | ODYS Parfums",
+      "ar": "طلباتي | ODYS Parfums"
+    },
+    "Mon Compte | ODYS Parfums": {
+      "en": "My Account | ODYS Parfums",
+      "ar": "حسابي | ODYS Parfums"
+    },
+    "Mot de passe oublié | ODYS Parfums": {
+      "en": "Forgotten password | ODYS Parfums",
+      "ar": "نسيت كلمة المرور | ODYS Parfums"
+    },
+    "Mot de passe | ODYS Parfums": {
+      "en": "Password | ODYS Parfums",
+      "ar": "كلمة المرور | ODYS Parfums"
+    },
+    "Nouveau mot de passe | ODYS Parfums": {
+      "en": "New password | ODYS Parfums",
+      "ar": "كلمة مرور جديدة | ODYS Parfums"
+    },
+    "Page introuvable | ODYS Parfums": {
+      "en": "Page not found | ODYS Parfums",
+      "ar": "الصفحة غير موجودة | ODYS Parfums"
+    },
+    "Contact | ODYS Parfums": {
+      "en": "Contact | ODYS Parfums",
+      "ar": "اتصل بنا | ODYS Parfums"
+    },
+    "Ajouter %nom% à ma liste de souhaits": {
+      "en": "Add %nom% to my wishlist",
+      "ar": "أضف %nom% إلى قائمة رغباتي"
+    },
+    "Agrandir la photo de %nom%": {
+      "en": "Enlarge the photo of %nom%",
+      "ar": "تكبير صورة %nom%"
+    },
+    "Ajouter %nom% à mes envies": {
+      "en": "Add %nom% to my wishlist",
+      "ar": "أضف %nom% إلى قائمة رغباتي"
+    },
+    "Ajouter %nom% au panier": {
+      "en": "Add %nom% to the cart",
+      "ar": "أضف %nom% إلى السلّة"
+    },
+    "Offrir %nom% — ajouter au panier avec un message": {
+      "en": "Gift %nom% — add to the cart with a message",
+      "ar": "أهدِ %nom% — أضف إلى السلّة مع رسالة"
+    },
+    "Quantité pour %nom%": {
+      "en": "Quantity for %nom%",
+      "ar": "الكمية لـ %nom%"
+    },
+    "Cœur": {
+      "en": "Heart",
+      "ar": "القلب"
     }
   },
   "autres_domaines": {

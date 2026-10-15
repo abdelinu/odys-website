@@ -49,7 +49,7 @@
     </span>
     {if !$odysFailed}
       <span class="odys-mini-dots" role="img"
-            aria-label="Étape {$odysStep} sur 4 : {$odysSteps[$odysStep-1]['label']}">
+            aria-label="{l s='Étape %rang% sur 4 : %etape%' sprintf=['%rang%' => $odysStep, '%etape%' => $odysSteps[$odysStep-1]['label']] d='Shop.Theme.Odys'}">
         {section name=d loop=4}
           {assign var='n' value=$smarty.section.d.index+1}
           <i class="{if $n < $odysStep}is-done{elseif $n == $odysStep}is-now{/if}"></i>
@@ -77,7 +77,7 @@
   {else}
     <div class="odys-track-head">
       <div>
-        <div class="odys-track-eyebrow">Étape {$odysStep} sur 4</div>
+        <div class="odys-track-eyebrow">{l s='Étape %rang% sur 4' sprintf=['%rang%' => $odysStep] d='Shop.Theme.Odys'}</div>
         <div class="odys-track-now">{$odysSteps[$odysStep-1]['label']}</div>
       </div>
       {if $order.carrier.name}

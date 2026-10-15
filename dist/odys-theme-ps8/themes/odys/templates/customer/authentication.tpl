@@ -1,5 +1,5 @@
 {extends file='layouts/layout-full-width.tpl'}
-{block name='head_title'}Connexion | ODYS Parfums{/block}
+{block name='head_title'}{l s='Connexion | ODYS Parfums' d='Shop.Theme.Odys'}{/block}
 {block name='content'}
 <div style="max-width:480px;margin:0 auto;padding:64px max(20px,32px) 80px">
   <div style="text-align:center;margin-bottom:36px">

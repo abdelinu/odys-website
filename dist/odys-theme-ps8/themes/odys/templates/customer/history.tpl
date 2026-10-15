@@ -8,7 +8,7 @@
  * linked to href="Array". The keys below are the presenter's own.
  *}
 {extends file='layouts/layout-full-width.tpl'}
-{block name='head_title'}Mes Commandes | ODYS Parfums{/block}
+{block name='head_title'}{l s='Mes Commandes | ODYS Parfums' d='Shop.Theme.Odys'}{/block}
 {block name='content'}
 <div class="odys-order">
   <div class="odys-order-top">

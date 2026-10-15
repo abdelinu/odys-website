@@ -13,7 +13,7 @@
  * through. The line now appears only when the shop is actually set up to send.
  *}
 {extends file='layouts/layout-full-width.tpl'}
-{block name='head_title'}Commande confirmée | ODYS Parfums{/block}
+{block name='head_title'}{l s='Commande confirmée | ODYS Parfums' d='Shop.Theme.Odys'}{/block}
 
 {block name='content'}
 <div class="odys-order">
@@ -83,7 +83,7 @@
           {/if}
           <div class="odys-order-line-body">
             <div class="odys-order-line-name">{$product.name}</div>
-            <div class="odys-order-line-qty">Quantité {$product.quantity} × {$product.price}</div>
+            <div class="odys-order-line-qty">{l s='Quantité %nombre% × %prix%' sprintf=['%nombre%' => $product.quantity, '%prix%' => $product.price] d='Shop.Theme.Odys'}</div>
           </div>
           <div class="odys-order-line-total">{$product.total}</div>
         </li>

@@ -1,5 +1,5 @@
 {extends file='layouts/layout-full-width.tpl'}
-{block name='head_title'}Mon Panier | ODYS Parfums{/block}
+{block name='head_title'}{l s='Mon Panier | ODYS Parfums' d='Shop.Theme.Odys'}{/block}
 {block name='content'}
 <div style="max-width:900px;margin:0 auto;padding:48px max(20px,32px) 80px">
   <div style="margin-bottom:28px">
@@ -40,7 +40,7 @@
                        autocomplete="off" value="{$product.cart_quantity|intval}"
                        data-qty-url="{$product.update_quantity_url}"
                        data-qty-now="{$product.cart_quantity|intval}"
-                       aria-label="Quantité pour {$product.name|escape:'html':'UTF-8'}"
+                       aria-label="{l s='Quantité pour %nom%' sprintf=['%nom%' => $product.name|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}"
                        style="width:46px;text-align:center;font-size:13px;font-weight:600;line-height:32px"/>
                 <a href="{$product.update_quantity_url}&amp;op=up"   style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--mid);text-decoration:none;background:var(--odys-surface)">+</a>
               </div>

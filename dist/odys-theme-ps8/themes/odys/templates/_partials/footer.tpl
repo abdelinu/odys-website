@@ -98,7 +98,7 @@
     <div class="ft-hr" role="presentation"></div>
 
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
-      <p class="ft-copy">© {$smarty.now|date_format:'%Y'} ODYS Parfums · Casablanca, Maroc · Tous droits réservés</p>
+      <p class="ft-copy">{l s='© %annee% ODYS Parfums · Casablanca, Maroc · Tous droits réservés' sprintf=['%annee%' => $smarty.now|date_format:'%Y'] d='Shop.Theme.Odys'}</p>
       <div style="display:flex;gap:20px">
         <a href="{$odysUrlMentions}" class="ft-legal">{l s='Mentions légales' d='Shop.Theme.Odys'}</a>
         <a href="{$odysUrlConfidentialite}" class="ft-legal">{l s='Confidentialité' d='Shop.Theme.Odys'}</a>

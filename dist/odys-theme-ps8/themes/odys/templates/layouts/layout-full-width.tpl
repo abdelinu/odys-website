@@ -263,6 +263,36 @@
   {/if}
 
   {block name='javascript'}
+  {* Les phrases qu'app.js ecrit lui-meme dans la page.
+
+     Un gabarit sait dire {l s='...'} ; un fichier .js, non — il est servi
+     tel quel, les memes octets pour les trois langues. C'est pour cela que
+     la boutique anglaise disait encore « Ajouter au Panier » : la phrase
+     n'etait pas dans un gabarit, elle etait dans le JavaScript.
+
+     Le gabarit les pose donc ici, traduites, et app.js les lit par leur
+     cle. Chaque lecture garde le francais en repli : si ce bloc manque, la
+     boutique parle francais plutot que de se taire. *}
+  <script>
+    window.odysMots = {
+      "panierAjouter": "{l s='Ajouter au Panier' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "livraisonIncluse": "{l s='Livraison gratuite incluse' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "livraisonReste": "{l s='+ %montant% DH → Livraison gratuite' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "enviesAjouter": "{l s='Ajouter à mes envies' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "enviesEnregistre": "{l s='Enregistré dans mes envies' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "enviesRetirer": "{l s='Retirer %nom% de mes envies' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "retirer": "{l s='Retirer' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "article": "{l s='Article' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "panierAjoute": "{l s='%nom% — ajouté au panier' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "panierEchec": "{l s='Ce parfum n\'a pas pu être ajouté au panier.' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "menuOuvrir": "{l s='Ouvrir le menu de navigation' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "menuFermer": "{l s='Fermer le menu de navigation' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "exemplaireAjouter": "{l s='Ajouter un exemplaire de %nom%' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "exemplaireRetirer": "{l s='Retirer un exemplaire de %nom%' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "panierRetirer": "{l s='Retirer %nom% du panier' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "panierVide": "{l s='Votre panier est vide.' d='Shop.Theme.Odys'|escape:'javascript'}"
+    };
+  </script>
   {include file="_partials/javascript.tpl" javascript=$javascript.bottom}
   {/block}
 

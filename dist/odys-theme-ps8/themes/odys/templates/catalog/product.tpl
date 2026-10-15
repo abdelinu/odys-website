@@ -108,7 +108,7 @@
         <span class="p-flag p-flag-new">{$product.flags.new.label|escape:'html':'UTF-8'}</span>
       {/if}
       <button type="button" class="gal-zoom" data-action="zoom-open"
-              aria-label="Agrandir la photo de {$product.name|escape:'html':'UTF-8'}">
+              aria-label="{l s='Agrandir la photo de %nom%' sprintf=['%nom%' => $product.name|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}">
       <img id="galMain"
            {* a product with no photo has cover = false, and reading .bySize
               off it prints a PHP warning into this very src *}
@@ -125,7 +125,7 @@
           <button class="thumb-btn"
                   data-action="switch-thumb"
                   data-src="{$image.bySize.large_default.url}"
-                  aria-label="Voir la photo {$image@iteration}"
+                  aria-label="{l s='Voir la photo %rang%' sprintf=['%rang%' => $image@iteration] d='Shop.Theme.Odys'}"
                   aria-pressed="{if $image@first}true{else}false{/if}">
             <img src="{$image.bySize.small_default.url}"
                  loading="lazy"
@@ -204,7 +204,7 @@
     <div class="scarcity-alert" role="alert">
       <div class="sa-icon" aria-hidden="true">⚠</div>
       <div class="sa-txt">
-        <strong>Stock limité · {$product.quantity} unités restantes</strong>
+        <strong>{l s='Stock limité · %nombre% unités restantes' sprintf=['%nombre%' => $product.quantity] d='Shop.Theme.Odys'}</strong>
         <small>{l s='Commandez maintenant pour garantir votre livraison' d='Shop.Theme.Odys'}</small>
       </div>
     </div>
@@ -236,7 +236,7 @@
           </button>
         {/if}{/foreach}
       </div>
-      <p class="vol-note">{$product.price_amount|intval} DH le gramme &middot; minimum {$odysGramMin} g</p>
+      <p class="vol-note">{l s='%prix% DH le gramme &middot; minimum %poids% g' sprintf=['%prix%' => $product.price_amount|intval, '%poids%' => $odysGramMin] d='Shop.Theme.Odys'}</p>
     </div>
     {else}
     {* Volume selector — EAA: radiogroup.
@@ -404,32 +404,32 @@
       <p class="olf-src">Les notes de la fragrance dont ce parfum s'inspire.
         La composition ODYS cherche a en retrouver l'accord.</p>
       {if $odysTete}
-        <div class="olf-tier olf-top" role="group" aria-label="Notes de tête">
-          <div class="olf-lbl"><div class="ol-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M3 8h9a3 3 0 1 0-3-3"/><path d="M3 13h13a3.2 3.2 0 1 1-3.2 3.2"/><path d="M3 18h6"/></svg></div><div class="ol-name">Tête</div></div>
+        <div class="olf-tier olf-top" role="group" aria-label="{l s='Notes de tête' d='Shop.Theme.Odys'}">
+          <div class="olf-lbl"><div class="ol-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M3 8h9a3 3 0 1 0-3-3"/><path d="M3 13h13a3.2 3.2 0 1 1-3.2 3.2"/><path d="M3 18h6"/></svg></div><div class="ol-name">{l s='Tête' d='Shop.Theme.Odys'}</div></div>
           <div class="olf-notes">{foreach from=$odysTete item=odysNote}
             <a class="note" href="{$urls.pages.search}?s={$odysNote|escape:'url'}"
                   data-note="{$odysNote|escape:'html':'UTF-8'}" data-type="tête"
-                  aria-label="Voir les parfums avec la note {$odysNote|escape:'html':'UTF-8'}">{$odysNote|escape:'html':'UTF-8'}</a>
+                  aria-label="{l s='Voir les parfums avec la note %note%' sprintf=['%note%' => $odysNote|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}">{$odysNote|escape:'html':'UTF-8'}</a>
           {/foreach}</div>
         </div>
       {/if}
       {if $odysCoeur}
-        <div class="olf-tier olf-heart" role="group" aria-label="Notes de cœur">
-          <div class="olf-lbl"><div class="ol-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="2.4"/><path d="M12 9.6c0-2.4 1-4.1 2.6-4.1S17 7 15.6 8.7"/><path d="M14.4 12c2.4 0 4.1 1 4.1 2.6S16.9 17 15.2 15.6"/><path d="M12 14.4c0 2.4-1 4.1-2.6 4.1S7 16.9 8.4 15.2"/><path d="M9.6 12c-2.4 0-4.1-1-4.1-2.6S7.1 7 8.8 8.4"/></svg></div><div class="ol-name">Cœur</div></div>
+        <div class="olf-tier olf-heart" role="group" aria-label="{l s='Notes de cœur' d='Shop.Theme.Odys'}">
+          <div class="olf-lbl"><div class="ol-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="2.4"/><path d="M12 9.6c0-2.4 1-4.1 2.6-4.1S17 7 15.6 8.7"/><path d="M14.4 12c2.4 0 4.1 1 4.1 2.6S16.9 17 15.2 15.6"/><path d="M12 14.4c0 2.4-1 4.1-2.6 4.1S7 16.9 8.4 15.2"/><path d="M9.6 12c-2.4 0-4.1-1-4.1-2.6S7.1 7 8.8 8.4"/></svg></div><div class="ol-name">{l s='Cœur' d='Shop.Theme.Odys'}</div></div>
           <div class="olf-notes">{foreach from=$odysCoeur item=odysNote}
             <a class="note" href="{$urls.pages.search}?s={$odysNote|escape:'url'}"
                   data-note="{$odysNote|escape:'html':'UTF-8'}" data-type="cœur"
-                  aria-label="Voir les parfums avec la note {$odysNote|escape:'html':'UTF-8'}">{$odysNote|escape:'html':'UTF-8'}</a>
+                  aria-label="{l s='Voir les parfums avec la note %note%' sprintf=['%note%' => $odysNote|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}">{$odysNote|escape:'html':'UTF-8'}</a>
           {/foreach}</div>
         </div>
       {/if}
       {if $odysFond}
-        <div class="olf-tier olf-base" role="group" aria-label="Notes de fond">
-          <div class="olf-lbl"><div class="ol-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 7.2 10h9.6L12 3Z"/><path d="M12 8.4 6 16.2h12L12 8.4Z"/><path d="M12 16.2V21"/><path d="M9.6 21h4.8"/></svg></div><div class="ol-name">Fond</div></div>
+        <div class="olf-tier olf-base" role="group" aria-label="{l s='Notes de fond' d='Shop.Theme.Odys'}">
+          <div class="olf-lbl"><div class="ol-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 7.2 10h9.6L12 3Z"/><path d="M12 8.4 6 16.2h12L12 8.4Z"/><path d="M12 16.2V21"/><path d="M9.6 21h4.8"/></svg></div><div class="ol-name">{l s='Fond' d='Shop.Theme.Odys'}</div></div>
           <div class="olf-notes">{foreach from=$odysFond item=odysNote}
             <a class="note" href="{$urls.pages.search}?s={$odysNote|escape:'url'}"
                   data-note="{$odysNote|escape:'html':'UTF-8'}" data-type="fond"
-                  aria-label="Voir les parfums avec la note {$odysNote|escape:'html':'UTF-8'}">{$odysNote|escape:'html':'UTF-8'}</a>
+                  aria-label="{l s='Voir les parfums avec la note %note%' sprintf=['%note%' => $odysNote|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}">{$odysNote|escape:'html':'UTF-8'}</a>
           {/foreach}</div>
         </div>
       {/if}
@@ -467,7 +467,7 @@
          deja longue, et aria-label dit la phrase entiere a qui ne voit
          pas l'icone. aria-pressed dit s'il est deja dans les envies. *}
       <button class="btn-wish btn-wish--icone" data-action="toggle-wish-full"
-              aria-label="Ajouter {$product.name|escape:'html':'UTF-8'} à mes envies"
+              aria-label="{l s='Ajouter %nom% à mes envies' sprintf=['%nom%' => $product.name|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}"
               data-id-product="{$product.id_product}"
               aria-pressed="false">
         <span aria-hidden="true">♡</span>
@@ -476,8 +476,8 @@
       <button class="btn-cart" id="addBtn" data-action="add-prod"
               data-id-product="{$product.id_product}"
               data-id-product-attribute="{$product.id_product_attribute|intval}"
-              aria-label="Ajouter {$product.name|escape:'html':'UTF-8'} au panier">
-        <span class="blbl">Ajouter au Panier · {$odysShort}</span>
+              aria-label="{l s='Ajouter %nom% au panier' sprintf=['%nom%' => $product.name|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}">
+        <span class="blbl">{l s='Ajouter au Panier' d='Shop.Theme.Odys'} · {$odysShort}</span>
         <div class="bspin" aria-hidden="true"></div>
       </button>
       {else}
@@ -504,7 +504,7 @@
           <strong>{l s='Livraison offerte' d='Shop.Theme.Odys'}</strong> — au-delà de {$odysShipFrom|intval} DH.
         {else}
           Livraison {$odysShipMin|intval}{if $odysShipMax > $odysShipMin}–{$odysShipMax|intval}{/if} DH
-          {if $odysShipFrom > 0}· <strong>offerte dès {$odysShipFrom|intval} DH</strong>{/if}
+          {if $odysShipFrom > 0}· <strong>{l s='offerte dès %montant% DH' sprintf=['%montant%' => $odysShipFrom|intval] d='Shop.Theme.Odys'}</strong>{/if}
         {/if}
       </p>
     {/if}
@@ -521,7 +521,7 @@
       <button class="btn-gift" data-action="add-gift"
               data-id-product="{$product.id_product}"
               data-id-product-attribute="{$product.id_product_attribute|intval}"
-              aria-label="Offrir {$product.name|escape:'html':'UTF-8'} — ajouter au panier avec un message">
+              aria-label="{l s='Offrir %nom% — ajouter au panier avec un message' sprintf=['%nom%' => $product.name|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}">
         <span aria-hidden="true">✦</span> {l s='Offrir à quelqu\'un' d='Shop.Theme.Odys'}
       </button>
     {/if}
@@ -584,7 +584,7 @@
       {foreach from=$accessories item=acc}
         <div class="sc" role="listitem">
           <div class="sc-img">
-            <a href="{$acc.url}" aria-label="Voir {$acc.name|escape:'html':'UTF-8'}">
+            <a href="{$acc.url}" aria-label="{l s='Voir %nom%' sprintf=['%nom%' => $acc.name|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}">
               <img src="{if $acc.cover}{$acc.cover.bySize.medium_default.url}{else}{$urls.no_picture_image.bySize.medium_default.url}{/if}" loading="lazy"
                    alt="{$acc.name|escape:'html':'UTF-8'}" width="160" height="160"/>
             </a>
@@ -592,7 +592,7 @@
                     data-id-product="{$acc.id_product}"
                     data-name="{$acc.name|escape:'html':'UTF-8'}"
                     data-price="{$acc.price_amount|intval}"
-                    aria-label="Ajouter {$acc.name|escape:'html':'UTF-8'} au panier">+</button>
+                    aria-label="{l s='Ajouter %nom% au panier' sprintf=['%nom%' => $acc.name|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}">+</button>
           </div>
           <div class="sc-body">
             <div class="sc-ref">ODYS {$acc.reference}</div>
@@ -603,7 +603,7 @@
                       data-id-product="{$acc.id_product}"
                       data-name="{$acc.name|escape:'html':'UTF-8'}"
                       data-price="{$acc.price_amount|intval}"
-                      aria-label="Ajouter {$acc.name|escape:'html':'UTF-8'} au panier">{l s='Ajouter' d='Shop.Theme.Odys'}</button>
+                      aria-label="{l s='Ajouter %nom% au panier' sprintf=['%nom%' => $acc.name|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}">{l s='Ajouter' d='Shop.Theme.Odys'}</button>
             </div>
           </div>
         </div>

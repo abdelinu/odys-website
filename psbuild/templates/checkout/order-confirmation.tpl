@@ -83,7 +83,7 @@
           {/if}
           <div class="odys-order-line-body">
             <div class="odys-order-line-name">{$product.name}</div>
-            <div class="odys-order-line-qty">Quantité {$product.quantity} × {$product.price}</div>
+            <div class="odys-order-line-qty">{l s='Quantité %nombre% × %prix%' sprintf=['%nombre%' => $product.quantity, '%prix%' => $product.price] d='Shop.Theme.Odys'}</div>
           </div>
           <div class="odys-order-line-total">{$product.total}</div>
         </li>

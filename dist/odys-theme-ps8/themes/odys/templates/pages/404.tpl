@@ -1,5 +1,5 @@
 {extends file='layouts/layout-full-width.tpl'}
-{block name='head_title'}Page introuvable | ODYS Parfums{/block}
+{block name='head_title'}{l s='Page introuvable | ODYS Parfums' d='Shop.Theme.Odys'}{/block}
 {block name='content'}
 <div style="min-height:70vh;display:flex;align-items:center;justify-content:center;padding:60px 20px;text-align:center">
   <div style="max-width:480px">

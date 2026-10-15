@@ -41,9 +41,9 @@
 
     <button class="pc-wish" type="button" data-action="toggle-wish"
             data-id="{$product.id_product}"
-            aria-label="Ajouter {$product.name|escape:'html':'UTF-8'} à ma liste de souhaits">♡</button>
+            aria-label="{l s='Ajouter %nom% à ma liste de souhaits' sprintf=['%nom%' => $product.name|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}">♡</button>
 
-    <a href="{$product.url}" aria-label="Voir {$product.name|escape:'html':'UTF-8'}">
+    <a href="{$product.url}" aria-label="{l s='Voir %nom%' sprintf=['%nom%' => $product.name|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}">
       <img src="{if $product.cover}{$product.cover.bySize.home_default.url}{else}{$urls.no_picture_image.bySize.home_default.url}{/if}"
            loading="lazy" decoding="async" width="400" height="400"
            alt="ODYS {$product.reference|escape:'html':'UTF-8'} {$product.name|escape:'html':'UTF-8'} — ODYS Parfums, Maroc"
