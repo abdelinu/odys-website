@@ -1083,6 +1083,31 @@ grep -q "background:#121319" "$css" && no "un champ garde le fond noir du theme 
 
 grep -q "olf-top .ol-icon,.olf-top .ol-name{color:var(--odys-cream-soft" "$css" && no "l etage Tete est ecrit en creme sur de l ivoire" || ok "les trois etages de la pyramide se lisent"
 
+step "Les prix : le meme montant dans les trois langues"
+
+# $product.price est une CHAINE deja mise en forme par PrestaShop, pas un
+# nombre. En francais elle commence par le chiffre (« 69,00 DH ») et
+# intval() rendait 69 ; en anglais elle commence par le symbole
+# (« DH69.00 ») et intval() rendait 0. Toute la boutique anglaise a
+# affiche « 0 DH ». Le montant brut vit dans price_amount.
+brut=$(grep -rn "[.]\(price\|regular_price\|total\)|intval" ../dist/odys-theme-ps8/themes/odys/ 2>/dev/null | wc -l)
+
+[ "${brut:-1}" = "0" ] && ok "aucun prix mis en forme n'est relu comme un nombre"   || no "$brut prix passent encore une chaine mise en forme a intval"
+
+# et la preuve en ligne : le meme parfum, le meme montant, trois langues
+for lg in fr en ar; do
+  page=$(curl -s -m 30 "$BOUT/$lg/")
+  zero=$(echo "$page" | grep -o 'class="pc-price"[^>]*>0 ' | wc -l)
+  combien=$(echo "$page" | grep -o 'class="pc-price"' | wc -l)
+  if [ "${combien:-0}" -eq 0 ]; then
+    no "/$lg/ : aucun prix sur l'accueil"
+  elif [ "${zero:-0}" -gt 0 ]; then
+    no "/$lg/ : ${zero} prix a zero sur ${combien}"
+  else
+    ok "/$lg/ : ${combien} prix, aucun a zero"
+  fi
+done
+
 step "The home signature trio is a setting"
 
 inst=$(sql "SELECT active FROM ps_module WHERE name='odys_loyalty'")

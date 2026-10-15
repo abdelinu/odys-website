@@ -48,8 +48,8 @@
             </div>
           </div>
           <div class="cart-line-price" style="text-align:right">
-            <div style="font-family:var(--serif);font-size:18px;font-weight:500;color:var(--rose-deep)">{$product.total|intval} DH</div>
-            <div style="font-size:10px;color:var(--mid)">{$product.price|intval} DH / {if isset($product.unity) && $product.unity}{$product.unity|escape:'html':'UTF-8'}{else}{l s='unité' d='Shop.Theme.Odys'}{/if}</div>
+            <div style="font-family:var(--serif);font-size:18px;font-weight:500;color:var(--rose-deep)">{$product.total}</div>
+            <div style="font-size:10px;color:var(--mid)">{$product.price} / {if isset($product.unity) && $product.unity}{$product.unity|escape:'html':'UTF-8'}{else}{l s='unité' d='Shop.Theme.Odys'}{/if}</div>
           </div>
         </div>
         {/foreach}

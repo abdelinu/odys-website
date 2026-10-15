@@ -236,7 +236,7 @@
           </button>
         {/if}{/foreach}
       </div>
-      <p class="vol-note">{$product.price|intval} DH le gramme &middot; minimum {$odysGramMin} g</p>
+      <p class="vol-note">{$product.price_amount|intval} DH le gramme &middot; minimum {$odysGramMin} g</p>
     </div>
     {else}
     {* Volume selector — EAA: radiogroup.
@@ -302,7 +302,7 @@
                   data-vol="{$odysShort|regex_replace:'/[^0-9]/':''}"
                   data-price="{$product.price_amount|intval}" data-action="pick-vol">
             <div class="vc-ml">{$odysShort}</div>
-            <div class="vc-price">{$product.price|intval} DH</div>
+            <div class="vc-price">{$product.price_amount|intval} DH</div>
           </button>
         {/if}
       </div>
@@ -311,7 +311,7 @@
     {/if}
 
     <div class="live-price-block">
-      <span class="lp-price" id="livePrice" aria-live="polite" aria-atomic="true">{if isset($product.unity) && $product.unity}{($product.price_amount * 5)|intval}{else}{$product.price|intval}{/if} DH</span>
+      <span class="lp-price" id="livePrice" aria-live="polite" aria-atomic="true">{if isset($product.unity) && $product.unity}{($product.price_amount * 5)|intval}{else}{$product.price_amount|intval}{/if} DH</span>
       {* le volume ne bouge que s'il y a un choix de format ; sinon il est
          déjà écrit sous le nom et le répéter ici ne dit rien de plus *}
       {if $combinations || (isset($product.unity) && $product.unity)}
@@ -598,7 +598,7 @@
             <div class="sc-ref">ODYS {$acc.reference}</div>
             <div class="sc-name"><a href="{$acc.url}">{$acc.name|escape:'html':'UTF-8'}</a></div>
             <div class="sc-price-row">
-              <span class="sc-price">{$acc.price|intval} DH</span>
+              <span class="sc-price">{$acc.price_amount|intval} DH</span>
               <button class="sc-add-full" data-action="add-to-cart"
                       data-id-product="{$acc.id_product}"
                       data-name="{$acc.name|escape:'html':'UTF-8'}"

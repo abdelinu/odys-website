@@ -63,10 +63,10 @@
     {/if}
 
     <div class="pc-prow" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-      <span class="pc-price" itemprop="price" content="{$product.price_amount}">{$product.price|intval} DH{if isset($product.unity) && $product.unity}<span class="pc-unit">&#8239;/&#8239;{$product.unity|escape:'html':'UTF-8'}</span>{/if}</span>
+      <span class="pc-price" itemprop="price" content="{$product.price_amount}">{$product.price_amount|intval} DH{if isset($product.unity) && $product.unity}<span class="pc-unit">&#8239;/&#8239;{$product.unity|escape:'html':'UTF-8'}</span>{/if}</span>
       <meta itemprop="priceCurrency" content="MAD"/>
       {if $product.regular_price_amount > $product.price_amount}
-        <span class="pc-old">{$product.regular_price|intval} DH</span>
+        <span class="pc-old">{$product.regular_price_amount|intval} DH</span>
       {/if}
     </div>
 
