@@ -237,7 +237,11 @@ code=$(curl -sL -o /tmp/front.html -m 180 -w "%{http_code}" "$SHOP/")
 
 [ "$code" = "200" ] && ok "home HTTP 200 ($(wc -c < /tmp/front.html) bytes)" || no "home HTTP $code"
 
-for marker in nv-hero nv-fam nv-sig nv-duo nv-assure odys-logo-w odys-bottle why-grid; do
+# odys-bottle est le flacon DESSINE : le repli du gabarit quand un parfum
+# de la bande signature n a pas de photo au catalogue. Les trois en ont
+# une, donc l accueil n en dessine plus — c etait le but. L etape de la
+# bande signature compte deja ces dessins, en exigeant zero.
+for marker in nv-hero nv-fam nv-sig nv-duo nv-assure odys-logo-w why-grid; do
 
   n=$(grep -c "$marker" /tmp/front.html)
 
@@ -917,7 +921,11 @@ js=../dist/odys-theme-ps8/themes/odys/assets/js/app.js
 grep -q "class=.cart-ko\|'cart-ko'" "$js" && ok "un echec affiche sa raison a cote du bouton" || no "un echec d ajout reste muet"
 grep -q "var odysChange" "$js" && ok "updateCart n est emis que si le panier a change" || no "un echec declencherait la confirmation de PrestaShop"
 # Le bandeau du bas s affichait AU CLIC, avant toute reponse du serveur.
-grep -q "window.odysToast(String(name" "$js" && ok "le bandeau attend la confirmation du serveur" || no "le bandeau s affiche avant la reponse du serveur"
+# La phrase passe par MOT() pour se traduire ; ce qui compte reste que le
+# bandeau part dans la reponse du serveur, avec le nom du produit.
+grep -q "window.odysToast(MOT(.panierAjoute.)" "$js" \
+  && ok "le bandeau attend la confirmation du serveur" \
+  || no "le bandeau s affiche avant la reponse du serveur"
 grep -q "addEventListener('click', function (e) {" ../psbuild/nuit.js && true
 awk "/Add-to-cart confirmation/,/^}\)\(\);/" ../psbuild/nuit.js | grep -q "addEventListener"   && no "le bandeau est encore declenche par un clic"   || ok "plus aucun clic ne declenche le bandeau a lui seul"
 
@@ -955,7 +963,12 @@ echo "$acc" | grep -qi "demo@odys" && no "des identifiants de demonstration sont
 appjs=../dist/odys-theme-ps8/themes/odys/assets/js/app.js
 grep -qi "demo@odys\|odys2026" "$appjs" && no "app.js porte encore les identifiants de demonstration" || ok "app.js est propre"
 # Les fonctions orphelines ne doivent pas lever d erreur si on les appelle.
-grep -q "getElementById('accModal')) { return; }" "$appjs" && ok "les fonctions orphelines sortent sans erreur" || no "openAccount leverait une erreur sur un element absent"
+# openAccount est devenue une fonction vide. Le bouton du bandeau porte
+# encore data-action="open-account", et une fonction vide ne peut rien
+# lever : c est plus fort que l ancienne garde sur #accModal.
+grep -qE "function openAccount\(\) *\{\}" "$appjs" \
+  && ok "les fonctions orphelines ne levent rien" \
+  || no "openAccount leverait une erreur sur un element absent"
 # Et aucun champ de formulaire sans libelle sur l accueil.
 sans=$(echo "$acc" | grep -o "<input[^>]*id=\"\(loginEmail\|loginPwd\|regPrenom\|regNom\|regEmail\|regTel\|regPwd\)\"" | wc -l)
 [ "${sans:-1}" = "0" ] && ok "les 7 champs sans libelle ont disparu de l accueil" || no "${sans} champ(s) de la maquette subsistent"
@@ -1212,7 +1225,11 @@ neg=$(sql "SELECT COUNT(*) FROM ps_customer c WHERE (SELECT COALESCE(SUM(points)
 
 [ "${neg:-0}" = "0" ] && ok "no negative balance" || no "${neg} customer(s) below zero"
 
-php_src=$(cat "$(dirname "$0")/../dist/odys-theme-ps8/themes/odys/modules/odys_loyalty/odys_loyalty.php" 2>/dev/null)
+# meme raison : on est dans docker/, le theme bati est a ../dist/. Lue
+# vide, cette source faisait echouer deux controles qui ne parlaient
+# pourtant pas du code livre.
+php_src=$(cat ../dist/odys-theme-ps8/themes/odys/modules/odys_loyalty/odys_loyalty.php 2>/dev/null)
+[ -n "$php_src" ] || no "la source du module de fidelite est introuvable"
 
 echo "$php_src" | grep -q "total_paid_tax_incl" && ok "points read what was paid, not the line totals" || no "points ignore the amount paid"
 
@@ -1258,9 +1275,12 @@ case "$prod" in *images.unsplash.com*) no "prototype photos on the product page"
 
   *) ok "no prototype imagery";; esac
 
-grep -q "track.children.length" ../dist/odys-theme-ps8/themes/odys/assets/js/app.js \
-  && ok "the demo carousel cannot paint over the real products" \
-  || no "app.js can still overwrite the recommendations"
+# Le garde-fou vivait dans initSuggestions, qui n existe plus : aucun
+# code ne peut desormais peindre par-dessus les vrais accessoires, et
+# SUGG_DB — des parfums inventes a des prix inventes — est parti avec.
+grep -qE "track.children.length|SUGG_DB" ../dist/odys-theme-ps8/themes/odys/assets/js/app.js \
+  && no "app.js peut encore repeindre les recommandations" \
+  || ok "plus aucun code ne peut repeindre les recommandations"
 
 svc=$(printf '%s' "$prod" | grep -c 'class="svc"')
 
@@ -3546,7 +3566,9 @@ if command -v python >/dev/null 2>&1; then
 
   # a short walk here; the full pre-launch pass is `python docker/crawl.py`
 
-  out=$(cd "$(dirname "$0")" && python crawl.py --base "$SHOP" --max 40 2>&1)
+  # verify.sh tourne deja depuis docker/ : un `cd docker` de plus
+  # echoue, et le parcours ne tournait pas du tout.
+  out=$(python crawl.py --base "$SHOP" --max 40 2>&1)
 
   echo "$out" | tail -1 | grep -q "Rien a signaler" \
     && ok "$(echo "$out" | head -1 | sed 's/(s)//g')" \
@@ -3954,6 +3976,60 @@ case "$anal" in
   *) no "maj-langues.php ne s analyse pas"; echo "    $(echo "$anal" | head -1)";;
 esac
 psh "rm -f /tmp/verif-lang.php" >/dev/null 2>&1
+
+step "app.js : il s analyse, et il traite tout ce qui se clique"
+
+# 1. le fichier doit s analyser. Une coupe de code peut laisser un corps de
+# fonction orpheline : le fichier se charge jusque-la, puis rien ne tourne.
+JS=../dist/odys-theme-ps8/themes/odys/assets/js/app.js
+TPL=../dist/odys-theme-ps8/themes/odys
+if command -v node >/dev/null 2>&1; then
+  if node --check "$JS" 2>/dev/null; then
+    ok "app.js s analyse sans erreur de syntaxe"
+  else
+    no "app.js ne s analyse pas : $(node --check "$JS" 2>&1 | head -2 | tr '
+' ' ')"
+  fi
+else
+  psh "php -r 'exit(0);'" >/dev/null &&     ok "node absent : le controle de syntaxe d app.js est saute"
+fi
+
+# 2. tout data-action d un gabarit livre doit avoir un traitement dans
+# app.js. On part du gabarit : c est lui qui dit ce que le client peut
+# cliquer. app.js ecrit ses cas de deux facons — `case 'x':` et
+# `if (act2 === 'x')` — et la seconde avait echappe a l analyse.
+# close-ann n a jamais eu de traitement : ni dans ref/, ni dans aucune
+# passe de construction. Le bouton x de la barre d annonce ne fait rien,
+# et cela precede ce travail. Il est nomme ici pour que le controle
+# reste rouge si un AUTRE action devient orphelin.
+CONNUS=" close-ann "
+SANS=""
+# app.js repartit les clics de trois facons : case 'x', === 'x', et
+# closest('[data-action="x"]'). Les trois comptent.
+for act in $(grep -rhoE 'data-action="[a-z0-9-]+"' "$TPL/templates" "$TPL/modules" 2>/dev/null \
+             | sed 's/.*="//;s/"//' | sort -u); do
+  case "$CONNUS" in *" $act "*) continue;; esac
+  grep -qhE "case '$act':|=== *'$act'|data-action=.$act" "$TPL"/assets/js/*.js \
+    || SANS="$SANS $act"
+done
+if [ -n "$SANS" ]; then
+  no "des data-action de gabarit n ont plus de traitement :$SANS"
+else
+  n=$(grep -rhoE 'data-action="[a-z0-9-]+"' "$TPL/templates" "$TPL/modules" 2>/dev/null \
+      | sed 's/.*="//;s/"//' | sort -u | wc -l)
+  ok "les $n data-action des gabarits ont un traitement (close-ann excepte, defaut anterieur)"
+fi
+
+# 3. et le prototype mort ne doit pas revenir
+REVENUS=""
+for mort in SUGG_DB FBT_BUNDLES AN_DATA REWARDS PARFUMS_DB REVIEW_SECTIONS             AN_SYSTEM_PROMPT openCheckout initLoyaltyDemo searchNote; do
+  grep -qE "(^|[^A-Za-z0-9_.])$mort([^A-Za-z0-9_]|$)" "$JS" && REVENUS="$REVENUS $mort"
+done
+if [ -n "$REVENUS" ]; then
+  no "le prototype est revenu dans app.js :$REVENUS"
+else
+  ok "aucun pan du prototype n est revenu dans app.js"
+fi
 
 step "Le panier s ouvre sur le cote"
 

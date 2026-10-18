@@ -290,7 +290,11 @@
       "exemplaireAjouter": "{l s='Ajouter un exemplaire de %nom%' d='Shop.Theme.Odys'|escape:'javascript'}",
       "exemplaireRetirer": "{l s='Retirer un exemplaire de %nom%' d='Shop.Theme.Odys'|escape:'javascript'}",
       "panierRetirer": "{l s='Retirer %nom% du panier' d='Shop.Theme.Odys'|escape:'javascript'}",
-      "panierVide": "{l s='Votre panier est vide.' d='Shop.Theme.Odys'|escape:'javascript'}"
+      "panierVide": "{l s='Votre panier est vide.' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "monCompte": "{l s='Mon compte' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "monCompteFidelite": "{l s='Mon compte fidélité' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "pointFidelite": "{l s='+%nombre% point fidélité' d='Shop.Theme.Odys'|escape:'javascript'}",
+      "pointsFidelite": "{l s='+%nombre% points fidélité' d='Shop.Theme.Odys'|escape:'javascript'}"
     };
   </script>
   {include file="_partials/javascript.tpl" javascript=$javascript.bottom}

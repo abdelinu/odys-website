@@ -1008,6 +1008,435 @@ must(_mots_remplaces == 15,
      'mots: les 15 phrases vivantes d app.js sont traduisibles')
 ok(f'mots: {_mots_remplaces} phrases d app.js lisent le dictionnaire du gabarit')
 
+
+# ─── le prototype mort ────────────────────────────────────────────────
+# app.js vient d'un prototype HTML monopage. Des pans entiers ne
+# s'accrochent a rien dans PrestaShop : leur conteneur n'existe dans aucun
+# gabarit livre, donc la fonction qui les monte sort sur son premier
+# `if (!el) return;`. Ils pesaient pourtant dans le fichier servi a chaque
+# page, et deux d'entre eux y promenaient des PRIX INVENTES (219 a 249 DH)
+# et des images unsplash.com.
+#
+# Chaque pan ci-dessous a ete prouve mort trois fois : son conteneur absent
+# de tout gabarit, son `data-action` absent de tout gabarit, et le DOM d'une
+# page reellement servie (document.getElementById(...) === null).
+#
+# Ce qui RESTE, et pourquoi :
+#   * showPtsToast : #ptsToast existe dans modals.tpl, et le pont d'ajout
+#     au panier s'en sert pour dire pourquoi un ajout a echoue ;
+#   * openAccount / closeAccount : reduits a rien, mais gardes. Le bouton
+#     « Mon compte » que ce fichier injecte dans l'en-tete porte
+#     data-action="open-account" ; retirer la fonction ferait lever une
+#     TypeError au clic. Le bouton n'ouvre rien aujourd'hui non plus — ce
+#     n'est pas a cette passe de decider s'il doit disparaitre ;
+#   * closeNotes : data-action="close-notes" existe, lui ;
+#   * le panier du prototype, le quiz, les envies, updateShip et consorts :
+#     vivants ou appeles par du vivant. On ne touche pas.
+
+def _sur(condition, plainte):
+    """Arreter la construction si la condition est fausse, sans rien dire
+    quand elle est vraie.
+
+    must() reaffiche son message en cas de SUCCES. Pour une garde interne
+    formulee comme un echec — « la fonction anTab est introuvable » — le
+    rapport annoncait donc le contraire de ce qui venait de se passer, et
+    soixante lignes de bruit par-dessus. Ici le message ne sort que quand il
+    est vrai.
+    """
+    if not condition:
+        raise SystemExit('FAILED ' + plainte)
+
+
+def _js_equilibre(txt, depart):
+    """La fin du bloc ouvert apres `depart` : accolades et crochets.
+
+    Les accolades d'une chaine ou d'un commentaire ne comptent pas. Sans
+    ce masquage, un `${...}` de gabarit ou un `/* } */` deplacerait la
+    fin du bloc et couperait le fichier n'importe ou.
+    """
+    i, n = depart, len(txt)
+    prof, demarre = 0, False
+    while i < n:
+        c = txt[i]
+        if c == "/" and i + 1 < n and txt[i + 1] == "/":
+            i = txt.find(chr(10), i)
+            if i == -1:
+                return n
+            continue
+        if c == "/" and i + 1 < n and txt[i + 1] == "*":
+            j = txt.find("*/", i + 2)
+            i = n if j == -1 else j + 2
+            continue
+        if c in "'\"" + chr(96):
+            quote, j = c, i + 1
+            while j < n:
+                if txt[j] == chr(92):
+                    j += 2
+                    continue
+                if txt[j] == quote:
+                    j += 1
+                    break
+                if quote != chr(96) and txt[j] == chr(10):
+                    break
+                j += 1
+            i = j
+            continue
+        if c in "{[":
+            prof += 1
+            demarre = True
+        elif c in "}]":
+            prof -= 1
+            if demarre and prof <= 0:
+                return i + 1
+        i += 1
+    return n
+
+
+def _js_retirer_fonction(js, nom):
+    """Retirer `function nom(...) { ... }`, corps compris."""
+    marque = "function " + nom + "("
+    i = js.find(marque)
+    _sur(i != -1, "retrait: la fonction " + nom + " est introuvable")
+    _sur(js.find(marque, i + 1) == -1,
+         "retrait: la fonction " + nom + " est declaree deux fois")
+    # remonter au debut de sa ligne, pour emporter l'indentation
+    deb = js.rfind(chr(10), 0, i) + 1
+    # Sauter la liste des parametres AVANT d equilibrer le corps. Une valeur
+    # par defaut comme opts={} ouvre et referme une accolade des la
+    # signature : l equilibrage s y arretait, la coupe emportait la seule
+    # premiere ligne et laissait le corps orphelin derriere un ) { tout seul.
+    # node --check l a vu ; le rapport de construction, non.
+    _prof, _j = 0, js.index("(", i)
+    while _j < len(js):
+        if js[_j] == "(":
+            _prof += 1
+        elif js[_j] == ")":
+            _prof -= 1
+            if _prof == 0:
+                break
+        _j += 1
+    _sur(_prof == 0, "retrait: parametres de " + nom + " mal fermes")
+    fin = _js_equilibre(js, _j)
+    # et la fin de ligne qui suit
+    if fin < len(js) and js[fin] == ";":
+        fin += 1
+    if fin < len(js) and js[fin] == chr(10):
+        fin += 1
+    return js[:deb] + js[fin:]
+
+
+def _js_retirer_donnee(js, declaration):
+    """Retirer `const X = [...];` ou `let X = {...};`, valeur comprise.
+
+    Une declaration sans crochet ni accolade — `let a = 0, b = null;` — n'a
+    rien a equilibrer : elle finit a son point-virgule. Sans ce cas,
+    l equilibrage cherchait une fermeture jusqu a la fin du fichier et
+    emportait tout ce qui suivait.
+    """
+    i = js.find(declaration)
+    _sur(i != -1, "retrait: la donnee " + declaration + " est introuvable")
+    deb = js.rfind(chr(10), 0, i) + 1
+    _pv = js.find(";", i)
+    _ouvre = min([p for p in (js.find("{", i), js.find("[", i)) if p != -1]
+                 or [len(js)])
+    if _pv != -1 and _pv < _ouvre:
+        fin = _pv
+    else:
+        fin = _js_equilibre(js, i)
+    if fin < len(js) and js[fin] == ";":
+        fin += 1
+    if fin < len(js) and js[fin] == chr(10):
+        fin += 1
+    return js[:deb] + js[fin:]
+
+
+def _js_retirer_exact(js, bout, combien=1):
+    """Retirer un morceau precis, en exigeant son nombre d'occurrences."""
+    n = js.count(bout)
+    _sur(n == combien,
+         "retrait: %d occurrence(s) au lieu de %d pour %r"
+         % (n, combien, bout[:58]))
+    return js.replace(bout, "")
+
+
+def _js_retirer_api(js, noms):
+    """Retirer des noms du `return { ... }` de l'IIFE ODYS.
+
+    Un nom oublie ici cite une fonction disparue : l'IIFE leve une
+    ReferenceError a l'evaluation et le script entier ne tourne pas.
+    """
+    _marque = chr(10) + "return {" + chr(10)
+    _sur(js.count(_marque) == 1,
+         "retrait: un seul return { au premier niveau (l API publique)")
+    deb = js.index(_marque) + 1
+    fin = js.index("};", deb)
+    bloc = avant = js[deb:fin]
+    for nom in noms:
+        for variante in (" " + nom + ",", nom + ", ", nom + ",", nom):
+            if variante in bloc:
+                bloc = bloc.replace(variante, " " if variante.startswith(" ") else "", 1)
+                break
+        _sur(not re.search(r"(?<![\w$.])" + re.escape(nom) + r"(?![\w$])", bloc),
+             "retrait: " + nom + " reste dans l API publique")
+    _sur(bloc != avant, "retrait: l API publique n a pas bouge")
+    # des virgules et des lignes vides restent : on les range
+    bloc = re.sub(r",\s*,", ",", bloc)
+    bloc = re.sub(r"\n[ \t]*,", ",", bloc)
+    bloc = re.sub(r"\n[ \t]*\n", chr(10), bloc)
+    bloc = re.sub(r",(\s*)$", r"\1", bloc)
+    return js[:deb] + bloc + js[fin:]
+
+
+_av = len(js)
+
+# ── 1. le tableau de bord d'analytique simule
+#    Monte par un DOMContentLoaded garde par #pg-analytics, absent de tout
+#    gabarit. Il portait aussi une invite pour une API de modele de langage
+#    et des chiffres de vente inventes.
+for _f in ("anTab", "anChangePeriod", "getCurrentTab", "anRenderTab",
+           "anRenderOverview", "anRenderSEO", "anRenderProducts",
+           "anRenderMarketing", "anRenderCustomers", "anRenderAI",
+           "anAddMessage", "anQuick", "anRunAI",
+           # anSendChat n a qu un appelant, anQuick, retire juste
+           # au-dessus ; anGenerateReport n est appele que par un
+           # onclick ecrit dans le HTML que anRenderMarketing
+           # fabriquait. Aucun gabarit ne les nomme et
+           # #anChatInput n existe nulle part.
+           "anSendChat", "anGenerateReport",
+           "drawLineChart", "drawBarChart", "drawDonutChart"):
+    js = _js_retirer_fonction(js, _f)
+js = _js_retirer_donnee(js, "const AN_DATA = {")
+js = _js_retirer_donnee(js, "const AN_SYSTEM_PROMPT = ")
+js = _js_retirer_donnee(js, "let anChatHistory = [")
+js = _js_retirer_donnee(js, "let chartsDrawn = {")
+ok("retrait: le tableau de bord d analytique simule")
+
+# ── 2. le panneau de recette de 74 tests manuels
+#    « DevTools -> Elements », « Console : taper ODYS ». Monte sur
+#    #reviewSections, absent de tout gabarit.
+js = _js_retirer_fonction(js, "initReview")
+js = _js_retirer_fonction(js, "rvCheck")
+js = _js_retirer_donnee(js, "const REVIEW_SECTIONS = [")
+js = _js_retirer_donnee(js, "let rvChecked = {")
+js = _js_retirer_exact(
+    js, "document.addEventListener('DOMContentLoaded', () => { initReview(); });\n")
+ok("retrait: le panneau de recette de 74 tests")
+
+# ── 3. le carrousel en ligne du prototype (#iSuggTrack, absent)
+for _f in ("initInlineSugg", "getISCVisible", "iSuggGoTo", "iSuggScroll",
+           "updateISCNav", "startISCAutoplay", "stopISCAutoplay",
+           "resetISCAutoplay"):
+    js = _js_retirer_fonction(js, _f)
+js = _js_retirer_donnee(js, "let iSuggOffset = 0, iSuggTimer = null;")
+js = _js_retirer_donnee(js, "const ISC_W = 132, ISC_CYCLE = 3500;")
+ok("retrait: le carrousel en ligne du prototype")
+
+# ── 4. les suggestions et le « souvent achetes ensemble » du prototype
+#    SUGG_DB portait des parfums inventes, a des prix inventes, avec des
+#    images unsplash.com. initSuggestions ne peignait pas par-dessus les
+#    vrais produits parce que PrestaShop remplit #suggTrack avant lui — et
+#    parce que ce noeud n'existe que dans un {if $accessories}. Le fichier
+#    servi promenait quand meme ces prix.
+for _f in ("initSuggestions", "initFBT",
+           "toggleFBT", "updateFBTTotal", "addFBT", "initUpsellStrip",
+           "initViewingNow"):
+    js = _js_retirer_fonction(js, _f)
+js = _js_retirer_donnee(js, "const SUGG_DB = [")
+js = _js_retirer_donnee(js, "const FBT_BUNDLES = {")
+js = _js_retirer_donnee(js, "let fbtSelected = new Set();")
+# suggOffset et SUGG_CARD_W restent : scrollSugg les lit, et
+# scrollSugg fait marcher les fleches du carrousel de la fiche.
+ok("retrait: les suggestions inventees du prototype")
+
+# ── 5. la caisse du prototype (#checkoutModal, #coStep1, #payStep absents)
+#    PrestaShop sert son propre tunnel de commande.
+for _f in ("openCheckout", "closeCheckout", "renderCoSummary", "setCoStep",
+           "coBack", "coNext", "selectPM", "markField", "validatePhone",
+           "validateEmail", "validateText", "rateLimit"):
+    js = _js_retirer_fonction(js, _f)
+js = _js_retirer_donnee(js, "const _rateBuckets = {};")
+js = _js_retirer_exact(js, """document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeCheckout();
+});
+""")
+ok("retrait: la caisse du prototype")
+
+# ── 6. le panneau de fidelite du prototype
+#    #accModal, #rewardsGrid, #lbPtsVal absents. Le vrai programme de
+#    fidelite est tenu par le module odys_loyalty, en base.
+for _f in ("initLoyaltyDemo", "updateLoyaltyUI", "renderRewards",
+           "redeemReward", "renderHistory", "renderLastOrders",
+           "awardLoyaltyPoints", "showAccTab", "showAccLogin",
+           "showRegister", "showLogin", "doLogin", "doRegister", "doLogout"):
+    js = _js_retirer_fonction(js, _f)
+js = _js_retirer_donnee(js, "const REWARDS = [")
+js = _js_retirer_exact(js, "  initLoyaltyDemo();\n")
+ok("retrait: le panneau de fidelite du prototype")
+
+# openAccount et closeAccount restent, mais ne font plus rien : le bouton
+# « Mon compte » injecte dans l'en-tete porte data-action="open-account", et
+# une fonction absente ferait lever une TypeError au clic. Il n'ouvre rien
+# aujourd'hui non plus, faute de #accModal.
+js = _js_retirer_fonction(js, "openAccount")
+js = _js_retirer_fonction(js, "closeAccount")
+js = js.replace("/* Account Modal */", """/* La fenetre « mon compte » du prototype a ete retiree du theme : son
+   gabarit n'existe plus (voir modals.tpl). Ces deux fonctions restent
+   parce que le bouton injecte dans l'en-tete porte
+   data-action="open-account" ; sans elles, un clic leverait une
+   TypeError. Elles ne font rien, ce qui est exactement ce que faisait la
+   fenetre absente. */
+function openAccount() {}
+function closeAccount() {}
+""", 1)
+must("function openAccount() {}" in js, "retrait: openAccount devient inerte")
+ok("retrait: la fenetre du compte devient inerte, le bouton ne leve rien")
+
+# ── 7. la recherche par note du prototype
+#    data-action="search-note" n'existe dans aucun gabarit : les notes sont
+#    devenues de vrais liens vers /recherche. PARFUMS_DB etait son
+#    catalogue, avec vingt-sept prix inventes.
+js = _js_retirer_fonction(js, "searchNote")
+js = _js_retirer_donnee(js, "const PARFUMS_DB = [")
+ok("retrait: la recherche par note du prototype et son catalogue invente")
+
+# ── 8. les noms disparus, dans l'API publique et dans le repartiteur
+js = _js_retirer_api(js, [
+    "openCheckout", "closeCheckout", "coNext", "coBack", "selectPM",
+    "showAccTab", "doLogin", "doRegister", "doLogout",
+    "showRegister", "showLogin", "redeemReward", "searchNote",
+    "renderCoSummary",
+])
+for _case in ("open-checkout", "close-checkout", "co-next", "co-back",
+              "select-pm", "do-login", "do-register", "do-logout",
+              "show-register", "show-login", "acc-tab", "redeem-reward",
+              "search-note"):
+    _lignes = [l for l in js.split(chr(10)) if ("case '" + _case + "':") in l]
+    must(len(_lignes) == 1,
+         "retrait: un seul case pour " + _case + " (trouve %d)" % len(_lignes))
+    js = js.replace(_lignes[0] + chr(10), "")
+ok("retrait: l API publique et le repartiteur ne citent plus de disparu")
+
+# ── 9. ce que les deux injections vivantes ecrivent a l'ecran
+#    Le bouton « Mon compte » et la pastille « +N points fidelite » sont
+#    poses par ce fichier dans l'en-tete et sur chaque carte produit. Ils
+#    sont VISIBLES, donc ils restent — mais ils parlaient francais dans les
+#    trois langues. Un controle sur le HTML servi ne pouvait pas les voir :
+#    ils n'existent qu'apres l'execution du script.
+js = _js_retirer_exact(js, """      btn.setAttribute('title', 'Mon compte');
+      btn.setAttribute('aria-label', 'Mon compte fidélité');""")
+js = js.replace("""      btn.className = 'ni ni-acc';
+      btn.dataset.action = 'open-account';""",
+                """      btn.className = 'ni ni-acc';
+      btn.dataset.action = 'open-account';
+      btn.setAttribute('title', MOT('monCompte'));
+      btn.setAttribute('aria-label', MOT('monCompteFidelite'));""", 1)
+must("MOT('monCompteFidelite')" in js, "retrait: le bouton du compte se traduit")
+
+_pastille = ("          const star = document.createTextNode('⭐ +' + pts + "
+             "' point' + (pts>1?'s':'') + ' fidélité');")
+js = _js_retirer_exact(js, _pastille + chr(10))
+js = js.replace("""          const pill = document.createElement('div');
+          pill.className = 'pc-pts-pill';""",
+                """          const pill = document.createElement('div');
+          pill.className = 'pc-pts-pill';
+          const star = document.createTextNode('⭐ ' +
+            MOT(pts > 1 ? 'pointsFidelite' : 'pointFidelite')
+              .replace('%nombre%', pts));""", 1)
+must("MOT(pts > 1 ? 'pointsFidelite' : 'pointFidelite')" in js,
+     "retrait: la pastille de points se traduit")
+ok("retrait: les deux injections visibles suivent enfin la langue")
+
+# ─── 11. le questionnaire du prototype ───────────────────────
+# Trois preuves concordantes : aucun de ses conteneurs (#qResult, #qs1,
+# #qs2, #qs3, #qReset) n existe dans un gabarit livre ; aucun de ses cinq
+# data-action n y est ecrit ; ses sept fonctions ne s appellent qu entre
+# elles. Et quizResults porte quatre parfums a 219, 229 et 249 DH — des
+# prix qui ne sont pas ceux du catalogue — avec « Inspire de Dior Sauvage
+# EDP » et des photographies prises sur images.unsplash.com.
+for _f in ("qPick", "qPick2", "qPick3", "showQuizResult", "addQuizResult",
+           "resetQuiz", "updateQProg"):
+    js = _js_retirer_fonction(js, _f)
+js = _js_retirer_donnee(js, "const quizResults = {")
+js = _js_retirer_donnee(js, "let qAnswers = {};")
+js = _js_retirer_donnee(js, "let qStep = 1;")
+js = _js_retirer_exact(js, "// ── QUIZ DATA ──" + chr(10))
+js = _js_retirer_api(js, ["qPick", "qPick2", "qPick3", "addQuizResult",
+                          "resetQuiz"])
+for _case in ("q-pick", "q-pick2", "q-pick3", "add-quiz-result",
+              "reset-quiz"):
+    _lignes = [l for l in js.split(chr(10)) if ("case '" + _case + "':") in l]
+    _sur(len(_lignes) == 1,
+         "retrait: un seul case pour " + _case + " (trouve %d)" % len(_lignes))
+    js = js.replace(_lignes[0] + chr(10), "")
+ok("retrait: le questionnaire du prototype et ses prix inventes")
+
+# ─── 10. le cablage reste orphelin ───────────────────────────
+# Retirer une fonction ne suffit pas : ce qui l appelait reste. Ces blocs
+# de montage tournaient au DOMContentLoaded et citaient des noms
+# disparus — ReferenceError, et tout app.js s arretait la, panier
+# compris. Chacun etait deja mort : #pg-analytics, #inlineSugg et les
+# quatre data-action du second repartiteur n existent dans aucun
+# gabarit, et _origSetCoStep n etait lu nulle part.
+js = _js_retirer_exact(js, "/* ── Initialize on page show ─────────────────────────────────── */\ndocument.addEventListener('DOMContentLoaded', () => {\n  if (document.getElementById('pg-analytics')) {\n    // Render overview when analytics page becomes visible\n    const obs = new MutationObserver(() => {\n      if (document.getElementById('pg-analytics').classList.contains('on')) {\n        anRenderTab('overview');\n      }\n    });\n    obs.observe(document.getElementById('pg-analytics'), { attributes: true, attributeFilter: ['class'] });\n  }\n});")
+ok('retrait: le montage du tableau de bord')
+js = _js_retirer_exact(js, "  initSuggestions();" + chr(10))
+ok('retrait: l appel mort a initSuggestions, l ecouteur reste')
+js = _js_retirer_exact(js,
+    "  if (act2 === " + chr(39) + "add-fbt" + chr(39) + ")     { e2.preventDefault(); addFBT(); }" + chr(10) +
+    "  if (act2 === " + chr(39) + "toggle-fbt" + chr(39) + ")  { e2.preventDefault(); toggleFBT(t2.dataset.code); }" + chr(10))
+ok('retrait: les deux cas morts du second repartiteur ; sugg-prev et sugg-next restent')
+js = _js_retirer_exact(js, "/* ══ INLINE PRODUCT CAROUSEL — auto-cycling ═══════════════ */\ndocument.addEventListener('DOMContentLoaded', () => {\n  initInlineSugg();\n  const w=document.getElementById('inlineSugg');\n  if(w){w.addEventListener('mouseenter',stopISCAutoplay);w.addEventListener('mouseleave',startISCAutoplay);}\n  document.getElementById('iSuggPrev')?.addEventListener('click',()=>iSuggScroll(-1));\n  document.getElementById('iSuggNext')?.addEventListener('click',()=>iSuggScroll(1));\n  window.addEventListener('resize',()=>{iSuggOffset=0;updateISCNav();});\n});")
+ok('retrait: le montage du carrousel en ligne')
+js = _js_retirer_exact(js, "/* Hook into checkout confirmation to award points */\nconst _origSetCoStep = typeof setCoStep === 'function' ? setCoStep : null;\n// Patch points award into the order submission timeout\n// This is done by augmenting coNext via a proxy pattern\n")
+ok('retrait: le raccord mort vers la caisse du prototype')
+js = _js_retirer_exact(js, '/* ══════════════════════════════════════════════════════════\n   FULL REVIEW PAGE — 74 interactive tests\n   ══════════════════════════════════════════════════════════ */\n')
+ok('retrait: la banniere du panneau de recette retire')
+
+# et le dernier commentaire qui promettait des points dans une caisse
+# qui n existe plus
+js = _js_retirer_exact(js, '// Points awarded directly inside coNext' + chr(10) + chr(10))
+ok('retrait: la derniere note sur la caisse du prototype')
+
+# Plus aucun nom retire ne doit rester cite. Les listes ci-dessus sont
+# ecrites a la main, et une liste ecrite a la main oublie : anSendChat et
+# anGenerateReport avaient survecu en appelant anTab et anQuick, disparues.
+# Le fichier se chargeait jusque-la, puis levait une ReferenceError et tout
+# app.js s arretait. Cette garde fait le compte a notre place.
+_disparus = [
+    "anTab", "anChangePeriod", "getCurrentTab", "anRenderTab",
+    "anRenderOverview", "anRenderSEO", "anRenderProducts",
+    "anRenderMarketing", "anRenderCustomers", "anRenderAI", "anAddMessage",
+    "anQuick", "anRunAI", "anSendChat", "anGenerateReport",
+    "drawLineChart", "drawBarChart", "drawDonutChart",
+    "AN_DATA", "AN_SYSTEM_PROMPT", "anChatHistory", "chartsDrawn",
+    "initReview", "rvCheck", "REVIEW_SECTIONS",
+    "initInlineSugg", "getISCVisible", "iSuggGoTo", "iSuggScroll",
+    "updateISCNav", "startISCAutoplay", "stopISCAutoplay", "resetISCAutoplay",
+    "initSuggestions", "initFBT", "toggleFBT",
+    "updateFBTTotal", "addFBT", "initUpsellStrip", "initViewingNow",
+    "SUGG_DB", "FBT_BUNDLES",
+    "openCheckout", "closeCheckout", "renderCoSummary", "setCoStep",
+    "coBack", "coNext", "selectPM", "markField", "validatePhone",
+    "validateEmail", "validateText", "rateLimit",
+    "initLoyaltyDemo", "updateLoyaltyUI", "renderRewards", "redeemReward",
+    "renderHistory", "renderLastOrders", "awardLoyaltyPoints", "showAccTab",
+    "showAccLogin", "showRegister", "showLogin", "doLogin", "doRegister",
+    "doLogout", "REWARDS",
+    "searchNote", "PARFUMS_DB",
+    "qPick", "qPick2", "qPick3", "showQuizResult",
+    "addQuizResult", "resetQuiz", "updateQProg",
+    "quizResults", "qAnswers", "qStep",
+]
+_restes = [_n for _n in _disparus
+           if re.search(r"(?<![\w$.])" + re.escape(_n) + r"(?![\w$])", js)]
+_sur(not _restes,
+     "retrait: aucun nom retire n est encore cite dans app.js (restes: %s)"
+     % ", ".join(_restes))
+ok("retrait: les %d noms retires ne sont plus cites nulle part" % len(_disparus))
+
+ok("retrait: app.js passe de %d a %d octets (-%d)"
+   % (_av, len(js), _av - len(js)))
+
 js_path.write_text(js, encoding="utf-8")
 ok(f"progressive-enhancement module appended ({len(js):,} bytes)")
 

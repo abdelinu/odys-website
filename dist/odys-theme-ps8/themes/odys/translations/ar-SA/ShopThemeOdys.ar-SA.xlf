@@ -1866,6 +1866,18 @@
         <source>Cœur</source>
         <target>القلب</target>
       </trans-unit>
+      <trans-unit id="462" resname="Mon compte fidélité">
+        <source>Mon compte fidélité</source>
+        <target>حساب نقاط الولاء</target>
+      </trans-unit>
+      <trans-unit id="463" resname="+%nombre% point fidélité">
+        <source>+%nombre% point fidélité</source>
+        <target>+%nombre% نقطة ولاء</target>
+      </trans-unit>
+      <trans-unit id="464" resname="+%nombre% points fidélité">
+        <source>+%nombre% points fidélité</source>
+        <target>+%nombre% نقاط ولاء</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
