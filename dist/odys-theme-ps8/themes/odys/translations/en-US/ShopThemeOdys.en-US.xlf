@@ -1878,6 +1878,234 @@
         <source>+%nombre% points fidélité</source>
         <target>+%nombre% loyalty points</target>
       </trans-unit>
+      <trans-unit id="465" resname="✓ Ajouté !">
+        <source>✓ Ajouté !</source>
+        <target>✓ Added!</target>
+      </trans-unit>
+      <trans-unit id="466" resname="Programme ODYS">
+        <source>Programme ODYS</source>
+        <target>ODYS Programme</target>
+      </trans-unit>
+      <trans-unit id="467" resname="Cumulez des points à chaque commande réglée et échangez-les contre des avantages exclusifs.">
+        <source>Cumulez des points à chaque commande réglée et échangez-les contre des avantages exclusifs.</source>
+        <target>Earn points on every paid order and redeem them for exclusive benefits.</target>
+      </trans-unit>
+      <trans-unit id="468" resname="Découvrir le programme">
+        <source>Découvrir le programme</source>
+        <target>Discover the programme</target>
+      </trans-unit>
+      <trans-unit id="469" resname="%nombre% point">
+        <source>%nombre% point</source>
+        <target>%nombre% point</target>
+      </trans-unit>
+      <trans-unit id="470" resname="%nombre% points">
+        <source>%nombre% points</source>
+        <target>%nombre% points</target>
+      </trans-unit>
+      <trans-unit id="471" resname="plus que %nombre% pt pour %recompense%">
+        <source>plus que %nombre% pt pour %recompense%</source>
+        <target>only %nombre% pt to go for %recompense%</target>
+      </trans-unit>
+      <trans-unit id="472" resname="plus que %nombre% pts pour %recompense%">
+        <source>plus que %nombre% pts pour %recompense%</source>
+        <target>only %nombre% pts to go for %recompense%</target>
+      </trans-unit>
+      <trans-unit id="473" resname="Oud &amp;middot; Boukhour exclus du programme">
+        <source>Oud &amp;middot; Boukhour exclus du programme</source>
+        <target>Oud &amp;middot; Boukhour excluded from the programme</target>
+      </trans-unit>
+      <trans-unit id="474" resname="%nombre% pt">
+        <source>%nombre% pt</source>
+        <target>%nombre% pt</target>
+      </trans-unit>
+      <trans-unit id="475" resname="%nombre% pts">
+        <source>%nombre% pts</source>
+        <target>%nombre% pts</target>
+      </trans-unit>
+      <trans-unit id="476" resname="Mes envies | ODYS Parfums">
+        <source>Mes envies | ODYS Parfums</source>
+        <target>My wishlist | ODYS Parfums</target>
+      </trans-unit>
+      <trans-unit id="477" resname="Les parfums ODYS que vous avez mis de côté.">
+        <source>Les parfums ODYS que vous avez mis de côté.</source>
+        <target>The ODYS fragrances you have set aside.</target>
+      </trans-unit>
+      <trans-unit id="478" resname="Votre sélection">
+        <source>Votre sélection</source>
+        <target>Your selection</target>
+      </trans-unit>
+      <trans-unit id="479" resname="Gardée sur cet appareil, sans compte. Elle vous attend à votre prochaine visite.">
+        <source>Gardée sur cet appareil, sans compte. Elle vous attend à votre prochaine visite.</source>
+        <target>Kept on this device, with no account. It will be waiting at your next visit.</target>
+      </trans-unit>
+      <trans-unit id="480" resname="Rien de mis de côté pour l'instant. Touchez le ♡ sur un parfum et vous le retrouverez ici.">
+        <source>Rien de mis de côté pour l'instant. Touchez le ♡ sur un parfum et vous le retrouverez ici.</source>
+        <target>Nothing set aside yet. Tap the ♡ on a fragrance and you will find it here.</target>
+      </trans-unit>
+      <trans-unit id="481" resname="Collection Inspiration">
+        <source>Collection Inspiration</source>
+        <target>Inspiration collection</target>
+      </trans-unit>
+      <trans-unit id="482" resname="Livraison %prix% DH">
+        <source>Livraison %prix% DH</source>
+        <target>Delivery %prix% DH</target>
+      </trans-unit>
+      <trans-unit id="483" resname="— au-delà de %montant% DH.">
+        <source>— au-delà de %montant% DH.</source>
+        <target>— above %montant% DH.</target>
+      </trans-unit>
+      <trans-unit id="484" resname="Bonjour ODYS, prévenez-moi du retour de %nom%.">
+        <source>Bonjour ODYS, prévenez-moi du retour de %nom%.</source>
+        <target>Hello ODYS, please let me know when %nom% is back.</target>
+      </trans-unit>
+      <trans-unit id="485" resname="Bonjour ODYS, je souhaite des informations sur %nom%.">
+        <source>Bonjour ODYS, je souhaite des informations sur %nom%.</source>
+        <target>Hello ODYS, I would like information about %nom%.</target>
+      </trans-unit>
+      <trans-unit id="486" resname="Indisponible">
+        <source>Indisponible</source>
+        <target>Unavailable</target>
+      </trans-unit>
+      <trans-unit id="487" resname="Commande reçue">
+        <source>Commande reçue</source>
+        <target>Order received</target>
+      </trans-unit>
+      <trans-unit id="488" resname="Nous avons votre commande">
+        <source>Nous avons votre commande</source>
+        <target>We have your order</target>
+      </trans-unit>
+      <trans-unit id="489" resname="En préparation">
+        <source>En préparation</source>
+        <target>Being prepared</target>
+      </trans-unit>
+      <trans-unit id="490" resname="Votre flacon est emballé à la main">
+        <source>Votre flacon est emballé à la main</source>
+        <target>Your bottle is packed by hand</target>
+      </trans-unit>
+      <trans-unit id="491" resname="Expédiée">
+        <source>Expédiée</source>
+        <target>Shipped</target>
+      </trans-unit>
+      <trans-unit id="492" resname="En route vers vous">
+        <source>En route vers vous</source>
+        <target>On its way to you</target>
+      </trans-unit>
+      <trans-unit id="493" resname="Livrée">
+        <source>Livrée</source>
+        <target>Delivered</target>
+      </trans-unit>
+      <trans-unit id="494" resname="Bonne découverte">
+        <source>Bonne découverte</source>
+        <target>Enjoy the discovery</target>
+      </trans-unit>
+      <trans-unit id="495" resname="Rien ne correspond à «&amp;nbsp;%mot%&amp;nbsp;».">
+        <source>Rien ne correspond à «&amp;nbsp;%mot%&amp;nbsp;».</source>
+        <target>Nothing matches «&amp;nbsp;%mot%&amp;nbsp;».</target>
+      </trans-unit>
+      <trans-unit id="496" resname="Notez-la. Elle suffit à suivre votre colis">
+        <source>Notez-la. Elle suffit à suivre votre colis</source>
+        <target>Note it down. It is all you need to track your parcel</target>
+      </trans-unit>
+      <trans-unit id="497" resname="Bonjour ODYS, ma commande %reference%.">
+        <source>Bonjour ODYS, ma commande %reference%.</source>
+        <target>Hello ODYS, my order %reference%.</target>
+      </trans-unit>
+      <trans-unit id="498" resname="Passée le %date%">
+        <source>Passée le %date%</source>
+        <target>Placed on %date%</target>
+      </trans-unit>
+      <trans-unit id="499" resname="Donner mon avis sur %nom%">
+        <source>Donner mon avis sur %nom%</source>
+        <target>Write my review of %nom%</target>
+      </trans-unit>
+      <trans-unit id="500" resname="Bonjour ODYS, je n'arrive pas à réinitialiser mon mot de passe.">
+        <source>Bonjour ODYS, je n'arrive pas à réinitialiser mon mot de passe.</source>
+        <target>Hello ODYS, I cannot reset my password.</target>
+      </trans-unit>
+      <trans-unit id="501" resname="Bonjour ODYS, je n'ai pas reçu le lien de mot de passe.">
+        <source>Bonjour ODYS, je n'ai pas reçu le lien de mot de passe.</source>
+        <target>Hello ODYS, I did not receive the password link.</target>
+      </trans-unit>
+      <trans-unit id="502" resname="point">
+        <source>point</source>
+        <target>point</target>
+      </trans-unit>
+      <trans-unit id="503" resname="points">
+        <source>points</source>
+        <target>points</target>
+      </trans-unit>
+      <trans-unit id="504" resname="Valables jusqu'au %date% — un achat remet le compteur à zéro.">
+        <source>Valables jusqu'au %date% — un achat remet le compteur à zéro.</source>
+        <target>Valid until %date% — any purchase resets the clock.</target>
+      </trans-unit>
+      <trans-unit id="505" resname="— votre code&amp;nbsp;:">
+        <source>— votre code&amp;nbsp;:</source>
+        <target>— your code:</target>
+      </trans-unit>
+      <trans-unit id="506" resname="Saisissez-le dans votre panier. Valable %mois% mois, une seule fois, une seule récompense par commande.">
+        <source>Saisissez-le dans votre panier. Valable %mois% mois, une seule fois, une seule récompense par commande.</source>
+        <target>Enter it in your cart. Valid for %mois% months, once only, one reward per order.</target>
+      </trans-unit>
+      <trans-unit id="507" resname="Les récompenses">
+        <source>Les récompenses</source>
+        <target>The rewards</target>
+      </trans-unit>
+      <trans-unit id="508" resname="Les récompenses s'ouvrent à partir de %seuil% points — encore %reste% à cumuler.">
+        <source>Les récompenses s'ouvrent à partir de %seuil% points — encore %reste% à cumuler.</source>
+        <target>Rewards open from %seuil% points — %reste% still to earn.</target>
+      </trans-unit>
+      <trans-unit id="509" resname="Une remise de %montant% DH, la valeur de 5&amp;nbsp;g de notre oud d'entrée de gamme.">
+        <source>Une remise de %montant% DH, la valeur de 5&amp;nbsp;g de notre oud d'entrée de gamme.</source>
+        <target>A %montant% DH discount, the value of 5&amp;nbsp;g of our entry-level oud.</target>
+      </trans-unit>
+      <trans-unit id="510" resname="Choix %rang%">
+        <source>Choix %rang%</source>
+        <target>Choice %rang%</target>
+      </trans-unit>
+      <trans-unit id="511" resname="Votre choix">
+        <source>Votre choix</source>
+        <target>Your choice</target>
+      </trans-unit>
+      <trans-unit id="512" resname="Aucun article en stock pour cette récompense.">
+        <source>Aucun article en stock pour cette récompense.</source>
+        <target>No item in stock for this reward.</target>
+      </trans-unit>
+      <trans-unit id="513" resname="Échanger %nombre% points">
+        <source>Échanger %nombre% points</source>
+        <target>Redeem %nombre% points</target>
+      </trans-unit>
+      <trans-unit id="514" resname="Encore %nombre% pts">
+        <source>Encore %nombre% pts</source>
+        <target>%nombre% pts to go</target>
+      </trans-unit>
+      <trans-unit id="515" resname="Votre historique">
+        <source>Votre historique</source>
+        <target>Your history</target>
+      </trans-unit>
+      <trans-unit id="516" resname="Mouvements de points">
+        <source>Mouvements de points</source>
+        <target>Points movements</target>
+      </trans-unit>
+      <trans-unit id="517" resname="Date">
+        <source>Date</source>
+        <target>Date</target>
+      </trans-unit>
+      <trans-unit id="518" resname="Motif">
+        <source>Motif</source>
+        <target>Reason</target>
+      </trans-unit>
+      <trans-unit id="519" resname="Points">
+        <source>Points</source>
+        <target>Points</target>
+      </trans-unit>
+      <trans-unit id="520" resname="Aucun mouvement pour l'instant.">
+        <source>Aucun mouvement pour l'instant.</source>
+        <target>No movement yet.</target>
+      </trans-unit>
+      <trans-unit id="521" resname="Les règles du programme">
+        <source>Les règles du programme</source>
+        <target>The programme rules</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

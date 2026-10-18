@@ -29,7 +29,7 @@
       {l s='Toujours rien après quelques minutes&nbsp;? Écrivez-nous.' d='Shop.Theme.Odys'}
     </p>
     {include file='_partials/contact-links.tpl' style='inline'
-             subject="Bonjour ODYS, je n'ai pas recu le lien de mot de passe."}
+             subject="{l s='Bonjour ODYS, je n\'ai pas reçu le lien de mot de passe.' d='Shop.Theme.Odys'}"}
   </div>
 
   <div style="margin-top:26px;font-size:12px">

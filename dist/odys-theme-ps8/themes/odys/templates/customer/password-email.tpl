@@ -46,7 +46,7 @@
       avec vous.' d='Shop.Theme.Odys'}
     </p>
     {include file='_partials/contact-links.tpl' style='inline'
-             subject="Bonjour ODYS, je n'arrive pas à reinitialiser mon mot de passe."}
+             subject="{l s='Bonjour ODYS, je n\'arrive pas à réinitialiser mon mot de passe.' d='Shop.Theme.Odys'}"}
   </div>
 
   <div style="margin-top:18px;text-align:center;font-size:12px;color:var(--mid)">

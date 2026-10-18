@@ -34,10 +34,14 @@
 {if $odysStep < 1}{assign var='odysStep' value=1}{/if}
 
 {assign var='odysSteps' value=[
-  ['label' => 'Commande reçue',  'hint' => 'Nous avons votre commande'],
-  ['label' => 'En préparation',  'hint' => 'Votre flacon est emballé à la main'],
-  ['label' => 'Expédiée',        'hint' => 'En route vers vous'],
-  ['label' => 'Livrée',          'hint' => 'Bonne découverte']
+  ['label' => "{l s='Commande reçue' d='Shop.Theme.Odys'}",
+   'hint' => "{l s='Nous avons votre commande' d='Shop.Theme.Odys'}"],
+  ['label' => "{l s='En préparation' d='Shop.Theme.Odys'}",
+   'hint' => "{l s='Votre flacon est emballé à la main' d='Shop.Theme.Odys'}"],
+  ['label' => "{l s='Expédiée' d='Shop.Theme.Odys'}",
+   'hint' => "{l s='En route vers vous' d='Shop.Theme.Odys'}"],
+  ['label' => "{l s='Livrée' d='Shop.Theme.Odys'}",
+   'hint' => "{l s='Bonne découverte' d='Shop.Theme.Odys'}"]
 ]}
 
 {if isset($compact) && $compact}

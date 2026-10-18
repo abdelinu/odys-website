@@ -58,6 +58,18 @@ class AdminOdysThemeController extends ModuleAdminController
         'ODYS_GRAM_MIN'     => ['Oud — commande minimum (g)', 'text', 'Vide : 5 g.'],
     ];
 
+    /**
+     * Les reglages qui tiennent une PHRASE, donc une par langue.
+     *
+     * Une case unique sert le meme texte aux trois boutiques : la note de
+     * paiement a la livraison s'affichait en francais sur la fiche arabe.
+     * Les autres cases de cet ecran restent monolingues tant que personne
+     * ne les remplit — les rendre multilingues obligerait a passer la
+     * langue a chaque lecture, gabarits compris, et celle-ci n'a qu'un
+     * seul point de lecture.
+     */
+    const LANG_FIELDS = ['ODYS_COD_NOTE'];
+
     /** Where an uploaded hero film and poster are kept, and what may be sent. */
     const UPLOAD_DIR = 'odys/';
     const UPLOADS = [
@@ -79,18 +91,28 @@ class AdminOdysThemeController extends ModuleAdminController
      */
     const AMBIANCE_SLOTS = 6;
 
-    /** slot => [slug, name, deep, wash, accent, leaf] — what the theme ships. */
+    /** slot => [slug, name, accent, leaf] — what the theme ships. */
     const AMBIANCE_DEFAULTS = [
-        1 => ['fleur-oranger', "Fleur d'oranger", '#080D09', '#16241A', '#EFE7D6', '#7E9B6A'],
-        2 => ['ambre', 'Ambre', '#0B0806', '#2A1A0C', '#E0A75C', '#B08D4F'],
+        1 => ['fleur-oranger', "Fleur d'oranger", '#EFE7D6', '#7E9B6A'],
+        2 => ['ambre', 'Ambre', '#E0A75C', '#B08D4F'],
     ];
 
-    /** The four colours of an ambiance, in the order they appear on screen. */
+    /**
+     * Les deux couleurs d'une ambiance, dans l'ordre de l'écran.
+     *
+     * Le fond de page et le halo n'y sont plus. Ces réglages datent de la
+     * boutique noire : posés sur l'ivoire d'aujourd'hui ils écrivaient
+     * crème sur crème, et la feuille de style ne pouvait rien y faire — le
+     * <style> de la fiche est imprimé après elle, donc il gagne toujours.
+     * Le sol appartient maintenant au site, le même sur toutes les fiches,
+     * et le halo se déduit de la secondaire. Ce qui est déjà enregistré
+     * reste en base, simplement plus relu.
+     */
     const AMBIANCE_COLOURS = [
-        'DEEP'   => ['Fond de page', 'La couleur derrière toute la page.'],
-        'WASH'   => ['Halo', 'La lueur sous le produit, en haut de la page.'],
-        'ACCENT' => ['Accent', 'Le prix, le format, le bouton d\'ajout au panier.'],
-        'LEAF'   => ['Secondaire', 'Les notes de la pyramide et les libellés discrets.'],
+        'ACCENT' => ['Accent', 'Le prix, le format et le bouton d\'ajout au panier. '
+            . 'Assombri automatiquement s\'il ne se lit pas sur l\'ivoire de la page.'],
+        'LEAF'   => ['Secondaire', 'Les notes de la pyramide et les libellés discrets. '
+            . 'C\'est aussi elle qui donne sa teinte au halo du haut de page.'],
     ];
 
     /** The three features the pyramid reads, by id. */
@@ -130,8 +152,21 @@ class AdminOdysThemeController extends ModuleAdminController
     private function save(): string
     {
         $refus = [];
+        foreach (self::LANG_FIELDS as $key) {
+            $parLangue = [];
+            foreach ($this->getLanguages() as $langue) {
+                $id = (int) $langue['id_lang'];
+                if (!Tools::getIsset($key . '_' . $id)) {
+                    continue 2;
+                }
+                $brut = mb_convert_encoding((string) Tools::getValue($key . '_' . $id), 'UTF-8', 'UTF-8');
+                $parLangue[$id] = Tools::substr(trim(strip_tags($brut)), 0, 300);
+            }
+            Configuration::updateValue($key, $parLangue);
+        }
+
         foreach (array_keys(self::FIELDS) as $key) {
-            if (!Tools::getIsset($key)) {
+            if (in_array($key, self::LANG_FIELDS, true) || !Tools::getIsset($key)) {
                 continue;
             }
             $raw = (string) Tools::getValue($key);
@@ -255,6 +290,8 @@ class AdminOdysThemeController extends ModuleAdminController
         $helper->currentIndex = self::$currentIndex;
         $helper->submit_action = 'submit_odys_theme';
         $helper->fields_value = [];
+        $helper->languages = $this->getLanguages();
+        $helper->default_form_language = (int) $this->context->language->id;
 
         $inputs = [];
         foreach (self::FIELDS as $key => $field) {
@@ -275,6 +312,18 @@ class AdminOdysThemeController extends ModuleAdminController
                     ['id' => $key . '_on', 'value' => 1, 'label' => 'Oui'],
                     ['id' => $key . '_off', 'value' => 0, 'label' => 'Non'],
                 ];
+            }
+            if (in_array($key, self::LANG_FIELDS, true)) {
+                // Tant qu'aucune traduction n'est enregistree, chaque onglet
+                // part du texte deja en place : l'employe traduit, il ne
+                // retape pas.
+                $input['lang'] = true;
+                $parLangue = [];
+                foreach ($this->getLanguages() as $langue) {
+                    $id = (int) $langue['id_lang'];
+                    $parLangue[$id] = (string) Configuration::get($key, $id);
+                }
+                $valeur = $parLangue;
             }
             $helper->fields_value[$key] = $valeur;
             $inputs[] = $input;
@@ -331,13 +380,13 @@ class AdminOdysThemeController extends ModuleAdminController
     /**
      * An ambiance as the shop has it: the saved slot, or what the theme ships.
      *
-     * @return array{slug:string,name:string,deep:string,wash:string,accent:string,leaf:string,img:string}
+     * @return array{slug:string,name:string,accent:string,leaf:string,img:string}
      */
     private function ambiance(int $slot): array
     {
         $fallback = isset(self::AMBIANCE_DEFAULTS[$slot])
             ? self::AMBIANCE_DEFAULTS[$slot]
-            : ['', '', '', '', '', ''];
+            : ['', '', '', ''];
         $get = function ($suffix, $default) use ($slot) {
             $value = (string) Configuration::get('ODYS_AMB_' . $slot . '_' . $suffix);
 
@@ -347,10 +396,8 @@ class AdminOdysThemeController extends ModuleAdminController
         return [
             'slug'   => $get('SLUG', $fallback[0]),
             'name'   => $get('NAME', $fallback[1]),
-            'deep'   => $get('DEEP', $fallback[2]),
-            'wash'   => $get('WASH', $fallback[3]),
-            'accent' => $get('ACCENT', $fallback[4]),
-            'leaf'   => $get('LEAF', $fallback[5]),
+            'accent' => $get('ACCENT', $fallback[2]),
+            'leaf'   => $get('LEAF', $fallback[3]),
             'img'    => (string) Configuration::get('ODYS_AMB_' . $slot . '_IMG'),
         ];
     }

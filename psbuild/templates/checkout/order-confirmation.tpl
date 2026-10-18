@@ -32,7 +32,7 @@
     <span class="odys-confirm-reflabel">{l s='Votre référence' d='Shop.Theme.Odys'}</span>
     <strong class="odys-confirm-refcode">{$order.details.reference}</strong>
     <p class="odys-confirm-refnote">
-      Notez-la. Elle suffit à suivre votre colis
+      {l s='Notez-la. Elle suffit à suivre votre colis' d='Shop.Theme.Odys'}
       {if isset($urls.pages.guest_tracking)}
         — <a href="{$urls.pages.guest_tracking}">{l s='suivre ma commande' d='Shop.Theme.Odys'}</a>
       {/if}.
@@ -117,7 +117,7 @@
        conversation : avec le paiement a la livraison et un serveur de
        courrier qui n'envoie rien, c'est le seul recu qu'il aura. *}
     {include file='_partials/contact-links.tpl'
-             subject="Bonjour ODYS, ma commande `$order.details.reference`."}
+             subject="{l s='Bonjour ODYS, ma commande %reference%.' sprintf=['%reference%' => $order.details.reference] d='Shop.Theme.Odys'}"}
   </section>
 
   {$HOOK_ORDER_CONFIRMATION nofilter}

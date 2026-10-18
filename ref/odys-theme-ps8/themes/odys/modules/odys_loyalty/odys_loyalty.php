@@ -735,6 +735,101 @@ class Odys_Loyalty extends Module
      * characteristic. The palette comes from the theme settings, and every
      * value is checked here because the result is written into a <style>.
      */
+    /**
+     * Le sol que la boutique peint derriere une ambiance.
+     *
+     * C'est --odys-cream de la feuille de style. La construction verifie que
+     * les deux ne se separent pas : une valeur recopiee qui derive en
+     * silence est exactement ce qui a rendu les prix illisibles.
+     */
+    const AMB_SOL = '#F4EFE5';
+
+    /** Le contraste minimum d'un texte, WCAG 2.1 AA. */
+    const AMB_CONTRASTE = 4.5;
+
+    /** '#rrggbb' verifie, ou '' — rien d'autre n'entre dans une declaration. */
+    private static function ambColour(string $raw): string
+    {
+        return preg_match('/^#[0-9A-Fa-f]{6}$/', $raw) ? Tools::strtoupper($raw) : '';
+    }
+
+    /** Les trois composantes de '#rrggbb'. */
+    private static function ambRgb(string $hex): array
+    {
+        return [
+            (int) hexdec(Tools::substr($hex, 1, 2)),
+            (int) hexdec(Tools::substr($hex, 3, 2)),
+            (int) hexdec(Tools::substr($hex, 5, 2)),
+        ];
+    }
+
+    private static function ambHex(array $rgb): string
+    {
+        return sprintf('#%02X%02X%02X',
+            max(0, min(255, (int) round($rgb[0]))),
+            max(0, min(255, (int) round($rgb[1]))),
+            max(0, min(255, (int) round($rgb[2]))));
+    }
+
+    /** La luminance relative, WCAG 2.1. */
+    private static function ambLum(array $rgb): float
+    {
+        $c = [];
+        foreach ($rgb as $v) {
+            $v /= 255;
+            $c[] = $v <= 0.03928 ? $v / 12.92 : pow(($v + 0.055) / 1.055, 2.4);
+        }
+
+        return 0.2126 * $c[0] + 0.7152 * $c[1] + 0.0722 * $c[2];
+    }
+
+    private static function ambRatio(array $a, array $b): float
+    {
+        $la = self::ambLum($a) + 0.05;
+        $lb = self::ambLum($b) + 0.05;
+
+        return $la > $lb ? $la / $lb : $lb / $la;
+    }
+
+    /**
+     * La meme couleur, assombrie juste assez pour se lire sur le sol.
+     *
+     * On descend par pas de 2 % : la couleur garde sa teinte, elle perd de
+     * la lumiere. Le noir donne 15:1 sur l'ivoire, donc la boucle aboutit
+     * toujours ; une couleur deja lisible ressort telle quelle.
+     */
+    private static function ambLisible(string $hex): string
+    {
+        $sol = self::ambRgb(self::AMB_SOL);
+        $rgb = self::ambRgb($hex);
+        for ($k = 1.0; $k > 0; $k -= 0.02) {
+            $essai = [$rgb[0] * $k, $rgb[1] * $k, $rgb[2] * $k];
+            if (self::ambRatio($essai, $sol) >= self::AMB_CONTRASTE) {
+                return self::ambHex($essai);
+            }
+        }
+
+        return '#000000';
+    }
+
+    /**
+     * La couleur posee sur le sol comme une haleine : le halo du haut de
+     * page. 14 % suffisent a donner la teinte de la matiere sans jamais
+     * assombrir ce qui s'ecrit par-dessus.
+     */
+    private static function ambTint(string $hex): string
+    {
+        $sol = self::ambRgb(self::AMB_SOL);
+        $rgb = self::ambRgb($hex);
+        $part = 0.14;
+
+        return self::ambHex([
+            $sol[0] * (1 - $part) + $rgb[0] * $part,
+            $sol[1] * (1 - $part) + $rgb[1] * $part,
+            $sol[2] * (1 - $part) + $rgb[2] * $part,
+        ]);
+    }
+
     private function ambianceCss(int $idProduct): string
     {
         if ($idProduct <= 0) {
@@ -760,13 +855,22 @@ class Odys_Loyalty extends Module
             if ((string) Configuration::get($key . 'SLUG') !== $slug) {
                 continue;
             }
+            // Le sol de la page n'est plus celui de l'ambiance : il est
+            // celui du site, le meme sur toutes les fiches. Les deux
+            // couleurs qui s'ECRIVENT sont ramenees au contraste exige
+            // avant d'etre posees, et le halo se deduit de la secondaire.
+            // Sans cela une ambiance reglee du temps de la boutique noire
+            // ecrit creme sur creme, et la feuille de style ne peut rien y
+            // faire puisque ce <style>-ci est imprime apres elle.
+            $accent = self::ambColour((string) Configuration::get($key . 'ACCENT'));
+            $leaf = self::ambColour((string) Configuration::get($key . 'LEAF'));
             $vars = '';
-            foreach (['deep' => 'DEEP', 'wash' => 'WASH',
-                      'accent' => 'ACCENT', 'leaf' => 'LEAF'] as $name => $suffix) {
-                $colour = (string) Configuration::get($key . $suffix);
-                if (preg_match('/^#[0-9A-Fa-f]{6}$/', $colour)) {
-                    $vars .= '--amb-' . $name . ':' . $colour . ';';
-                }
+            if ($leaf !== '') {
+                $vars .= '--amb-wash:' . self::ambTint($leaf) . ';';
+                $vars .= '--amb-leaf:' . self::ambLisible($leaf) . ';';
+            }
+            if ($accent !== '') {
+                $vars .= '--amb-accent:' . self::ambLisible($accent) . ';';
             }
             $css = $vars !== '' ? 'body[data-ambiance="' . $slug . '"]{' . $vars . '}' : '';
 
@@ -999,7 +1103,11 @@ class Odys_Loyalty extends Module
                 'odysShipMin' => $prices ? min($prices) : 0,
                 'odysShipMax' => $prices ? max($prices) : 0,
                 'odysShipFrom' => (float) Configuration::get('PS_SHIPPING_FREE_PRICE'),
-                'odysCodNote' => (string) Configuration::get('ODYS_COD_NOTE'),
+                // Une phrase par langue depuis que l'ecran du theme en propose
+                // une par langue ; tant qu'aucune n'est saisie, PrestaShop rend
+                // encore la valeur unique d'avant, donc rien ne disparait.
+                'odysCodNote' => (string) Configuration::get('ODYS_COD_NOTE',
+                    (int) $this->context->language->id),
             ]);
         }
 

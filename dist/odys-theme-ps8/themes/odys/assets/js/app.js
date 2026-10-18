@@ -36,6 +36,8 @@ MOT.FR = {
   'retirer': 'Retirer',
   'article': 'Article',
   'panierAjoute': '%nom% — ajouté au panier',
+  'panierAjouteBouton': '✓ Ajouté !',
+  'panierIndispo': 'Indisponible',
   'panierEchec': 'Ce parfum n\'a pas pu être ajouté au panier.',
   'menuOuvrir': 'Ouvrir le menu de navigation',
   'menuFermer': 'Fermer le menu de navigation',
@@ -88,7 +90,6 @@ if (typeof prestashop === 'undefined') {
  *   - Rate limiting on login, register, checkout (client-side layer)
  *
  * PrestaShop integration notes:
- *   - Cart operations: replace addToCart() with prestashop.emit('updateCart')
  *   - Prices: read from {$product.price} Smarty vars, never hardcoded
  *   - Checkout: hand off to PS checkout controller after address step
  *   - Loyalty: replace in-memory state with API calls to odys_loyalty module
@@ -129,7 +130,6 @@ function safeText(el, text) {
 // NOTE PRODUCTION: extraire dans app.js et ajouter defer + CSP strict
 const ODYS = (() => {
 // ── STATE (private) ──
-let cart = [];
 let curPage = 'home';
 let qty = 1;
 let selVol = 50;
@@ -156,7 +156,6 @@ function go(id) {
   // page transition — guarded
   const pt = document.getElementById('pt');
   if (pt) { pt.classList.add('show'); setTimeout(() => pt.classList.remove('show'), 400); }
-  updateCartBadges();
   closeMenu();
 }
 
@@ -172,218 +171,6 @@ function toggleMenu() {
 function closeMenu() {
   document.querySelectorAll('.ham').forEach(b => b.classList.remove('open'));
   document.querySelectorAll('.mob-menu').forEach(m => m.classList.remove('open'));
-}
-
-// ── CART ──
-function openCart() {
-  /* le tiroir de la maquette n'est plus pose dans la page : celui qui montre le panier de PrestaShop vit dans tiroir_panier.js */
-  var d = document.getElementById('drawer');
-  var o = document.getElementById('ov');
-  if (!d || !o) { return; }
-  d.classList.add('on'); o.classList.add('on'); renderCart();
-}
-function closeCart() {
-  var d = document.getElementById('drawer');
-  var o = document.getElementById('ov');
-  if (d) { d.classList.remove('on'); }
-  if (o) { o.classList.remove('on'); }
-}
-
-function addToCart(code, name, price, btn) {
-  const noPoints = code.startsWith('OUD-') || code.startsWith('SAM-') ||
-                   code.startsWith('BK-') || code.startsWith('F0') ||
-                   code.startsWith('F1') || code.startsWith('F3') ||
-                   code === 'PACK-OUD';
-  const existing = cart.find(i => i.code === code);
-  if (existing) existing.qty++;
-  else cart.push({ code, name, price, qty: 1, noPoints });
-  if (btn) {
-    const orig = btn.textContent;
-    btn.classList.add('done');
-    btn.textContent = '✓ Ajouté !';
-    setTimeout(() => { btn.classList.remove('done'); btn.textContent = orig; }, 1600);
-  }
-  updateCartBadges();
-  openCart();
-  const add = document.getElementById('dAdded');
-  if (add) { add.classList.add('show'); setTimeout(() => add.classList.remove('show'), 2200); }
-  renderCart();
-  updateShip();
-  renderXS();
-}
-
-function renderCart() {
-  const el = document.getElementById('dItems');
-  if (!el) return;
-  el.innerHTML = '';  // clear safely
-
-  if (cart.length === 0) {
-    const empty = document.createElement('div');
-    empty.className = 'd-empty';
-    empty.innerHTML = '<div class="ei">🛒</div>';
-    const p = document.createElement('p');
-    p.textContent = 'Votre panier est vide';
-    empty.appendChild(p);
-    el.appendChild(empty);
-    return;
-  }
-
-  const frag = document.createDocumentFragment();
-  cart.forEach(i => {
-    const wrap = document.createElement('div');
-    wrap.className = 'dp';
-
-    // Image
-    const img = document.createElement('img');
-    img.className = 'dp-img';
-    img.src = 'https://images.unsplash.com/photo-1541643600914-78b084683702?w=132&q=60';
-    img.loading = 'lazy';
-    img.alt = 'ODYS ' + i.code;
-    wrap.appendChild(img);
-
-    // Info block
-    const inf = document.createElement('div');
-    inf.className = 'dp-inf';
-
-    const code = document.createElement('div');
-    code.className = 'dp-code';
-    code.textContent = 'ODYS ' + i.code;
-
-    const name = document.createElement('div');
-    name.className = 'dp-name';
-    name.textContent = i.name; // textContent = safe, no XSS
-
-    const ins = document.createElement('div');
-    ins.className = 'dp-ins';
-    ins.textContent = 'Élaboré au Maroc 🇲🇦';
-
-    const row = document.createElement('div');
-    row.className = 'dp-row';
-
-    const price = document.createElement('span');
-    price.className = 'dp-price';
-    price.textContent = (i.price * i.qty) + ' DH';
-
-    const dpq = document.createElement('div');
-    dpq.className = 'dpq';
-
-    const btnMinus = document.createElement('button');
-    btnMinus.dataset.action = 'chg-item';
-    btnMinus.dataset.code   = i.code;
-    btnMinus.dataset.delta  = '-1';
-    btnMinus.textContent    = '−';
-
-    const qtySpan = document.createElement('span');
-    qtySpan.textContent = i.qty;
-
-    const btnPlus = document.createElement('button');
-    btnPlus.dataset.action = 'chg-item';
-    btnPlus.dataset.code   = i.code;
-    btnPlus.dataset.delta  = '1';
-    btnPlus.textContent    = '+';
-
-    dpq.append(btnMinus, qtySpan, btnPlus);
-    row.append(price, dpq);
-
-    const rmBtn = document.createElement('button');
-    rmBtn.className       = 'dp-rm';
-    rmBtn.dataset.action  = 'remove-item';
-    rmBtn.dataset.code    = i.code;
-    rmBtn.textContent     = 'Retirer';
-
-    inf.append(code, name, ins, row, rmBtn);
-    wrap.append(img, inf);
-    frag.appendChild(wrap);
-  });
-
-  el.appendChild(frag);
-}
-
-function chgItem(code, d) {
-  const i = cart.find(x => x.code === code);
-  if (!i) return;
-  i.qty += d;
-  if (i.qty <= 0) cart = cart.filter(x => x.code !== code);
-  renderCart(); updateCartBadges(); updateShip(); renderXS();
-}
-function removeItem(code) { cart = cart.filter(x => x.code !== code); renderCart(); updateCartBadges(); updateShip(); renderXS(); }
-
-function updateCartBadges() {
-  const total = cart.reduce((a, i) => a + i.qty, 0);
-  document.querySelectorAll('.cb').forEach(b => { b.style.display = total > 0 ? 'flex' : 'none'; b.textContent = total; });
-  var odysCnt = document.getElementById('dCnt');
-  if (odysCnt) { odysCnt.textContent = total + ' article' + (total !== 1 ? 's' : ''); }
-  const sum = cart.reduce((a, i) => a + i.price * i.qty, 0);
-  var odysTot = document.getElementById('dTotal');
-  if (odysTot) { odysTot.textContent = sum + ' DH'; }
-}
-
-/* ── SHIPPING — 20 DH Casa · 30 DH partout au Maroc ──────────── */
-const SHIPPING = {
-  casa:  { cost: 20, label: 'Casablanca', freeThreshold: 300 },
-  maroc: { cost: 30, label: 'Tout le Maroc', freeThreshold: 300 },
-};
-
-function getShipZone() {
-  // Read selected city from checkout form if open, else default to maroc
-  const ville = document.getElementById('coVille');
-  if (ville && ville.value) {
-    return ville.value === 'Casablanca' ? 'casa' : 'maroc';
-  }
-  return 'maroc'; // default before city chosen
-}
-
-function getShipCost(zone, total) {
-  const z = SHIPPING[zone] || SHIPPING.maroc;
-  return total >= z.freeThreshold ? 0 : z.cost;
-}
-
-function updateShip() {
-  const sum  = cart.reduce((a, i) => a + i.price * i.qty, 0);
-  const zone = getShipZone();
-  const z    = SHIPPING[zone];
-  const shipCost = getShipCost(zone, sum);
-  const isFree   = shipCost === 0;
-  const pct      = Math.min(100, (sum / z.freeThreshold) * 100);
-
-  const fill = document.getElementById('dsFill');
-  const val  = document.getElementById('dsVal');
-  const msg  = document.getElementById('dsMsg');
-  const hd   = document.querySelector('.ds-top span:first-child');
-
-  if (fill) fill.style.width = pct + '%';
-  if (val)  val.textContent  = sum + ' / ' + z.freeThreshold + ' DH';
-  if (hd)   hd.textContent   = isFree ? 'Livraison offerte ✓' : (zone === 'casa' ? 'Livraison Casa : 20 DH' : 'Livraison Maroc : 30 DH');
-  if (msg) {
-    if (isFree) {
-      msg.textContent = '🎉 Livraison gratuite débloquée !';
-      msg.style.color = 'var(--green)';
-    } else {
-      const need = z.freeThreshold - sum;
-      msg.textContent = `Ajoutez ${need} DH → livraison offerte (${zone === 'casa' ? '20 DH' : '30 DH'} actuellement)`;
-      msg.style.color = '';
-    }
-  }
-}
-
-function getCartTotal(includeShipping) {
-  const subtotal = cart.reduce((a, i) => a + i.price * i.qty, 0);
-  if (!includeShipping) return subtotal;
-  const zone = getShipZone();
-  return subtotal + getShipCost(zone, subtotal);
-}
-
-function renderXS() {
-  const xs = document.getElementById('dXs');
-  const list = document.getElementById('dXsList');
-  if (!xs || !list || cart.length === 0) { if (xs) xs.style.display = 'none'; return; }
-  xs.style.display = 'block';
-  const recs = [
-    { code:'07', name:'La Nuit', price:219, img:'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=160&q=60' },
-    { code:'33', name:'L\'Azur', price:229, img:'https://images.unsplash.com/photo-1557170334-a9632e77c6e4?w=160&q=60' },
-    { code:'14', name:'L\'Oriental', price:249, img:'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=160&q=60' },
-  ].filter(r => !cart.find(i => i.code === r.code));
-  list.innerHTML = recs.slice(0,3).map(r => `<div class="dxs-i" data-action="add-to-cart" data-code="${esc(r.code)}" data-name="${esc(r.name)}" data-price="${Number(r.price)}"><img src="${esc(r.img)}" loading="lazy" alt="ODYS Parfums"/><div class="dxs-n">ODYS ${esc(r.code)}</div><div class="dxs-p">${Number(r.price)} DH</div></div>`).join('');
 }
 
 // ── PRODUCT PAGE ──
@@ -463,14 +250,6 @@ function qtyWrite(n) {
   if ('value' in e && e.tagName === 'INPUT') { e.value = n; } else { e.textContent = n; }
 }
 function chgQty(d) { qty = Math.max(1, qtyRead() + d); qtyWrite(qty); }
-function addProd() {
-  const btn = document.getElementById('addBtn');
-  btn.classList.add('loading');
-  setTimeout(() => {
-    btn.classList.remove('loading');
-    addToCart('01-' + selVol + 'ml', 'L\'Icône ' + selVol + 'ml', selPrice * qty, null);
-  }, 700);
-}
 function switchThumb(li, src) {
   document.querySelectorAll('.thumbs li').forEach(x => x.classList.remove('on'));
   li.classList.add('on');
@@ -581,7 +360,7 @@ function wishRestore() {
       var full = btn.getAttribute('data-action') === 'toggle-wish-full';
       btn.classList.add('on');
       btn.setAttribute('aria-pressed', 'true');
-      btn.textContent = full ? '♥ Enregistré dans mes envies' : '♥';
+      btn.textContent = full ? '♥ ' + MOT('enviesEnregistre') : '♥';
       if (!full) { btn.style.color = 'var(--rose)'; }
     });
   wishPaintCount();
@@ -755,31 +534,6 @@ function pickGram(btn, cardId, pricePerGram) {
   card.dataset.selectedTotal = total;
 }
 
-function addOud(code, name, cardId, btn) {
-  const card  = document.getElementById(cardId);
-  const grams = card ? parseInt(card.dataset.selectedGrams || 10) : 10;
-  const total = card ? parseInt(card.dataset.selectedTotal || 0) : 0;
-  if (total <= 0) {
-    if (card) card.querySelectorAll('.gb').forEach(b => {
-      b.style.borderColor = 'var(--oud)'; setTimeout(() => { b.style.borderColor = ''; }, 800);
-    });
-    return;
-  }
-  const itemCode = 'OUD-' + code + '-' + grams + 'g';
-  const itemName = name + ' ' + grams + 'g';
-  const existing = cart.find(i => i.code === itemCode);
-  if (existing) existing.qty++;
-  else cart.push({ code: itemCode, name: itemName, price: total, qty: 1, noPoints: true });
-  if (btn) {
-    const orig = btn.textContent;
-    btn.style.background = 'var(--green)'; btn.textContent = '✓ Ajouté !';
-    setTimeout(() => { btn.style.background = ''; btn.textContent = orig; }, 1600);
-  }
-  updateCartBadges(); openCart();
-  const add = document.getElementById('dAdded');
-  if (add) { add.classList.add('show'); setTimeout(() => add.classList.remove('show'), 2200); }
-  renderCart(); updateShip(); renderXS();
-}
 
 
 /* ══════════════════════════════════════════════════════════
@@ -917,13 +671,11 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ── PUBLIC API ──────────────────────────────────────────── */
 return {
   go, toggleMenu, closeMenu,
-  openCart, closeCart, addToCart, chgItem, removeItem,
-  pickVol, chgQty, qtyRead, qtyWrite, addProd, switchThumb, toggleAcc, toggleWish, wishToggle, wishDrop,
+  pickVol, chgQty, qtyRead, qtyWrite,  switchThumb, toggleAcc, toggleWish, wishToggle, wishDrop,
   filterFam, filterOnglet,     
-  pickGram, addOud,
+  pickGram, 
   openAccount, closeAccount,    
-   closeNotes,
-  updateShip 
+   closeNotes
 };
 })(); // end ODYS IIFE
 
@@ -945,10 +697,6 @@ document.addEventListener('change', function (e) {
     + '&qty=' + Math.abs(delta);
 });
 
-document.addEventListener('change', function(e) {
-  if (e.target.closest('[data-action="select-pm"]')) ODYS.selectPM(e.target.closest('.pm'));
-  if (e.target.id === 'coVille') { ODYS.updateShip(); ODYS.renderCoSummary(); }
-});
 document.addEventListener('click', function(e) {
   const t = e.target.closest('[data-action]');
   if (!t) return;
@@ -957,8 +705,6 @@ document.addEventListener('click', function(e) {
   const p = t.dataset;
   switch (action) {
     case 'go':            ODYS.go(p.page); if(p.closeMenu) ODYS.closeMenu(); if(p.closeNotes) ODYS.closeNotes(); break;
-    case 'open-cart':     ODYS.openCart(); break;
-    case 'close-cart':    ODYS.closeCart(); break;
     case 'open-account':  ODYS.openAccount(); break;
     case 'close-account': ODYS.closeAccount(); break;
     case 'close-notes':   ODYS.closeNotes(); break;
@@ -968,17 +714,14 @@ document.addEventListener('click', function(e) {
     case 'toggle-wish-full': ODYS.wishToggle(t, true); break;
     case 'wish-drop':     ODYS.wishDrop(t.getAttribute('data-id')); break;
     case 'toggle-acc':    ODYS.toggleAcc(t); break;
-    case 'add-to-cart':   if (!p.idProduct) ODYS.addToCart(p.code, p.name, Number(p.price), t); break;  // PS buttons: bridge below
-    case 'add-prod':      if (!p.idProduct) ODYS.addProd(); break;  // PS buttons: bridge below
     case 'pick-vol':      ODYS.pickVol(t); break;
     case 'chg-qty':       ODYS.chgQty(Number(p.delta)); break;
-    case 'chg-item':      ODYS.chgItem(p.code, Number(p.delta)); break;
-    case 'remove-item':   ODYS.removeItem(p.code); break;
     case 'filter-fam':    ODYS.filterFam(t, p.fam); break;
     case 'filter-onglet': ODYS.filterOnglet(t, p.onglet); break;
     case 'pick-gram':     ODYS.pickGram(t, p.cardId, Number(p.rate)); break;
-    case 'add-oud':       ODYS.addOud(p.code, p.name, p.cardId, t); break;
     case 'switch-thumb':  ODYS.switchThumb(t, p.src); break;
+    case 'close-ann':     { document.documentElement.classList.add('ann-fermee');
+                            try { sessionStorage.setItem('odysAnnFermee', '1'); } catch (err) {} } break;
     case 'dismiss-sbn':   { const s = document.getElementById('sbn'); if(s) s.style.display='none'; } break;
     case 'wa-order': {
       const n = document.querySelector('[data-wa-number]')?.dataset.waNumber || '212600000000';
@@ -987,13 +730,11 @@ document.addEventListener('click', function(e) {
     }
   }
 });
-document.getElementById('ov')       ?.addEventListener('click', () => ODYS.closeCart());
-document.getElementById('coOv')     ?.addEventListener('click', () => ODYS.closeCheckout());
 document.getElementById('accOv')    ?.addEventListener('click', () => ODYS.closeAccount());
 document.getElementById('notesOv')  ?.addEventListener('click', () => ODYS.closeNotes());
 document.addEventListener('keydown', e => {
   if (e.key !== 'Escape') return;
-  ODYS.closeCheckout(); ODYS.closeAccount(); ODYS.closeNotes(); ODYS.closeCart();
+  ODYS.closeAccount(); ODYS.closeNotes();
 });
 
 
@@ -1125,14 +866,29 @@ document.addEventListener('click', function(e2) {
     var name        = btn.dataset.name || '';
     var price       = parseInt(btn.dataset.price || '0', 10);
 
+    /* Pas de repli : le selecteur du pont exige [data-id-product] et
+       les cinq boutons d'achat des gabarits le portent en dur.
+       docker/verify.sh echoue si un bouton d'achat parait sans lui. */
     if (idProduct) {
       psAddToCart(idProduct, idAttr, qty, function(resp) {
         var odysPlein = resp && resp.cart && Number(resp.cart.products_count) > 0;
         if (resp && resp.success && !resp.hasError && (Number(resp.quantity) > 0 || odysPlein)) {
-          /* Also update ODYS cart UI */
           /* Le tiroir montre ce que PrestaShop vient de confirmer. */
           if (window.odysTiroirApresAjout) { window.odysTiroirApresAjout(resp); }
-          ODYS.addToCart('ps-' + idProduct, name, price, btn);
+          /* Le bouton dit lui-meme que c'est entre. La phrase passe
+             par le dictionnaire : le panier de la maquette ecrivait
+             « ✓ Ajouté ! » en francais dans les trois langues. Et elle
+             va dans .blbl quand il y en a un — ecrire dans le
+             textContent du bouton emportait son libelle et son
+             rouet, que l'etiquette du volume cherche ensuite. */
+          var odysCible = btn.querySelector('.blbl') || btn;
+          var odysAvantAjout = odysCible.textContent;
+          btn.classList.add('done');
+          odysCible.textContent = MOT('panierAjouteBouton');
+          setTimeout(function () {
+            btn.classList.remove('done');
+            odysCible.textContent = odysAvantAjout;
+          }, 1600);
           /* Le bandeau du bas, maintenant que PrestaShop a confirme. */
           if (window.odysToast) {
             window.odysToast(MOT('panierAjoute').replace('%nom%',
@@ -1155,7 +911,7 @@ document.addEventListener('click', function(e2) {
           if (btn) {
             var odysAvant = btn.textContent;
             btn.classList.add('ko');
-            btn.textContent = 'Indisponible';
+            btn.textContent = MOT('panierIndispo');
             setTimeout(function () { btn.classList.remove('ko'); btn.textContent = odysAvant; }, 2600);
           }
           /* Le toast de fidelite n'existe pas sur toutes les pages : la
@@ -1177,9 +933,6 @@ document.addEventListener('click', function(e2) {
           }
         }
       });
-    } else {
-      /* Fallback for prototype mode */
-      ODYS.addToCart(btn.dataset.code || 'prod', name, price, btn);
     }
   });
 
@@ -1375,29 +1128,10 @@ document.addEventListener('click', function(e2) {
       if (e.key === 'Escape' && mobMenu.getAttribute('aria-hidden') === 'false') {
         mobMenu.setAttribute('aria-hidden', 'true');
         hamBtn.setAttribute('aria-expanded', 'false');
-        hamBtn.setAttribute('aria-label', 'Ouvrir le menu de navigation');
+        hamBtn.setAttribute('aria-label', MOT('menuOuvrir'));
         hamBtn.focus();
       }
     });
-  }
-
-  /* ── Cart drawer: aria-hidden + focus management ────────────── */
-  var cartDrawer = document.getElementById('drawer');
-  var cartBtn = document.getElementById('cartBtn');
-  if (cartDrawer) {
-    // Every open/close path (openCart/closeCart, ODYS.*, overlay, Escape)
-    // toggles .on, so follow the class rather than wrapping functions.
-    new MutationObserver(function () {
-      var open = cartDrawer.classList.contains('on');
-      if (cartDrawer.getAttribute('aria-hidden') === (open ? 'false' : 'true')) return;
-      cartDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
-      if (open) {
-        var closeBtn = cartDrawer.querySelector('.d-close');
-        if (closeBtn) setTimeout(function () { closeBtn.focus(); }, 80);
-      } else if (cartBtn && cartDrawer.contains(document.activeElement)) {
-        cartBtn.focus();
-      }
-    }).observe(cartDrawer, { attributes: true, attributeFilter: ['class'] });
   }
 
   /* ── Form validation — aria-invalid ────────────────────────── */
@@ -1413,25 +1147,15 @@ document.addEventListener('click', function(e2) {
   }, true);
 
   /* ── Announce cart changes to screen readers ────────────────── */
-  var cartLiveRegion = document.getElementById('cartCount');
-  var cartCountSrc = document.getElementById('dCnt');
-  if (cartCountSrc) {
-    // updateCartBadges() is private to the ODYS IIFE and can't be wrapped from
-    // here; mirror the count it writes into #dCnt instead.
-    new MutationObserver(function () {
-      var text = cartCountSrc.textContent.trim();
-      if (cartLiveRegion) cartLiveRegion.textContent = text;
-      if (cartBtn) cartBtn.setAttribute('aria-label', 'Ouvrir le panier — ' + text);
-    }).observe(cartCountSrc, { childList: true, characterData: true, subtree: true });
-  }
 
   /* ── Keyboard: carousel arrows ─────────────────────────────── */
   document.addEventListener('keydown', function (e) {
     if (!['ArrowLeft','ArrowRight'].includes(e.key)) return;
     var focused = document.activeElement;
-    if (focused && focused.closest('#inlineSugg, .sugg-section')) {
-      var prev = focused.closest('[role="region"]')?.querySelector('[aria-label*="précédent"], [aria-label*="Précédent"]');
-      var next = focused.closest('[role="region"]')?.querySelector('[aria-label*="suivant"], [aria-label*="Suivant"]');
+    var sugg = focused && focused.closest('.sugg-section');
+    if (sugg) {
+      var prev = sugg.querySelector('[data-action="sugg-prev"]');
+      var next = sugg.querySelector('[data-action="sugg-next"]');
       if (e.key === 'ArrowLeft'  && prev) { e.preventDefault(); prev.click(); }
       if (e.key === 'ArrowRight' && next) { e.preventDefault(); next.click(); }
     }

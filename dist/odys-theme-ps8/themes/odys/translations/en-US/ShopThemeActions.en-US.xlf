@@ -31,6 +31,18 @@
         <source>Proceed to checkout</source>
         <target>Proceed to checkout</target>
       </trans-unit>
+      <trans-unit id="8" resname="Subscribe">
+        <source>Subscribe</source>
+        <target>Subscribe</target>
+      </trans-unit>
+      <trans-unit id="9" resname="OK">
+        <source>OK</source>
+        <target>OK</target>
+      </trans-unit>
+      <trans-unit id="10" resname="Share">
+        <source>Share</source>
+        <target>Share</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

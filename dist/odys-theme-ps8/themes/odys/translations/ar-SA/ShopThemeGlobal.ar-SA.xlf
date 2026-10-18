@@ -31,6 +31,18 @@
         <source>Close</source>
         <target>إغلاق</target>
       </trans-unit>
+      <trans-unit id="8" resname="New">
+        <source>New</source>
+        <target>جديد</target>
+      </trans-unit>
+      <trans-unit id="9" resname="(tax incl.)">
+        <source>(tax incl.)</source>
+        <target>(شامل الضريبة)</target>
+      </trans-unit>
+      <trans-unit id="10" resname="(tax excl.)">
+        <source>(tax excl.)</source>
+        <target>(غير شامل الضريبة)</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

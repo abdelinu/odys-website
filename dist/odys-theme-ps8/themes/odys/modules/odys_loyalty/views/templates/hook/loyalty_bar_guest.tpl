@@ -8,11 +8,10 @@
     </svg>
   </span>
   <div class="lc-body">
-    <h2 class="lc-name" id="odys-loyalty-hd">Programme ODYS</h2>
-    <p class="lc-sub">Cumulez des points à chaque commande réglée
-      et échangez-les contre des avantages exclusifs.</p>
+    <h2 class="lc-name" id="odys-loyalty-hd">{l s='Programme ODYS' d='Shop.Theme.Odys'}</h2>
+    <p class="lc-sub">{l s='Cumulez des points à chaque commande réglée et échangez-les contre des avantages exclusifs.' d='Shop.Theme.Odys'}</p>
     <a class="lc-link" href="{$loyalty_url|escape:'html':'UTF-8'}">
-      Découvrir le programme <span aria-hidden="true">→</span>
+      {l s='Découvrir le programme' d='Shop.Theme.Odys'} <span aria-hidden="true">→</span>
     </a>
   </div>
 </section>

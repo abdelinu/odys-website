@@ -32,10 +32,18 @@ def must(cond, msg):
     ok(msg)
 
 # ── 0. Fresh copy of the shipped theme ──────────────────────────────────
+# dist/odys-theme-ps8/themes/odys est monte dans le conteneur de recette.
+# Supprimer le DOSSIER laissait ce montage accroche a un inode efface :
+# la boutique locale continuait de servir la construction precedente, et
+# tout ce qu'on y verifiait etait un mensonge tranquille — on relit une
+# page, elle est en francais, et on cherche la cause dans le catalogue.
+# On vide donc le CONTENU et on garde les dossiers, qui ne coutent rien.
 if DIST.parent.exists():
-    shutil.rmtree(DIST.parent, ignore_errors=True)
+    for _mort in sorted(DIST.parent.rglob("*"), key=lambda q: -len(q.parts)):
+        if _mort.is_file() or _mort.is_symlink():
+            _mort.unlink()
 DIST.parent.mkdir(parents=True, exist_ok=True)
-shutil.copytree(SRC, DIST)
+shutil.copytree(SRC, DIST, dirs_exist_ok=True)
 ok("theme tree copied from v3.1")
 
 # ═══════════════════════════════════════════════════════════════════════
@@ -480,7 +488,7 @@ new_tail = """          /* PS8 will fire updateCart event — listen for it */
           if (btn) {
             var odysAvant = btn.textContent;
             btn.classList.add('ko');
-            btn.textContent = 'Indisponible';
+            btn.textContent = MOT('panierIndispo');
             setTimeout(function () { btn.classList.remove('ko'); btn.textContent = odysAvant; }, 2600);
           }
           /* Le toast de fidelite n'existe pas sur toutes les pages : la
@@ -531,21 +539,15 @@ for old, new, label in (
 js, fl_notes = strip_flacons.strip_js(js)
 ok("Flacons Voyage page: JS removed (" + "; ".join(fl_notes) + ")")
 live_re = re.compile(r"  var cartLiveRegion = document\.getElementById\('cartCount'\);\n  var origUpdateBadges = window\.updateCartBadges;\n  window\.updateCartBadges = function \(\) \{.*?\n  \};\n", re.S)
-live_new = (
-    "  var cartLiveRegion = document.getElementById('cartCount');\n"
-    "  var cartCountSrc = document.getElementById('dCnt');\n"
-    "  if (cartCountSrc) {\n"
-    "    // updateCartBadges() is private to the ODYS IIFE and can't be wrapped from\n"
-    "    // here; mirror the count it writes into #dCnt instead.\n"
-    "    new MutationObserver(function () {\n"
-    "      var text = cartCountSrc.textContent.trim();\n"
-    "      if (cartLiveRegion) cartLiveRegion.textContent = text;\n"
-    "      if (cartBtn) cartBtn.setAttribute('aria-label', 'Ouvrir le panier — ' + text);\n"
-    "    }).observe(cartCountSrc, { childList: true, characterData: true, subtree: true });\n"
-    "  }\n"
-)
+# Ce bloc annoncait le nombre d'articles aux lecteurs d'ecran. Il lisait
+# #dCnt, que seul le panier de la maquette ecrivait, et parlait a #cartCount
+# en posant une etiquette « Ouvrir le panier — » sur #cartBtn. Aucun des
+# trois n'est dans un gabarit livre : il n'y avait rien a annoncer, rien pour
+# l'entendre, et la phrase etait en francais pour les trois langues. Le vrai
+# compte vit dans le tiroir de PrestaShop (tiroir_panier.js).
+live_new = ""
 js, n = live_re.subn(lambda m: live_new, js, count=1)
-must(n == 1, "scope: live region mirrors #dCnt (no window.updateCartBadges)")
+must(n == 1, "scope: le bloc qui miroitait #dCnt est retire")
 must("typeof addToCart" not in js and "window.updateCartBadges" not in js, "scope: no dead guards or wrappers left")
 
 js += """
@@ -894,35 +896,6 @@ must(SHIM_MODAL not in js, "avis: le pont vers les fenetres n'est pose qu'une fo
 js = js + SHIM_MODAL
 ok("avis: les fenetres du module officiel s'ouvrent sans Bootstrap")
 
-# Le tiroir de la maquette n'est plus dans la page : son contenu venait
-# d'un tableau JavaScript. Ses deux fonctions cherchent pourtant encore
-# #drawer a chaque ajout, et echouaient sur null — l'erreur etait rattrapee
-# par le pont, qui abandonnait la suite : le bandeau « ajoute au panier »
-# ne s'affichait jamais. Une garde a l'endroit ou tout le monde passe.
-_vieux_ouvre = ("function openCart() { document.getElementById('drawer').classList.add('on'); "
-                "document.getElementById('ov').classList.add('on'); renderCart(); }")
-_neuf_ouvre = ("function openCart() {" + LF
-               + "  /* le tiroir de la maquette n'est plus pose dans la page :"
-               + " celui qui montre le panier de PrestaShop vit dans"
-               + " tiroir_panier.js */" + LF
-               + "  var d = document.getElementById('drawer');" + LF
-               + "  var o = document.getElementById('ov');" + LF
-               + "  if (!d || !o) { return; }" + LF
-               + "  d.classList.add('on'); o.classList.add('on'); renderCart();" + LF
-               + "}")
-js, _n = js.replace(_vieux_ouvre, _neuf_ouvre), js.count(_vieux_ouvre)
-must(_n == 1, "panier: openCart ne tombe plus sur un tiroir absent")
-
-_vieux_ferme = ("function closeCart() { document.getElementById('drawer').classList.remove('on'); "
-                "document.getElementById('ov').classList.remove('on'); }")
-_neuf_ferme = ("function closeCart() {" + LF
-               + "  var d = document.getElementById('drawer');" + LF
-               + "  var o = document.getElementById('ov');" + LF
-               + "  if (d) { d.classList.remove('on'); }" + LF
-               + "  if (o) { o.classList.remove('on'); }" + LF
-               + "}")
-js, _n = js.replace(_vieux_ferme, _neuf_ferme), js.count(_vieux_ferme)
-must(_n == 1, "panier: closeCart ne tombe plus sur un tiroir absent")
 
 # Le tiroir du panier. Il vit dans son propre fichier parce qu'il parle a
 # PrestaShop, pas a la maquette : psbuild/tiroir_panier.js.
@@ -997,15 +970,27 @@ for _vieux, _neuf in [
      "MOT('exemplaireAjouter').replace('%nom%', prod.name)"),
     ("'Retirer ' + prod.name + ' du panier'",
      "MOT('panierRetirer').replace('%nom%', prod.name)"),
+    # wishToggle() traduisait son libelle, wishRestore() non : au clic le
+    # bouton de la fiche disait « Saved to my wishlist », et au
+    # rechargement suivant « Enregistre dans mes envies ». La meme
+    # phrase, deux fois ecrite, une seule fois traduite.
+    ("btn.textContent = full ? '♥ Enregistré dans mes envies' : '♥';",
+     "btn.textContent = full ? '♥ ' + MOT('enviesEnregistre') : '♥';"),
+    # Le hamburger : l'echappee du premier bloc a11y reposait l'etiquette
+    # en francais. Le second bloc du menu la reecrit traduite dans le meme
+    # evenement, donc personne ne la voyait — mais elle est fausse, et
+    # c'est l'ordre d'enregistrement des ecouteurs qui la cache.
+    ("hamBtn.setAttribute('aria-label', 'Ouvrir le menu de navigation');",
+     "hamBtn.setAttribute('aria-label', MOT('menuOuvrir'));"),
 ]:
     # le libelle du rapport est l indice, pas la phrase : la console
     # Windows ne sait pas ecrire les caracteres qu elle contient
     _mots_remplaces += 1
     must(js.count(_vieux) == 1,
-         'mots: phrase %d sur %d a remplacer' % (_mots_remplaces, 15))
+         'mots: phrase %d sur %d a remplacer' % (_mots_remplaces, 17))
     js = js.replace(_vieux, _neuf)
-must(_mots_remplaces == 15,
-     'mots: les 15 phrases vivantes d app.js sont traduisibles')
+must(_mots_remplaces == 17,
+     'mots: les 17 phrases vivantes d app.js sont traduisibles')
 ok(f'mots: {_mots_remplaces} phrases d app.js lisent le dictionnaire du gabarit')
 
 
@@ -1397,6 +1382,183 @@ ok('retrait: la banniere du panneau de recette retire')
 js = _js_retirer_exact(js, '// Points awarded directly inside coNext' + chr(10) + chr(10))
 ok('retrait: la derniere note sur la caisse du prototype')
 
+# ── 13. le panier de la maquette — le dernier pan
+#    Son tiroir et ses boites (#drawer, #ov, #dItems, #dCnt, #dTotal, #dXs,
+#    #dXsList, #dAdded, #cartBtn, #dsFill, #dsVal, #dsMsg, .cb) ne sont dans
+#    aucun gabarit livre, et aucune des trente pages servies — dix types,
+#    trois langues — n'en porte un seul. Le vrai tiroir est #odysTiroir,
+#    rendu par _partials/cart-drawer.tpl et pilote par tiroir_panier.js ;
+#    il lit le panier de PrestaShop.
+#
+#    Ce pan avait ete garde parce qu'il tenait a une action VIVANTE : le
+#    repartiteur portait `case 'add-to-cart':` et `case 'add-prod':`, tous
+#    deux gardes par `if (!p.idProduct)`. Un bouton d'achat sans identifiant
+#    de produit serait donc tombe dans ce panier-la, qui ne commande rien.
+#    Sa mort ne reposait pas sur un conteneur absent mais sur une invariante
+#    de gabarit, ce qui est une preuve plus faible. Elle a ete relevee : les
+#    cinq boutons d'achat des gabarits ecrivent `data-id-product` en dur dans
+#    la balise — les deux de la fiche sous `{if $odysAchetable}`, les deux du
+#    carrousel dans `{foreach from=$accessories}`, celui de la carte dans la
+#    branche `{else}` d'un produit achetable — et les 187 boutons releves sur
+#    les pages servies le portent tous. docker/verify.sh tient maintenant
+#    cette invariante, sans quoi elle se perdrait au premier gabarit neuf.
+#
+#    Mort partout, sauf a un endroit, et c'est ce qui manquait a la preuve :
+#    la branche de succes du pont appelait ODYS.addToCart pour le seul
+#    clignotement du bouton. Ce clignotement EST visible — sur /ar/ le
+#    bouton arabe affichait « ✓ Ajouté ! » en francais, et sur /en/ aussi.
+#    Il reste donc, mais traduit, et sans remplacer le contenu du bouton :
+#    textContent emportait <span class="blbl"> et <div class="bspin">, et
+#    l'etiquette du volume ne suivait plus apres un ajout.
+_vieux_pont = "          ODYS.addToCart('ps-' + idProduct, name, price, btn);"
+_neuf_pont = (
+    "          /* Le bouton dit lui-meme que c'est entre. La phrase passe" + LF
+    + "             par le dictionnaire : le panier de la maquette ecrivait" + LF
+    + "             « ✓ Ajouté ! » en francais dans les trois langues. Et elle" + LF
+    + "             va dans .blbl quand il y en a un — ecrire dans le" + LF
+    + "             textContent du bouton emportait son libelle et son" + LF
+    + "             rouet, que l'etiquette du volume cherche ensuite. */" + LF
+    + "          var odysCible = btn.querySelector('.blbl') || btn;" + LF
+    + "          var odysAvantAjout = odysCible.textContent;" + LF
+    + "          btn.classList.add('done');" + LF
+    + "          odysCible.textContent = MOT('panierAjouteBouton');" + LF
+    + "          setTimeout(function () {" + LF
+    + "            btn.classList.remove('done');" + LF
+    + "            odysCible.textContent = odysAvantAjout;" + LF
+    + "          }, 1600);")
+must(js.count(_vieux_pont) == 1, "panier: la branche de succes du pont est unique")
+js = js.replace(_vieux_pont, _neuf_pont, 1)
+
+# Le repli du pont : son selecteur exige deja [data-id-product], donc cette
+# branche ne s'atteint qu'avec un attribut present mais vide. Elle ne doit
+# rien ajouter du tout plutot qu'entrer dans un panier que PrestaShop ignore.
+_vieux_repli = ("    } else {" + LF
+                + "      /* Fallback for prototype mode */" + LF
+                + "      ODYS.addToCart(btn.dataset.code || 'prod', name, price, btn);" + LF
+                + "    }")
+must(js.count(_vieux_repli) == 1, "panier: la branche de repli du pont est unique")
+js = js.replace(_vieux_repli, "    }", 1)
+js = js.replace("    if (idProduct) {", (
+    "    /* Pas de repli : le selecteur du pont exige [data-id-product] et" + LF
+    + "       les cinq boutons d'achat des gabarits le portent en dur." + LF
+    + "       docker/verify.sh echoue si un bouton d'achat parait sans lui. */" + LF
+    + "    if (idProduct) {"), 1)
+# Et la note qui annoncait la mise a jour du panier de la maquette.
+js = _js_retirer_exact(js, "          /* Also update ODYS cart UI */" + LF, 1)
+
+must(js.count("/* Pas de repli :") == 1,
+     "panier: le pont n'a plus de repli vers la maquette")
+
+# Le repartiteur. open-cart, close-cart et add-oud ne sont ecrits dans aucun
+# gabarit ; chg-item et remove-item n'etaient poses que par renderCart, qui
+# disparait. add-to-cart et add-prod partent avec leur garde : un bouton sans
+# identifiant ne fera plus rien, au lieu de faire quelque chose d'invisible.
+for _case in ("open-cart", "close-cart", "add-to-cart", "add-prod",
+              "chg-item", "remove-item", "add-oud"):
+    _lignes = [_l for _l in js.split(LF) if ("case '" + _case + "':") in _l]
+    must(len(_lignes) == 1,
+         "panier: un seul case pour " + _case + " (trouve %d)" % len(_lignes))
+    js = js.replace(_lignes[0] + LF, "")
+
+# Le seul ecouteur de `change` du prototype : #coVille etait la ville de sa
+# caisse, et selectPM et renderCoSummary ont disparu avec elle. Deux appels a
+# des methodes qui n'existent plus, que seule l'absence de #coVille et de .pm
+# empechait de lever.
+js = _js_retirer_exact(js, (
+    'document.addEventListener(QchangeQ, function(e) {' + LF
+    + '  if (e.target.closest(Q[data-action="select-pm"]Q))'
+    + ' ODYS.selectPM(e.target.closest(Q.pmQ));' + LF
+    + '  if (e.target.id === QcoVilleQ)'
+    + ' { ODYS.updateShip(); ODYS.renderCoSummary(); }' + LF
+    + '});' + LF).replace('Q', chr(39)), 1)
+
+# Les voiles des fenetres du prototype.
+js = _js_retirer_exact(js, "document.getElementById('ov')       "
+    "?.addEventListener('click', () => ODYS.closeCart());" + LF, 1)
+js = _js_retirer_exact(js, "document.getElementById('coOv')     "
+    "?.addEventListener('click', () => ODYS.closeCheckout());" + LF, 1)
+
+# La touche Echap. ODYS.closeCheckout n'existe plus depuis que l'etape 8 l'a
+# retiree de l'API publique, et cette ligne l'appelait SANS garde : chaque
+# Echap, sur n'importe quelle page, levait
+#   Uncaught TypeError: ODYS.closeCheckout is not a function
+# La garde des disparus ne pouvait pas le voir : son motif exclut ce qui est
+# precede d'un point, donc tout ce qui passe par ODYS. Elle le voit
+# maintenant, dans sa seconde passe plus bas.
+_vieux_echap = ("  ODYS.closeCheckout(); ODYS.closeAccount();"
+                " ODYS.closeNotes(); ODYS.closeCart();")
+must(js.count(_vieux_echap) == 1, "panier: la ligne d'Echap est unique")
+js = js.replace(_vieux_echap, "  ODYS.closeAccount(); ODYS.closeNotes();", 1)
+
+# Le bloc d'accessibilite du tiroir de la maquette : il suit la classe de
+# #drawer, qui n'est nulle part. Son commentaire cite openCart et closeCart.
+js = _js_retirer_exact(js, (
+    "  /* ── Cart drawer: aria-hidden + focus management "
+    + "─" * 14 + " */" + LF
+    + "  var cartDrawer = document.getElementById('drawer');" + LF
+    + "  var cartBtn = document.getElementById('cartBtn');" + LF
+    + "  if (cartDrawer) {" + LF
+    + "    // Every open/close path (openCart/closeCart, ODYS.*, overlay, Escape)" + LF
+    + "    // toggles .on, so follow the class rather than wrapping functions." + LF
+    + "    new MutationObserver(function () {" + LF
+    + "      var open = cartDrawer.classList.contains('on');" + LF
+    + "      if (cartDrawer.getAttribute('aria-hidden') === (open ? 'false' : 'true')) return;" + LF
+    + "      cartDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');" + LF
+    + "      if (open) {" + LF
+    + "        var closeBtn = cartDrawer.querySelector('.d-close');" + LF
+    + "        if (closeBtn) setTimeout(function () { closeBtn.focus(); }, 80);" + LF
+    + "      } else if (cartBtn && cartDrawer.contains(document.activeElement)) {" + LF
+    + "        cartBtn.focus();" + LF
+    + "      }" + LF
+    + "    }).observe(cartDrawer, { attributes: true, attributeFilter: ['class'] });" + LF
+    + "  }" + LF + LF), 1)
+
+# Les fonctions. renderCart fabriquait les lignes du tiroir — une photo
+# unsplash en dur pour chacune, « Élaboré au Maroc », « Retirer » et
+# « Votre panier est vide » ; renderXS proposait trois parfums a 219, 229 et
+# 249 DH, prix inventes et photos unsplash ; updateShip ecrivait
+# « Livraison gratuite debloquee ! » dans une barre absente. addProd ajoutait
+# « L'Icône » quel que soit le parfum regarde, et addOud un poids d'oud
+# depuis un bouton add-oud qu'aucun gabarit ne porte. getCartTotal n'avait
+# aucun appelant.
+for _f in ("addToCart", "renderCart", "chgItem", "removeItem",
+           "updateCartBadges", "getShipZone", "getShipCost", "updateShip",
+           "getCartTotal", "renderXS", "openCart", "closeCart",
+           "addProd", "addOud"):
+    js = _js_retirer_fonction(js, _f)
+js = _js_retirer_donnee(js, "let cart = [];")
+js = _js_retirer_donnee(js, "const SHIPPING = {")
+
+# go() mettait a jour les pastilles du panier de la maquette a chaque page.
+js = _js_retirer_exact(js, "  updateCartBadges();" + LF, 1)
+
+js = _js_retirer_api(js, [
+    "openCart", "closeCart", "addToCart", "chgItem", "removeItem",
+    "addProd", "addOud", "updateShip",
+])
+must(js.count("'✓ Ajouté !'") == 1,
+     "panier: la phrase du bouton ne subsiste que dans le repli de MOT")
+must("images.unsplash.com" not in js,
+     "panier: plus une photo inventee dans app.js")
+must(js.count("Votre panier est vide") == 1,
+     "panier: le panier vide ne subsiste que dans le repli de MOT")
+
+# Les deux titres de section restent seuls, au-dessus du vide : « CART » et
+# le filet de SHIPPING, qui annoncait 20 DH Casa et 30 DH partout au Maroc.
+# Les vrais frais de port sont ceux de PrestaShop, que le tiroir lit.
+js, _n = re.subn("// \u2500\u2500 CART \u2500\u2500\n+"
+                 "/\\* \u2500\u2500 SHIPPING \u2014[^\n]*\n+",
+                 "", js, count=1)
+must(_n == 1, "panier: les deux titres de section du prototype partent")
+
+# Et la note d'en-tete qui donnait addToCart comme la chose a remplacer :
+# c'est fait, le pont parle a PrestaShop.
+js = _js_retirer_exact(js,
+    " *   - Cart operations: replace addToCart() with"
+    " prestashop.emit('updateCart')" + LF, 1)
+ok("retrait: le panier de la maquette, ses prix inventes et ses phrases en dur")
+
+
 # Plus aucun nom retire ne doit rester cite. Les listes ci-dessus sont
 # ecrites a la main, et une liste ecrite a la main oublie : anSendChat et
 # anGenerateReport avaient survecu en appelant anTab et anQuick, disparues.
@@ -1423,6 +1585,10 @@ _disparus = [
     "showAccLogin", "showRegister", "showLogin", "doLogin", "doRegister",
     "doLogout", "REWARDS",
     "searchNote", "PARFUMS_DB",
+    "addToCart", "renderCart", "chgItem", "removeItem",
+    "updateCartBadges", "getShipZone", "getShipCost", "updateShip",
+    "getCartTotal", "renderXS", "openCart", "closeCart",
+    "addProd", "addOud", "SHIPPING",
     "qPick", "qPick2", "qPick3", "showQuizResult",
     "addQuizResult", "resetQuiz", "updateQProg",
     "quizResults", "qAnswers", "qStep",
@@ -1432,7 +1598,22 @@ _restes = [_n for _n in _disparus
 _sur(not _restes,
      "retrait: aucun nom retire n est encore cite dans app.js (restes: %s)"
      % ", ".join(_restes))
-ok("retrait: les %d noms retires ne sont plus cites nulle part" % len(_disparus))
+
+# Seconde passe : ce qui passe par l'API publique. Le motif ci-dessus exclut
+# ce qui est precede d'un point, pour ne pas confondre `i.qty` avec une
+# variable `qty`. ODYS.closeCheckout() lui a donc echappe : l'etape 8 avait
+# retire closeCheckout de l'API, la touche Echap l'appelait toujours sans
+# garde, et chaque Echap sur n'importe quelle page de la boutique levait
+#   Uncaught TypeError: ODYS.closeCheckout is not a function
+# Le rapport de construction etait vert, node --check aussi : une methode
+# absente ne se voit qu'a l'execution. Celle-ci la cherche a l'ecrit.
+_restes_api = [_n for _n in _disparus
+               if re.search(r"ODYS\s*\.\s*" + re.escape(_n) + r"(?![\w$])", js)]
+_sur(not _restes_api,
+     "retrait: l API publique ODYS.* ne cite plus de disparu (restes: %s)"
+     % ", ".join(_restes_api))
+ok("retrait: les %d noms retires ne sont plus cites nulle part, "
+   "ni en direct ni par ODYS.*" % len(_disparus))
 
 ok("retrait: app.js passe de %d a %d octets (-%d)"
    % (_av, len(js), _av - len(js)))
@@ -2010,8 +2191,8 @@ if prod_tpl.exists():
        en une ligne, sans dejuger le produit. *}
     <div class="olf-pyr" role="region" aria-label="{l s='Pyramide de l\\'inspiration' d='Shop.Theme.Odys'}">
       <div class="olf-hd" id="olf-hd-label">{l s='Pyramide de l\\'inspiration' d='Shop.Theme.Odys'}</div>
-      <p class="olf-src">Les notes de la fragrance dont ce parfum s'inspire.
-        La composition ODYS cherche a en retrouver l'accord.</p>
+      <p class="olf-src">{l s='Les notes de la fragrance dont ce parfum s\\'inspire.
+        La composition ODYS cherche à en retrouver l\\'accord.' d='Shop.Theme.Odys'}</p>
 """
 
     for _var, _classe, _aria, _nom, _type, _svg in etages:
@@ -2293,7 +2474,6 @@ if preview_src.exists():
     idx.write_text(page, encoding="utf-8")
 
 print("ODYS PrestaShop theme v5.0")
-print("\n".join(report))
 # PrestaShop names a combined bundle from the list of files that went into it,
 # not from their contents, so editing the stylesheet leaves the URL unchanged
 # and a returning browser keeps yesterday's CSS. There is no Cache-Control on
@@ -2309,6 +2489,70 @@ cache_dir.mkdir(parents=True, exist_ok=True)
 </IfModule>
 """, encoding="utf-8")
 ok("assets/cache/.htaccess written (a deploy is seen without a hard refresh)")
+
+# ── Les gabarits en fins de ligne UNIX ──────────────────────────────────
+# Une cle de traduction, c'est la phrase francaise elle-meme, octet pour
+# octet. Les gabarits sont ecrits sous Windows, donc en CRLF ; le catalogue
+# XLIFF, lui, est ecrit par Python en LF. Une phrase qui tient sur deux
+# lignes dans un {l s='...'} porte donc un retour chariot que sa cle n'a
+# pas : la traduction n'est jamais trouvee et la phrase reste francaise
+# dans les trois langues. Huit phrases etaient dans ce cas, dont la
+# presentation de la pyramide olfactive, sur chaque fiche produit.
+# Rien ne se voyait : la page s'affiche, simplement en francais.
+_crlf = 0
+for _t in sorted(THEME.rglob("*.tpl")):
+    _octets = _t.read_bytes()
+    if b"\r\n" in _octets:
+        _crlf += 1
+        _t.write_bytes(_octets.replace(b"\r\n", b"\n"))
+ok("gabarits: %d fichiers passes en fins de ligne UNIX" % _crlf)
+
+# Une apostrophe non echappee ferme le {l s='...'} en plein milieu :
+# Smarty rend alors une erreur fatale, et seulement a la visite de la page.
+# La construction, elle, n'a rien a dire. On la lui fait dire ici.
+_ouvertes = []
+for _t in sorted(THEME.rglob("*.tpl")):
+    _s = _t.read_bytes().decode("utf-8")
+    _j = _s.find("{l s='")
+    while _j != -1:
+        _k = _j + 6
+        while _k < len(_s):
+            if _s[_k] == chr(92):
+                _k += 2
+                continue
+            if _s[_k] == chr(39):
+                break
+            _k += 1
+        if _k + 1 < len(_s) and _s[_k + 1] not in " }":
+            _ouvertes.append(_t.name + ": " + _s[_j:_j + 60])
+        _j = _s.find("{l s='", _k + 1)
+must(not _ouvertes,
+     "gabarits: chaque apostrophe d'une cle de traduction est echappee"
+     + (" (" + "; ".join(_ouvertes) + ")" if _ouvertes else ""))
+
+_CLE = re.compile(r"""{l\s+s=(['"])((?:\\.|(?!\1).)*?)\1""", re.S)
+_portent_cr = sorted({_t.name for _t in THEME.rglob("*.tpl")
+                      for _m in _CLE.finditer(_t.read_bytes().decode("utf-8"))
+                      if "\r" in _m.group(2)})
+must(not _portent_cr,
+     "gabarits: aucune cle {l s=} ne porte de retour chariot"
+     + (" (" + ", ".join(_portent_cr) + ")" if _portent_cr else ""))
+
+# ── Le sol de l'ambiance est celui du site ──────────────────────────────
+# odys_loyalty borne les couleurs d'une ambiance pour qu'elles se lisent sur
+# AMB_SOL, recopie a la main depuis --odys-cream. Si l'ivoire du site change
+# sans que cette constante suive, le module continue de calculer — juste,
+# pour un fond qui n'existe plus. C'est la derive qui a rendu les prix
+# illisibles la premiere fois ; elle ne peut plus passer en silence.
+_mod_src = (THEME / "modules" / "odys_loyalty" / "odys_loyalty.php").read_text(encoding="utf-8")
+_sol_php = re.search(r"AMB_SOL = '(#[0-9A-Fa-f]{6})'", _mod_src)
+_sol_css = re.search(r"--odys-cream:\s*(#[0-9A-Fa-f]{6})", NUIT)
+must(_sol_php and _sol_css and _sol_php.group(1).upper() == _sol_css.group(1).upper(),
+     "ambiance: le sol du module est l'ivoire de la feuille de style"
+     + ((" (module %s, feuille %s)" % (_sol_php.group(1) if _sol_php else "?",
+                                       _sol_css.group(1) if _sol_css else "?"))
+        if not (_sol_php and _sol_css and _sol_php.group(1).upper() == _sol_css.group(1).upper())
+        else ""))
 
 # Les mots du theme en anglais et en arabe, livres avec le theme.
 # Voir psbuild/traductions_xlf.py : un domaine qui n'a pas de fichier
@@ -2338,4 +2582,5 @@ _lang_dst.parent.mkdir(parents=True, exist_ok=True)
 shutil.copy2(HERE / 'maj_langues.php', _lang_dst)
 ok('deploy: maj-langues.php (%d octets)' % _lang_dst.stat().st_size)
 
+print("\n".join(report))
 print(f"\n  written: {DIST}")

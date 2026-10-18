@@ -92,7 +92,7 @@
     <meta itemprop="name" content="{$product.name|escape:'html':'UTF-8'}"/>
     <meta itemprop="sku"  content="{$product.reference}"/>
 
-    <div class="p-code">Collection Inspiration · ODYS {$product.reference}</div>
+    <div class="p-code">{l s='Collection Inspiration' d='Shop.Theme.Odys'} · ODYS {$product.reference}</div>
     <h1 class="p-name" itemprop="name">{$product.name|escape:'html':'UTF-8'}</h1>
     {* What this product is, resolved once so the heading, the live price line
        and the cart button cannot disagree. A product carrying a "Contenance"
@@ -356,7 +356,8 @@
         <span aria-hidden="true">♡</span>
       </button>
       {if $odysAchetable}
-      <button class="btn-cart" id="addBtn" data-action="add-prod"
+      <button class="btn-cart" id="addBtn" type="button" data-action="add-prod"
+              data-name="{$product.name|escape:'html':'UTF-8'}"
               data-id-product="{$product.id_product}"
               data-id-product-attribute="{$product.combinations[0].id_combination|default:0}"
               aria-label="Ajouter {$product.name|escape:'html':'UTF-8'} au panier">
@@ -375,7 +376,7 @@
          la meme que partout ailleurs sur le site. *}
       <p class="oos-note">{l s='Ce parfum revient bientôt. Écrivez-nous pour être prévenu.' d='Shop.Theme.Odys'}</p>
       {include file='_partials/contact-links.tpl' style='inline'
-               subject="Bonjour ODYS, prévenez-moi du retour de `$product.name`."}
+               subject="{l s='Bonjour ODYS, prévenez-moi du retour de %nom%.' sprintf=['%nom%' => $product.name] d='Shop.Theme.Odys'}"}
     {/if}
 
     {* The delivery cost belongs here, not three steps later at the checkout:
@@ -384,9 +385,11 @@
     {if $odysShipMin > 0}
       <p class="odys-ship-note">
         {if $odysShipFrom > 0 && $product.price_amount >= $odysShipFrom}
-          <strong>{l s='Livraison offerte' d='Shop.Theme.Odys'}</strong> — au-delà de {$odysShipFrom|intval} DH.
+          <strong>{l s='Livraison offerte' d='Shop.Theme.Odys'}</strong> {l s='— au-delà de %montant% DH.' sprintf=['%montant%' => $odysShipFrom|intval] d='Shop.Theme.Odys'}
         {else}
-          Livraison {$odysShipMin|intval}{if $odysShipMax > $odysShipMin}–{$odysShipMax|intval}{/if} DH
+          {assign var='odysShipPrix' value=$odysShipMin|intval}
+          {if $odysShipMax > $odysShipMin}{assign var='odysShipPrix' value=$odysShipPrix|cat:'–'|cat:$odysShipMax|intval}{/if}
+          {l s='Livraison %prix% DH' sprintf=['%prix%' => $odysShipPrix] d='Shop.Theme.Odys'}
           {if $odysShipFrom > 0}· <strong>{l s='offerte dès %montant% DH' sprintf=['%montant%' => $odysShipFrom|intval] d='Shop.Theme.Odys'}</strong>{/if}
         {/if}
       </p>
@@ -401,7 +404,8 @@
        chercher. Si le script ne tourne pas, le parfum entre quand meme au
        panier et la case reste a cocher a la main : rien ne se perd. *}
     {if $odysAchetable}
-      <button class="btn-gift" data-action="add-gift"
+      <button class="btn-gift" type="button" data-action="add-gift"
+              data-name="{$product.name|escape:'html':'UTF-8'}"
               data-id-product="{$product.id_product}"
               data-id-product-attribute="{$product.combinations[0].id_combination|default:0}"
               aria-label="Offrir {$product.name|escape:'html':'UTF-8'} — ajouter au panier avec un message">
@@ -411,7 +415,7 @@
 
     {* a COD buyer wants a human before a driver turns up asking for cash *}
     {include file='_partials/contact-links.tpl' style='inline'
-      subject="Bonjour ODYS, je souhaite des informations sur `$product.name`."}
+      subject="{l s='Bonjour ODYS, je souhaite des informations sur %nom%.' sprintf=['%nom%' => $product.name] d='Shop.Theme.Odys'}"}
 
     {* Services — discreet line icons, the same family as the header *}
     <ul class="svc-grid" aria-label="{l s='Nos services' d='Shop.Theme.Odys'}" role="list">

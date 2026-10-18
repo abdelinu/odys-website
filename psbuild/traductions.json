@@ -1869,6 +1869,234 @@
     "+%nombre% points fidélité": {
       "en": "+%nombre% loyalty points",
       "ar": "+%nombre% نقاط ولاء"
+    },
+    "✓ Ajouté !": {
+      "en": "✓ Added!",
+      "ar": "✓ أُضيف!"
+    },
+    "Programme ODYS": {
+      "en": "ODYS Programme",
+      "ar": "برنامج أوديس"
+    },
+    "Cumulez des points à chaque commande réglée et échangez-les contre des avantages exclusifs.": {
+      "en": "Earn points on every paid order and redeem them for exclusive benefits.",
+      "ar": "اجمع النقاط مع كل طلب مؤدّى واستبدلها بمزايا حصرية."
+    },
+    "Découvrir le programme": {
+      "en": "Discover the programme",
+      "ar": "اكتشف البرنامج"
+    },
+    "%nombre% point": {
+      "en": "%nombre% point",
+      "ar": "%nombre% نقطة"
+    },
+    "%nombre% points": {
+      "en": "%nombre% points",
+      "ar": "%nombre% نقاط"
+    },
+    "plus que %nombre% pt pour %recompense%": {
+      "en": "only %nombre% pt to go for %recompense%",
+      "ar": "بقيت %nombre% نقطة للحصول على %recompense%"
+    },
+    "plus que %nombre% pts pour %recompense%": {
+      "en": "only %nombre% pts to go for %recompense%",
+      "ar": "بقيت %nombre% نقاط للحصول على %recompense%"
+    },
+    "Oud &middot; Boukhour exclus du programme": {
+      "en": "Oud &middot; Boukhour excluded from the programme",
+      "ar": "العود والبخور غير مشمولين بالبرنامج"
+    },
+    "%nombre% pt": {
+      "en": "%nombre% pt",
+      "ar": "%nombre% نقطة"
+    },
+    "%nombre% pts": {
+      "en": "%nombre% pts",
+      "ar": "%nombre% نقاط"
+    },
+    "Mes envies | ODYS Parfums": {
+      "en": "My wishlist | ODYS Parfums",
+      "ar": "رغباتي | ODYS Parfums"
+    },
+    "Les parfums ODYS que vous avez mis de côté.": {
+      "en": "The ODYS fragrances you have set aside.",
+      "ar": "عطور أوديس التي وضعتها جانبًا."
+    },
+    "Votre sélection": {
+      "en": "Your selection",
+      "ar": "مختاراتك"
+    },
+    "Gardée sur cet appareil, sans compte. Elle vous attend à votre prochaine visite.": {
+      "en": "Kept on this device, with no account. It will be waiting at your next visit.",
+      "ar": "محفوظة على هذا الجهاز، بدون حساب. ستنتظرك في زيارتك القادمة."
+    },
+    "Rien de mis de côté pour l'instant. Touchez le ♡ sur un parfum et vous le retrouverez ici.": {
+      "en": "Nothing set aside yet. Tap the ♡ on a fragrance and you will find it here.",
+      "ar": "لا شيء محفوظ بعد. المس ♡ على عطر وستجده هنا."
+    },
+    "Collection Inspiration": {
+      "en": "Inspiration collection",
+      "ar": "مجموعة الإلهام"
+    },
+    "Livraison %prix% DH": {
+      "en": "Delivery %prix% DH",
+      "ar": "التوصيل %prix% درهم"
+    },
+    "— au-delà de %montant% DH.": {
+      "en": "— above %montant% DH.",
+      "ar": "— ابتداءً من %montant% درهم."
+    },
+    "Bonjour ODYS, prévenez-moi du retour de %nom%.": {
+      "en": "Hello ODYS, please let me know when %nom% is back.",
+      "ar": "مرحبًا أوديس، أخبروني عند عودة %nom%."
+    },
+    "Bonjour ODYS, je souhaite des informations sur %nom%.": {
+      "en": "Hello ODYS, I would like information about %nom%.",
+      "ar": "مرحبًا أوديس، أودّ معلومات عن %nom%."
+    },
+    "Indisponible": {
+      "en": "Unavailable",
+      "ar": "غير متوفر"
+    },
+    "Commande reçue": {
+      "en": "Order received",
+      "ar": "تم استلام الطلب"
+    },
+    "Nous avons votre commande": {
+      "en": "We have your order",
+      "ar": "طلبك وصلنا"
+    },
+    "En préparation": {
+      "en": "Being prepared",
+      "ar": "قيد التحضير"
+    },
+    "Votre flacon est emballé à la main": {
+      "en": "Your bottle is packed by hand",
+      "ar": "قارورتك تُغلَّف يدويًا"
+    },
+    "Expédiée": {
+      "en": "Shipped",
+      "ar": "تم الشحن"
+    },
+    "En route vers vous": {
+      "en": "On its way to you",
+      "ar": "في الطريق إليك"
+    },
+    "Livrée": {
+      "en": "Delivered",
+      "ar": "تم التسليم"
+    },
+    "Bonne découverte": {
+      "en": "Enjoy the discovery",
+      "ar": "اكتشاف ممتع"
+    },
+    "Rien ne correspond à «&nbsp;%mot%&nbsp;».": {
+      "en": "Nothing matches «&nbsp;%mot%&nbsp;».",
+      "ar": "لا نتائج لـ «&nbsp;%mot%&nbsp;»."
+    },
+    "Notez-la. Elle suffit à suivre votre colis": {
+      "en": "Note it down. It is all you need to track your parcel",
+      "ar": "دوّنه. يكفي لتتبّع طردك"
+    },
+    "Bonjour ODYS, ma commande %reference%.": {
+      "en": "Hello ODYS, my order %reference%.",
+      "ar": "مرحبًا أوديس، طلبي %reference%."
+    },
+    "Passée le %date%": {
+      "en": "Placed on %date%",
+      "ar": "بتاريخ %date%"
+    },
+    "Donner mon avis sur %nom%": {
+      "en": "Write my review of %nom%",
+      "ar": "اكتب رأيي عن %nom%"
+    },
+    "Bonjour ODYS, je n'arrive pas à réinitialiser mon mot de passe.": {
+      "en": "Hello ODYS, I cannot reset my password.",
+      "ar": "مرحبًا أوديس، لا أستطيع إعادة تعيين كلمة المرور."
+    },
+    "Bonjour ODYS, je n'ai pas reçu le lien de mot de passe.": {
+      "en": "Hello ODYS, I did not receive the password link.",
+      "ar": "مرحبًا أوديس، لم يصلني رابط كلمة المرور."
+    },
+    "point": {
+      "en": "point",
+      "ar": "نقطة"
+    },
+    "points": {
+      "en": "points",
+      "ar": "نقاط"
+    },
+    "Valables jusqu'au %date% — un achat remet le compteur à zéro.": {
+      "en": "Valid until %date% — any purchase resets the clock.",
+      "ar": "صالحة حتى %date% — أي شراء يعيد العدّ من جديد."
+    },
+    "— votre code&nbsp;:": {
+      "en": "— your code:",
+      "ar": "— رمزك:"
+    },
+    "Saisissez-le dans votre panier. Valable %mois% mois, une seule fois, une seule récompense par commande.": {
+      "en": "Enter it in your cart. Valid for %mois% months, once only, one reward per order.",
+      "ar": "أدخله في سلّتك. صالح %mois% أشهر، مرة واحدة، ومكافأة واحدة لكل طلب."
+    },
+    "Les récompenses": {
+      "en": "The rewards",
+      "ar": "المكافآت"
+    },
+    "Les récompenses s'ouvrent à partir de %seuil% points — encore %reste% à cumuler.": {
+      "en": "Rewards open from %seuil% points — %reste% still to earn.",
+      "ar": "تُفتح المكافآت ابتداءً من %seuil% نقطة — بقيت %reste%."
+    },
+    "Une remise de %montant% DH, la valeur de 5&nbsp;g de notre oud d'entrée de gamme.": {
+      "en": "A %montant% DH discount, the value of 5&nbsp;g of our entry-level oud.",
+      "ar": "خصم %montant% درهم، قيمة 5&nbsp;غرامات من عودنا الأساسي."
+    },
+    "Choix %rang%": {
+      "en": "Choice %rang%",
+      "ar": "الاختيار %rang%"
+    },
+    "Votre choix": {
+      "en": "Your choice",
+      "ar": "اختيارك"
+    },
+    "Aucun article en stock pour cette récompense.": {
+      "en": "No item in stock for this reward.",
+      "ar": "لا يوجد منتج متوفر لهذه المكافأة."
+    },
+    "Échanger %nombre% points": {
+      "en": "Redeem %nombre% points",
+      "ar": "استبدال %nombre% نقطة"
+    },
+    "Encore %nombre% pts": {
+      "en": "%nombre% pts to go",
+      "ar": "بقيت %nombre% نقطة"
+    },
+    "Votre historique": {
+      "en": "Your history",
+      "ar": "سجلّك"
+    },
+    "Mouvements de points": {
+      "en": "Points movements",
+      "ar": "حركات النقاط"
+    },
+    "Date": {
+      "en": "Date",
+      "ar": "التاريخ"
+    },
+    "Motif": {
+      "en": "Reason",
+      "ar": "السبب"
+    },
+    "Points": {
+      "en": "Points",
+      "ar": "النقاط"
+    },
+    "Aucun mouvement pour l'instant.": {
+      "en": "No movement yet.",
+      "ar": "لا حركات بعد."
+    },
+    "Les règles du programme": {
+      "en": "The programme rules",
+      "ar": "قواعد البرنامج"
     }
   },
   "autres_domaines": {
@@ -1900,6 +2128,18 @@
       "Proceed to checkout": {
         "en": "Proceed to checkout",
         "ar": "إتمام الطلب"
+      },
+      "Subscribe": {
+        "en": "Subscribe",
+        "ar": "اشترك"
+      },
+      "OK": {
+        "en": "OK",
+        "ar": "موافق"
+      },
+      "Share": {
+        "en": "Share",
+        "ar": "مشاركة"
       }
     },
     "ShopThemeCustomeraccount": {
@@ -1944,6 +2184,18 @@
       "Close": {
         "en": "Close",
         "ar": "إغلاق"
+      },
+      "New": {
+        "en": "New",
+        "ar": "جديد"
+      },
+      "(tax incl.)": {
+        "en": "(tax incl.)",
+        "ar": "(شامل الضريبة)"
+      },
+      "(tax excl.)": {
+        "en": "(tax excl.)",
+        "ar": "(غير شامل الضريبة)"
       }
     },
     "ShopThemeCatalog": {
@@ -1974,6 +2226,30 @@
       "Search": {
         "en": "Search",
         "ar": "بحث"
+      },
+      "%s other products in the same category:": {
+        "en": "%s other products in the same category:",
+        "ar": "%s منتجات أخرى في نفس الفئة:"
+      },
+      "New": {
+        "en": "New",
+        "ar": "جديد"
+      },
+      "On sale!": {
+        "en": "On sale!",
+        "ar": "تخفيض!"
+      },
+      "Pack": {
+        "en": "Pack",
+        "ar": "علبة"
+      },
+      "Reduced price": {
+        "en": "Reduced price",
+        "ar": "سعر مخفّض"
+      },
+      "Online only": {
+        "en": "Online only",
+        "ar": "على الإنترنت فقط"
       }
     },
     "ModulesProductcommentsShop": {
@@ -2092,6 +2368,12 @@
       "Your review appreciation cannot be sent": {
         "en": "Your review appreciation cannot be sent",
         "ar": "تعذّر إرسال تقديرك لهذا الرأي"
+      }
+    },
+    "ShopFormsLabels": {
+      "Your email address": {
+        "en": "Your email address",
+        "ar": "عنوان بريدك الإلكتروني"
       }
     }
   }

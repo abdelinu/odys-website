@@ -22,9 +22,9 @@
     <p class="odys-404-eyebrow">{l s='Aucun résultat' d='Shop.Theme.Odys'}</p>
     <p class="odys-404-title">
       {if isset($search_string) && $search_string}
-        Rien ne correspond à «&nbsp;{$search_string|escape:'html':'UTF-8'}&nbsp;».
+        {l s='Rien ne correspond à «&nbsp;%mot%&nbsp;».' sprintf=['%mot%' => $search_string|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}
       {else}
-        Cette sélection est vide pour le moment.
+        {l s='Cette sélection est vide pour le moment.' d='Shop.Theme.Odys'}
       {/if}
     </p>
     <p class="odys-404-lede">

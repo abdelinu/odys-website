@@ -876,7 +876,7 @@ grep -q 'if \$odysWa || \$odysTel' ../dist/odys-theme-ps8/themes/odys/templates/
 
 oc=../dist/odys-theme-ps8/themes/odys/templates/checkout/order-confirmation.tpl
 
-grep -q "subject=\"Bonjour ODYS, ma commande" "$oc"   && ok "la reference part avec le message WhatsApp"   || no "le message WhatsApp de la commande est vide de sa reference"
+grep -q "'%reference%' => \$order.details.reference" "$oc"   && ok "la reference part avec le message WhatsApp"   || no "le message WhatsApp de la commande est vide de sa reference"
 
 # Un seul encart dans le corps de la page : le deuxieme que j avais ajoute
 
@@ -2673,9 +2673,22 @@ if [ -n "$bo_slug" ]; then
 
   bo_accent=$(sql "SELECT value FROM ps_configuration WHERE name='ODYS_AMB_1_ACCENT'")
 
-  echo "$page" | grep -q -- "--amb-accent:$bo_accent" \
-    && ok "la couleur affichee est bien celle enregistree ($bo_accent)" \
-    || no "la page n'affiche pas la couleur enregistree"
+  # L'accent enregistre a ete choisi du temps ou la boutique etait noire.
+  # Le module ne le recopie plus tel quel : il l'assombrit juste assez pour
+  # qu'il se lise sur l'ivoire, et il n'imprime plus de fond de page :
+  # le sol appartient au site, le meme sur toutes les fiches. Ce sont ces
+  # deux promesses-la qu'on verifie, pas une egalite d'octets.
+  echo "$page" | grep -q -- "--amb-deep:" \
+    && no "l'ambiance repeint encore le fond de la page" \
+    || ok "l'ambiance ne repeint plus le fond de la page"
+
+  pose=$(echo "$page" | grep -o -- "--amb-accent:#[0-9A-Fa-f]\{6\}" | head -1 | cut -d: -f2)
+
+  ratio=$(python ../psbuild/contraste.py "$pose")
+
+  [ -n "$ratio" ] \
+    && ok "l'accent pose se lit sur l'ivoire ($pose, $ratio:1)" \
+    || no "l'accent pose ne se lit pas sur l'ivoire ($pose, enregistre $bo_accent)"
 
   # une photo televersee est servie depuis img/odys/, que le rebuild ne touche pas
 
@@ -3703,13 +3716,15 @@ jsf=../dist/odys-theme-ps8/themes/odys/assets/js/app.js
 prodtpl=../dist/odys-theme-ps8/themes/odys/templates/catalog/product.tpl
 
 # Le bogue vu en production : updateCartBadges() ecrivait dans #dCnt et
-# #dTotal, qui n'existent que dans le tiroir du panier. Sur une fiche
+# #dTotal, qui n'existent que dans le tiroir de la maquette. Sur une fiche
 # produit l'ajout levait donc une TypeError, le .catch du pont rappelait le
 # callback avec null, et le client lisait « Ce parfum n'a pas pu etre ajoute
 # au panier » pendant que PrestaShop repondait 200 et le mettait au panier.
-grep -q 'if (odysCnt)' "$jsf" && grep -q 'if (odysTot)' "$jsf" \
-  && ok "les compteurs du tiroir ne sont ecrits que s ils existent" \
-  || no "updateCartBadges ecrit encore dans des elements absents"
+# Une garde a suffi un temps ; le panier de la maquette est parti depuis, et
+# l'exiger absent est plus fort que de relire ses gardes.
+grep -q 'function updateCartBadges' "$jsf" \
+  && no "updateCartBadges est revenue : elle ecrit dans des elements absents" \
+  || ok "aucun compteur de la maquette a ecrire : la fonction n existe plus"
 grep -q 'try { callback(data); }' "$jsf" \
   && ok "une erreur d affichage ne fait plus passer un ajout reussi pour un echec" \
   || no "le verdict d un ajout depend encore de ce qui se passe apres"
@@ -4029,6 +4044,82 @@ if [ -n "$REVENUS" ]; then
   no "le prototype est revenu dans app.js :$REVENUS"
 else
   ok "aucun pan du prototype n est revenu dans app.js"
+
+step "Tout bouton d achat porte son identifiant de produit"
+
+# Le panier de la maquette tenait a cette invariante, et c est pour elle
+# qu il avait ete laisse en place : le repartiteur portait
+# `case 'add-to-cart':` et `case 'add-prod':` gardes par `if (!p.idProduct)`,
+# donc un bouton d achat SANS data-id-product tombait dans un panier qui ne
+# commande rien. Le pan est parti ; le pont PrestaShop est desormais le seul
+# chemin de l ajout, et son selecteur exige [data-id-product].
+#
+# Cette invariante ne repose sur aucun conteneur absent : elle repose sur ce
+# que les gabarits ecrivent. Elle se perdrait donc au premier gabarit neuf,
+# et un bouton d achat qui ne fait rien ne se voit pas dans un rapport.
+# Elle se mesure ici, dans les gabarits livres puis sur les pages servies.
+python - <<'EOPY' && ok "les boutons d achat des gabarits portent tous un identifiant de produit" || no "un bouton d achat de gabarit n a pas de data-id-product"
+import pathlib, re, sys
+racines = [pathlib.Path("../dist/odys-theme-ps8/themes/odys/templates"),
+           pathlib.Path("../dist/odys-theme-ps8/modules")]
+ACHAT = "add-to-cart|add-prod|add-gift"
+# [^>]*? : une balise tient sur plusieurs lignes dans ces gabarits, et un
+# attribut ne contient pas de >. Le compte des deux motifs doit coincider :
+# sinon une balise n a pas pu etre lue, et le controle doit le dire plutot
+# que de conclure a tort.
+BALISE = re.compile(r'<[a-zA-Z][^>]*?data-action="(?:' + ACHAT + r')"[^>]*?>', re.S)
+ACTION = re.compile(r'data-action="(?:' + ACHAT + r')"')
+IDENT = re.compile(r'data-id-product="[^"]+"')
+nb_action = nb_balise = 0
+fautifs = []
+for racine in racines:
+    for p in sorted(racine.rglob("*.tpl")):
+        t = p.read_text(encoding="utf-8", errors="replace")
+        nb_action += len(ACTION.findall(t))
+        for m in BALISE.finditer(t):
+            nb_balise += 1
+            if not IDENT.search(m.group(0)):
+                fautifs.append("%s -> %s" % (p.name, " ".join(m.group(0).split())[:110]))
+if nb_action != nb_balise:
+    print("  %d data-action d achat mais %d balises lues : une balise n a pas pu etre lue"
+          % (nb_action, nb_balise))
+    sys.exit(1)
+if fautifs:
+    for f in fautifs:
+        print("  " + f)
+    sys.exit(1)
+if nb_balise < 5:
+    print("  seulement %d boutons d achat trouves : le releve ne couvre plus les gabarits"
+          % nb_balise)
+    sys.exit(1)
+print("  %d boutons d achat releves dans les gabarits" % nb_balise)
+EOPY
+
+# Et sur les pages servies, dans les trois langues : un module peut rendre
+# une carte produit sans passer par le gabarit du theme.
+for lg in fr en ar; do
+  for chemin in "" "parfums/20-l-icone.html" "10-parfums"; do
+    page=$(curl -s -m 40 "$BOUT/$lg/$chemin")
+    [ -z "$page" ] && { no "/$lg/$chemin ne repond pas"; continue; }
+    res=$(printf '%s' "$page" | python -c '
+import re, sys
+t = sys.stdin.read()
+ACHAT = "add-to-cart|add-prod|add-gift"
+BALISE = re.compile(r"<[a-zA-Z][^>]*?data-action=\"(?:" + ACHAT + r")\"[^>]*?>", re.S)
+ACTION = re.compile(r"data-action=\"(?:" + ACHAT + r")\"")
+IDENT = re.compile(r"data-id-product=\"[0-9]+\"")
+bal = BALISE.findall(t)
+sans = [b for b in bal if not IDENT.search(b)]
+if len(ACTION.findall(t)) != len(bal):
+    print("illisible"); sys.exit(0)
+print("%d %d" % (len(bal), len(sans)))')
+    case "$res" in
+      illisible) no "/$lg/$chemin : un bouton d achat n a pas pu etre lu";;
+      *" 0")     ok "/$lg/$chemin : ${res%% *} boutons d achat, tous avec un identifiant";;
+      *)         no "/$lg/$chemin : ${res##* } bouton(s) d achat sans data-id-product";;
+    esac
+  done
+done
 fi
 
 step "Le panier s ouvre sur le cote"
@@ -4058,12 +4149,41 @@ grep -q 'cart.subtotals.products.amount' ../dist/odys-theme-ps8/themes/odys/temp
   && ok "le seuil se mesure sur les produits, livraison exclue" \
   || no "la livraison compte pour atteindre la livraison offerte"
 
-# Le tiroir de la maquette n est plus dans la page : ses fonctions cherchaient
-# #drawer a chaque ajout et echouaient, ce qui avalait la suite du pont.
+# Le tiroir de la maquette n est plus dans la page, et son code n est plus
+# dans app.js : ses fonctions cherchaient #drawer a chaque ajout et
+# echouaient, ce qui avalait la suite du pont. Une garde les tenait ; elles
+# sont parties. Ce qui suit l'exige, nom par nom, parce qu'un pan de
+# prototype revient toujours par une fonction qu'on croyait seule.
 jsf2=../dist/odys-theme-ps8/themes/odys/assets/js/app.js
-grep -q "if (!d || !o) { return; }" "$jsf2" \
-  && ok "l ancien tiroir ne fait plus echouer l ajout" \
-  || no "openCart tombe encore sur un tiroir absent"
+MAQ=""
+for f in openCart closeCart addToCart renderCart renderXS updateShip \
+         getShipCost getShipZone getCartTotal chgItem removeItem \
+         updateCartBadges addProd addOud; do
+  grep -qE "function $f *\\(" "$jsf2" && MAQ="$MAQ $f"
+done
+grep -qE "^let cart = \\[\\];" "$jsf2" && MAQ="$MAQ cart"
+grep -qE "^const SHIPPING = \\{" "$jsf2" && MAQ="$MAQ SHIPPING"
+if [ -n "$MAQ" ]; then
+  no "le panier de la maquette est revenu dans app.js :$MAQ"
+else
+  ok "le panier de la maquette n est plus dans app.js"
+fi
+# et ses phrases francaises avec lui : elles etaient servies aux trois langues
+MAQP=""
+grep -q "images.unsplash.com" "$jsf2" && MAQP="$MAQP photos-inventees"
+grep -q "textContent = '✓ Ajouté !'" "$jsf2" && MAQP="$MAQP ajoute-en-dur"
+grep -q "Élaboré au Maroc" "$jsf2" && MAQP="$MAQP elabore-au-maroc"
+grep -q "Livraison gratuite débloquée" "$jsf2" && MAQP="$MAQP livraison-debloquee"
+grep -q "Ouvrir le panier —" "$jsf2" && MAQP="$MAQP ouvrir-le-panier"
+if [ -n "$MAQP" ]; then
+  no "des phrases en dur du panier de la maquette sont revenues :$MAQP"
+else
+  ok "aucune phrase en dur du panier de la maquette dans app.js"
+fi
+# Le clignotement du bouton, lui, est vivant : il reste, mais traduit.
+grep -q "MOT('panierAjouteBouton')" "$jsf2" \
+  && ok "le bouton annonce l ajout dans la langue de la page" \
+  || no "le bouton n annonce plus l ajout, ou l annonce en francais partout"
 grep -q "window.odysTiroirApresAjout(resp)" "$jsf2" \
   && ok "le tiroir montre ce que PrestaShop a confirme" \
   || no "le tiroir s ouvrirait sur autre chose que la reponse du serveur"

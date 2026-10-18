@@ -31,6 +31,30 @@
         <source>Search</source>
         <target>بحث</target>
       </trans-unit>
+      <trans-unit id="8" resname="%s other products in the same category:">
+        <source>%s other products in the same category:</source>
+        <target>%s منتجات أخرى في نفس الفئة:</target>
+      </trans-unit>
+      <trans-unit id="9" resname="New">
+        <source>New</source>
+        <target>جديد</target>
+      </trans-unit>
+      <trans-unit id="10" resname="On sale!">
+        <source>On sale!</source>
+        <target>تخفيض!</target>
+      </trans-unit>
+      <trans-unit id="11" resname="Pack">
+        <source>Pack</source>
+        <target>علبة</target>
+      </trans-unit>
+      <trans-unit id="12" resname="Reduced price">
+        <source>Reduced price</source>
+        <target>سعر مخفّض</target>
+      </trans-unit>
+      <trans-unit id="13" resname="Online only">
+        <source>Online only</source>
+        <target>على الإنترنت فقط</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

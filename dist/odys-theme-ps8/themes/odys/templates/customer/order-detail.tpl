@@ -23,7 +23,7 @@
 {assign var='odysUnits' value=0}
 {foreach from=$order.products item=line}{assign var='odysUnits' value=$odysUnits+$line.quantity}{/foreach}
     <div class="odys-order-sub">
-      Passée le {$order.details.order_date}
+      {l s='Passée le %date%' sprintf=['%date%' => $order.details.order_date] d='Shop.Theme.Odys'}
       · {$odysUnits} article{if $odysUnits > 1}s{/if}
       · {$order.totals.total.value}
     </div>
@@ -142,8 +142,7 @@
         choisir. Il est relu avant d\'être publié.' d='Shop.Theme.Odys'}</p>
       <ul class="odys-avis-liens" role="list">
         {foreach from=$order.products item=product}
-          <li><a href="{$product.url|escape:'html':'UTF-8'}#avis">Donner mon avis sur
-            {$product.name|escape:'html':'UTF-8'}</a></li>
+          <li><a href="{$product.url|escape:'html':'UTF-8'}#avis">{l s='Donner mon avis sur %nom%' sprintf=['%nom%' => $product.name|escape:'html':'UTF-8'] d='Shop.Theme.Odys'}</a></li>
         {/foreach}
       </ul>
     </section>

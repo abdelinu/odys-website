@@ -1878,6 +1878,234 @@
         <source>+%nombre% points fidélité</source>
         <target>+%nombre% نقاط ولاء</target>
       </trans-unit>
+      <trans-unit id="465" resname="✓ Ajouté !">
+        <source>✓ Ajouté !</source>
+        <target>✓ أُضيف!</target>
+      </trans-unit>
+      <trans-unit id="466" resname="Programme ODYS">
+        <source>Programme ODYS</source>
+        <target>برنامج أوديس</target>
+      </trans-unit>
+      <trans-unit id="467" resname="Cumulez des points à chaque commande réglée et échangez-les contre des avantages exclusifs.">
+        <source>Cumulez des points à chaque commande réglée et échangez-les contre des avantages exclusifs.</source>
+        <target>اجمع النقاط مع كل طلب مؤدّى واستبدلها بمزايا حصرية.</target>
+      </trans-unit>
+      <trans-unit id="468" resname="Découvrir le programme">
+        <source>Découvrir le programme</source>
+        <target>اكتشف البرنامج</target>
+      </trans-unit>
+      <trans-unit id="469" resname="%nombre% point">
+        <source>%nombre% point</source>
+        <target>%nombre% نقطة</target>
+      </trans-unit>
+      <trans-unit id="470" resname="%nombre% points">
+        <source>%nombre% points</source>
+        <target>%nombre% نقاط</target>
+      </trans-unit>
+      <trans-unit id="471" resname="plus que %nombre% pt pour %recompense%">
+        <source>plus que %nombre% pt pour %recompense%</source>
+        <target>بقيت %nombre% نقطة للحصول على %recompense%</target>
+      </trans-unit>
+      <trans-unit id="472" resname="plus que %nombre% pts pour %recompense%">
+        <source>plus que %nombre% pts pour %recompense%</source>
+        <target>بقيت %nombre% نقاط للحصول على %recompense%</target>
+      </trans-unit>
+      <trans-unit id="473" resname="Oud &amp;middot; Boukhour exclus du programme">
+        <source>Oud &amp;middot; Boukhour exclus du programme</source>
+        <target>العود والبخور غير مشمولين بالبرنامج</target>
+      </trans-unit>
+      <trans-unit id="474" resname="%nombre% pt">
+        <source>%nombre% pt</source>
+        <target>%nombre% نقطة</target>
+      </trans-unit>
+      <trans-unit id="475" resname="%nombre% pts">
+        <source>%nombre% pts</source>
+        <target>%nombre% نقاط</target>
+      </trans-unit>
+      <trans-unit id="476" resname="Mes envies | ODYS Parfums">
+        <source>Mes envies | ODYS Parfums</source>
+        <target>رغباتي | ODYS Parfums</target>
+      </trans-unit>
+      <trans-unit id="477" resname="Les parfums ODYS que vous avez mis de côté.">
+        <source>Les parfums ODYS que vous avez mis de côté.</source>
+        <target>عطور أوديس التي وضعتها جانبًا.</target>
+      </trans-unit>
+      <trans-unit id="478" resname="Votre sélection">
+        <source>Votre sélection</source>
+        <target>مختاراتك</target>
+      </trans-unit>
+      <trans-unit id="479" resname="Gardée sur cet appareil, sans compte. Elle vous attend à votre prochaine visite.">
+        <source>Gardée sur cet appareil, sans compte. Elle vous attend à votre prochaine visite.</source>
+        <target>محفوظة على هذا الجهاز، بدون حساب. ستنتظرك في زيارتك القادمة.</target>
+      </trans-unit>
+      <trans-unit id="480" resname="Rien de mis de côté pour l'instant. Touchez le ♡ sur un parfum et vous le retrouverez ici.">
+        <source>Rien de mis de côté pour l'instant. Touchez le ♡ sur un parfum et vous le retrouverez ici.</source>
+        <target>لا شيء محفوظ بعد. المس ♡ على عطر وستجده هنا.</target>
+      </trans-unit>
+      <trans-unit id="481" resname="Collection Inspiration">
+        <source>Collection Inspiration</source>
+        <target>مجموعة الإلهام</target>
+      </trans-unit>
+      <trans-unit id="482" resname="Livraison %prix% DH">
+        <source>Livraison %prix% DH</source>
+        <target>التوصيل %prix% درهم</target>
+      </trans-unit>
+      <trans-unit id="483" resname="— au-delà de %montant% DH.">
+        <source>— au-delà de %montant% DH.</source>
+        <target>— ابتداءً من %montant% درهم.</target>
+      </trans-unit>
+      <trans-unit id="484" resname="Bonjour ODYS, prévenez-moi du retour de %nom%.">
+        <source>Bonjour ODYS, prévenez-moi du retour de %nom%.</source>
+        <target>مرحبًا أوديس، أخبروني عند عودة %nom%.</target>
+      </trans-unit>
+      <trans-unit id="485" resname="Bonjour ODYS, je souhaite des informations sur %nom%.">
+        <source>Bonjour ODYS, je souhaite des informations sur %nom%.</source>
+        <target>مرحبًا أوديس، أودّ معلومات عن %nom%.</target>
+      </trans-unit>
+      <trans-unit id="486" resname="Indisponible">
+        <source>Indisponible</source>
+        <target>غير متوفر</target>
+      </trans-unit>
+      <trans-unit id="487" resname="Commande reçue">
+        <source>Commande reçue</source>
+        <target>تم استلام الطلب</target>
+      </trans-unit>
+      <trans-unit id="488" resname="Nous avons votre commande">
+        <source>Nous avons votre commande</source>
+        <target>طلبك وصلنا</target>
+      </trans-unit>
+      <trans-unit id="489" resname="En préparation">
+        <source>En préparation</source>
+        <target>قيد التحضير</target>
+      </trans-unit>
+      <trans-unit id="490" resname="Votre flacon est emballé à la main">
+        <source>Votre flacon est emballé à la main</source>
+        <target>قارورتك تُغلَّف يدويًا</target>
+      </trans-unit>
+      <trans-unit id="491" resname="Expédiée">
+        <source>Expédiée</source>
+        <target>تم الشحن</target>
+      </trans-unit>
+      <trans-unit id="492" resname="En route vers vous">
+        <source>En route vers vous</source>
+        <target>في الطريق إليك</target>
+      </trans-unit>
+      <trans-unit id="493" resname="Livrée">
+        <source>Livrée</source>
+        <target>تم التسليم</target>
+      </trans-unit>
+      <trans-unit id="494" resname="Bonne découverte">
+        <source>Bonne découverte</source>
+        <target>اكتشاف ممتع</target>
+      </trans-unit>
+      <trans-unit id="495" resname="Rien ne correspond à «&amp;nbsp;%mot%&amp;nbsp;».">
+        <source>Rien ne correspond à «&amp;nbsp;%mot%&amp;nbsp;».</source>
+        <target>لا نتائج لـ «&amp;nbsp;%mot%&amp;nbsp;».</target>
+      </trans-unit>
+      <trans-unit id="496" resname="Notez-la. Elle suffit à suivre votre colis">
+        <source>Notez-la. Elle suffit à suivre votre colis</source>
+        <target>دوّنه. يكفي لتتبّع طردك</target>
+      </trans-unit>
+      <trans-unit id="497" resname="Bonjour ODYS, ma commande %reference%.">
+        <source>Bonjour ODYS, ma commande %reference%.</source>
+        <target>مرحبًا أوديس، طلبي %reference%.</target>
+      </trans-unit>
+      <trans-unit id="498" resname="Passée le %date%">
+        <source>Passée le %date%</source>
+        <target>بتاريخ %date%</target>
+      </trans-unit>
+      <trans-unit id="499" resname="Donner mon avis sur %nom%">
+        <source>Donner mon avis sur %nom%</source>
+        <target>اكتب رأيي عن %nom%</target>
+      </trans-unit>
+      <trans-unit id="500" resname="Bonjour ODYS, je n'arrive pas à réinitialiser mon mot de passe.">
+        <source>Bonjour ODYS, je n'arrive pas à réinitialiser mon mot de passe.</source>
+        <target>مرحبًا أوديس، لا أستطيع إعادة تعيين كلمة المرور.</target>
+      </trans-unit>
+      <trans-unit id="501" resname="Bonjour ODYS, je n'ai pas reçu le lien de mot de passe.">
+        <source>Bonjour ODYS, je n'ai pas reçu le lien de mot de passe.</source>
+        <target>مرحبًا أوديس، لم يصلني رابط كلمة المرور.</target>
+      </trans-unit>
+      <trans-unit id="502" resname="point">
+        <source>point</source>
+        <target>نقطة</target>
+      </trans-unit>
+      <trans-unit id="503" resname="points">
+        <source>points</source>
+        <target>نقاط</target>
+      </trans-unit>
+      <trans-unit id="504" resname="Valables jusqu'au %date% — un achat remet le compteur à zéro.">
+        <source>Valables jusqu'au %date% — un achat remet le compteur à zéro.</source>
+        <target>صالحة حتى %date% — أي شراء يعيد العدّ من جديد.</target>
+      </trans-unit>
+      <trans-unit id="505" resname="— votre code&amp;nbsp;:">
+        <source>— votre code&amp;nbsp;:</source>
+        <target>— رمزك:</target>
+      </trans-unit>
+      <trans-unit id="506" resname="Saisissez-le dans votre panier. Valable %mois% mois, une seule fois, une seule récompense par commande.">
+        <source>Saisissez-le dans votre panier. Valable %mois% mois, une seule fois, une seule récompense par commande.</source>
+        <target>أدخله في سلّتك. صالح %mois% أشهر، مرة واحدة، ومكافأة واحدة لكل طلب.</target>
+      </trans-unit>
+      <trans-unit id="507" resname="Les récompenses">
+        <source>Les récompenses</source>
+        <target>المكافآت</target>
+      </trans-unit>
+      <trans-unit id="508" resname="Les récompenses s'ouvrent à partir de %seuil% points — encore %reste% à cumuler.">
+        <source>Les récompenses s'ouvrent à partir de %seuil% points — encore %reste% à cumuler.</source>
+        <target>تُفتح المكافآت ابتداءً من %seuil% نقطة — بقيت %reste%.</target>
+      </trans-unit>
+      <trans-unit id="509" resname="Une remise de %montant% DH, la valeur de 5&amp;nbsp;g de notre oud d'entrée de gamme.">
+        <source>Une remise de %montant% DH, la valeur de 5&amp;nbsp;g de notre oud d'entrée de gamme.</source>
+        <target>خصم %montant% درهم، قيمة 5&amp;nbsp;غرامات من عودنا الأساسي.</target>
+      </trans-unit>
+      <trans-unit id="510" resname="Choix %rang%">
+        <source>Choix %rang%</source>
+        <target>الاختيار %rang%</target>
+      </trans-unit>
+      <trans-unit id="511" resname="Votre choix">
+        <source>Votre choix</source>
+        <target>اختيارك</target>
+      </trans-unit>
+      <trans-unit id="512" resname="Aucun article en stock pour cette récompense.">
+        <source>Aucun article en stock pour cette récompense.</source>
+        <target>لا يوجد منتج متوفر لهذه المكافأة.</target>
+      </trans-unit>
+      <trans-unit id="513" resname="Échanger %nombre% points">
+        <source>Échanger %nombre% points</source>
+        <target>استبدال %nombre% نقطة</target>
+      </trans-unit>
+      <trans-unit id="514" resname="Encore %nombre% pts">
+        <source>Encore %nombre% pts</source>
+        <target>بقيت %nombre% نقطة</target>
+      </trans-unit>
+      <trans-unit id="515" resname="Votre historique">
+        <source>Votre historique</source>
+        <target>سجلّك</target>
+      </trans-unit>
+      <trans-unit id="516" resname="Mouvements de points">
+        <source>Mouvements de points</source>
+        <target>حركات النقاط</target>
+      </trans-unit>
+      <trans-unit id="517" resname="Date">
+        <source>Date</source>
+        <target>التاريخ</target>
+      </trans-unit>
+      <trans-unit id="518" resname="Motif">
+        <source>Motif</source>
+        <target>السبب</target>
+      </trans-unit>
+      <trans-unit id="519" resname="Points">
+        <source>Points</source>
+        <target>النقاط</target>
+      </trans-unit>
+      <trans-unit id="520" resname="Aucun mouvement pour l'instant.">
+        <source>Aucun mouvement pour l'instant.</source>
+        <target>لا حركات بعد.</target>
+      </trans-unit>
+      <trans-unit id="521" resname="Les règles du programme">
+        <source>Les règles du programme</source>
+        <target>قواعد البرنامج</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

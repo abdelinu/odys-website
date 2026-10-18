@@ -31,6 +31,18 @@
         <source>Proceed to checkout</source>
         <target>إتمام الطلب</target>
       </trans-unit>
+      <trans-unit id="8" resname="Subscribe">
+        <source>Subscribe</source>
+        <target>اشترك</target>
+      </trans-unit>
+      <trans-unit id="9" resname="OK">
+        <source>OK</source>
+        <target>موافق</target>
+      </trans-unit>
+      <trans-unit id="10" resname="Share">
+        <source>Share</source>
+        <target>مشاركة</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
