@@ -37,8 +37,27 @@ h1,h2,h3,h4,.pc-name,.p-name,.cc-title,.sec-hd-left h2{
   -webkit-text-fill-color:var(--odys-gold);color:var(--odys-gold)}
 
 /* ── 3. ANNOUNCEMENT / SCARCITY BARS ─────────────────────────────────── */
-.ann{background:var(--odys-black);padding:11px 0;font-size:9.5px;
-  letter-spacing:var(--tracking-wider)}
+/* `overflow:clip` et non `hidden` : le ruban mesure cinq fois la largeur de
+   l'ecran, donc `hidden` faisait de .ann une boite DEFILABLE. En arabe elle
+   s'ouvre defilee vers la gauche, et la croix, posee dessus, partait avec le
+   defilement — 338 px hors du bord, parfois hors de vue. `clip` coupe de la
+   meme facon sans rien rendre defilable. Un navigateur qui ne connait pas
+   `clip` garde le `overflow:hidden` de la regle d'origine. */
+.ann{position:relative;overflow:clip;background:var(--odys-black);padding:11px 0;
+  font-size:9.5px;letter-spacing:var(--tracking-wider)}
+/* La croix n'avait aucun style : bouton gris du navigateur, 8 px de large,
+   pose sous le bandeau qu'il devait fermer. Elle se range au bout de la
+   barre — bout droit en francais, bout gauche en arabe, d'ou la propriete
+   logique — et reprend le fond du bandeau pour que le texte defile
+   dessous sans le traverser. `background:inherit` suit l'ambiance oud,
+   qui repeint .ann en #0D0A07. */
+.ann-x{position:absolute;top:0;bottom:0;inset-inline-end:0;width:44px;
+  display:flex;align-items:center;justify-content:center;
+  border:0;padding:0;cursor:pointer;line-height:1;font-size:15px;
+  background:inherit;color:rgba(245,235,221,.62)}
+.ann-x:hover,.ann-x:focus-visible{color:var(--odys-soft-gold)}
+/* Refuse, la barre sort de la mise en page au lieu d'y garder sa place. */
+html.ann-fermee .ann{display:none}
 .ann-track{color:rgba(245,235,221,.62);animation-duration:80s}
 .ann-track strong,.ann .ag{color:var(--odys-soft-gold);font-weight:500}
 .ai-dot{width:3px;height:3px;border-radius:50%;background:var(--odys-gold);

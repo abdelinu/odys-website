@@ -127,6 +127,13 @@
   {/if}
 
   {hook h='displayHeader'}
+  {* Le bandeau d'annonces refuse ne doit pas reapparaitre d'une page a
+     l'autre, ni clignoter. Le drapeau est donc lu ICI, dans la tete :
+     app.js est charge en bas et en defer, il aurait rendu le bandeau
+     visible le temps d'une image avant de le retirer, et toute la page
+     aurait saute d'un cran. sessionStorage peut lever (navigation
+     privee, cookies refuses) : le bandeau reste alors affiche. *}
+  <script>{literal}try{if(sessionStorage.getItem('odysAnnFermee')==='1'){document.documentElement.classList.add('ann-fermee');}}catch(e){}{/literal}</script>
 </head>
 
 {* `oud` switches theme.css to the Oud & Boukhour smoke-and-amber layer *}

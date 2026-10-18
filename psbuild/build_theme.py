@@ -1437,6 +1437,43 @@ ok("retrait: les %d noms retires ne sont plus cites nulle part" % len(_disparus)
 ok("retrait: app.js passe de %d a %d octets (-%d)"
    % (_av, len(js), _av - len(js)))
 
+# ─── 12. la croix de la barre d'annonce ──────────────────────
+# Le gabarit porte data-action="close-ann" depuis la maquette, et aucun
+# fichier .js ne l'a jamais traite — ni ici, ni dans ref/. Le client
+# cliquait sur la croix, le bandeau restait. Le refus tient la visite
+# (sessionStorage : le serveur n'a rien a faire de ce choix, donc pas de
+# cookie), et la tete du gabarit relit le drapeau avant le premier rendu,
+# sinon le bandeau s'afficherait une fraction de seconde a chaque page.
+_ann_avant = "    case 'dismiss-sbn':"
+_ann_apres = (
+    "    case 'close-ann':     { document.documentElement.classList.add('ann-fermee');" + NL
+    + "                            try { sessionStorage.setItem('odysAnnFermee', '1'); } catch (err) {} } break;" + NL
+    + "    case 'dismiss-sbn':")
+must(js.count(_ann_avant) == 1, "annonce: le cas dismiss-sbn du repartiteur sert d'ancre")
+js = js.replace(_ann_avant, _ann_apres, 1)
+ok("annonce: la croix ferme le bandeau et s'en souvient le temps de la visite")
+
+# ─── 13. les fleches du clavier ne cherchent plus un mot francais ───
+# L'ecouteur trouvait les boutons du carrousel par leur aria-label en
+# francais. Ces libelles sont traduits depuis : sur /en/ et /ar/ le
+# selecteur ne ramenait plus rien et les fleches ne defilaient plus. Les
+# data-action, eux, ne changent pas de langue. Et le conteneur cite en
+# premier, #inlineSugg, est parti avec son carrousel : .sugg-section
+# porte le seul qui reste.
+_kb_avant = (
+    "    if (focused && focused.closest('#inlineSugg, .sugg-section')) {" + NL
+    + "      var prev = focused.closest('[role=\"region\"]')?.querySelector('[aria-label*=\"précédent\"], [aria-label*=\"Précédent\"]');" + NL
+    + "      var next = focused.closest('[role=\"region\"]')?.querySelector('[aria-label*=\"suivant\"], [aria-label*=\"Suivant\"]');")
+_kb_apres = (
+    "    var sugg = focused && focused.closest('.sugg-section');" + NL
+    + "    if (sugg) {" + NL
+    + "      var prev = sugg.querySelector('[data-action=\"sugg-prev\"]');" + NL
+    + "      var next = sugg.querySelector('[data-action=\"sugg-next\"]');")
+must(js.count(_kb_avant) == 1, "clavier: les deux lignes qui cherchaient un libelle francais")
+js = js.replace(_kb_avant, _kb_apres, 1)
+must("aria-label*=" not in js, "clavier: plus aucun selecteur d'app.js ne lit un libelle traduit")
+ok("clavier: les fleches trouvent le carrousel par data-action, dans les trois langues")
+
 js_path.write_text(js, encoding="utf-8")
 ok(f"progressive-enhancement module appended ({len(js):,} bytes)")
 

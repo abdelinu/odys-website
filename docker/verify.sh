@@ -3998,11 +3998,11 @@ fi
 # app.js. On part du gabarit : c est lui qui dit ce que le client peut
 # cliquer. app.js ecrit ses cas de deux facons — `case 'x':` et
 # `if (act2 === 'x')` — et la seconde avait echappe a l analyse.
-# close-ann n a jamais eu de traitement : ni dans ref/, ni dans aucune
-# passe de construction. Le bouton x de la barre d annonce ne fait rien,
-# et cela precede ce travail. Il est nomme ici pour que le controle
-# reste rouge si un AUTRE action devient orphelin.
-CONNUS=" close-ann "
+# La liste CONNUS ne sert qu a nommer les trous connus. close-ann y a
+# figure jusqu au branchement de la croix de la barre d annonce ; un trou
+# repare n a plus a y etre, et la liste vide laisse le controle rouge des
+# qu un action devient orphelin.
+CONNUS=""
 SANS=""
 # app.js repartit les clics de trois facons : case 'x', === 'x', et
 # closest('[data-action="x"]'). Les trois comptent.
@@ -4017,7 +4017,7 @@ if [ -n "$SANS" ]; then
 else
   n=$(grep -rhoE 'data-action="[a-z0-9-]+"' "$TPL/templates" "$TPL/modules" 2>/dev/null \
       | sed 's/.*="//;s/"//' | sort -u | wc -l)
-  ok "les $n data-action des gabarits ont un traitement (close-ann excepte, defaut anterieur)"
+  ok "les $n data-action des gabarits ont tous un traitement dans app.js"
 fi
 
 # 3. et le prototype mort ne doit pas revenir
